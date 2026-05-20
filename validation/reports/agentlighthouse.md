@@ -22,7 +22,7 @@ Coverage: **63%**
 ## Score Interpretation
 
 - Agent-Readiness Score: 85/100
-- Human-readable project signals: 60/100 - README present, 23 Markdown doc file(s), package metadata present
+- Human-readable project signals: 60/100 - README present, 24 Markdown doc file(s), package metadata present
 - Agent-specific context layer: 68/100 - AGENTS.md present, CLAUDE.md present, llms.txt present, agent task benchmark present
 - Verifiability: 60/100 - test script declared, lint script declared, typecheck script declared, command probes not run
 
@@ -107,14 +107,14 @@ No non-informational findings.
 
 ## Scan Metadata
 
-- Scan ID: `scan_0a22d070`
+- Scan ID: `scan_9690debe`
 - AgentLighthouse version: `0.1.0-alpha.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T21:29:31.780Z
-- Completed: 2026-05-20T21:29:31.799Z
-- Duration: 19ms
-- Files scanned: 130
-- Text files read: 124
+- Started: 2026-05-20T21:49:19.951Z
+- Completed: 2026-05-20T21:49:19.968Z
+- Duration: 17ms
+- Files scanned: 136
+- Text files read: 130
 - Ignored paths observed: 13
 - Warnings: 0
 - Errors: 0

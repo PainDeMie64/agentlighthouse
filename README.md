@@ -38,6 +38,8 @@ pnpm --filter @agentlighthouse/cli dev scan .
 pnpm --filter @agentlighthouse/cli dev scan . --report-dir agentlighthouse-reports
 ```
 
+In non-interactive automation, use `CI=true pnpm install` to avoid package-manager prompts.
+
 The report bundle writes:
 
 - `scan.json`
@@ -88,6 +90,10 @@ pnpm --filter @agentlighthouse/cli dev scan . \
 ```
 
 ## CI Usage
+
+The commands below show the installed CLI shape that the packed alpha will expose. Until npm
+publishing is complete, use the source form:
+`pnpm --filter @agentlighthouse/cli dev scan ...`.
 
 Simple scan gate:
 
@@ -260,13 +266,15 @@ Local release checks are available without publishing anything:
 ```bash
 pnpm release:check
 pnpm release:dry-run
+pnpm release:fresh-clone
+pnpm release:rehearsal
 ```
 
-`pnpm release:smoke` packs the core and CLI packages, installs the tarballs in a temporary clean project, and runs the installed `agentlighthouse` binary. No release script publishes packages or creates git tags.
+`pnpm release:smoke` packs the core and CLI packages, installs the tarballs in a temporary clean project, and runs the installed `agentlighthouse` binary. `pnpm release:fresh-clone` rehearses the README workflow and packed CLI install from a clean clone. No release script publishes packages, creates GitHub Releases, or creates git tags.
 
 ## Roadmap
 
-- Phase 2E: baseline lifecycle, report bundles, dogfood CI, public-alpha DX.
+- Phase 2G: public-alpha release rehearsal from fresh clone.
 - Phase 3: docs crawler and deeper API/MCP reference resolution.
 - Phase 4: deterministic benchmark runner.
 - Phase 5: hosted dashboard and project history.
@@ -280,5 +288,6 @@ pnpm release:dry-run
 - [Scoring Model](docs/SCORING_MODEL.md)
 - [Rules](docs/RULES.md)
 - [Release Process](docs/RELEASE.md)
+- [Alpha Release Checklist](docs/ALPHA_RELEASE_CHECKLIST.md)
 - [Versioning](docs/VERSIONING.md)
 - [Schema Stability](docs/SCHEMA_STABILITY.md)

@@ -2,7 +2,9 @@
 
 AgentLighthouse includes an experimental source-based composite GitHub Action for CI use. It scans the caller workspace and writes local report artifacts. It does not require a GitHub token unless you choose to upload SARIF.
 
-For public alpha, direct CLI commands are still the recommended GitHub Actions path until `@agentlighthouse/cli` is published to npm. The composite action is useful for dogfooding and early adopters who are comfortable building the action from source.
+First-alpha decision: use direct CLI commands until npm package publishing is complete; the action is
+experimental. The composite action is useful for dogfooding and early adopters who are comfortable
+building the action from source.
 
 ```yaml
 - uses: actions/checkout@v4

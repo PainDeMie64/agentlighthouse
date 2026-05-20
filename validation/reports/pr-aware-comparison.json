@@ -1,24 +1,24 @@
 {
-  "comparisonId": "cmp_0b491d23",
+  "comparisonId": "cmp_d78eb4af",
   "baseline": {
-    "scanId": "scan_b0f11bf9",
+    "scanId": "scan_3d5ed3d1",
     "scannedPath": "<repo>/examples/sample-good-project",
     "score": 85,
     "confidence": "medium",
     "confidenceScore": 66,
     "coverage": 67,
     "profile": "api",
-    "completedAt": "2026-05-20T21:29:31.512Z"
+    "completedAt": "2026-05-20T21:49:19.664Z"
   },
   "current": {
-    "scanId": "scan_58483fff",
+    "scanId": "scan_e4b5fb5a",
     "scannedPath": "<repo>/examples/sample-bad-project",
     "score": 0,
     "confidence": "low",
     "confidenceScore": 58,
     "coverage": 93,
     "profile": "library",
-    "completedAt": "2026-05-20T21:29:31.540Z"
+    "completedAt": "2026-05-20T21:49:19.698Z"
   },
   "deltas": {
     "scoreDelta": -85,

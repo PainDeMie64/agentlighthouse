@@ -1,6 +1,6 @@
 # Release Readiness
 
-Generated: 2026-05-20T21:29:46.614Z
+Generated: 2026-05-20T21:49:44.956Z
 
 ## Package Versions
 
@@ -11,23 +11,16 @@ Generated: 2026-05-20T21:29:46.614Z
 
 ## Tarballs Tested
 
-- `.tmp/release-artifacts/agentlighthouse-core-0.1.0-alpha.0.tgz`
-- `.tmp/release-artifacts/agentlighthouse-cli-0.1.0-alpha.0.tgz`
+- None
 
 ## Checks
 
-- PASSED: Typecheck - pnpm typecheck
-- PASSED: Lint - pnpm lint
-- PASSED: Tests - pnpm test
-- PASSED: Build - pnpm build
-- PASSED: Format check - pnpm format:check
-- PASSED: Real-world validation - pnpm validate:realworld
-- PASSED: Packed install smoke - pnpm release:smoke
-- PASSED: npm publish dry-run - pnpm release:dry-run
-- PASSED: Git whitespace check - git diff --check
+- PASSED: Build - Built packages before npm dry-run.
+- PASSED: npm publish dry-run for @agentlighthouse/core - npm dry-run completed without publishing.
+- PASSED: npm publish dry-run for @agentlighthouse/cli - npm dry-run completed without publishing.
 
 ## Known Packaging Limitations
 
-- npm publish dry-run was performed only as a dry-run. No package was published.
-- The GitHub Action is source-based for public alpha and will become faster after npm distribution.
-- No git tag or npm package is created by release:check.
+- This was npm publish --dry-run only. No package was published.
+- @agentlighthouse/web is private and intentionally skipped.
+- No git tag was created.

@@ -61,12 +61,16 @@ describe("release metadata", () => {
     await expect(
       access(path.join(repoRoot, "docs", "SCHEMA_STABILITY.md"))
     ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "docs", "ALPHA_RELEASE_CHECKLIST.md"))
+    ).resolves.toBeUndefined();
   });
 
   it("does not claim npm publication in the README", async () => {
     const readme = await readFile(path.join(repoRoot, "README.md"), "utf8");
     expect(readme).toContain("has not been published to npm yet");
     expect(readme).toContain("Future npm install path after publication");
+    expect(readme).toContain("direct pnpm CLI commands are the recommended CI path");
     expect(readme).not.toContain("npm install -g @agentlighthouse/cli\n\n## Quickstart");
   });
 
@@ -76,6 +80,41 @@ describe("release metadata", () => {
     expect(rootWithScripts.scripts?.["release:smoke"]).toBe("tsx scripts/release-smoke.ts");
     expect(rootWithScripts.scripts?.["release:check"]).toBe("tsx scripts/release-check.ts");
     expect(rootWithScripts.scripts?.["release:dry-run"]).toBe("tsx scripts/release-dry-run.ts");
+    expect(rootWithScripts.scripts?.["release:fresh-clone"]).toBe(
+      "tsx scripts/release-fresh-clone.ts"
+    );
+    expect(rootWithScripts.scripts?.["release:rehearsal"]).toBe("tsx scripts/release-rehearsal.ts");
+    expect(rootWithScripts.scripts?.["release:package-audit"]).toBe(
+      "tsx scripts/package-content-audit.ts"
+    );
+    expect(rootWithScripts.scripts?.["release:readme-check"]).toBe(
+      "tsx scripts/readme-command-check.ts"
+    );
+    expect(rootWithScripts.scripts?.["release:external-trial"]).toBe(
+      "tsx scripts/external-trial-summary.ts"
+    );
+  });
+
+  it("keeps release rehearsal scripts in source control", async () => {
+    const scripts = [
+      "scripts/release-fresh-clone.ts",
+      "scripts/release-rehearsal.ts",
+      "scripts/package-content-audit.ts",
+      "scripts/readme-command-check.ts",
+      "scripts/external-trial-summary.ts"
+    ];
+    for (const script of scripts) {
+      await expect(access(path.join(repoRoot, script))).resolves.toBeUndefined();
+    }
+  });
+
+  it("keeps the changelog ready for the alpha candidate", async () => {
+    const changelog = await readFile(path.join(repoRoot, "CHANGELOG.md"), "utf8");
+    expect(changelog).toContain("## 0.1.0-alpha.0");
+    expect(changelog).toContain("### Added");
+    expect(changelog).toContain("### Changed");
+    expect(changelog).toContain("### Known Limitations");
+    expect(changelog).toContain("not published to npm yet");
   });
 });
 

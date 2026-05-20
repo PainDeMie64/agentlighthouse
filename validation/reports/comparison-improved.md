@@ -78,8 +78,8 @@ None.
 
 ## Metadata
 
-- Baseline scan: `scan_58483fff` (2026-05-20T21:29:31.540Z)
-- Current scan: `scan_b0f11bf9` (2026-05-20T21:29:31.512Z)
+- Baseline scan: `scan_e4b5fb5a` (2026-05-20T21:49:19.698Z)
+- Current scan: `scan_3d5ed3d1` (2026-05-20T21:49:19.664Z)
 - Baseline profile: `library`
 - Current profile: `api`
 - Comparison model: `0.1.0`

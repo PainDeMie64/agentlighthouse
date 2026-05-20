@@ -8,11 +8,36 @@ import { format } from "prettier";
 export const repoRoot = process.cwd();
 export const releaseArtifactsDir = path.join(repoRoot, ".tmp", "release-artifacts");
 export const releaseSmokeDir = path.join(tmpdir(), "agentlighthouse-release-smoke");
+export const releaseRehearsalDir = path.join(repoRoot, ".tmp", "release-rehearsal");
 export const releaseReportPath = path.join(
   repoRoot,
   "validation",
   "reports",
   "release-readiness.md"
+);
+export const publicAlphaRehearsalReportPath = path.join(
+  repoRoot,
+  "validation",
+  "reports",
+  "public-alpha-rehearsal.md"
+);
+export const packageContentAuditReportPath = path.join(
+  repoRoot,
+  "validation",
+  "reports",
+  "package-content-audit.md"
+);
+export const readmeCommandCheckReportPath = path.join(
+  repoRoot,
+  "validation",
+  "reports",
+  "readme-command-check.md"
+);
+export const externalTrialReportPath = path.join(
+  repoRoot,
+  "validation",
+  "reports",
+  "external-trial-summary.md"
 );
 
 export interface CommandResult {
@@ -26,7 +51,7 @@ export interface CommandResult {
 export async function runCommand(
   command: string,
   args: string[],
-  options: { cwd?: string; allowFailure?: boolean } = {}
+  options: { cwd?: string; allowFailure?: boolean; env?: NodeJS.ProcessEnv } = {}
 ): Promise<CommandResult> {
   const cwd = options.cwd ?? repoRoot;
   const rendered = [command, ...args].join(" ");
@@ -34,7 +59,7 @@ export async function runCommand(
   const result = await new Promise<CommandResult>((resolve, reject) => {
     const child = spawn(command, args, {
       cwd,
-      env: process.env,
+      env: { ...process.env, INIT_CWD: cwd, ...options.env },
       stdio: ["ignore", "pipe", "pipe"]
     });
     let stdout = "";
@@ -69,6 +94,18 @@ export async function runCommand(
 export async function ensureCleanDir(dir: string): Promise<void> {
   await rm(dir, { recursive: true, force: true });
   await mkdir(dir, { recursive: true });
+}
+
+export async function writeMarkdownReport(filePath: string, markdown: string): Promise<void> {
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(
+    filePath,
+    await format(markdown.endsWith("\n") ? markdown : `${markdown}\n`, {
+      parser: "markdown",
+      printWidth: 100
+    }),
+    "utf8"
+  );
 }
 
 export async function packWorkspacePackage(

@@ -31,7 +31,12 @@
     "validate:realworld": "tsx scripts/validate-realworld.ts",
     "release:smoke": "tsx scripts/release-smoke.ts",
     "release:check": "tsx scripts/release-check.ts",
-    "release:dry-run": "tsx scripts/release-dry-run.ts"
+    "release:dry-run": "tsx scripts/release-dry-run.ts",
+    "release:package-audit": "tsx scripts/package-content-audit.ts",
+    "release:readme-check": "tsx scripts/readme-command-check.ts",
+    "release:external-trial": "tsx scripts/external-trial-summary.ts",
+    "release:fresh-clone": "tsx scripts/release-fresh-clone.ts",
+    "release:rehearsal": "tsx scripts/release-rehearsal.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

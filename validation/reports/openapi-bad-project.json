@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_78b327b1",
+  "scanId": "scan_0520e6cd",
   "scannedPath": "<repo>/examples/openapi-bad-project",
-  "startedAt": "2026-05-20T21:29:31.625Z",
-  "completedAt": "2026-05-20T21:29:31.628Z",
+  "startedAt": "2026-05-20T21:49:19.793Z",
+  "completedAt": "2026-05-20T21:49:19.796Z",
   "durationMs": 3,
   "agentLighthouseVersion": "0.1.0-alpha.0",
   "profile": "api",
@@ -1227,7 +1227,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/openapi-bad-project",
-  "scannedAt": "2026-05-20T21:29:31.628Z",
+  "scannedAt": "2026-05-20T21:49:19.796Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

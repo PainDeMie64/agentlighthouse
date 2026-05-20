@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_b0f11bf9",
+  "scanId": "scan_3d5ed3d1",
   "scannedPath": "<repo>/examples/sample-good-project",
-  "startedAt": "2026-05-20T21:29:31.504Z",
-  "completedAt": "2026-05-20T21:29:31.512Z",
-  "durationMs": 8,
+  "startedAt": "2026-05-20T21:49:19.654Z",
+  "completedAt": "2026-05-20T21:49:19.664Z",
+  "durationMs": 10,
   "agentLighthouseVersion": "0.1.0-alpha.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -326,7 +326,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-good-project",
-  "scannedAt": "2026-05-20T21:29:31.512Z",
+  "scannedAt": "2026-05-20T21:49:19.664Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

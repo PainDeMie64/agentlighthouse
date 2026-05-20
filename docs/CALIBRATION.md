@@ -46,6 +46,22 @@ pnpm validate:realworld
 - Added Phase 2B CI reporters and gates: SARIF, PR summaries, GitHub step summary output, severity gates, and confidence gates.
 - Added Phase 2C baseline comparison with stable finding fingerprints, delta reporters, and regression gates.
 - Added Phase 2D PR-aware changed-file classification, line-level locations where practical, SARIF regions, and gates for new findings on changed files.
+- Added Phase 2E baseline lifecycle commands, scan+baseline convenience mode, report bundles, and public-alpha CLI ergonomics.
+- Added Phase 2F/2G package smoke tests, release dry-runs, fresh-clone rehearsal, package content audit, and README command verification.
+
+## Phase 2G External Trial Summary
+
+The public-alpha rehearsal uses optional repositories under `.tmp/validation-repos/` and writes a
+sanitized summary to `validation/reports/external-trial-summary.md`. Current local trial targets are:
+
+- `expressjs-docs`: docs-heavy project.
+- `mcp-typescript-sdk`: developer-tool/MCP-adjacent project.
+- `sindresorhus-is`: small TypeScript library.
+
+These projects are not committed. Low scores on mature external projects are expected when they lack
+agent-specific context files, task benchmarks, command verifiability, or machine-readable workflows.
+The useful calibration question is whether the top findings explain concrete agent failure modes
+instead of judging the software's human quality.
 
 ## False Positives Found
 
@@ -67,8 +83,9 @@ pnpm validate:realworld
 - Docs usefulness is still deterministic and heuristic.
 - Command probes run only when explicitly enabled and do not execute install commands or arbitrary docs commands.
 - Profiles are still minimal and do not yet support user-defined rule-level severity overrides.
-- Scan+baseline convenience mode is deferred; compare-only is the stable CI primitive for now.
 - Changed-file classification is heuristic and depends on findings having useful locations; unknown-location findings remain visible instead of being hidden.
+- External trial reports are summarized by default; full external reports remain ignored unless
+  manually reviewed for sensitive paths and third-party evidence snippets.
 
 ## What To Test Next
 
