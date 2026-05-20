@@ -39,6 +39,7 @@ Initial caps:
 - Coverage below 50%: max 70
 - Shallow key artifacts: max 95
 - API profile without OpenAPI: max 82
+- MCP profile without MCP tools: max 82
 
 Caps make 100/100 rare. A project should only reach 100 when relevant artifacts are strong, commands are clear, docs are useful, benchmark tasks are verifiable, security guidance exists, no meaningful warnings remain, coverage is high, and confidence is high.
 
@@ -52,6 +53,28 @@ Subscores use the same severity weights for grouped categories:
 - Examples & Tasks
 - Security & Privacy
 - Freshness & Consistency
+
+## Score Interpretation
+
+Reports now separate:
+
+- Agent-Readiness Score: the main calibrated score.
+- Human-readable project signals: README, docs, examples, package metadata, and API specs.
+- Agent-specific context layer: AGENTS.md, CLAUDE.md, llms.txt, Cursor/Copilot instructions, and task benchmarks.
+- Verifiability: scripts, examples, task verification commands, API examples, and optional command probes.
+
+A mature public repository can have strong human-readable signals while still scoring lower on agent-readiness because it lacks the agent-specific context layer.
+
+## Profiles
+
+Profiles tune applicability and future scoring emphasis:
+
+- `api`: stricter on OpenAPI descriptions, examples, auth, and error recovery.
+- `mcp`: stricter on MCP tool clarity, schemas, privacy, and destructive actions.
+- `docs`: avoids package-script expectations that do not fit docs-only projects.
+- `library`: emphasizes README, package metadata, examples, and tests.
+- `internal`: emphasizes setup, conventions, privacy, and task workflows.
+- `devtool`: emphasizes docs, examples, APIs, setup, and agent artifacts.
 
 ## Evolution
 

@@ -1,0 +1,401 @@
+{
+  "scanId": "scan_83f4351e",
+  "scannedPath": "<repo>/examples/openapi-good-project",
+  "startedAt": "2026-05-20T19:47:28.296Z",
+  "completedAt": "2026-05-20T19:47:28.301Z",
+  "durationMs": 5,
+  "agentLighthouseVersion": "0.1.0",
+  "profile": "api",
+  "scoringModelVersion": "0.1.0",
+  "score": 95,
+  "summary": "Strong agent-readiness with 0 high-priority issue(s) remaining.",
+  "subscores": [
+    {
+      "id": "agent_instructions",
+      "label": "Agent Instructions",
+      "score": 95,
+      "findingsCount": 1
+    },
+    {
+      "id": "documentation",
+      "label": "Documentation",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "api_and_tooling",
+      "label": "API & Tooling",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "examples_and_tasks",
+      "label": "Examples & Tasks",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "security_and_privacy",
+      "label": "Security & Privacy",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "freshness_and_consistency",
+      "label": "Freshness & Consistency",
+      "score": 100,
+      "findingsCount": 0
+    }
+  ],
+  "recommendations": [
+    "Use opt-in command probes in trusted environments to verify setup and tests."
+  ],
+  "rawScore": 95,
+  "scoreConfidence": "medium",
+  "scoreConfidenceScore": 71,
+  "coverage": {
+    "evaluatedChecks": 7,
+    "skippedChecks": 0,
+    "notApplicableChecks": 2,
+    "notEvaluatedChecks": 3,
+    "evaluatedCategories": [
+      "agent_instructions",
+      "documentation",
+      "api_schema",
+      "setup_and_tests",
+      "security_and_privacy",
+      "task_benchmarks"
+    ],
+    "missingCategories": ["examples", "freshness_and_consistency"],
+    "coveragePercent": 70
+  },
+  "scoringCaps": [
+    {
+      "id": "cap.shallow-key-artifacts",
+      "maxScore": 95,
+      "reason": "One or more key agent-readiness artifacts are shallow or partial."
+    }
+  ],
+  "projectName": "openapi-good-project",
+  "findings": [
+    {
+      "id": "agent-instructions.agents-too-short",
+      "title": "AGENTS.md is too short",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "AGENTS.md exists but appears too brief to guide realistic agent work.",
+      "evidence": ["AGENTS.md length is 711 characters."],
+      "recommendation": "Expand AGENTS.md with commands, architecture boundaries, coding conventions, and safety guidance.",
+      "affectedFile": "AGENTS.md",
+      "suggestedFixType": "update_file",
+      "ruleId": "agent-instructions.agents-too-short"
+    },
+    {
+      "id": "api.openapi-detected",
+      "title": "OpenAPI file detected",
+      "severity": "info",
+      "category": "api_schema",
+      "description": "The scanner found an API schema that agents can use.",
+      "evidence": ["openapi.yaml"],
+      "recommendation": "Keep API descriptions, examples, and auth details current.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "none",
+      "ruleId": "api.openapi-detected"
+    },
+    {
+      "id": "mcp.not-evaluated",
+      "title": "MCP readiness could not be evaluated yet",
+      "severity": "info",
+      "category": "mcp_tools",
+      "description": "No MCP server/config/package signal was detected.",
+      "evidence": ["No file or package name matching MCP was scanned."],
+      "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+      "suggestedFixType": "review_manually",
+      "ruleId": "mcp.not-evaluated"
+    },
+    {
+      "id": "COMMAND_VERIFICATION_SKIPPED",
+      "title": "Command verification probes were skipped",
+      "severity": "info",
+      "category": "setup_and_tests",
+      "description": "Static analysis is default; project commands are not executed unless explicitly enabled.",
+      "evidence": ["Run with --probe commands or --run-probes to execute safe script probes."],
+      "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+      "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+      "fixExample": "agentlighthouse scan . --probe commands",
+      "suggestedFixType": "none",
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+    }
+  ],
+  "scoreInterpretation": {
+    "agentReadinessScore": 95,
+    "humanReadableProjectSignals": {
+      "score": 89,
+      "summary": "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      "signals": [
+        "README present",
+        "1 Markdown doc file(s)",
+        "package metadata present",
+        "OpenAPI spec present"
+      ]
+    },
+    "agentSpecificContextLayer": {
+      "score": 68,
+      "summary": "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      "signals": [
+        "AGENTS.md present",
+        "CLAUDE.md present",
+        "llms.txt present",
+        "agent task benchmark present"
+      ]
+    },
+    "verifiability": {
+      "score": 80,
+      "summary": "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      "signals": [
+        "test script declared",
+        "lint script declared",
+        "typecheck script declared",
+        "3 API operation(s) have examples",
+        "command probes not run"
+      ]
+    }
+  },
+  "apiAnalysis": {
+    "specFiles": ["openapi.yaml"],
+    "operationCount": 3,
+    "operationsWithExamples": 3,
+    "operationsMissingDescriptions": 0,
+    "destructiveOperations": ["openapi.yaml: DELETE /customers/{customer_id} (deleteCustomer)"],
+    "authSchemes": ["bearerAuth"],
+    "weakOperations": [],
+    "highRiskOperations": ["openapi.yaml: DELETE /customers/{customer_id} (deleteCustomer)"]
+  },
+  "mcpAnalysis": {
+    "detected": false,
+    "files": [],
+    "toolCount": 0,
+    "toolsWithSchemas": 0,
+    "toolsWithExamples": 0,
+    "ambiguousTools": [],
+    "destructiveTools": [],
+    "privacySensitiveTools": [],
+    "weakTools": []
+  },
+  "commandProbes": {
+    "enabled": false,
+    "attempted": 0,
+    "skipped": 3,
+    "passed": 0,
+    "failed": 0,
+    "timedOut": 0,
+    "results": []
+  },
+  "detectedProject": {
+    "type": "openapi_project",
+    "name": "openapi-good-project",
+    "confidence": 0.85,
+    "evidence": ["OpenAPI files detected: openapi.yaml."],
+    "packageManager": "npm",
+    "frameworks": []
+  },
+  "detectedArtifacts": [
+    {
+      "path": "AGENTS.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Primary coding-agent instructions",
+      "quality": "strong",
+      "notes": [
+        "Includes project overview.",
+        "Includes setup commands.",
+        "Includes test commands.",
+        "Includes lint/typecheck commands.",
+        "Missing docs links."
+      ]
+    },
+    {
+      "path": "CLAUDE.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Claude Code project memory",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes test commands.",
+        "Includes lint/typecheck commands.",
+        "Includes security/privacy guidance.",
+        "Missing setup commands.",
+        "Missing architecture map.",
+        "Missing coding conventions.",
+        "Missing generated-file warnings."
+      ]
+    },
+    {
+      "path": "llms.txt",
+      "exists": true,
+      "kind": "file",
+      "role": "LLM-readable project map",
+      "quality": "thin",
+      "notes": [
+        "Includes project overview.",
+        "Includes docs links.",
+        "Missing architecture map.",
+        "Missing examples."
+      ]
+    },
+    {
+      "path": "README.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Human and agent entry point",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes setup commands.",
+        "Includes test commands.",
+        "Includes architecture map.",
+        "Missing docs links."
+      ]
+    },
+    {
+      "path": ".cursor/rules",
+      "exists": false,
+      "kind": "missing",
+      "role": "Cursor rules",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "GitHub Copilot instructions",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".agentlighthouseignore",
+      "exists": true,
+      "kind": "file",
+      "role": "AgentLighthouse ignore rules",
+      "quality": "unknown",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    }
+  ],
+  "scanStats": {
+    "filesScanned": 9,
+    "textFilesRead": 8,
+    "bytesRead": 7267,
+    "docsMarkdownFileCount": 1,
+    "openApiFileCount": 1,
+    "benchmarkFileCount": 1,
+    "findingCount": 4
+  },
+  "ignoredPaths": [],
+  "warnings": [],
+  "errors": [],
+  "projectPath": "<repo>/examples/openapi-good-project",
+  "scannedAt": "2026-05-20T19:47:28.301Z",
+  "recommendedActions": [
+    "Use opt-in command probes in trusted environments to verify setup and tests."
+  ],
+  "signals": {
+    "rootPath": "<repo>/examples/openapi-good-project",
+    "projectName": "openapi-good-project",
+    "scannedFiles": [
+      ".agentlighthouseignore",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "agentlighthouse.tasks.yaml",
+      "docs/ARCHITECTURE.md",
+      "llms.txt",
+      "openapi.yaml",
+      "package.json"
+    ],
+    "artifacts": {
+      "AGENTS.md": {
+        "path": "AGENTS.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 712,
+        "contentPreview": "# Agent Instructions\n\n## Project Overview\n\nThis sample API project demonstrates an agent-readable OpenAPI contract.\n\n## Setup Commands\n\n```bash\nnpm test\n```\n\n```bash\nnpm run lint\n```\n\n```bash\nnpm run typecheck\n```\n\n## Architecture Map\n\n- `openapi.yaml`: API contract.\n- `agentlighthouse.tasks.yaml`: agent task benchmark.\n\n## Coding Conventions\n\nKeep examples placeholder-safe and update tests with contract changes.\n\n## Common Mistakes\n\n- Do not use real API keys.\n- Do not edit generated build outp"
+      },
+      "CLAUDE.md": {
+        "path": "CLAUDE.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 311,
+        "contentPreview": "# Claude Memory\n\nOpenAPI Good Project is a sandbox API contract fixture for AgentLighthouse.\n\n## Workflow\n\n- Run `npm test`, `npm run lint`, and `npm run typecheck`.\n- Keep `openapi.yaml` examples placeholder-safe.\n\n## Boundaries\n\nDo not add real credentials. Destructive API examples must remain sandbox-only.\n"
+      },
+      "llms.txt": {
+        "path": "llms.txt",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 150,
+        "contentPreview": "# OpenAPI Good Project\n\n- [README](README.md)\n- [OpenAPI](openapi.yaml)\n- [Agent Tasks](agentlighthouse.tasks.yaml)\n- [Agent Instructions](AGENTS.md)\n"
+      },
+      "README.md": {
+        "path": "README.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 524,
+        "contentPreview": "# OpenAPI Good Project\n\n## Quickstart\n\nInstall dependencies and verify the API contract:\n\n```bash\nnpm test\n```\n\n## Usage Example\n\nUse `GET /v1/customers` to list customers and `POST /v1/customers` to create one with an idempotency key.\n\n## Architecture\n\n- `openapi.yaml` contains the API contract.\n- `agentlighthouse.tasks.yaml` contains verifiable agent workflows.\n- `AGENTS.md` contains agent operating instructions.\n\n## Troubleshooting\n\nIf authentication fails, check that `EXAMPLE_API_KEY` is rep"
+      },
+      ".cursor/rules": {
+        "path": ".cursor/rules",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".github/copilot-instructions.md": {
+        "path": ".github/copilot-instructions.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".agentlighthouseignore": {
+        "path": ".agentlighthouseignore",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 19
+      }
+    },
+    "docsMarkdownFiles": ["docs/ARCHITECTURE.md"],
+    "openApiFiles": ["openapi.yaml"],
+    "mcpFiles": [],
+    "configFiles": ["package.json"],
+    "benchmarkFiles": ["agentlighthouse.tasks.yaml"],
+    "ignoredPaths": [],
+    "warnings": [],
+    "errors": [],
+    "scanStats": {
+      "filesScanned": 9,
+      "textFilesRead": 8,
+      "bytesRead": 7267,
+      "docsMarkdownFileCount": 1,
+      "openApiFileCount": 1,
+      "benchmarkFileCount": 1
+    },
+    "packageJson": {
+      "path": "package.json",
+      "name": "openapi-good-project",
+      "scripts": {
+        "test": "node --test",
+        "lint": "echo lint-ok",
+        "typecheck": "echo typecheck-ok"
+      },
+      "dependencies": [],
+      "devDependencies": []
+    },
+    "textByPath": {
+      "AGENTS.md": "# Agent Instructions\n\n## Project Overview\n\nThis sample API project demonstrates an agent-readable OpenAPI contract.\n\n## Setup Commands\n\n```bash\nnpm test\n```\n\n```bash\nnpm run lint\n```\n\n```bash\nnpm run typecheck\n```\n\n## Architecture Map\n\n- `openapi.yaml`: API contract.\n- `agentlighthouse.tasks.yaml`: agent task benchmark.\n\n## Coding Conventions\n\nKeep examples placeholder-safe and update tests with contract changes.\n\n## Common Mistakes\n\n- Do not use real API keys.\n- Do not edit generated build output.\n- Do not remove error responses when simplifying examples.\n\n## Security and Privacy\n\nNever use real API keys. Use `EXAMPLE_API_KEY` in examples.\n\n## Ownership\n\nAPI contract changes require maintainer review.\n",
+      "CLAUDE.md": "# Claude Memory\n\nOpenAPI Good Project is a sandbox API contract fixture for AgentLighthouse.\n\n## Workflow\n\n- Run `npm test`, `npm run lint`, and `npm run typecheck`.\n- Keep `openapi.yaml` examples placeholder-safe.\n\n## Boundaries\n\nDo not add real credentials. Destructive API examples must remain sandbox-only.\n",
+      "README.md": "# OpenAPI Good Project\n\n## Quickstart\n\nInstall dependencies and verify the API contract:\n\n```bash\nnpm test\n```\n\n## Usage Example\n\nUse `GET /v1/customers` to list customers and `POST /v1/customers` to create one with an idempotency key.\n\n## Architecture\n\n- `openapi.yaml` contains the API contract.\n- `agentlighthouse.tasks.yaml` contains verifiable agent workflows.\n- `AGENTS.md` contains agent operating instructions.\n\n## Troubleshooting\n\nIf authentication fails, check that `EXAMPLE_API_KEY` is replaced by a sandbox key.\n",
+      "agentlighthouse.tasks.yaml": "version: 0.1.0\nproject: openapi-good-project\ntasks:\n  - id: add-customer-api-example\n    title: Add a customer API example\n    persona: SDK maintainer\n    objective: Add a runnable customer creation example that uses the documented idempotency key and sandbox API key placeholder.\n    projectAreas:\n      - openapi\n      - docs\n    requiredDocs:\n      - README.md\n      - openapi.yaml\n      - AGENTS.md\n    allowedFiles:\n      - README.md\n      - openapi.yaml\n    disallowedFiles:\n      - .env\n    expectedActions:\n      - Read the OpenAPI request body schema.\n      - Preserve placeholder credentials.\n    expectedOutputs:\n      - A request example with idempotency_key and email.\n    successCriteria:\n      - Example uses EXAMPLE_API_KEY.\n      - Example includes idempotency_key.\n    verificationCommands:\n      - npm test\n    riskLevel: medium\n    commonFailureModes:\n      - Omits Authorization header.\n      - Uses a realistic-looking API key.\n",
+      "docs/ARCHITECTURE.md": "# Architecture\n\n- `openapi.yaml` defines the API contract.\n- `agentlighthouse.tasks.yaml` defines verifiable agent workflows.\n- `AGENTS.md` defines coding-agent operating rules.\n\nThe fixture is intentionally small but should remain semantically strong for API analysis.\n",
+      "llms.txt": "# OpenAPI Good Project\n\n- [README](README.md)\n- [OpenAPI](openapi.yaml)\n- [Agent Tasks](agentlighthouse.tasks.yaml)\n- [Agent Instructions](AGENTS.md)\n",
+      "openapi.yaml": "openapi: 3.1.0\ninfo:\n  title: Customer Platform API\n  version: 1.0.0\n  description: Customer Platform API for listing, creating, and deleting sandbox customers with explicit authentication, idempotency, pagination, and error recovery guidance for generated clients.\nservers:\n  - url: https://api.example.com/v1\nsecurity:\n  - bearerAuth: []\ntags:\n  - name: Customers\n    description: Customer account workflows.\nexternalDocs:\n  url: https://docs.example.com\ncomponents:\n  securitySchemes:\n    bearerAuth:\n      type: http\n      scheme: bearer\n  schemas:\n    CustomerCreate:\n      type: object\n      required: [email, idempotency_key]\n      properties:\n        email:\n          type: string\n          description: Customer email address in the sandbox workspace.\n        idempotency_key:\n          type: string\n          description: Unique key that prevents duplicate customer creation on retries.\n    Customer:\n      type: object\n      properties:\n        id:\n          type: string\n          description: Stable customer identifier.\n        email:\n          type: string\n          description: Customer email address.\npaths:\n  /customers:\n    get:\n      operationId: listCustomers\n      summary: List customers\n      description: Lists sandbox customers using cursor pagination. Use limit and cursor to continue through all pages. A 429 response includes Retry-After guidance.\n      parameters:\n        - name: limit\n          in: query\n          description: Maximum number of customers to return, up to 100.\n          schema:\n            type: integer\n        - name: cursor\n          in: query\n          description: Cursor returned from the previous page.\n          schema:\n            type: string\n      responses:\n        \"200\":\n          description: A paginated list of customers.\n          content:\n            application/json:\n              examples:\n                page:\n                  value:\n                    data: [{ id: cus_123, email: user@example.com }]\n                    next_cursor: cursor_456\n        \"401\":\n          description: Missing or invalid bearer token.\n        \"429\":\n          description: Too many requests; retry after the Retry-After header.\n    post:\n      operationId: createCustomer\n      summary: Create customer\n      description: Creates one sandbox customer. This write operation is idempotent when idempotency_key is reused after a network failure.\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              $ref: \"#/components/schemas/CustomerCreate\"\n            examples:\n              basic:\n                value:\n                  email: user@example.com\n                  idempotency_key: idem_123\n      responses:\n        \"201\":\n          description: Customer created.\n          content:\n            application/json:\n              examples:\n                created:\n                  value:\n                    id: cus_123\n                    email: user@example.com\n        \"400\":\n          description: Invalid request body.\n        \"401\":\n          description: Missing or invalid bearer token.\n        \"409\":\n          description: Idempotency conflict.\n        \"429\":\n          description: Too many requests; retry after the Retry-After header.\n  /customers/{customer_id}:\n    delete:\n      operationId: deleteCustomer\n      summary: Delete sandbox customer\n      description: Destructive sandbox-only operation. Requires maintainer permission and cannot be undone; do not call against production data.\n      parameters:\n        - name: customer_id\n          in: path\n          required: true\n          description: Stable customer identifier to delete.\n          schema:\n            type: string\n      responses:\n        \"204\":\n          description: Customer deleted.\n          content:\n            application/json:\n              examples:\n                deleted:\n                  value:\n                    deleted: true\n        \"401\":\n          description: Missing or invalid bearer token.\n        \"403\":\n          description: Token lacks delete permission.\n        \"404\":\n          description: Customer was not found.\n",
+      "package.json": "{\n  \"name\": \"openapi-good-project\",\n  \"version\": \"0.1.0\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"test\": \"node --test\",\n    \"lint\": \"echo lint-ok\",\n    \"typecheck\": \"echo typecheck-ok\"\n  }\n}\n"
+    }
+  }
+}

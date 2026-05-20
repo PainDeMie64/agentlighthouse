@@ -1,0 +1,672 @@
+{
+  "scanId": "scan_2b7cf89b",
+  "scannedPath": "<repo>/examples/mcp-bad-project",
+  "startedAt": "2026-05-20T19:47:28.385Z",
+  "completedAt": "2026-05-20T19:47:28.386Z",
+  "durationMs": 1,
+  "agentLighthouseVersion": "0.1.0",
+  "profile": "mcp",
+  "scoringModelVersion": "0.1.0",
+  "score": 0,
+  "summary": "Agent-readiness needs focused work before agents can reliably use this project.",
+  "subscores": [
+    {
+      "id": "agent_instructions",
+      "label": "Agent Instructions",
+      "score": 70,
+      "findingsCount": 5
+    },
+    {
+      "id": "documentation",
+      "label": "Documentation",
+      "score": 81,
+      "findingsCount": 5
+    },
+    {
+      "id": "api_and_tooling",
+      "label": "API & Tooling",
+      "score": 36,
+      "findingsCount": 10
+    },
+    {
+      "id": "examples_and_tasks",
+      "label": "Examples & Tasks",
+      "score": 95,
+      "findingsCount": 1
+    },
+    {
+      "id": "security_and_privacy",
+      "label": "Security & Privacy",
+      "score": 90,
+      "findingsCount": 2
+    },
+    {
+      "id": "freshness_and_consistency",
+      "label": "Freshness & Consistency",
+      "score": 96,
+      "findingsCount": 2
+    }
+  ],
+  "recommendations": [
+    "Run: agentlighthouse init .",
+    "Add or document setup, test, lint, and typecheck commands.",
+    "Improve README and docs so agents can find quickstart, install, and examples.",
+    "Add task benchmarks for the top developer workflows agents should complete.",
+    "Clarify MCP tool names, descriptions, schemas, examples, and safety notes."
+  ],
+  "rawScore": 0,
+  "scoreConfidence": "medium",
+  "scoreConfidenceScore": 69,
+  "coverage": {
+    "evaluatedChecks": 32,
+    "skippedChecks": 0,
+    "notApplicableChecks": 2,
+    "notEvaluatedChecks": 1,
+    "evaluatedCategories": [
+      "agent_instructions",
+      "documentation",
+      "mcp_tools",
+      "setup_and_tests",
+      "security_and_privacy",
+      "task_benchmarks",
+      "freshness_and_consistency"
+    ],
+    "missingCategories": ["examples"],
+    "coveragePercent": 97
+  },
+  "scoringCaps": [
+    {
+      "id": "cap.no-agent-instructions",
+      "maxScore": 80,
+      "reason": "No agent instruction artifact exists."
+    },
+    {
+      "id": "cap.setup-or-tests-not-verifiable",
+      "maxScore": 85,
+      "reason": "Setup or test commands are not verifiable from project scripts."
+    },
+    {
+      "id": "cap.no-task-benchmarks",
+      "maxScore": 90,
+      "reason": "No realistic agent task benchmark file was found."
+    },
+    {
+      "id": "cap.shallow-key-artifacts",
+      "maxScore": 95,
+      "reason": "One or more key agent-readiness artifacts are shallow or partial."
+    }
+  ],
+  "projectName": "mcp-bad-project",
+  "findings": [
+    {
+      "id": "agent-instructions.missing-agents-md",
+      "title": "Missing AGENTS.md",
+      "severity": "high",
+      "category": "agent_instructions",
+      "description": "The repo has no AGENTS.md, so coding agents lack a stable project guide.",
+      "evidence": ["AGENTS.md was not found at the repository root."],
+      "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+      "affectedFile": "AGENTS.md",
+      "suggestedFixType": "create_file",
+      "ruleId": "agent-instructions.missing-agents-md"
+    },
+    {
+      "id": "agent-instructions.missing-claude-md",
+      "title": "Missing CLAUDE.md",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "Claude Code users do not have a concise project memory file.",
+      "evidence": ["CLAUDE.md was not found at the repository root."],
+      "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+      "affectedFile": "CLAUDE.md",
+      "suggestedFixType": "create_file",
+      "ruleId": "agent-instructions.missing-claude-md"
+    },
+    {
+      "id": "artifact-quality.READMEmd.missing-clear-test-command",
+      "title": "README.md exists, but does not include clear test command",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "A detected agent-facing artifact is missing specific guidance agents need for reliable work.",
+      "evidence": [
+        "README.md does not contain any of: test, pnpm test, npm test, pytest, cargo test, go test."
+      ],
+      "recommendation": "Add clear test command to README.md.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command"
+    },
+    {
+      "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+      "title": "README.md exists, but does not include architecture or repo map",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "A detected agent-facing artifact is missing specific guidance agents need for reliable work.",
+      "evidence": [
+        "README.md does not contain any of: architecture, repo structure, packages/, apps/, src/."
+      ],
+      "recommendation": "Add architecture or repo map to README.md.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map"
+    },
+    {
+      "id": "artifact-quality.readme-missing-verification-step",
+      "title": "README has installation guidance but no verification step",
+      "severity": "low",
+      "category": "documentation",
+      "description": "Agents need a quick command to verify the project works after installation.",
+      "evidence": [
+        "README does not show an obvious test, build, healthcheck, or smoke-test step after installation."
+      ],
+      "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.readme-missing-verification-step"
+    },
+    {
+      "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
+      "title": "README commands are not clearly grounded in package.json scripts",
+      "severity": "low",
+      "category": "freshness_and_consistency",
+      "description": "Commands are more trustworthy when README examples match executable project scripts.",
+      "evidence": [
+        "No fenced README command references a package.json script such as test, lint, typecheck, dev, or build."
+      ],
+      "recommendation": "Show package-manager commands that map directly to package.json scripts.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "update_file",
+      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts"
+    },
+    {
+      "id": "llms.missing",
+      "title": "Missing llms.txt",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "The project does not expose a compact, machine-readable map for LLMs and agents.",
+      "evidence": ["llms.txt was not found at the repository root."],
+      "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+      "affectedFile": "llms.txt",
+      "suggestedFixType": "create_file",
+      "ruleId": "llms.missing"
+    },
+    {
+      "id": "docs.readme-no-quickstart",
+      "title": "README.md has no quickstart section",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: quickstart, quick start, getting started."],
+      "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-quickstart"
+    },
+    {
+      "id": "docs.readme-no-install",
+      "title": "README.md has no installation instructions",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: install, pnpm, npm, yarn, pip."],
+      "recommendation": "Add installation commands and prerequisites.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-install"
+    },
+    {
+      "id": "docs.readme-no-examples",
+      "title": "README.md has no examples",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: example, usage, demo."],
+      "recommendation": "Add concrete examples showing expected usage and output.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-examples"
+    },
+    {
+      "id": "docs.directory-missing",
+      "title": "Docs directory missing",
+      "severity": "low",
+      "category": "documentation",
+      "description": "No docs directory was detected for deeper project context.",
+      "evidence": ["No scanned files were under docs/."],
+      "recommendation": "Add docs/ for architecture, development, API, and operational context.",
+      "affectedFile": "docs/",
+      "suggestedFixType": "create_file",
+      "ruleId": "docs.directory-missing"
+    },
+    {
+      "id": "setup.package-json-no-scripts",
+      "title": "package.json has no scripts",
+      "severity": "high",
+      "category": "setup_and_tests",
+      "description": "Agents cannot discover standard local workflows from package.json.",
+      "evidence": ["package.json scripts object is empty."],
+      "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.package-json-no-scripts"
+    },
+    {
+      "id": "setup.missing-test-script",
+      "title": "No test script in package.json",
+      "severity": "high",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run test without a package script.",
+      "evidence": ["package.json scripts does not include \"test\"."],
+      "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-test-script"
+    },
+    {
+      "id": "setup.missing-lint-script",
+      "title": "No lint script in package.json",
+      "severity": "medium",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run lint without a package script.",
+      "evidence": ["package.json scripts does not include \"lint\"."],
+      "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-lint-script"
+    },
+    {
+      "id": "setup.missing-typecheck-script",
+      "title": "No typecheck script in package.json",
+      "severity": "medium",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run typecheck without a package script.",
+      "evidence": ["package.json scripts does not include \"typecheck\"."],
+      "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-typecheck-script"
+    },
+    {
+      "id": "api.openapi-not-detected",
+      "title": "OpenAPI file not detected",
+      "severity": "info",
+      "category": "api_schema",
+      "description": "No OpenAPI schema was found. This may be fine for projects without an HTTP API.",
+      "evidence": ["No openapi.* or swagger.* file was scanned."],
+      "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
+      "suggestedFixType": "review_manually",
+      "ruleId": "api.openapi-not-detected"
+    },
+    {
+      "id": "mcp.detected",
+      "title": "MCP-related files or packages detected",
+      "severity": "info",
+      "category": "mcp_tools",
+      "description": "MCP signals were found and can be evaluated by future deeper analyzers.",
+      "evidence": ["src/mcp-server.example.txt"],
+      "recommendation": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "review_manually",
+      "ruleId": "mcp.detected"
+    },
+    {
+      "id": "security.missing-agentlighthouseignore",
+      "title": "Missing .agentlighthouseignore",
+      "severity": "medium",
+      "category": "security_and_privacy",
+      "description": "Scans should explicitly exclude generated, private, and secret-bearing paths.",
+      "evidence": [".agentlighthouseignore was not found at the repository root."],
+      "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+      "affectedFile": ".agentlighthouseignore",
+      "suggestedFixType": "create_file",
+      "ruleId": "security.missing-agentlighthouseignore"
+    },
+    {
+      "id": "security.agent-secret-guidance-missing",
+      "title": "Instructions do not tell agents how to handle secrets",
+      "severity": "medium",
+      "category": "security_and_privacy",
+      "description": "Agent-facing instructions should state how to avoid exposing secrets or private data.",
+      "evidence": ["No secret/privacy guidance was detected in AGENTS.md."],
+      "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
+      "affectedFile": "AGENTS.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "security.agent-secret-guidance-missing"
+    },
+    {
+      "id": "freshness.deprecated-or-todo-terms",
+      "title": "Docs contain TODO/deprecated-looking terms without migration guidance",
+      "severity": "low",
+      "category": "freshness_and_consistency",
+      "description": "Stale markers can confuse agents unless they include replacement guidance.",
+      "evidence": ["README.md:3: Tools coming soon."],
+      "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
+      "suggestedFixType": "update_file",
+      "ruleId": "freshness.deprecated-or-todo-terms"
+    },
+    {
+      "id": "MCP_TOOL_NAME_AMBIGUOUS",
+      "title": "MCP tool names are ambiguous",
+      "severity": "medium",
+      "category": "mcp_tools",
+      "description": "2 MCP tool(s) need stronger agent-facing metadata.",
+      "evidence": ["src/mcp-server.example.txt: run", "src/mcp-server.example.txt: delete"],
+      "recommendation": "Rename generic tools so the action and resource are obvious.",
+      "agentFailureMode": "A coding agent may choose a generic tool like run or query for the wrong workflow.",
+      "fixExample": "Use names such as search_docs, create_workspace_ticket, or revoke_api_key.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "update_file",
+      "ruleId": "MCP_TOOL_NAME_AMBIGUOUS"
+    },
+    {
+      "id": "MCP_TOOL_DESCRIPTION_SHALLOW",
+      "title": "MCP tool descriptions are too shallow",
+      "severity": "medium",
+      "category": "mcp_tools",
+      "description": "2 MCP tool(s) need stronger agent-facing metadata.",
+      "evidence": ["src/mcp-server.example.txt: run", "src/mcp-server.example.txt: delete"],
+      "recommendation": "Expand tool descriptions with intent, constraints, and safe usage guidance.",
+      "agentFailureMode": "A coding agent may not distinguish similar tools without usage context.",
+      "fixExample": "Mention input expectations, side effects, auth requirements, and error behavior.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "update_file",
+      "ruleId": "MCP_TOOL_DESCRIPTION_SHALLOW"
+    },
+    {
+      "id": "MCP_TOOL_INPUT_SCHEMA_MISSING",
+      "title": "MCP tools are missing input schemas",
+      "severity": "high",
+      "category": "mcp_tools",
+      "description": "2 MCP tool(s) need stronger agent-facing metadata.",
+      "evidence": ["src/mcp-server.example.txt: run", "src/mcp-server.example.txt: delete"],
+      "recommendation": "Add structured input schemas with required fields and descriptions.",
+      "agentFailureMode": "A coding agent may pass malformed arguments or omit required identifiers.",
+      "fixExample": "Use a zod/object schema with workspace_id and query fields plus descriptions.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "update_file",
+      "ruleId": "MCP_TOOL_INPUT_SCHEMA_MISSING"
+    },
+    {
+      "id": "MCP_TOOL_EXAMPLE_MISSING",
+      "title": "MCP tools lack examples or usage notes",
+      "severity": "low",
+      "category": "mcp_tools",
+      "description": "2 MCP tool(s) need stronger agent-facing metadata.",
+      "evidence": ["src/mcp-server.example.txt: run", "src/mcp-server.example.txt: delete"],
+      "recommendation": "Add examples or usage notes for common calls.",
+      "agentFailureMode": "A coding agent may not know the expected argument shape or output semantics.",
+      "fixExample": "Include an example invocation showing realistic placeholder arguments.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "update_file",
+      "ruleId": "MCP_TOOL_EXAMPLE_MISSING"
+    },
+    {
+      "id": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED",
+      "title": "Destructive MCP tools are not clearly marked",
+      "severity": "high",
+      "category": "mcp_tools",
+      "description": "1 MCP tool(s) need stronger agent-facing metadata.",
+      "evidence": ["src/mcp-server.example.txt: delete"],
+      "recommendation": "Mark destructive tools and document confirmation, permissions, and safe testing behavior.",
+      "agentFailureMode": "A coding agent may call a write/delete tool without realizing it changes external state.",
+      "fixExample": "State that the tool mutates data and requires explicit user approval outside test fixtures.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "update_file",
+      "ruleId": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED"
+    },
+    {
+      "id": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR",
+      "title": "MCP tool error behavior is unclear",
+      "severity": "low",
+      "category": "mcp_tools",
+      "description": "2 MCP tool(s) need stronger agent-facing metadata.",
+      "evidence": ["src/mcp-server.example.txt: run", "src/mcp-server.example.txt: delete"],
+      "recommendation": "Explain common errors and whether retry or user follow-up is appropriate.",
+      "agentFailureMode": "A coding agent may retry unsafe operations or fail silently when a tool returns an error.",
+      "fixExample": "Document not-found, unauthorized, rate-limit, and validation failures.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "update_file",
+      "ruleId": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR"
+    },
+    {
+      "id": "TASK_BENCHMARK_MISSING",
+      "title": "Missing agent task benchmark file",
+      "severity": "medium",
+      "category": "task_benchmarks",
+      "description": "The project has no agentlighthouse.tasks.yaml or benchmark task file.",
+      "evidence": ["No agent task benchmark file was found."],
+      "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+      "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
+      "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
+      "affectedFile": "agentlighthouse.tasks.yaml",
+      "suggestedFixType": "create_file",
+      "ruleId": "TASK_BENCHMARK_MISSING"
+    },
+    {
+      "id": "COMMAND_VERIFICATION_SKIPPED",
+      "title": "Command verification probes were skipped",
+      "severity": "info",
+      "category": "setup_and_tests",
+      "description": "Static analysis is default; project commands are not executed unless explicitly enabled.",
+      "evidence": ["Run with --probe commands or --run-probes to execute safe script probes."],
+      "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+      "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+      "fixExample": "agentlighthouse scan . --probe commands",
+      "suggestedFixType": "none",
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+    }
+  ],
+  "scoreInterpretation": {
+    "agentReadinessScore": 0,
+    "humanReadableProjectSignals": {
+      "score": 60,
+      "summary": "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      "signals": ["README present", "package metadata present", "MCP files or dependencies present"]
+    },
+    "agentSpecificContextLayer": {
+      "score": 0,
+      "summary": "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      "signals": []
+    },
+    "verifiability": {
+      "score": 0,
+      "summary": "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      "signals": ["command probes not run"]
+    }
+  },
+  "apiAnalysis": {
+    "specFiles": [],
+    "operationCount": 0,
+    "operationsWithExamples": 0,
+    "operationsMissingDescriptions": 0,
+    "destructiveOperations": [],
+    "authSchemes": [],
+    "weakOperations": [],
+    "highRiskOperations": []
+  },
+  "mcpAnalysis": {
+    "detected": true,
+    "files": ["package.json", "src/mcp-server.example.txt"],
+    "toolCount": 2,
+    "toolsWithSchemas": 0,
+    "toolsWithExamples": 0,
+    "ambiguousTools": ["src/mcp-server.example.txt: run", "src/mcp-server.example.txt: delete"],
+    "destructiveTools": ["src/mcp-server.example.txt: delete"],
+    "privacySensitiveTools": ["src/mcp-server.example.txt: delete"],
+    "weakTools": ["src/mcp-server.example.txt: run", "src/mcp-server.example.txt: delete"]
+  },
+  "commandProbes": {
+    "enabled": false,
+    "attempted": 0,
+    "skipped": 3,
+    "passed": 0,
+    "failed": 0,
+    "timedOut": 0,
+    "results": []
+  },
+  "detectedProject": {
+    "type": "mcp_project",
+    "name": "mcp-bad-project",
+    "confidence": 0.9,
+    "evidence": ["MCP file or package signal detected."],
+    "packageManager": "npm",
+    "frameworks": []
+  },
+  "detectedArtifacts": [
+    {
+      "path": "AGENTS.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "Primary coding-agent instructions",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": "CLAUDE.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "Claude Code project memory",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": "llms.txt",
+      "exists": false,
+      "kind": "missing",
+      "role": "LLM-readable project map",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": "README.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Human and agent entry point",
+      "quality": "thin",
+      "notes": [
+        "Includes project overview.",
+        "Missing setup commands.",
+        "Missing test commands.",
+        "Missing architecture map.",
+        "Missing docs links."
+      ]
+    },
+    {
+      "path": ".cursor/rules",
+      "exists": false,
+      "kind": "missing",
+      "role": "Cursor rules",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "GitHub Copilot instructions",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".agentlighthouseignore",
+      "exists": false,
+      "kind": "missing",
+      "role": "AgentLighthouse ignore rules",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    }
+  ],
+  "scanStats": {
+    "filesScanned": 3,
+    "textFilesRead": 3,
+    "bytesRead": 451,
+    "docsMarkdownFileCount": 0,
+    "openApiFileCount": 0,
+    "benchmarkFileCount": 0,
+    "findingCount": 28
+  },
+  "ignoredPaths": [],
+  "warnings": [],
+  "errors": [],
+  "projectPath": "<repo>/examples/mcp-bad-project",
+  "scannedAt": "2026-05-20T19:47:28.386Z",
+  "recommendedActions": [
+    "Run: agentlighthouse init .",
+    "Add or document setup, test, lint, and typecheck commands.",
+    "Improve README and docs so agents can find quickstart, install, and examples.",
+    "Add task benchmarks for the top developer workflows agents should complete.",
+    "Clarify MCP tool names, descriptions, schemas, examples, and safety notes."
+  ],
+  "signals": {
+    "rootPath": "<repo>/examples/mcp-bad-project",
+    "projectName": "mcp-bad-project",
+    "scannedFiles": ["README.md", "package.json", "src/mcp-server.example.txt"],
+    "artifacts": {
+      "AGENTS.md": {
+        "path": "AGENTS.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      "CLAUDE.md": {
+        "path": "CLAUDE.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      "llms.txt": {
+        "path": "llms.txt",
+        "exists": false,
+        "kind": "missing"
+      },
+      "README.md": {
+        "path": "README.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 38,
+        "contentPreview": "# MCP Bad Project\n\nTools coming soon.\n"
+      },
+      ".cursor/rules": {
+        "path": ".cursor/rules",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".github/copilot-instructions.md": {
+        "path": ".github/copilot-instructions.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".agentlighthouseignore": {
+        "path": ".agentlighthouseignore",
+        "exists": false,
+        "kind": "missing"
+      }
+    },
+    "docsMarkdownFiles": [],
+    "openApiFiles": [],
+    "mcpFiles": ["src/mcp-server.example.txt"],
+    "configFiles": ["package.json"],
+    "benchmarkFiles": [],
+    "ignoredPaths": [],
+    "warnings": [],
+    "errors": [],
+    "scanStats": {
+      "filesScanned": 3,
+      "textFilesRead": 3,
+      "bytesRead": 451,
+      "docsMarkdownFileCount": 0,
+      "openApiFileCount": 0,
+      "benchmarkFileCount": 0
+    },
+    "packageJson": {
+      "path": "package.json",
+      "name": "mcp-bad-project",
+      "scripts": {},
+      "dependencies": ["@modelcontextprotocol/sdk"],
+      "devDependencies": []
+    },
+    "textByPath": {
+      "README.md": "# MCP Bad Project\n\nTools coming soon.\n",
+      "package.json": "{\n  \"name\": \"mcp-bad-project\",\n  \"version\": \"0.1.0\",\n  \"type\": \"module\",\n  \"dependencies\": {\n    \"@modelcontextprotocol/sdk\": \"^1.0.0\"\n  },\n  \"scripts\": {}\n}\n",
+      "src/mcp-server.example.txt": "import { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";\n\nconst server = new McpServer({ name: \"bad-mcp\", version: \"1.0.0\" });\n\nserver.tool(\"run\", {\n  description: \"Runs stuff.\"\n});\n\nserver.tool(\"delete\", {\n  description: \"Deletes token.\"\n});\n"
+    }
+  }
+}

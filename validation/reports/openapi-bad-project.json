@@ -1,0 +1,821 @@
+{
+  "scanId": "scan_5ed1a0fb",
+  "scannedPath": "<repo>/examples/openapi-bad-project",
+  "startedAt": "2026-05-20T19:47:28.318Z",
+  "completedAt": "2026-05-20T19:47:28.320Z",
+  "durationMs": 2,
+  "agentLighthouseVersion": "0.1.0",
+  "profile": "api",
+  "scoringModelVersion": "0.1.0",
+  "score": 0,
+  "summary": "Agent-readiness needs focused work before agents can reliably use this project.",
+  "subscores": [
+    {
+      "id": "agent_instructions",
+      "label": "Agent Instructions",
+      "score": 70,
+      "findingsCount": 5
+    },
+    {
+      "id": "documentation",
+      "label": "Documentation",
+      "score": 79,
+      "findingsCount": 6
+    },
+    {
+      "id": "api_and_tooling",
+      "label": "API & Tooling",
+      "score": 5,
+      "findingsCount": 18
+    },
+    {
+      "id": "examples_and_tasks",
+      "label": "Examples & Tasks",
+      "score": 95,
+      "findingsCount": 1
+    },
+    {
+      "id": "security_and_privacy",
+      "label": "Security & Privacy",
+      "score": 90,
+      "findingsCount": 2
+    },
+    {
+      "id": "freshness_and_consistency",
+      "label": "Freshness & Consistency",
+      "score": 96,
+      "findingsCount": 2
+    }
+  ],
+  "recommendations": [
+    "Run: agentlighthouse init .",
+    "Add or document setup, test, lint, and typecheck commands.",
+    "Improve README and docs so agents can find quickstart, install, and examples.",
+    "Add task benchmarks for the top developer workflows agents should complete.",
+    "Improve OpenAPI operation descriptions, examples, auth, and error responses."
+  ],
+  "rawScore": 0,
+  "scoreConfidence": "medium",
+  "scoreConfidenceScore": 61,
+  "coverage": {
+    "evaluatedChecks": 41,
+    "skippedChecks": 0,
+    "notApplicableChecks": 2,
+    "notEvaluatedChecks": 2,
+    "evaluatedCategories": [
+      "agent_instructions",
+      "documentation",
+      "api_schema",
+      "setup_and_tests",
+      "security_and_privacy",
+      "task_benchmarks",
+      "freshness_and_consistency"
+    ],
+    "missingCategories": ["examples"],
+    "coveragePercent": 95
+  },
+  "scoringCaps": [
+    {
+      "id": "cap.no-agent-instructions",
+      "maxScore": 80,
+      "reason": "No agent instruction artifact exists."
+    },
+    {
+      "id": "cap.setup-or-tests-not-verifiable",
+      "maxScore": 85,
+      "reason": "Setup or test commands are not verifiable from project scripts."
+    },
+    {
+      "id": "cap.no-task-benchmarks",
+      "maxScore": 90,
+      "reason": "No realistic agent task benchmark file was found."
+    },
+    {
+      "id": "cap.shallow-key-artifacts",
+      "maxScore": 95,
+      "reason": "One or more key agent-readiness artifacts are shallow or partial."
+    }
+  ],
+  "projectName": "openapi-bad-project",
+  "findings": [
+    {
+      "id": "agent-instructions.missing-agents-md",
+      "title": "Missing AGENTS.md",
+      "severity": "high",
+      "category": "agent_instructions",
+      "description": "The repo has no AGENTS.md, so coding agents lack a stable project guide.",
+      "evidence": ["AGENTS.md was not found at the repository root."],
+      "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+      "affectedFile": "AGENTS.md",
+      "suggestedFixType": "create_file",
+      "ruleId": "agent-instructions.missing-agents-md"
+    },
+    {
+      "id": "agent-instructions.missing-claude-md",
+      "title": "Missing CLAUDE.md",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "Claude Code users do not have a concise project memory file.",
+      "evidence": ["CLAUDE.md was not found at the repository root."],
+      "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+      "affectedFile": "CLAUDE.md",
+      "suggestedFixType": "create_file",
+      "ruleId": "agent-instructions.missing-claude-md"
+    },
+    {
+      "id": "artifact-quality.READMEmd.missing-clear-test-command",
+      "title": "README.md exists, but does not include clear test command",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "A detected agent-facing artifact is missing specific guidance agents need for reliable work.",
+      "evidence": [
+        "README.md does not contain any of: test, pnpm test, npm test, pytest, cargo test, go test."
+      ],
+      "recommendation": "Add clear test command to README.md.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command"
+    },
+    {
+      "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+      "title": "README.md exists, but does not include architecture or repo map",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "A detected agent-facing artifact is missing specific guidance agents need for reliable work.",
+      "evidence": [
+        "README.md does not contain any of: architecture, repo structure, packages/, apps/, src/."
+      ],
+      "recommendation": "Add architecture or repo map to README.md.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map"
+    },
+    {
+      "id": "artifact-quality.readme-missing-verification-step",
+      "title": "README has installation guidance but no verification step",
+      "severity": "low",
+      "category": "documentation",
+      "description": "Agents need a quick command to verify the project works after installation.",
+      "evidence": [
+        "README does not show an obvious test, build, healthcheck, or smoke-test step after installation."
+      ],
+      "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.readme-missing-verification-step"
+    },
+    {
+      "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
+      "title": "README commands are not clearly grounded in package.json scripts",
+      "severity": "low",
+      "category": "freshness_and_consistency",
+      "description": "Commands are more trustworthy when README examples match executable project scripts.",
+      "evidence": [
+        "No fenced README command references a package.json script such as test, lint, typecheck, dev, or build."
+      ],
+      "recommendation": "Show package-manager commands that map directly to package.json scripts.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "update_file",
+      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts"
+    },
+    {
+      "id": "artifact-quality.readme-missing-troubleshooting",
+      "title": "README lacks troubleshooting guidance",
+      "severity": "low",
+      "category": "documentation",
+      "description": "Developer-tool and API projects benefit from troubleshooting notes because agents often need to recover from local setup failures.",
+      "evidence": ["No troubleshooting, debug, FAQ, or common-issue section was detected."],
+      "recommendation": "Add a short troubleshooting section with common setup and test failure fixes.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.readme-missing-troubleshooting"
+    },
+    {
+      "id": "llms.missing",
+      "title": "Missing llms.txt",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "The project does not expose a compact, machine-readable map for LLMs and agents.",
+      "evidence": ["llms.txt was not found at the repository root."],
+      "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+      "affectedFile": "llms.txt",
+      "suggestedFixType": "create_file",
+      "ruleId": "llms.missing"
+    },
+    {
+      "id": "docs.readme-no-quickstart",
+      "title": "README.md has no quickstart section",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: quickstart, quick start, getting started."],
+      "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-quickstart"
+    },
+    {
+      "id": "docs.readme-no-install",
+      "title": "README.md has no installation instructions",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: install, pnpm, npm, yarn, pip."],
+      "recommendation": "Add installation commands and prerequisites.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-install"
+    },
+    {
+      "id": "docs.readme-no-examples",
+      "title": "README.md has no examples",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: example, usage, demo."],
+      "recommendation": "Add concrete examples showing expected usage and output.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-examples"
+    },
+    {
+      "id": "docs.directory-missing",
+      "title": "Docs directory missing",
+      "severity": "low",
+      "category": "documentation",
+      "description": "No docs directory was detected for deeper project context.",
+      "evidence": ["No scanned files were under docs/."],
+      "recommendation": "Add docs/ for architecture, development, API, and operational context.",
+      "affectedFile": "docs/",
+      "suggestedFixType": "create_file",
+      "ruleId": "docs.directory-missing"
+    },
+    {
+      "id": "setup.package-json-no-scripts",
+      "title": "package.json has no scripts",
+      "severity": "high",
+      "category": "setup_and_tests",
+      "description": "Agents cannot discover standard local workflows from package.json.",
+      "evidence": ["package.json scripts object is empty."],
+      "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.package-json-no-scripts"
+    },
+    {
+      "id": "setup.missing-test-script",
+      "title": "No test script in package.json",
+      "severity": "high",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run test without a package script.",
+      "evidence": ["package.json scripts does not include \"test\"."],
+      "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-test-script"
+    },
+    {
+      "id": "setup.missing-lint-script",
+      "title": "No lint script in package.json",
+      "severity": "medium",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run lint without a package script.",
+      "evidence": ["package.json scripts does not include \"lint\"."],
+      "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-lint-script"
+    },
+    {
+      "id": "setup.missing-typecheck-script",
+      "title": "No typecheck script in package.json",
+      "severity": "medium",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run typecheck without a package script.",
+      "evidence": ["package.json scripts does not include \"typecheck\"."],
+      "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-typecheck-script"
+    },
+    {
+      "id": "api.openapi-detected",
+      "title": "OpenAPI file detected",
+      "severity": "info",
+      "category": "api_schema",
+      "description": "The scanner found an API schema that agents can use.",
+      "evidence": ["openapi.yaml"],
+      "recommendation": "Keep API descriptions, examples, and auth details current.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "none",
+      "ruleId": "api.openapi-detected"
+    },
+    {
+      "id": "api.openapi-no-nearby-examples",
+      "title": "OpenAPI exists but no examples are nearby",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "Agents need request and response examples in addition to schemas.",
+      "evidence": ["OpenAPI files: openapi.yaml"],
+      "recommendation": "Add examples near the API spec or link examples from the API documentation.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "add_example",
+      "ruleId": "api.openapi-no-nearby-examples"
+    },
+    {
+      "id": "api.openapi-thin-descriptions",
+      "title": "OpenAPI operation descriptions appear thin",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "The OpenAPI schema may not provide enough semantic guidance for agents.",
+      "evidence": ["No operation description longer than 20 characters was detected."],
+      "recommendation": "Add meaningful operation descriptions, auth notes, and representative examples.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "api.openapi-thin-descriptions"
+    },
+    {
+      "id": "mcp.not-evaluated",
+      "title": "MCP readiness could not be evaluated yet",
+      "severity": "info",
+      "category": "mcp_tools",
+      "description": "No MCP server/config/package signal was detected.",
+      "evidence": ["No file or package name matching MCP was scanned."],
+      "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+      "suggestedFixType": "review_manually",
+      "ruleId": "mcp.not-evaluated"
+    },
+    {
+      "id": "security.missing-agentlighthouseignore",
+      "title": "Missing .agentlighthouseignore",
+      "severity": "medium",
+      "category": "security_and_privacy",
+      "description": "Scans should explicitly exclude generated, private, and secret-bearing paths.",
+      "evidence": [".agentlighthouseignore was not found at the repository root."],
+      "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+      "affectedFile": ".agentlighthouseignore",
+      "suggestedFixType": "create_file",
+      "ruleId": "security.missing-agentlighthouseignore"
+    },
+    {
+      "id": "security.agent-secret-guidance-missing",
+      "title": "Instructions do not tell agents how to handle secrets",
+      "severity": "medium",
+      "category": "security_and_privacy",
+      "description": "Agent-facing instructions should state how to avoid exposing secrets or private data.",
+      "evidence": ["No secret/privacy guidance was detected in AGENTS.md."],
+      "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
+      "affectedFile": "AGENTS.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "security.agent-secret-guidance-missing"
+    },
+    {
+      "id": "freshness.deprecated-or-todo-terms",
+      "title": "Docs contain TODO/deprecated-looking terms without migration guidance",
+      "severity": "low",
+      "category": "freshness_and_consistency",
+      "description": "Stale markers can confuse agents unless they include replacement guidance.",
+      "evidence": ["README.md:3: API docs coming soon."],
+      "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
+      "suggestedFixType": "update_file",
+      "ruleId": "freshness.deprecated-or-todo-terms"
+    },
+    {
+      "id": "OPENAPI_WEAK_SPEC_DESCRIPTION",
+      "title": "OpenAPI spec description is too thin for agents",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "The API-level description does not explain product concepts, auth expectations, or common workflows.",
+      "evidence": ["openapi.yaml: info.description is missing or shorter than 40 characters."],
+      "recommendation": "Add a concise overview of the API domain, common workflows, auth model, and safe usage constraints.",
+      "agentFailureMode": "A coding agent may jump straight to endpoints without understanding product nouns, authentication, or workflow ordering.",
+      "fixExample": "Describe the main resources, required authentication, common create/list/update flows, and where to find examples.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_WEAK_SPEC_DESCRIPTION"
+    },
+    {
+      "id": "OPENAPI_AUTH_UNCLEAR",
+      "title": "OpenAPI authentication is unclear",
+      "severity": "high",
+      "category": "api_schema",
+      "description": "No security scheme or clear authentication guidance was detected.",
+      "evidence": [
+        "openapi.yaml: components.securitySchemes is missing and auth hints were not found."
+      ],
+      "recommendation": "Document the auth scheme, required headers, scopes, and placeholder-safe example credentials.",
+      "agentFailureMode": "A coding agent may generate client code without the required Authorization header or may invent unsafe credential handling.",
+      "fixExample": "Add an HTTP bearer or API key security scheme and a request example using EXAMPLE_API_KEY.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_AUTH_UNCLEAR"
+    },
+    {
+      "id": "OPENAPI_SERVER_URL_MISSING",
+      "title": "OpenAPI server URL is missing",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "Agents need a base URL signal to generate usable client examples.",
+      "evidence": ["openapi.yaml: servers is missing."],
+      "recommendation": "Add production and sandbox server URLs, or explain how agents should configure the base URL.",
+      "agentFailureMode": "A coding agent may invent a base URL or hardcode the wrong host.",
+      "fixExample": "Add servers: [{ url: 'https://api.example.com/v1' }].",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_SERVER_URL_MISSING"
+    },
+    {
+      "id": "OPENAPI_MISSING_OPERATION_ID",
+      "title": "OpenAPI operations have weak or missing operationIds",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "3 operation(s) need stronger agent-facing API documentation.",
+      "evidence": [
+        "openapi.yaml: GET /items (list)",
+        "openapi.yaml: POST /items (create)",
+        "openapi.yaml: DELETE /items/{id} (delete)"
+      ],
+      "recommendation": "Give every operation a stable, specific operationId such as createWorkspaceInvite or listCustomerInvoices.",
+      "agentFailureMode": "A coding agent may generate confusing client methods or call the wrong endpoint when operation IDs are missing or generic.",
+      "fixExample": "Use verb+noun names that distinguish similar operations, for example revokeApiKey instead of delete.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_MISSING_OPERATION_ID"
+    },
+    {
+      "id": "OPENAPI_WEAK_OPERATION_DESCRIPTION",
+      "title": "OpenAPI operations have weak descriptions",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "3 operation(s) need stronger agent-facing API documentation.",
+      "evidence": [
+        "openapi.yaml: GET /items (list)",
+        "openapi.yaml: POST /items (create)",
+        "openapi.yaml: DELETE /items/{id} (delete)"
+      ],
+      "recommendation": "Add operation descriptions explaining when to use the endpoint, required context, side effects, and recovery behavior.",
+      "agentFailureMode": "A coding agent may choose the wrong operation because summaries alone do not explain intent or preconditions.",
+      "fixExample": "Add descriptions that mention required IDs, auth scope, side effects, and common failure handling.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_WEAK_OPERATION_DESCRIPTION"
+    },
+    {
+      "id": "OPENAPI_MISSING_REQUEST_EXAMPLE",
+      "title": "Write operations lack request examples",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "1 operation(s) need stronger agent-facing API documentation.",
+      "evidence": ["openapi.yaml: POST /items (create)"],
+      "recommendation": "Add request examples for create/update operations using realistic placeholder values.",
+      "agentFailureMode": "A coding agent may send malformed payloads or omit required fields because no concrete request shape is shown.",
+      "fixExample": "Add an example body with workspace_id, customer_id, and idempotency_key where relevant.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_MISSING_REQUEST_EXAMPLE"
+    },
+    {
+      "id": "OPENAPI_MISSING_RESPONSE_EXAMPLE",
+      "title": "Operations lack response examples",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "3 operation(s) need stronger agent-facing API documentation.",
+      "evidence": [
+        "openapi.yaml: GET /items (list)",
+        "openapi.yaml: POST /items (create)",
+        "openapi.yaml: DELETE /items/{id} (delete)"
+      ],
+      "recommendation": "Add response examples for successful and important error cases.",
+      "agentFailureMode": "A coding agent may write incorrect parsing code because expected response shapes are not exemplified.",
+      "fixExample": "Add 200/201 response examples with IDs, timestamps, pagination cursors, and nested objects.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_MISSING_RESPONSE_EXAMPLE"
+    },
+    {
+      "id": "OPENAPI_MISSING_ERROR_RESPONSES",
+      "title": "Operations lack common error responses",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "3 operation(s) need stronger agent-facing API documentation.",
+      "evidence": [
+        "openapi.yaml: GET /items (list)",
+        "openapi.yaml: POST /items (create)",
+        "openapi.yaml: DELETE /items/{id} (delete)"
+      ],
+      "recommendation": "Document likely 400/401/403/404/409/429/500 responses and how callers should recover.",
+      "agentFailureMode": "A coding agent may generate happy-path-only integrations with no auth, retry, or validation recovery.",
+      "fixExample": "Add 401, 404, 409, and 429 responses with short descriptions and example error payloads.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_MISSING_ERROR_RESPONSES"
+    },
+    {
+      "id": "OPENAPI_AMBIGUOUS_OPERATION_NAME",
+      "title": "OpenAPI operation names are ambiguous",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "3 operation(s) need stronger agent-facing API documentation.",
+      "evidence": [
+        "openapi.yaml: GET /items (list)",
+        "openapi.yaml: POST /items (create)",
+        "openapi.yaml: DELETE /items/{id} (delete)"
+      ],
+      "recommendation": "Rename generic operationIds so similar endpoints are distinguishable to code generators and agents.",
+      "agentFailureMode": "A coding agent may map multiple endpoints to vague client methods such as run, query, or update.",
+      "fixExample": "Prefer syncCatalog, searchDocuments, or updateWorkspaceMember over generic names.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_AMBIGUOUS_OPERATION_NAME"
+    },
+    {
+      "id": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED",
+      "title": "Destructive API operations are not clearly marked",
+      "severity": "high",
+      "category": "api_schema",
+      "description": "1 operation(s) need stronger agent-facing API documentation.",
+      "evidence": ["openapi.yaml: DELETE /items/{id} (delete)"],
+      "recommendation": "Mark destructive operations with permission, confirmation, irreversibility, and recovery guidance.",
+      "agentFailureMode": "A coding agent may call a destructive endpoint during testing without understanding consequences.",
+      "fixExample": "State whether delete/cancel/revoke is irreversible and include sandbox-safe examples.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED"
+    },
+    {
+      "id": "OPENAPI_PAGINATION_UNCLEAR",
+      "title": "List operations do not explain pagination",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "1 operation(s) need stronger agent-facing API documentation.",
+      "evidence": ["openapi.yaml: GET /items (list)"],
+      "recommendation": "Document pagination parameters, cursors, limits, and response fields.",
+      "agentFailureMode": "A coding agent may fetch only the first page or invent unsupported pagination parameters.",
+      "fixExample": "Describe limit and cursor parameters and include a response example with next_cursor.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_PAGINATION_UNCLEAR"
+    },
+    {
+      "id": "OPENAPI_RATE_LIMIT_UNCLEAR",
+      "title": "OpenAPI rate-limit behavior is unclear",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "No 429, Retry-After, or rate-limit guidance was detected.",
+      "evidence": ["No operation mentions 429, Retry-After, or rate limits."],
+      "recommendation": "Document rate limits and retry behavior for generated clients.",
+      "agentFailureMode": "A coding agent may create brittle retry loops or ignore throttling responses.",
+      "fixExample": "Add a 429 response with Retry-After guidance and an example error payload.",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_RATE_LIMIT_UNCLEAR"
+    },
+    {
+      "id": "TASK_BENCHMARK_MISSING",
+      "title": "Missing agent task benchmark file",
+      "severity": "medium",
+      "category": "task_benchmarks",
+      "description": "The project has no agentlighthouse.tasks.yaml or benchmark task file.",
+      "evidence": ["No agent task benchmark file was found."],
+      "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+      "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
+      "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
+      "affectedFile": "agentlighthouse.tasks.yaml",
+      "suggestedFixType": "create_file",
+      "ruleId": "TASK_BENCHMARK_MISSING"
+    },
+    {
+      "id": "COMMAND_VERIFICATION_SKIPPED",
+      "title": "Command verification probes were skipped",
+      "severity": "info",
+      "category": "setup_and_tests",
+      "description": "Static analysis is default; project commands are not executed unless explicitly enabled.",
+      "evidence": ["Run with --probe commands or --run-probes to execute safe script probes."],
+      "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+      "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+      "fixExample": "agentlighthouse scan . --probe commands",
+      "suggestedFixType": "none",
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+    }
+  ],
+  "scoreInterpretation": {
+    "agentReadinessScore": 0,
+    "humanReadableProjectSignals": {
+      "score": 69,
+      "summary": "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      "signals": ["README present", "package metadata present", "OpenAPI spec present"]
+    },
+    "agentSpecificContextLayer": {
+      "score": 0,
+      "summary": "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      "signals": []
+    },
+    "verifiability": {
+      "score": 0,
+      "summary": "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      "signals": ["command probes not run"]
+    }
+  },
+  "apiAnalysis": {
+    "specFiles": ["openapi.yaml"],
+    "operationCount": 3,
+    "operationsWithExamples": 0,
+    "operationsMissingDescriptions": 3,
+    "destructiveOperations": ["openapi.yaml: DELETE /items/{id} (delete)"],
+    "authSchemes": [],
+    "weakOperations": [
+      "openapi.yaml: GET /items (list)",
+      "openapi.yaml: POST /items (create)",
+      "openapi.yaml: DELETE /items/{id} (delete)"
+    ],
+    "highRiskOperations": [
+      "openapi.yaml: GET /items (list)",
+      "openapi.yaml: POST /items (create)",
+      "openapi.yaml: DELETE /items/{id} (delete)"
+    ]
+  },
+  "mcpAnalysis": {
+    "detected": false,
+    "files": [],
+    "toolCount": 0,
+    "toolsWithSchemas": 0,
+    "toolsWithExamples": 0,
+    "ambiguousTools": [],
+    "destructiveTools": [],
+    "privacySensitiveTools": [],
+    "weakTools": []
+  },
+  "commandProbes": {
+    "enabled": false,
+    "attempted": 0,
+    "skipped": 3,
+    "passed": 0,
+    "failed": 0,
+    "timedOut": 0,
+    "results": []
+  },
+  "detectedProject": {
+    "type": "openapi_project",
+    "name": "openapi-bad-project",
+    "confidence": 0.85,
+    "evidence": ["OpenAPI files detected: openapi.yaml."],
+    "packageManager": "npm",
+    "frameworks": []
+  },
+  "detectedArtifacts": [
+    {
+      "path": "AGENTS.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "Primary coding-agent instructions",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": "CLAUDE.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "Claude Code project memory",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": "llms.txt",
+      "exists": false,
+      "kind": "missing",
+      "role": "LLM-readable project map",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": "README.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Human and agent entry point",
+      "quality": "thin",
+      "notes": [
+        "Includes project overview.",
+        "Missing setup commands.",
+        "Missing test commands.",
+        "Missing architecture map.",
+        "Missing docs links."
+      ]
+    },
+    {
+      "path": ".cursor/rules",
+      "exists": false,
+      "kind": "missing",
+      "role": "Cursor rules",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "GitHub Copilot instructions",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".agentlighthouseignore",
+      "exists": false,
+      "kind": "missing",
+      "role": "AgentLighthouse ignore rules",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    }
+  ],
+  "scanStats": {
+    "filesScanned": 3,
+    "textFilesRead": 3,
+    "bytesRead": 808,
+    "docsMarkdownFileCount": 0,
+    "openApiFileCount": 1,
+    "benchmarkFileCount": 0,
+    "findingCount": 37
+  },
+  "ignoredPaths": [],
+  "warnings": [],
+  "errors": [],
+  "projectPath": "<repo>/examples/openapi-bad-project",
+  "scannedAt": "2026-05-20T19:47:28.320Z",
+  "recommendedActions": [
+    "Run: agentlighthouse init .",
+    "Add or document setup, test, lint, and typecheck commands.",
+    "Improve README and docs so agents can find quickstart, install, and examples.",
+    "Add task benchmarks for the top developer workflows agents should complete.",
+    "Improve OpenAPI operation descriptions, examples, auth, and error responses."
+  ],
+  "signals": {
+    "rootPath": "<repo>/examples/openapi-bad-project",
+    "projectName": "openapi-bad-project",
+    "scannedFiles": ["README.md", "openapi.yaml", "package.json"],
+    "artifacts": {
+      "AGENTS.md": {
+        "path": "AGENTS.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      "CLAUDE.md": {
+        "path": "CLAUDE.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      "llms.txt": {
+        "path": "llms.txt",
+        "exists": false,
+        "kind": "missing"
+      },
+      "README.md": {
+        "path": "README.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 45,
+        "contentPreview": "# OpenAPI Bad Project\n\nAPI docs coming soon.\n"
+      },
+      ".cursor/rules": {
+        "path": ".cursor/rules",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".github/copilot-instructions.md": {
+        "path": ".github/copilot-instructions.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".agentlighthouseignore": {
+        "path": ".agentlighthouseignore",
+        "exists": false,
+        "kind": "missing"
+      }
+    },
+    "docsMarkdownFiles": [],
+    "openApiFiles": ["openapi.yaml"],
+    "mcpFiles": [],
+    "configFiles": ["package.json"],
+    "benchmarkFiles": [],
+    "ignoredPaths": [],
+    "warnings": [],
+    "errors": [],
+    "scanStats": {
+      "filesScanned": 3,
+      "textFilesRead": 3,
+      "bytesRead": 808,
+      "docsMarkdownFileCount": 0,
+      "openApiFileCount": 1,
+      "benchmarkFileCount": 0
+    },
+    "packageJson": {
+      "path": "package.json",
+      "name": "openapi-bad-project",
+      "scripts": {},
+      "dependencies": [],
+      "devDependencies": []
+    },
+    "textByPath": {
+      "README.md": "# OpenAPI Bad Project\n\nAPI docs coming soon.\n",
+      "openapi.yaml": "openapi: 3.0.0\ninfo:\n  title: Bad API\n  version: 1.0.0\npaths:\n  /items:\n    get:\n      operationId: list\n      summary: Items\n      responses:\n        \"200\":\n          description: ok\n    post:\n      operationId: create\n      summary: Create\n      requestBody:\n        content:\n          application/json:\n            schema:\n              type: object\n      responses:\n        \"200\":\n          description: ok\n  /items/{id}:\n    delete:\n      operationId: delete\n      summary: Delete\n      parameters:\n        - name: id\n          in: path\n          required: true\n          schema:\n            type: string\n      responses:\n        \"200\":\n          description: ok\n",
+      "package.json": "{\n  \"name\": \"openapi-bad-project\",\n  \"version\": \"0.1.0\",\n  \"type\": \"module\",\n  \"scripts\": {}\n}\n"
+    }
+  }
+}

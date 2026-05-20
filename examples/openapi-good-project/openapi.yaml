@@ -1,0 +1,130 @@
+openapi: 3.1.0
+info:
+  title: Customer Platform API
+  version: 1.0.0
+  description: Customer Platform API for listing, creating, and deleting sandbox customers with explicit authentication, idempotency, pagination, and error recovery guidance for generated clients.
+servers:
+  - url: https://api.example.com/v1
+security:
+  - bearerAuth: []
+tags:
+  - name: Customers
+    description: Customer account workflows.
+externalDocs:
+  url: https://docs.example.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    CustomerCreate:
+      type: object
+      required: [email, idempotency_key]
+      properties:
+        email:
+          type: string
+          description: Customer email address in the sandbox workspace.
+        idempotency_key:
+          type: string
+          description: Unique key that prevents duplicate customer creation on retries.
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable customer identifier.
+        email:
+          type: string
+          description: Customer email address.
+paths:
+  /customers:
+    get:
+      operationId: listCustomers
+      summary: List customers
+      description: Lists sandbox customers using cursor pagination. Use limit and cursor to continue through all pages. A 429 response includes Retry-After guidance.
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of customers to return, up to 100.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description: Cursor returned from the previous page.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A paginated list of customers.
+          content:
+            application/json:
+              examples:
+                page:
+                  value:
+                    data: [{ id: cus_123, email: user@example.com }]
+                    next_cursor: cursor_456
+        "401":
+          description: Missing or invalid bearer token.
+        "429":
+          description: Too many requests; retry after the Retry-After header.
+    post:
+      operationId: createCustomer
+      summary: Create customer
+      description: Creates one sandbox customer. This write operation is idempotent when idempotency_key is reused after a network failure.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerCreate"
+            examples:
+              basic:
+                value:
+                  email: user@example.com
+                  idempotency_key: idem_123
+      responses:
+        "201":
+          description: Customer created.
+          content:
+            application/json:
+              examples:
+                created:
+                  value:
+                    id: cus_123
+                    email: user@example.com
+        "400":
+          description: Invalid request body.
+        "401":
+          description: Missing or invalid bearer token.
+        "409":
+          description: Idempotency conflict.
+        "429":
+          description: Too many requests; retry after the Retry-After header.
+  /customers/{customer_id}:
+    delete:
+      operationId: deleteCustomer
+      summary: Delete sandbox customer
+      description: Destructive sandbox-only operation. Requires maintainer permission and cannot be undone; do not call against production data.
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          description: Stable customer identifier to delete.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Customer deleted.
+          content:
+            application/json:
+              examples:
+                deleted:
+                  value:
+                    deleted: true
+        "401":
+          description: Missing or invalid bearer token.
+        "403":
+          description: Token lacks delete permission.
+        "404":
+          description: Customer was not found.

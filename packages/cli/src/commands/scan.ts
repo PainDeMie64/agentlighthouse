@@ -10,6 +10,8 @@ export interface ScanCommandOptions {
   json?: boolean;
   format?: ScanFormat;
   profile?: ScanProfile;
+  probe?: string[];
+  runProbes?: boolean;
   output?: string;
   failUnder?: string;
   include?: string[];
@@ -28,14 +30,21 @@ export async function runScanCommand(
   }
   if (
     options.profile &&
-    !["default", "devtool", "api", "docs", "library", "internal"].includes(options.profile)
+    !["default", "devtool", "api", "mcp", "docs", "library", "internal"].includes(options.profile)
   ) {
     throw new Error(`Unsupported profile "${options.profile}".`);
+  }
+  const probes = new Set(options.probe ?? []);
+  if ([...probes].some((probe) => probe !== "commands")) {
+    throw new Error(`Unsupported probe. Use --probe commands.`);
   }
   const result = await scanProject(scanPath, {
     include: options.include ?? [],
     exclude: options.exclude ?? [],
-    profile: options.profile
+    profile: options.profile,
+    probes: {
+      commands: options.runProbes === true || probes.has("commands")
+    }
   });
   const failUnder = options.failUnder ? Number.parseInt(options.failUnder, 10) : undefined;
   const rendered = renderResult(result, format, options.color ?? true);

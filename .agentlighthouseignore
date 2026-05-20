@@ -9,8 +9,7 @@ coverage/
 .tmp/
 vendor/
 validation/reports/
-examples/sample-project/
-examples/sample-bad-project/
+examples/
 *.log
 .env
 .env.*

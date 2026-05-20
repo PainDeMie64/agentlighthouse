@@ -16,7 +16,6 @@ export class ReadinessAnalyzer implements Analyzer {
       ...setupFindings(signals),
       ...apiFindings(signals, this.profile),
       ...mcpFindings(signals),
-      ...benchmarkFindings(signals),
       ...securityFindings(signals),
       ...freshnessFindings(signals)
     ];
@@ -504,7 +503,7 @@ function mcpFindings(signals: ProjectSignals): Finding[] {
       suggestedFixType: "review_manually"
     })
   ];
-  if (!/description.{10,}/i.test(mcpText)) {
+  if (!/description[\s\S]{10,}/i.test(mcpText)) {
     findings.push(
       finding({
         id: "mcp.tool-descriptions-thin",
@@ -703,7 +702,7 @@ function strongSignalFindings(signals: ProjectSignals, profile: ScanProfile): Fi
     );
   }
 
-  if (benchmarkContent && !/success_criteria:\s*\n\s*-/i.test(benchmarkContent)) {
+  if (benchmarkContent && !/(success_criteria|successCriteria):\s*\n\s*-/i.test(benchmarkContent)) {
     findings.push(
       finding({
         id: "artifact-quality.benchmarks-not-verifiable",
@@ -712,7 +711,7 @@ function strongSignalFindings(signals: ProjectSignals, profile: ScanProfile): Fi
         category: "task_benchmarks",
         description:
           "Benchmark tasks need explicit success criteria so agent completion can be evaluated.",
-        evidence: ["No success_criteria list was detected."],
+        evidence: ["No success criteria list was detected."],
         recommendation: "Add success criteria to each benchmark task.",
         affectedFile: signals.benchmarkFiles[0],
         suggestedFixType: "update_file"
@@ -763,60 +762,6 @@ function strongSignalFindings(signals: ProjectSignals, profile: ScanProfile): Fi
   }
 
   return findings;
-}
-
-function benchmarkFindings(signals: ProjectSignals): Finding[] {
-  if (signals.benchmarkFiles.length === 0) {
-    return [
-      finding({
-        id: "benchmarks.missing-agent-task-file",
-        title: "Missing agent task benchmark file",
-        severity: "medium",
-        category: "task_benchmarks",
-        description: "The project has no task benchmark describing realistic agent workflows.",
-        evidence: ["No benchmarks/agent-tasks.yaml or .agentlighthouse/tasks.yaml file was found."],
-        recommendation:
-          "Add a benchmark file with tasks such as install, run tests, add a small feature, and find core modules.",
-        affectedFile: "benchmarks/agent-tasks.yaml",
-        suggestedFixType: "create_file"
-      })
-    ];
-  }
-
-  const content = signals.benchmarkFiles.map((file) => signals.textByPath[file] ?? "").join("\n");
-  if (!/\btasks\s*:/i.test(content) || !/\bprompt\s*:/i.test(content)) {
-    return [
-      finding({
-        id: "benchmarks.no-tasks",
-        title: "Benchmark file exists but has no tasks",
-        severity: "medium",
-        category: "task_benchmarks",
-        description: "The benchmark file does not appear to contain executable task definitions.",
-        evidence: signals.benchmarkFiles,
-        recommendation: "Add task entries with prompts and success criteria.",
-        affectedFile: signals.benchmarkFiles[0],
-        suggestedFixType: "update_file"
-      })
-    ];
-  }
-  if (/prompt:\s*.{0,30}$/im.test(content)) {
-    return [
-      finding({
-        id: "benchmarks.tasks-too-vague",
-        title: "Benchmark tasks are too vague",
-        severity: "low",
-        category: "task_benchmarks",
-        description:
-          "At least one benchmark prompt appears too short to represent a realistic workflow.",
-        evidence: ["A prompt shorter than 30 characters was detected."],
-        recommendation:
-          "Expand benchmark prompts with context, expected files, and success criteria.",
-        affectedFile: signals.benchmarkFiles[0],
-        suggestedFixType: "update_file"
-      })
-    ];
-  }
-  return [];
 }
 
 function securityFindings(signals: ProjectSignals): Finding[] {
@@ -964,9 +909,10 @@ function hasVerificationStep(text: string): boolean {
 function commandsMatchScripts(text: string, scripts: Record<string, string>): boolean {
   const scriptNames = Object.keys(scripts);
   if (scriptNames.length === 0) return false;
-  return scriptNames.some((script) =>
-    new RegExp(`\\b(pnpm|npm run|yarn|bun)\\s+${escapeRegex(script)}\\b`, "i").test(text)
-  );
+  return scriptNames.some((script) => {
+    const escaped = escapeRegex(script);
+    return new RegExp(`\\b(pnpm|npm run|npm|yarn|bun)\\s+${escaped}\\b`, "i").test(text);
+  });
 }
 
 function escapeRegex(value: string): string {

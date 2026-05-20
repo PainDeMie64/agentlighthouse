@@ -7,6 +7,10 @@ describe("renderMarkdownReport", () => {
 
     expect(report).toContain("# AgentLighthouse Report");
     expect(report).toContain("## Project Detection");
+    expect(report).toContain("## Score Interpretation");
+    expect(report).toContain("## API Analysis");
+    expect(report).toContain("## MCP Analysis");
+    expect(report).toContain("## Command Probes");
     expect(report).toContain("## Top Findings");
     expect(report).toContain("## Detected Artifacts");
     expect(report).toContain("## Scan Metadata");

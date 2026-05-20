@@ -10,6 +10,9 @@ export function renderCliReport(result: ScanResult, color = false): string {
   );
   lines.push(`Coverage: ${result.coverage.coveragePercent}%`);
   lines.push(`Project: ${result.detectedProject.name} (${result.detectedProject.type})`);
+  lines.push(
+    `Human signals: ${result.scoreInterpretation.humanReadableProjectSignals.score}/100 | Agent context: ${result.scoreInterpretation.agentSpecificContextLayer.score}/100 | Verifiability: ${result.scoreInterpretation.verifiability.score}/100`
+  );
   lines.push("");
   lines.push("Subscores:");
   for (const subscore of result.subscores) {
@@ -28,6 +31,9 @@ export function renderCliReport(result: ScanResult, color = false): string {
       const affected = finding.affectedFile ? ` (${finding.affectedFile})` : "";
       lines.push(`- ${finding.title}${affected}`);
       lines.push(`  ${finding.recommendation}`);
+      if (finding.agentFailureMode) {
+        lines.push(`  Agent failure mode: ${finding.agentFailureMode}`);
+      }
     }
     lines.push("");
   }
@@ -66,6 +72,8 @@ ${findings
 - Category: ${finding.category}
 - Affected file: ${finding.affectedFile ?? "n/a"}
 - Recommendation: ${finding.recommendation}
+- Agent failure mode: ${finding.agentFailureMode ?? "n/a"}
+- Fix example: ${finding.fixExample ?? "n/a"}
 - Evidence: ${finding.evidence.join("; ")}
 `
   )
@@ -86,7 +94,8 @@ Score: **${result.score}/100**
 
 ${result.summary}
 
-Confidence: **${titleCase(result.scoreConfidence)}** (${result.scoreConfidenceScore}/100)  
+Confidence: **${titleCase(result.scoreConfidence)}** (${result.scoreConfidenceScore}/100)
+
 Coverage: **${result.coverage.coveragePercent}%**
 
 ## Project Detection
@@ -97,9 +106,46 @@ Coverage: **${result.coverage.coveragePercent}%**
 - Frameworks: ${result.detectedProject.frameworks.length > 0 ? result.detectedProject.frameworks.join(", ") : "none detected"}
 - Evidence: ${result.detectedProject.evidence.join("; ")}
 
+## Score Interpretation
+
+- Agent-Readiness Score: ${result.scoreInterpretation.agentReadinessScore}/100
+- Human-readable project signals: ${result.scoreInterpretation.humanReadableProjectSignals.score}/100 - ${result.scoreInterpretation.humanReadableProjectSignals.signals.join(", ") || "none detected"}
+- Agent-specific context layer: ${result.scoreInterpretation.agentSpecificContextLayer.score}/100 - ${result.scoreInterpretation.agentSpecificContextLayer.signals.join(", ") || "none detected"}
+- Verifiability: ${result.scoreInterpretation.verifiability.score}/100 - ${result.scoreInterpretation.verifiability.signals.join(", ") || "none detected"}
+
 ## Subscores
 
 ${result.subscores.map((subscore) => `- ${subscore.label}: ${subscore.score}/100`).join("\n")}
+
+## API Analysis
+
+- Spec files: ${result.apiAnalysis.specFiles.join(", ") || "none"}
+- Operations: ${result.apiAnalysis.operationCount}
+- Operations with examples: ${result.apiAnalysis.operationsWithExamples}
+- Operations missing descriptions: ${result.apiAnalysis.operationsMissingDescriptions}
+- Auth schemes: ${result.apiAnalysis.authSchemes.join(", ") || "none"}
+- Destructive operations: ${result.apiAnalysis.destructiveOperations.join("; ") || "none"}
+- Weak operations: ${result.apiAnalysis.weakOperations.slice(0, 8).join("; ") || "none"}
+
+## MCP Analysis
+
+- Detected: ${result.mcpAnalysis.detected ? "yes" : "no"}
+- Files: ${result.mcpAnalysis.files.join(", ") || "none"}
+- Tools: ${result.mcpAnalysis.toolCount}
+- Tools with schemas: ${result.mcpAnalysis.toolsWithSchemas}
+- Tools with examples: ${result.mcpAnalysis.toolsWithExamples}
+- Ambiguous tools: ${result.mcpAnalysis.ambiguousTools.join("; ") || "none"}
+- Destructive tools: ${result.mcpAnalysis.destructiveTools.join("; ") || "none"}
+- Weak tools: ${result.mcpAnalysis.weakTools.slice(0, 8).join("; ") || "none"}
+
+## Command Probes
+
+- Enabled: ${result.commandProbes.enabled ? "yes" : "no"}
+- Attempted: ${result.commandProbes.attempted}
+- Passed: ${result.commandProbes.passed}
+- Failed: ${result.commandProbes.failed}
+- Timed out: ${result.commandProbes.timedOut}
+- Skipped: ${result.commandProbes.skipped}
 
 ## Coverage
 

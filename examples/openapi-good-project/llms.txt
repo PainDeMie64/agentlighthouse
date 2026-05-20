@@ -1,0 +1,6 @@
+# OpenAPI Good Project
+
+- [README](README.md)
+- [OpenAPI](openapi.yaml)
+- [Agent Tasks](agentlighthouse.tasks.yaml)
+- [Agent Instructions](AGENTS.md)

@@ -51,6 +51,16 @@ const profileCategories: Record<ScanProfile, FindingCategory[]> = {
     "task_benchmarks",
     "freshness_and_consistency"
   ],
+  mcp: [
+    "agent_instructions",
+    "documentation",
+    "mcp_tools",
+    "examples",
+    "setup_and_tests",
+    "security_and_privacy",
+    "task_benchmarks",
+    "freshness_and_consistency"
+  ],
   docs: [
     "agent_instructions",
     "documentation",
@@ -281,6 +291,13 @@ function computeScoreCaps(
       id: "cap.api-profile-without-openapi",
       maxScore: 82,
       reason: "API profile selected but no OpenAPI schema was detected."
+    });
+  }
+  if (input.profile === "mcp" && input.signals.mcpFiles.length === 0) {
+    caps.push({
+      id: "cap.mcp-profile-without-tools",
+      maxScore: 82,
+      reason: "MCP profile selected but no MCP files or tool definitions were detected."
     });
   }
   return caps.sort((a, b) => a.maxScore - b.maxScore);

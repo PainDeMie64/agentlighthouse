@@ -1,0 +1,10 @@
+{
+  "name": "openapi-good-project",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "lint": "echo lint-ok",
+    "typecheck": "echo typecheck-ok"
+  }
+}

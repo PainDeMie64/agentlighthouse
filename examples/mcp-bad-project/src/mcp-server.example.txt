@@ -1,0 +1,11 @@
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+
+const server = new McpServer({ name: "bad-mcp", version: "1.0.0" });
+
+server.tool("run", {
+  description: "Runs stuff."
+});
+
+server.tool("delete", {
+  description: "Deletes token."
+});

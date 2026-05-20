@@ -18,6 +18,9 @@ It complements Codex, Claude Code, Cursor, GitHub Copilot, Gemini, and future ag
 - Agent-readiness score from 0 to 100.
 - Structured findings with severity, category, evidence, recommendation, and suggested fix type.
 - Detection for `AGENTS.md`, `CLAUDE.md`, `llms.txt`, Cursor/Copilot hints, docs, OpenAPI specs, package scripts, MCP signals, benchmark files, and common config.
+- Semantic OpenAPI and MCP analysis for agent failure modes, unsafe ambiguity, examples, auth, errors, and tool schemas.
+- Opt-in command probes for trusted local verification; static analysis remains the default.
+- Score interpretation that separates human-readable signals, agent-specific context, and verifiability.
 - Starter artifact generation for agent instructions, Claude memory, `llms.txt`, `.agentlighthouseignore`, and task benchmarks.
 - CLI commands for `scan`, `init`, and `version`.
 - Next.js dashboard with sample score, findings, subscores, and recommendations.
@@ -45,6 +48,12 @@ pnpm dev
 
 The dashboard runs from `apps/web` through the root `pnpm dev` script.
 
+## Troubleshooting
+
+- If install fails, confirm Node.js 22+ and pnpm 10.33.0.
+- If command probes fail, rerun the same package script manually and check whether local dependencies are installed.
+- If validation reports include unexpected third-party evidence, keep external reports ignored and summarize only the calibration notes.
+
 ## CLI Usage
 
 ```bash
@@ -52,6 +61,7 @@ agentlighthouse scan <path>
 agentlighthouse scan <path> --json --output report.json
 agentlighthouse scan <path> --format markdown --output report.md
 agentlighthouse scan <path> --profile devtool
+agentlighthouse scan <path> --probe commands
 agentlighthouse scan <path> --fail-under 70
 agentlighthouse init <path> --dry-run
 agentlighthouse init <path> --force
@@ -90,11 +100,18 @@ Add `agentlighthouse.config.json` to set a default profile:
 
 ```json
 {
-  "profile": "devtool"
+  "profile": "devtool",
+  "probes": {
+    "commands": false,
+    "timeoutMs": 30000,
+    "allowedScripts": ["test", "typecheck", "lint"]
+  }
 }
 ```
 
-Supported profiles are `default`, `devtool`, `api`, `docs`, `library`, and `internal`.
+Supported profiles are `default`, `devtool`, `api`, `mcp`, `docs`, `library`, and `internal`.
+
+Command probes are off by default. AgentLighthouse never runs install commands or arbitrary commands copied from docs.
 
 ## Repository Structure
 
@@ -102,7 +119,7 @@ Supported profiles are `default`, `devtool`, `api`, `docs`, `library`, and `inte
 apps/web                Next.js dashboard
 packages/core           scanner, analyzers, scoring, schemas, generators, reporters
 packages/cli            command-line interface
-examples/sample-project intentionally imperfect project for scanner validation
+examples                 sample projects, including good/bad OpenAPI and MCP fixtures
 docs                    product, architecture, scoring, development, validation docs
 validation/reports      safe generated scan reports
 ```
@@ -111,8 +128,9 @@ validation/reports      safe generated scan reports
 
 - Phase 0: foundation, deterministic scanner, docs, CI.
 - Phase 1: local scanner and dashboard depth.
-- Phase 2: GitHub Action and PR suggestions.
-- Phase 3: docs crawler plus deeper OpenAPI and MCP analysis.
+- Phase 2A: semantic OpenAPI, MCP, task benchmark, and command probe analysis.
+- Phase 2B: GitHub Action and PR suggestions.
+- Phase 3: docs crawler plus deeper API/MCP reference resolution.
 - Phase 4: agent benchmark runner.
 - Phase 5: hosted SaaS dashboard.
 

@@ -18,6 +18,10 @@ pnpm --filter @agentlighthouse/cli dev scan .
 pnpm --filter @agentlighthouse/cli dev scan examples/sample-project
 pnpm --filter @agentlighthouse/cli dev scan examples/sample-good-project
 pnpm --filter @agentlighthouse/cli dev scan examples/sample-bad-project
+pnpm --filter @agentlighthouse/cli dev scan examples/openapi-good-project
+pnpm --filter @agentlighthouse/cli dev scan examples/openapi-bad-project
+pnpm --filter @agentlighthouse/cli dev scan examples/mcp-good-project
+pnpm --filter @agentlighthouse/cli dev scan examples/mcp-bad-project
 ```
 
 ## Run Against Any Local Repo
@@ -57,6 +61,14 @@ Reports should not contain secrets or sensitive local paths. Sanitize before com
 - `validation/reports/sample-good-project.md`
 - `validation/reports/sample-bad-project.json`
 - `validation/reports/sample-bad-project.md`
+- `validation/reports/openapi-good-project.json`
+- `validation/reports/openapi-good-project.md`
+- `validation/reports/openapi-bad-project.json`
+- `validation/reports/openapi-bad-project.md`
+- `validation/reports/mcp-good-project.json`
+- `validation/reports/mcp-good-project.md`
+- `validation/reports/mcp-bad-project.json`
+- `validation/reports/mcp-bad-project.md`
 - `validation/reports/agentlighthouse.json`
 - `validation/reports/agentlighthouse.md`
 
@@ -86,6 +98,8 @@ The first implementation was exercised against:
 - `examples/sample-project` as an intentionally imperfect setup target.
 - `examples/sample-good-project` as a high-readiness reference.
 - `examples/sample-bad-project` as a low-readiness reference.
+- `examples/openapi-good-project` and `examples/openapi-bad-project` for semantic API analysis.
+- `examples/mcp-good-project` and `examples/mcp-bad-project` for semantic MCP analysis.
 - `sindresorhus/is` as a small JavaScript/TypeScript library.
 - `modelcontextprotocol/typescript-sdk` as a developer-tool and MCP/API-focused project.
 - `expressjs/expressjs.com` as a documentation-heavy project.

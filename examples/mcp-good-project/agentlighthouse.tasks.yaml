@@ -1,0 +1,31 @@
+version: 0.1.0
+project: mcp-good-project
+tasks:
+  - id: add-readonly-tool-example
+    title: Add a read-only MCP tool example
+    persona: MCP server maintainer
+    objective: Add an example invocation for search_public_docs that uses safe placeholder input and documents the output shape.
+    projectAreas:
+      - src/mcp-server.example.txt
+      - README.md
+    requiredDocs:
+      - README.md
+      - AGENTS.md
+    allowedFiles:
+      - src/mcp-server.example.txt
+      - README.md
+    disallowedFiles:
+      - .env
+    expectedActions:
+      - Preserve auth and privacy guidance.
+    expectedOutputs:
+      - Example invocation and expected output summary.
+    successCriteria:
+      - Example does not include secrets.
+      - Example shows the required query parameter.
+    verificationCommands:
+      - npm test
+    riskLevel: low
+    commonFailureModes:
+      - Uses a private-data tool for public docs.
+      - Omits required schema fields.

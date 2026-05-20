@@ -5,6 +5,7 @@ import { ProjectSummary } from "../../components/ProjectSummary";
 import { RecommendationList } from "../../components/RecommendationList";
 import { ReportPreview } from "../../components/ReportPreview";
 import { ScoreCard } from "../../components/ScoreCard";
+import { SemanticSummary } from "../../components/SemanticSummary";
 import { SubscoreGrid } from "../../components/SubscoreGrid";
 
 export default function DashboardPage() {
@@ -22,6 +23,7 @@ export default function DashboardPage() {
           <div className="space-y-6">
             <ScoreCard result={sampleScanResult} />
             <ProjectSummary result={sampleScanResult} />
+            <SemanticSummary result={sampleScanResult} />
             <SubscoreGrid result={sampleScanResult} />
             <FindingList result={sampleScanResult} />
           </div>

@@ -4,7 +4,8 @@ Score: **0/100**
 
 Agent-readiness needs focused work before agents can reliably use this project.
 
-Confidence: **Low** (58/100)  
+Confidence: **Low** (58/100)
+
 Coverage: **93%**
 
 ## Project Detection
@@ -15,6 +16,13 @@ Coverage: **93%**
 - Frameworks: none detected
 - Evidence: package.json detected.
 
+## Score Interpretation
+
+- Agent-Readiness Score: 0/100
+- Human-readable project signals: 40/100 - README present, package metadata present
+- Agent-specific context layer: 0/100 - none detected
+- Verifiability: 0/100 - command probes not run
+
 ## Subscores
 
 - Agent Instructions: 70/100
@@ -23,6 +31,36 @@ Coverage: **93%**
 - Examples & Tasks: 95/100
 - Security & Privacy: 90/100
 - Freshness & Consistency: 96/100
+
+## API Analysis
+
+- Spec files: none
+- Operations: 0
+- Operations with examples: 0
+- Operations missing descriptions: 0
+- Auth schemes: none
+- Destructive operations: none
+- Weak operations: none
+
+## MCP Analysis
+
+- Detected: no
+- Files: none
+- Tools: 0
+- Tools with schemas: 0
+- Tools with examples: 0
+- Ambiguous tools: none
+- Destructive tools: none
+- Weak tools: none
+
+## Command Probes
+
+- Enabled: no
+- Attempted: 0
+- Passed: 0
+- Failed: 0
+- Timed out: 0
+- Skipped: 3
 
 ## Coverage
 
@@ -54,7 +92,7 @@ Coverage: **93%**
 2. Add or document setup, test, lint, and typecheck commands.
 3. Improve README and docs so agents can find quickstart, install, and examples.
 4. Add task benchmarks for the top developer workflows agents should complete.
-5. Document secret-handling and privacy rules for agent workflows.
+5. Use opt-in command probes in trusted environments to verify setup and tests.
 
 ## Detected Artifacts
 
@@ -70,11 +108,11 @@ Coverage: **93%**
 
 ## Scan Metadata
 
-- Scan ID: `scan_a03a745e`
+- Scan ID: `scan_3e66c375`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:08:58.791Z
-- Completed: 2026-05-20T19:08:58.792Z
+- Started: 2026-05-20T19:47:28.253Z
+- Completed: 2026-05-20T19:47:28.254Z
 - Duration: 1ms
 - Files scanned: 3
 - Text files read: 2
@@ -92,6 +130,8 @@ Coverage: **93%**
 - Category: agent_instructions
 - Affected file: AGENTS.md
 - Recommendation: Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: AGENTS.md was not found at the repository root.
 
 #### package.json has no scripts
@@ -100,6 +140,8 @@ Coverage: **93%**
 - Category: setup_and_tests
 - Affected file: package.json
 - Recommendation: Add scripts for test, lint, typecheck, build, and local development.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: package.json scripts object is empty.
 
 #### No test script in package.json
@@ -108,6 +150,8 @@ Coverage: **93%**
 - Category: setup_and_tests
 - Affected file: package.json
 - Recommendation: Add a package.json "test" script or document the equivalent command clearly.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: package.json scripts does not include "test".
 
 ### Medium
@@ -118,6 +162,8 @@ Coverage: **93%**
 - Category: agent_instructions
 - Affected file: CLAUDE.md
 - Recommendation: Add CLAUDE.md with concise workflow, boundaries, and testing expectations.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: CLAUDE.md was not found at the repository root.
 
 #### README.md exists, but does not include clear test command
@@ -126,6 +172,8 @@ Coverage: **93%**
 - Category: agent_instructions
 - Affected file: README.md
 - Recommendation: Add clear test command to README.md.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: README.md does not contain any of: test, pnpm test, npm test, pytest, cargo test, go test.
 
 #### README.md exists, but does not include architecture or repo map
@@ -134,6 +182,8 @@ Coverage: **93%**
 - Category: agent_instructions
 - Affected file: README.md
 - Recommendation: Add architecture or repo map to README.md.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: README.md does not contain any of: architecture, repo structure, packages/, apps/, src/.
 
 #### Missing llms.txt
@@ -142,6 +192,8 @@ Coverage: **93%**
 - Category: agent_instructions
 - Affected file: llms.txt
 - Recommendation: Create llms.txt with links to README, docs, architecture, examples, and API references.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: llms.txt was not found at the repository root.
 
 #### README.md has no quickstart section
@@ -150,6 +202,8 @@ Coverage: **93%**
 - Category: documentation
 - Affected file: README.md
 - Recommendation: Add a quickstart that gets a new user to a working command quickly.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: README.md does not contain any of: quickstart, quick start, getting started.
 
 #### README.md has no installation instructions
@@ -158,6 +212,8 @@ Coverage: **93%**
 - Category: documentation
 - Affected file: README.md
 - Recommendation: Add installation commands and prerequisites.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: README.md does not contain any of: install, pnpm, npm, yarn, pip.
 
 #### README.md has no examples
@@ -166,6 +222,8 @@ Coverage: **93%**
 - Category: documentation
 - Affected file: README.md
 - Recommendation: Add concrete examples showing expected usage and output.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: README.md does not contain any of: example, usage, demo.
 
 #### Docs exist but no Markdown files are discoverable
@@ -174,6 +232,8 @@ Coverage: **93%**
 - Category: documentation
 - Affected file: docs/
 - Recommendation: Add Markdown documentation or ensure docs source is not ignored.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: docs/ exists but no .md or .mdx files were scanned.
 
 #### No lint script in package.json
@@ -182,6 +242,8 @@ Coverage: **93%**
 - Category: setup_and_tests
 - Affected file: package.json
 - Recommendation: Add a package.json "lint" script or document the equivalent command clearly.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: package.json scripts does not include "lint".
 
 #### No typecheck script in package.json
@@ -190,15 +252,9 @@ Coverage: **93%**
 - Category: setup_and_tests
 - Affected file: package.json
 - Recommendation: Add a package.json "typecheck" script or document the equivalent command clearly.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: package.json scripts does not include "typecheck".
-
-#### Missing agent task benchmark file
-
-- Severity: medium
-- Category: task_benchmarks
-- Affected file: benchmarks/agent-tasks.yaml
-- Recommendation: Add a benchmark file with tasks such as install, run tests, add a small feature, and find core modules.
-- Evidence: No benchmarks/agent-tasks.yaml or .agentlighthouse/tasks.yaml file was found.
 
 #### Missing .agentlighthouseignore
 
@@ -206,6 +262,8 @@ Coverage: **93%**
 - Category: security_and_privacy
 - Affected file: .agentlighthouseignore
 - Recommendation: Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: .agentlighthouseignore was not found at the repository root.
 
 #### Instructions do not tell agents how to handle secrets
@@ -214,7 +272,19 @@ Coverage: **93%**
 - Category: security_and_privacy
 - Affected file: AGENTS.md
 - Recommendation: Add a security section explaining secret handling and external LLM constraints.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: No secret/privacy guidance was detected in AGENTS.md.
+
+#### Missing agent task benchmark file
+
+- Severity: medium
+- Category: task_benchmarks
+- Affected file: agentlighthouse.tasks.yaml
+- Recommendation: Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.
+- Agent failure mode: A team cannot tell whether agents can complete common workflows because no deterministic task set exists.
+- Fix example: Add tasks for installing the project, running tests, adding a small feature, and using the public API.
+- Evidence: No agent task benchmark file was found.
 
 ### Low
 
@@ -224,6 +294,8 @@ Coverage: **93%**
 - Category: documentation
 - Affected file: README.md
 - Recommendation: Add a short verification step such as running tests, typecheck, build, or a health command.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: README does not show an obvious test, build, healthcheck, or smoke-test step after installation.
 
 #### README commands are not clearly grounded in package.json scripts
@@ -232,6 +304,8 @@ Coverage: **93%**
 - Category: freshness_and_consistency
 - Affected file: README.md
 - Recommendation: Show package-manager commands that map directly to package.json scripts.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: No fenced README command references a package.json script such as test, lint, typecheck, dev, or build.
 
 #### Docs contain TODO/deprecated-looking terms without migration guidance
@@ -240,6 +314,8 @@ Coverage: **93%**
 - Category: freshness_and_consistency
 - Affected file: n/a
 - Recommendation: Resolve TODOs or add explicit migration/replacement guidance.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: README.md:3: Coming soon.; README.md:5: TODO old setup.
 
 ### Info
@@ -250,6 +326,8 @@ Coverage: **93%**
 - Category: api_schema
 - Affected file: n/a
 - Recommendation: For API products, publish an OpenAPI spec with operation descriptions and examples.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: No openapi._ or swagger._ file was scanned.
 
 #### MCP readiness could not be evaluated yet
@@ -258,4 +336,16 @@ Coverage: **93%**
 - Category: mcp_tools
 - Affected file: n/a
 - Recommendation: If this project exposes MCP tools, include server files and clear tool descriptions.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: No file or package name matching MCP was scanned.
+
+#### Command verification probes were skipped
+
+- Severity: info
+- Category: setup_and_tests
+- Affected file: n/a
+- Recommendation: Use command probes in trusted local or CI environments when you want executable verification.
+- Agent failure mode: Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.
+- Fix example: agentlighthouse scan . --probe commands
+- Evidence: Run with --probe commands or --run-probes to execute safe script probes.

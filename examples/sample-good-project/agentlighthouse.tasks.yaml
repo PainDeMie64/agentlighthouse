@@ -1,0 +1,71 @@
+version: 0.1.0
+project: sample-good-project
+tasks:
+  - id: run-quality-gates
+    title: Run quality gates
+    persona: maintainer using an AI coding agent
+    objective: Install dependencies, then run lint, typecheck, and tests using the documented package manager and report failures with actionable file paths.
+    projectAreas:
+      - setup
+      - tests
+      - ci
+    requiredDocs:
+      - README.md
+      - AGENTS.md
+      - docs/ARCHITECTURE.md
+    allowedFiles:
+      - package.json
+      - src/**
+      - docs/**
+    disallowedFiles:
+      - node_modules/**
+      - dist/**
+    expectedActions:
+      - Identify pnpm as the package manager.
+      - Run lint, typecheck, and tests.
+    expectedOutputs:
+      - Command summary with pass/fail status and file paths for failures.
+    successCriteria:
+      - The agent identifies pnpm as the package manager.
+      - The agent runs the documented commands.
+      - The agent reports failures with file paths.
+    verificationCommands:
+      - pnpm lint
+      - pnpm typecheck
+      - pnpm test
+    riskLevel: low
+    commonFailureModes:
+      - Uses npm instead of pnpm.
+      - Reports success without running all quality gates.
+  - id: find-architecture
+    title: Find architecture map
+    persona: new contributor using an AI coding agent
+    objective: Explain where source code, docs, OpenAPI specs, and benchmark tasks live using only documented project context.
+    projectAreas:
+      - docs
+      - repo-structure
+    requiredDocs:
+      - README.md
+      - AGENTS.md
+      - docs/ARCHITECTURE.md
+    allowedFiles:
+      - README.md
+      - AGENTS.md
+      - docs/**
+      - agentlighthouse.tasks.yaml
+    disallowedFiles:
+      - node_modules/**
+    expectedActions:
+      - Read README and architecture docs.
+      - Cross-check the benchmark file location.
+    expectedOutputs:
+      - Architecture summary with file paths.
+    successCriteria:
+      - The agent references README, AGENTS.md, and docs/ARCHITECTURE.md.
+      - The explanation is consistent with the repository structure.
+    verificationCommands:
+      - pnpm test
+    riskLevel: low
+    commonFailureModes:
+      - Invents directories not present in the repo.
+      - Ignores agent-specific instructions.

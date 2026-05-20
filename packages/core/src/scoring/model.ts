@@ -112,8 +112,17 @@ function recommendedActions(findings: Finding[]): string[] {
   if ([...ids].some((id) => id.startsWith("docs."))) {
     actions.push("Improve README and docs so agents can find quickstart, install, and examples.");
   }
-  if ([...ids].some((id) => id.startsWith("benchmarks."))) {
+  if ([...ids].some((id) => id.startsWith("benchmarks.") || id.startsWith("TASK_"))) {
     actions.push("Add task benchmarks for the top developer workflows agents should complete.");
+  }
+  if ([...ids].some((id) => id.startsWith("OPENAPI_"))) {
+    actions.push("Improve OpenAPI operation descriptions, examples, auth, and error responses.");
+  }
+  if ([...ids].some((id) => id.startsWith("MCP_"))) {
+    actions.push("Clarify MCP tool names, descriptions, schemas, examples, and safety notes.");
+  }
+  if ([...ids].some((id) => id.startsWith("COMMAND_"))) {
+    actions.push("Use opt-in command probes in trusted environments to verify setup and tests.");
   }
   if ([...ids].some((id) => id.startsWith("security."))) {
     actions.push("Document secret-handling and privacy rules for agent workflows.");

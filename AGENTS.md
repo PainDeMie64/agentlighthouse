@@ -8,17 +8,39 @@ The product complements agent platforms. It is not a chatbot, AI IDE, hosted gov
 
 ## Setup Commands
 
-- Install dependencies: `pnpm install`
-- Run the dashboard: `pnpm dev`
-- Build all packages and apps: `pnpm build`
-- Run real-world validation: `pnpm validate:realworld`
+```bash
+pnpm install
+```
+
+```bash
+pnpm dev
+```
+
+```bash
+pnpm build
+```
+
+```bash
+pnpm validate:realworld
+```
 
 ## Test, Lint, and Typecheck Commands
 
-- Unit tests: `pnpm test`
-- Typecheck: `pnpm typecheck`
-- Lint: `pnpm lint`
-- Format check: `pnpm format:check`
+```bash
+pnpm test
+```
+
+```bash
+pnpm typecheck
+```
+
+```bash
+pnpm lint
+```
+
+```bash
+pnpm format:check
+```
 
 Run tests and typecheck after changing scanner, scoring, generator, CLI, or shared schema logic.
 
@@ -63,6 +85,12 @@ Run tests and typecheck after changing scanner, scoring, generator, CLI, or shar
 3. Add tests with realistic fixtures.
 4. Expose the behavior through CLI or dashboard only after core behavior is covered.
 5. Update docs and validation guidance.
+
+## Ownership And Review
+
+- Core schema and scoring changes require extra care because CLI, dashboard, reports, and validation all consume those contracts.
+- OpenAPI, MCP, command-probe, and benchmark analyzers own their rule IDs and should not silently change existing IDs.
+- Review generated validation reports before committing; external reports stay ignored unless deliberately summarized.
 
 ## Reporting Uncertainty
 

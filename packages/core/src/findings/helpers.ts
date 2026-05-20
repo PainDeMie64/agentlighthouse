@@ -10,6 +10,9 @@ export function finding(input: {
   evidence: string[];
   recommendation: string;
   affectedFile?: string;
+  agentFailureMode?: string;
+  fixExample?: string;
+  docsLinks?: string[];
   suggestedFixType: SuggestedFixType;
 }): Finding {
   return {

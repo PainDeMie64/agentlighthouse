@@ -1,13 +1,13 @@
 {
-  "scanId": "scan_d4c62bf4",
+  "scanId": "scan_72f221ad",
   "scannedPath": "<repo>/examples/sample-project",
-  "startedAt": "2026-05-20T19:08:58.661Z",
-  "completedAt": "2026-05-20T19:08:58.668Z",
-  "durationMs": 7,
+  "startedAt": "2026-05-20T19:47:28.099Z",
+  "completedAt": "2026-05-20T19:47:28.110Z",
+  "durationMs": 11,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
-  "score": 19,
+  "score": 0,
   "summary": "Agent-readiness needs focused work before agents can reliably use this project.",
   "subscores": [
     {
@@ -25,8 +25,8 @@
     {
       "id": "api_and_tooling",
       "label": "API & Tooling",
-      "score": 75,
-      "findingsCount": 4
+      "score": 42,
+      "findingsCount": 12
     },
     {
       "id": "examples_and_tasks",
@@ -52,13 +52,13 @@
     "Add or document setup, test, lint, and typecheck commands.",
     "Improve README and docs so agents can find quickstart, install, and examples.",
     "Add task benchmarks for the top developer workflows agents should complete.",
-    "Document secret-handling and privacy rules for agent workflows."
+    "Improve OpenAPI operation descriptions, examples, auth, and error responses."
   ],
-  "rawScore": 19,
+  "rawScore": 0,
   "scoreConfidence": "medium",
-  "scoreConfidenceScore": 64,
+  "scoreConfidenceScore": 65,
   "coverage": {
-    "evaluatedChecks": 23,
+    "evaluatedChecks": 31,
     "skippedChecks": 0,
     "notApplicableChecks": 2,
     "notEvaluatedChecks": 2,
@@ -72,7 +72,7 @@
       "freshness_and_consistency"
     ],
     "missingCategories": ["examples"],
-    "coveragePercent": 92
+    "coveragePercent": 94
   },
   "scoringCaps": [
     {
@@ -272,18 +272,6 @@
       "ruleId": "mcp.not-evaluated"
     },
     {
-      "id": "benchmarks.missing-agent-task-file",
-      "title": "Missing agent task benchmark file",
-      "severity": "medium",
-      "category": "task_benchmarks",
-      "description": "The project has no task benchmark describing realistic agent workflows.",
-      "evidence": ["No benchmarks/agent-tasks.yaml or .agentlighthouse/tasks.yaml file was found."],
-      "recommendation": "Add a benchmark file with tasks such as install, run tests, add a small feature, and find core modules.",
-      "affectedFile": "benchmarks/agent-tasks.yaml",
-      "suggestedFixType": "create_file",
-      "ruleId": "benchmarks.missing-agent-task-file"
-    },
-    {
       "id": "security.missing-agentlighthouseignore",
       "title": "Missing .agentlighthouseignore",
       "severity": "medium",
@@ -320,8 +308,201 @@
       "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
       "suggestedFixType": "update_file",
       "ruleId": "freshness.deprecated-or-todo-terms"
+    },
+    {
+      "id": "OPENAPI_WEAK_SPEC_DESCRIPTION",
+      "title": "OpenAPI spec description is too thin for agents",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "The API-level description does not explain product concepts, auth expectations, or common workflows.",
+      "evidence": ["openapi.yaml: info.description is missing or shorter than 40 characters."],
+      "recommendation": "Add a concise overview of the API domain, common workflows, auth model, and safe usage constraints.",
+      "agentFailureMode": "A coding agent may jump straight to endpoints without understanding product nouns, authentication, or workflow ordering.",
+      "fixExample": "Describe the main resources, required authentication, common create/list/update flows, and where to find examples.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_WEAK_SPEC_DESCRIPTION"
+    },
+    {
+      "id": "OPENAPI_AUTH_UNCLEAR",
+      "title": "OpenAPI authentication is unclear",
+      "severity": "high",
+      "category": "api_schema",
+      "description": "No security scheme or clear authentication guidance was detected.",
+      "evidence": [
+        "openapi.yaml: components.securitySchemes is missing and auth hints were not found."
+      ],
+      "recommendation": "Document the auth scheme, required headers, scopes, and placeholder-safe example credentials.",
+      "agentFailureMode": "A coding agent may generate client code without the required Authorization header or may invent unsafe credential handling.",
+      "fixExample": "Add an HTTP bearer or API key security scheme and a request example using EXAMPLE_API_KEY.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_AUTH_UNCLEAR"
+    },
+    {
+      "id": "OPENAPI_SERVER_URL_MISSING",
+      "title": "OpenAPI server URL is missing",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "Agents need a base URL signal to generate usable client examples.",
+      "evidence": ["openapi.yaml: servers is missing."],
+      "recommendation": "Add production and sandbox server URLs, or explain how agents should configure the base URL.",
+      "agentFailureMode": "A coding agent may invent a base URL or hardcode the wrong host.",
+      "fixExample": "Add servers: [{ url: 'https://api.example.com/v1' }].",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_SERVER_URL_MISSING"
+    },
+    {
+      "id": "OPENAPI_MISSING_OPERATION_ID",
+      "title": "OpenAPI operations have weak or missing operationIds",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "1 operation(s) need stronger agent-facing API documentation.",
+      "evidence": ["openapi.yaml: GET /widgets"],
+      "recommendation": "Give every operation a stable, specific operationId such as createWorkspaceInvite or listCustomerInvoices.",
+      "agentFailureMode": "A coding agent may generate confusing client methods or call the wrong endpoint when operation IDs are missing or generic.",
+      "fixExample": "Use verb+noun names that distinguish similar operations, for example revokeApiKey instead of delete.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_MISSING_OPERATION_ID"
+    },
+    {
+      "id": "OPENAPI_MISSING_RESPONSE_EXAMPLE",
+      "title": "Operations lack response examples",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "1 operation(s) need stronger agent-facing API documentation.",
+      "evidence": ["openapi.yaml: GET /widgets"],
+      "recommendation": "Add response examples for successful and important error cases.",
+      "agentFailureMode": "A coding agent may write incorrect parsing code because expected response shapes are not exemplified.",
+      "fixExample": "Add 200/201 response examples with IDs, timestamps, pagination cursors, and nested objects.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_MISSING_RESPONSE_EXAMPLE"
+    },
+    {
+      "id": "OPENAPI_MISSING_ERROR_RESPONSES",
+      "title": "Operations lack common error responses",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "1 operation(s) need stronger agent-facing API documentation.",
+      "evidence": ["openapi.yaml: GET /widgets"],
+      "recommendation": "Document likely 400/401/403/404/409/429/500 responses and how callers should recover.",
+      "agentFailureMode": "A coding agent may generate happy-path-only integrations with no auth, retry, or validation recovery.",
+      "fixExample": "Add 401, 404, 409, and 429 responses with short descriptions and example error payloads.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_MISSING_ERROR_RESPONSES"
+    },
+    {
+      "id": "OPENAPI_PAGINATION_UNCLEAR",
+      "title": "List operations do not explain pagination",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "1 operation(s) need stronger agent-facing API documentation.",
+      "evidence": ["openapi.yaml: GET /widgets"],
+      "recommendation": "Document pagination parameters, cursors, limits, and response fields.",
+      "agentFailureMode": "A coding agent may fetch only the first page or invent unsupported pagination parameters.",
+      "fixExample": "Describe limit and cursor parameters and include a response example with next_cursor.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_PAGINATION_UNCLEAR"
+    },
+    {
+      "id": "OPENAPI_RATE_LIMIT_UNCLEAR",
+      "title": "OpenAPI rate-limit behavior is unclear",
+      "severity": "low",
+      "category": "api_schema",
+      "description": "No 429, Retry-After, or rate-limit guidance was detected.",
+      "evidence": ["No operation mentions 429, Retry-After, or rate limits."],
+      "recommendation": "Document rate limits and retry behavior for generated clients.",
+      "agentFailureMode": "A coding agent may create brittle retry loops or ignore throttling responses.",
+      "fixExample": "Add a 429 response with Retry-After guidance and an example error payload.",
+      "suggestedFixType": "update_file",
+      "ruleId": "OPENAPI_RATE_LIMIT_UNCLEAR"
+    },
+    {
+      "id": "TASK_BENCHMARK_MISSING",
+      "title": "Missing agent task benchmark file",
+      "severity": "medium",
+      "category": "task_benchmarks",
+      "description": "The project has no agentlighthouse.tasks.yaml or benchmark task file.",
+      "evidence": ["No agent task benchmark file was found."],
+      "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+      "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
+      "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
+      "affectedFile": "agentlighthouse.tasks.yaml",
+      "suggestedFixType": "create_file",
+      "ruleId": "TASK_BENCHMARK_MISSING"
+    },
+    {
+      "id": "COMMAND_VERIFICATION_SKIPPED",
+      "title": "Command verification probes were skipped",
+      "severity": "info",
+      "category": "setup_and_tests",
+      "description": "Static analysis is default; project commands are not executed unless explicitly enabled.",
+      "evidence": ["Run with --probe commands or --run-probes to execute safe script probes."],
+      "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+      "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+      "fixExample": "agentlighthouse scan . --probe commands",
+      "suggestedFixType": "none",
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
     }
   ],
+  "scoreInterpretation": {
+    "agentReadinessScore": 0,
+    "humanReadableProjectSignals": {
+      "score": 83,
+      "summary": "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      "signals": [
+        "README present",
+        "1 Markdown doc file(s)",
+        "package metadata present",
+        "OpenAPI spec present"
+      ]
+    },
+    "agentSpecificContextLayer": {
+      "score": 0,
+      "summary": "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      "signals": []
+    },
+    "verifiability": {
+      "score": 0,
+      "summary": "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      "signals": ["command probes not run"]
+    }
+  },
+  "apiAnalysis": {
+    "specFiles": ["openapi.yaml"],
+    "operationCount": 1,
+    "operationsWithExamples": 0,
+    "operationsMissingDescriptions": 0,
+    "destructiveOperations": [],
+    "authSchemes": [],
+    "weakOperations": ["openapi.yaml: GET /widgets"],
+    "highRiskOperations": ["openapi.yaml: GET /widgets"]
+  },
+  "mcpAnalysis": {
+    "detected": false,
+    "files": [],
+    "toolCount": 0,
+    "toolsWithSchemas": 0,
+    "toolsWithExamples": 0,
+    "ambiguousTools": [],
+    "destructiveTools": [],
+    "privacySensitiveTools": [],
+    "weakTools": []
+  },
+  "commandProbes": {
+    "enabled": false,
+    "attempted": 0,
+    "skipped": 3,
+    "passed": 0,
+    "failed": 0,
+    "timedOut": 0,
+    "results": []
+  },
   "detectedProject": {
     "type": "openapi_project",
     "name": "sample-widget-api",
@@ -402,19 +583,19 @@
     "docsMarkdownFileCount": 1,
     "openApiFileCount": 1,
     "benchmarkFileCount": 0,
-    "findingCount": 18
+    "findingCount": 27
   },
   "ignoredPaths": [],
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-project",
-  "scannedAt": "2026-05-20T19:08:58.668Z",
+  "scannedAt": "2026-05-20T19:47:28.110Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",
     "Improve README and docs so agents can find quickstart, install, and examples.",
     "Add task benchmarks for the top developer workflows agents should complete.",
-    "Document secret-handling and privacy rules for agent workflows."
+    "Improve OpenAPI operation descriptions, examples, auth, and error responses."
   ],
   "signals": {
     "rootPath": "<repo>/examples/sample-project",

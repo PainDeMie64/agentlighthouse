@@ -8,6 +8,8 @@ Phase 1.5 calibrated AgentLighthouse away from "all files exist, therefore 100" 
 - `examples/sample-good-project`: high-readiness API/devtool sample.
 - `examples/sample-project`: intentionally imperfect API sample.
 - `examples/sample-bad-project`: intentionally weak Node sample.
+- `examples/openapi-good-project` and `examples/openapi-bad-project`: API semantic calibration.
+- `examples/mcp-good-project` and `examples/mcp-bad-project`: MCP tool semantic calibration.
 - Optional external repos under `.tmp/validation-repos/`:
   - `sindresorhus/is`
   - `modelcontextprotocol/typescript-sdk`
@@ -39,12 +41,15 @@ pnpm validate:realworld
 - Added scoring caps for missing agent instructions, missing docs, unknown project type, missing task benchmarks, shallow key artifacts, and low coverage.
 - Added profile support: `default`, `devtool`, `api`, `docs`, `library`, `internal`.
 - Added shallow artifact findings that look for command blocks, verification steps, grounded commands, troubleshooting, task criteria, concrete links, and ownership notes.
+- Added Phase 2A semantic findings for OpenAPI operations, MCP tools, opt-in command probes, and richer task benchmarks.
+- Added score interpretation for human-readable signals, agent-specific context, and verifiability.
 
 ## False Positives Found
 
 - Sample OpenAPI files inside `examples/` caused AgentLighthouse itself to be detected as an API project. Root self-scan now ignores example OpenAPI files for project classification.
 - README command extraction previously misread `pnpm --filter` as a package script. Option flags are ignored.
 - The freshness rule flagged its own documented rule ID because `deprecated` appeared inside inline code in `docs/RULES.md`. Freshness checks now strip inline code before matching stale terms.
+- The old sample-good OpenAPI fixture was too toy-like and scored lower under semantic analysis. It was upgraded instead of weakening the OpenAPI rules.
 
 ## False Negatives Found
 
@@ -54,11 +59,11 @@ pnpm validate:realworld
 
 ## Remaining Weaknesses
 
-- OpenAPI analysis is still mostly textual.
-- MCP analysis does not parse tool schemas yet.
+- OpenAPI analysis is still static and does not fully resolve all `$ref` graphs.
+- MCP analysis parses common registration patterns but does not execute servers yet.
 - Docs usefulness is still deterministic and heuristic.
-- Command verification checks whether commands are discoverable, not whether they actually run.
-- Profiles are intentionally minimal and do not yet support rule-level severity overrides.
+- Command probes run only when explicitly enabled and do not execute install commands or arbitrary docs commands.
+- Profiles are still minimal and do not yet support user-defined rule-level severity overrides.
 
 ## What To Test Next
 

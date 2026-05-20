@@ -85,9 +85,16 @@ export class LocalFilesystemScanner implements Scanner {
       (file) => file.startsWith("docs/") && [".md", ".mdx"].includes(path.extname(file))
     );
     const openApiFiles = scannedFiles.filter(isOpenApiFile);
-    const mcpFiles = scannedFiles.filter((file) => /(^|[/.])mcp([/. -]|$)/i.test(file));
+    const mcpFiles = scannedFiles.filter(
+      (file) =>
+        /(^|\/)mcp\.json$/i.test(file) ||
+        /(^|\/)mcp-server\.[jt]sx?$/i.test(file) ||
+        /(^|\/)mcp-server\.example\.txt$/i.test(file)
+    );
     const benchmarkFiles = scannedFiles.filter((file) =>
       [
+        "agentlighthouse.tasks.yaml",
+        "agentlighthouse.tasks.yml",
         "benchmarks/agent-tasks.yaml",
         "benchmarks/agent-tasks.yml",
         ".agentlighthouse/tasks.yaml",

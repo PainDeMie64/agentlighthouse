@@ -1,0 +1,6 @@
+# MCP Good Project
+
+- [README](README.md)
+- [Server](src/mcp-server.example.txt)
+- [Tasks](agentlighthouse.tasks.yaml)
+- [Instructions](AGENTS.md)

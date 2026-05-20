@@ -11,6 +11,10 @@ AgentLighthouse is Lighthouse for AI agents: a deterministic, local-first scanne
 - [Scoring Model](docs/SCORING_MODEL.md)
 - [Rules](docs/RULES.md)
 - [Calibration](docs/CALIBRATION.md)
+- [OpenAPI Analysis](docs/OPENAPI_ANALYSIS.md)
+- [MCP Analysis](docs/MCP_ANALYSIS.md)
+- [Command Probes](docs/COMMAND_PROBES.md)
+- [Task Benchmarks](docs/TASK_BENCHMARKS.md)
 - [Development Guide](docs/DEVELOPMENT.md)
 - [CI Usage](docs/CI.md)
 - [Validation Guide](docs/VALIDATION.md)
@@ -18,9 +22,9 @@ AgentLighthouse is Lighthouse for AI agents: a deterministic, local-first scanne
 - [Decisions](docs/DECISIONS.md)
 - [Agent Instructions](AGENTS.md)
 - [Claude Memory](CLAUDE.md)
+- [Agent Task Benchmarks](agentlighthouse.tasks.yaml)
 - [Core Package](packages/core/src/index.ts)
 - [CLI Package](packages/cli/src/index.ts)
-- [Good Sample Project](examples/sample-good-project/README.md)
 
 ## Example Usage
 

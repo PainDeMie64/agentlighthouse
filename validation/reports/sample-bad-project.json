@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_a03a745e",
+  "scanId": "scan_3e66c375",
   "scannedPath": "<repo>/examples/sample-bad-project",
-  "startedAt": "2026-05-20T19:08:58.791Z",
-  "completedAt": "2026-05-20T19:08:58.792Z",
+  "startedAt": "2026-05-20T19:47:28.253Z",
+  "completedAt": "2026-05-20T19:47:28.254Z",
   "durationMs": 1,
   "agentLighthouseVersion": "0.1.0",
   "profile": "library",
@@ -52,7 +52,7 @@
     "Add or document setup, test, lint, and typecheck commands.",
     "Improve README and docs so agents can find quickstart, install, and examples.",
     "Add task benchmarks for the top developer workflows agents should complete.",
-    "Document secret-handling and privacy rules for agent workflows."
+    "Use opt-in command probes in trusted environments to verify setup and tests."
   ],
   "rawScore": 0,
   "scoreConfidence": "low",
@@ -308,18 +308,6 @@
       "ruleId": "mcp.not-evaluated"
     },
     {
-      "id": "benchmarks.missing-agent-task-file",
-      "title": "Missing agent task benchmark file",
-      "severity": "medium",
-      "category": "task_benchmarks",
-      "description": "The project has no task benchmark describing realistic agent workflows.",
-      "evidence": ["No benchmarks/agent-tasks.yaml or .agentlighthouse/tasks.yaml file was found."],
-      "recommendation": "Add a benchmark file with tasks such as install, run tests, add a small feature, and find core modules.",
-      "affectedFile": "benchmarks/agent-tasks.yaml",
-      "suggestedFixType": "create_file",
-      "ruleId": "benchmarks.missing-agent-task-file"
-    },
-    {
       "id": "security.missing-agentlighthouseignore",
       "title": "Missing .agentlighthouseignore",
       "severity": "medium",
@@ -353,8 +341,83 @@
       "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
       "suggestedFixType": "update_file",
       "ruleId": "freshness.deprecated-or-todo-terms"
+    },
+    {
+      "id": "TASK_BENCHMARK_MISSING",
+      "title": "Missing agent task benchmark file",
+      "severity": "medium",
+      "category": "task_benchmarks",
+      "description": "The project has no agentlighthouse.tasks.yaml or benchmark task file.",
+      "evidence": ["No agent task benchmark file was found."],
+      "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+      "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
+      "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
+      "affectedFile": "agentlighthouse.tasks.yaml",
+      "suggestedFixType": "create_file",
+      "ruleId": "TASK_BENCHMARK_MISSING"
+    },
+    {
+      "id": "COMMAND_VERIFICATION_SKIPPED",
+      "title": "Command verification probes were skipped",
+      "severity": "info",
+      "category": "setup_and_tests",
+      "description": "Static analysis is default; project commands are not executed unless explicitly enabled.",
+      "evidence": ["Run with --probe commands or --run-probes to execute safe script probes."],
+      "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+      "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+      "fixExample": "agentlighthouse scan . --probe commands",
+      "suggestedFixType": "none",
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
     }
   ],
+  "scoreInterpretation": {
+    "agentReadinessScore": 0,
+    "humanReadableProjectSignals": {
+      "score": 40,
+      "summary": "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      "signals": ["README present", "package metadata present"]
+    },
+    "agentSpecificContextLayer": {
+      "score": 0,
+      "summary": "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      "signals": []
+    },
+    "verifiability": {
+      "score": 0,
+      "summary": "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      "signals": ["command probes not run"]
+    }
+  },
+  "apiAnalysis": {
+    "specFiles": [],
+    "operationCount": 0,
+    "operationsWithExamples": 0,
+    "operationsMissingDescriptions": 0,
+    "destructiveOperations": [],
+    "authSchemes": [],
+    "weakOperations": [],
+    "highRiskOperations": []
+  },
+  "mcpAnalysis": {
+    "detected": false,
+    "files": [],
+    "toolCount": 0,
+    "toolsWithSchemas": 0,
+    "toolsWithExamples": 0,
+    "ambiguousTools": [],
+    "destructiveTools": [],
+    "privacySensitiveTools": [],
+    "weakTools": []
+  },
+  "commandProbes": {
+    "enabled": false,
+    "attempted": 0,
+    "skipped": 3,
+    "passed": 0,
+    "failed": 0,
+    "timedOut": 0,
+    "results": []
+  },
   "detectedProject": {
     "type": "node_javascript",
     "name": "sample-bad-project",
@@ -434,19 +497,19 @@
     "docsMarkdownFileCount": 0,
     "openApiFileCount": 0,
     "benchmarkFileCount": 0,
-    "findingCount": 21
+    "findingCount": 22
   },
   "ignoredPaths": [],
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-bad-project",
-  "scannedAt": "2026-05-20T19:08:58.792Z",
+  "scannedAt": "2026-05-20T19:47:28.254Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",
     "Improve README and docs so agents can find quickstart, install, and examples.",
     "Add task benchmarks for the top developer workflows agents should complete.",
-    "Document secret-handling and privacy rules for agent workflows."
+    "Use opt-in command probes in trusted environments to verify setup and tests."
   ],
   "signals": {
     "rootPath": "<repo>/examples/sample-bad-project",

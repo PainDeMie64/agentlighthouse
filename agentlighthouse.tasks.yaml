@@ -1,0 +1,75 @@
+version: 0.1.0
+project: AgentLighthouse
+tasks:
+  - id: run-core-tests
+    title: Run AgentLighthouse quality gates
+    persona: founding engineer using an AI coding agent
+    objective: Run tests, typecheck, and lint after a scanner or scoring change and summarize any failures with file paths.
+    projectAreas:
+      - packages/core
+      - packages/cli
+      - apps/web
+    requiredDocs:
+      - README.md
+      - AGENTS.md
+      - docs/DEVELOPMENT.md
+    allowedFiles:
+      - packages/**
+      - apps/**
+      - docs/**
+    disallowedFiles:
+      - node_modules/**
+      - validation/reports/external/**
+    expectedActions:
+      - Run the documented quality commands.
+      - Report failures with exact files and likely causes.
+    expectedOutputs:
+      - Quality gate summary with command status.
+    successCriteria:
+      - "pnpm test passes or failures are summarized with file paths."
+      - "pnpm typecheck passes."
+      - "pnpm lint passes."
+    verificationCommands:
+      - pnpm test
+      - pnpm typecheck
+      - pnpm lint
+    riskLevel: low
+    commonFailureModes:
+      - Skips typecheck after schema changes.
+      - Reports generic failure without file paths.
+  - id: add-openapi-rule
+    title: Add an OpenAPI semantic rule
+    persona: product engineer improving API agent-readiness
+    objective: Add a deterministic OpenAPI rule with an agent failure mode and a focused unit test.
+    projectAreas:
+      - packages/core/src/analyzers
+      - packages/core/src/__tests__
+      - docs/RULES.md
+    requiredDocs:
+      - docs/OPENAPI_ANALYSIS.md
+      - docs/RULES.md
+      - AGENTS.md
+    allowedFiles:
+      - packages/core/**
+      - docs/**
+      - examples/openapi-good-project/**
+      - examples/openapi-bad-project/**
+    disallowedFiles:
+      - validation/reports/external/**
+    expectedActions:
+      - Add or update a stable rule ID.
+      - Include `agentFailureMode` and `fixExample`.
+      - Cover good and bad fixtures.
+    expectedOutputs:
+      - Analyzer change, tests, and rule documentation.
+    successCriteria:
+      - The bad OpenAPI fixture produces the new finding.
+      - The good OpenAPI fixture avoids the finding.
+      - Tests pass.
+    verificationCommands:
+      - pnpm test
+      - pnpm typecheck
+    riskLevel: medium
+    commonFailureModes:
+      - Adds a keyword-only rule that flags good specs.
+      - Omits documentation for the new rule.

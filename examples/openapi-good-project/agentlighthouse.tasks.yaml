@@ -1,0 +1,33 @@
+version: 0.1.0
+project: openapi-good-project
+tasks:
+  - id: add-customer-api-example
+    title: Add a customer API example
+    persona: SDK maintainer
+    objective: Add a runnable customer creation example that uses the documented idempotency key and sandbox API key placeholder.
+    projectAreas:
+      - openapi
+      - docs
+    requiredDocs:
+      - README.md
+      - openapi.yaml
+      - AGENTS.md
+    allowedFiles:
+      - README.md
+      - openapi.yaml
+    disallowedFiles:
+      - .env
+    expectedActions:
+      - Read the OpenAPI request body schema.
+      - Preserve placeholder credentials.
+    expectedOutputs:
+      - A request example with idempotency_key and email.
+    successCriteria:
+      - Example uses EXAMPLE_API_KEY.
+      - Example includes idempotency_key.
+    verificationCommands:
+      - npm test
+    riskLevel: medium
+    commonFailureModes:
+      - Omits Authorization header.
+      - Uses a realistic-looking API key.

@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: Bad API
+  version: 1.0.0
+paths:
+  /items:
+    get:
+      operationId: list
+      summary: Items
+      responses:
+        "200":
+          description: ok
+    post:
+      operationId: create
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: ok
+  /items/{id}:
+    delete:
+      operationId: delete
+      summary: Delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ok

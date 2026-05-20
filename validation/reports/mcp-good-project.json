@@ -1,0 +1,407 @@
+{
+  "scanId": "scan_4cb116c8",
+  "scannedPath": "<repo>/examples/mcp-good-project",
+  "startedAt": "2026-05-20T19:47:28.362Z",
+  "completedAt": "2026-05-20T19:47:28.366Z",
+  "durationMs": 4,
+  "agentLighthouseVersion": "0.1.0",
+  "profile": "mcp",
+  "scoringModelVersion": "0.1.0",
+  "score": 95,
+  "summary": "Strong agent-readiness with 0 high-priority issue(s) remaining.",
+  "subscores": [
+    {
+      "id": "agent_instructions",
+      "label": "Agent Instructions",
+      "score": 98,
+      "findingsCount": 1
+    },
+    {
+      "id": "documentation",
+      "label": "Documentation",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "api_and_tooling",
+      "label": "API & Tooling",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "examples_and_tasks",
+      "label": "Examples & Tasks",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "security_and_privacy",
+      "label": "Security & Privacy",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "freshness_and_consistency",
+      "label": "Freshness & Consistency",
+      "score": 100,
+      "findingsCount": 0
+    }
+  ],
+  "recommendations": [
+    "Use opt-in command probes in trusted environments to verify setup and tests."
+  ],
+  "rawScore": 98,
+  "scoreConfidence": "medium",
+  "scoreConfidenceScore": 82,
+  "coverage": {
+    "evaluatedChecks": 7,
+    "skippedChecks": 0,
+    "notApplicableChecks": 2,
+    "notEvaluatedChecks": 2,
+    "evaluatedCategories": [
+      "agent_instructions",
+      "documentation",
+      "mcp_tools",
+      "setup_and_tests",
+      "security_and_privacy",
+      "task_benchmarks"
+    ],
+    "missingCategories": ["examples", "freshness_and_consistency"],
+    "coveragePercent": 78
+  },
+  "scoringCaps": [
+    {
+      "id": "cap.shallow-key-artifacts",
+      "maxScore": 95,
+      "reason": "One or more key agent-readiness artifacts are shallow or partial."
+    }
+  ],
+  "projectName": "mcp-good-project",
+  "findings": [
+    {
+      "id": "agent-instructions.claude-vague",
+      "title": "CLAUDE.md appears stale or too vague",
+      "severity": "low",
+      "category": "agent_instructions",
+      "description": "CLAUDE.md exists but may not contain enough stable project memory.",
+      "evidence": ["CLAUDE.md length is 273 characters."],
+      "recommendation": "Refresh CLAUDE.md with current setup commands, product boundaries, and test expectations.",
+      "affectedFile": "CLAUDE.md",
+      "suggestedFixType": "update_file",
+      "ruleId": "agent-instructions.claude-vague"
+    },
+    {
+      "id": "api.openapi-not-detected",
+      "title": "OpenAPI file not detected",
+      "severity": "info",
+      "category": "api_schema",
+      "description": "No OpenAPI schema was found. This may be fine for projects without an HTTP API.",
+      "evidence": ["No openapi.* or swagger.* file was scanned."],
+      "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
+      "suggestedFixType": "review_manually",
+      "ruleId": "api.openapi-not-detected"
+    },
+    {
+      "id": "mcp.detected",
+      "title": "MCP-related files or packages detected",
+      "severity": "info",
+      "category": "mcp_tools",
+      "description": "MCP signals were found and can be evaluated by future deeper analyzers.",
+      "evidence": ["src/mcp-server.example.txt"],
+      "recommendation": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance.",
+      "affectedFile": "src/mcp-server.example.txt",
+      "suggestedFixType": "review_manually",
+      "ruleId": "mcp.detected"
+    },
+    {
+      "id": "COMMAND_VERIFICATION_SKIPPED",
+      "title": "Command verification probes were skipped",
+      "severity": "info",
+      "category": "setup_and_tests",
+      "description": "Static analysis is default; project commands are not executed unless explicitly enabled.",
+      "evidence": ["Run with --probe commands or --run-probes to execute safe script probes."],
+      "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+      "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+      "fixExample": "agentlighthouse scan . --probe commands",
+      "suggestedFixType": "none",
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+    }
+  ],
+  "scoreInterpretation": {
+    "agentReadinessScore": 95,
+    "humanReadableProjectSignals": {
+      "score": 80,
+      "summary": "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      "signals": [
+        "README present",
+        "1 Markdown doc file(s)",
+        "package metadata present",
+        "MCP files or dependencies present"
+      ]
+    },
+    "agentSpecificContextLayer": {
+      "score": 68,
+      "summary": "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      "signals": [
+        "AGENTS.md present",
+        "CLAUDE.md present",
+        "llms.txt present",
+        "agent task benchmark present"
+      ]
+    },
+    "verifiability": {
+      "score": 60,
+      "summary": "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      "signals": [
+        "test script declared",
+        "lint script declared",
+        "typecheck script declared",
+        "command probes not run"
+      ]
+    }
+  },
+  "apiAnalysis": {
+    "specFiles": [],
+    "operationCount": 0,
+    "operationsWithExamples": 0,
+    "operationsMissingDescriptions": 0,
+    "destructiveOperations": [],
+    "authSchemes": [],
+    "weakOperations": [],
+    "highRiskOperations": []
+  },
+  "mcpAnalysis": {
+    "detected": true,
+    "files": ["package.json", "src/mcp-server.example.txt"],
+    "toolCount": 2,
+    "toolsWithSchemas": 2,
+    "toolsWithExamples": 2,
+    "ambiguousTools": [],
+    "destructiveTools": ["src/mcp-server.example.txt: revoke_sandbox_token"],
+    "privacySensitiveTools": [
+      "src/mcp-server.example.txt: search_public_docs",
+      "src/mcp-server.example.txt: revoke_sandbox_token"
+    ],
+    "weakTools": [
+      "src/mcp-server.example.txt: search_public_docs",
+      "src/mcp-server.example.txt: revoke_sandbox_token"
+    ]
+  },
+  "commandProbes": {
+    "enabled": false,
+    "attempted": 0,
+    "skipped": 3,
+    "passed": 0,
+    "failed": 0,
+    "timedOut": 0,
+    "results": []
+  },
+  "detectedProject": {
+    "type": "mcp_project",
+    "name": "mcp-good-project",
+    "confidence": 0.9,
+    "evidence": ["MCP file or package signal detected."],
+    "packageManager": "npm",
+    "frameworks": []
+  },
+  "detectedArtifacts": [
+    {
+      "path": "AGENTS.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Primary coding-agent instructions",
+      "quality": "strong",
+      "notes": [
+        "Includes project overview.",
+        "Includes setup commands.",
+        "Includes test commands.",
+        "Includes lint/typecheck commands.",
+        "Missing docs links."
+      ]
+    },
+    {
+      "path": "CLAUDE.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Claude Code project memory",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes test commands.",
+        "Includes lint/typecheck commands.",
+        "Includes security/privacy guidance.",
+        "Missing setup commands.",
+        "Missing architecture map.",
+        "Missing coding conventions.",
+        "Missing generated-file warnings."
+      ]
+    },
+    {
+      "path": "llms.txt",
+      "exists": true,
+      "kind": "file",
+      "role": "LLM-readable project map",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes architecture map.",
+        "Includes docs links.",
+        "Includes examples."
+      ]
+    },
+    {
+      "path": "README.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Human and agent entry point",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes test commands.",
+        "Includes architecture map.",
+        "Includes examples.",
+        "Missing setup commands.",
+        "Missing docs links."
+      ]
+    },
+    {
+      "path": ".cursor/rules",
+      "exists": false,
+      "kind": "missing",
+      "role": "Cursor rules",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "exists": false,
+      "kind": "missing",
+      "role": "GitHub Copilot instructions",
+      "quality": "missing",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    },
+    {
+      "path": ".agentlighthouseignore",
+      "exists": true,
+      "kind": "file",
+      "role": "AgentLighthouse ignore rules",
+      "quality": "unknown",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    }
+  ],
+  "scanStats": {
+    "filesScanned": 9,
+    "textFilesRead": 8,
+    "bytesRead": 4504,
+    "docsMarkdownFileCount": 1,
+    "openApiFileCount": 0,
+    "benchmarkFileCount": 1,
+    "findingCount": 4
+  },
+  "ignoredPaths": [],
+  "warnings": [],
+  "errors": [],
+  "projectPath": "<repo>/examples/mcp-good-project",
+  "scannedAt": "2026-05-20T19:47:28.366Z",
+  "recommendedActions": [
+    "Use opt-in command probes in trusted environments to verify setup and tests."
+  ],
+  "signals": {
+    "rootPath": "<repo>/examples/mcp-good-project",
+    "projectName": "mcp-good-project",
+    "scannedFiles": [
+      ".agentlighthouseignore",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "agentlighthouse.tasks.yaml",
+      "docs/ARCHITECTURE.md",
+      "llms.txt",
+      "package.json",
+      "src/mcp-server.example.txt"
+    ],
+    "artifacts": {
+      "AGENTS.md": {
+        "path": "AGENTS.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 830,
+        "contentPreview": "# Agent Instructions\n\n## Project Overview\n\nThis project demonstrates clear MCP tool metadata.\n\n## Setup Commands\n\n```bash\nnpm test\n```\n\n```bash\nnpm run lint\n```\n\n```bash\nnpm run typecheck\n```\n\n## Architecture Map\n\n- `src/mcp-server.example.txt`: MCP tool registrations.\n- `agentlighthouse.tasks.yaml`: benchmark workflows.\n\n## Coding Conventions\n\nTool names must be action-resource specific and descriptions must explain when not to use the tool.\n\n## Common Mistakes\n\n- Do not use generic tool names "
+      },
+      "CLAUDE.md": {
+        "path": "CLAUDE.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 274,
+        "contentPreview": "# Claude Memory\n\nMCP Good Project is a static MCP readiness fixture.\n\n## Workflow\n\n- Run `npm test`, `npm run lint`, and `npm run typecheck`.\n- Keep tool names action-resource specific.\n\n## Boundaries\n\nDo not add real credentials or production side effects to sample tools.\n"
+      },
+      "llms.txt": {
+        "path": "llms.txt",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 147,
+        "contentPreview": "# MCP Good Project\n\n- [README](README.md)\n- [Server](src/mcp-server.example.txt)\n- [Tasks](agentlighthouse.tasks.yaml)\n- [Instructions](AGENTS.md)\n"
+      },
+      "README.md": {
+        "path": "README.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 533,
+        "contentPreview": "# MCP Good Project\n\n## Quickstart\n\n```bash\nnpm test\n```\n\n## Example\n\nThe server exposes `search_public_docs` for read-only documentation search and `revoke_sandbox_token` for explicitly approved sandbox token cleanup.\n\n## Architecture\n\n- `src/mcp-server.example.txt` contains MCP tool definitions.\n- `agentlighthouse.tasks.yaml` contains verifiable agent workflows.\n- `AGENTS.md` contains agent operating instructions.\n\n## Troubleshooting\n\nIf auth fails, use an `EXAMPLE_TOKEN` placeholder and never "
+      },
+      ".cursor/rules": {
+        "path": ".cursor/rules",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".github/copilot-instructions.md": {
+        "path": ".github/copilot-instructions.md",
+        "exists": false,
+        "kind": "missing"
+      },
+      ".agentlighthouseignore": {
+        "path": ".agentlighthouseignore",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 19
+      }
+    },
+    "docsMarkdownFiles": ["docs/ARCHITECTURE.md"],
+    "openApiFiles": [],
+    "mcpFiles": ["src/mcp-server.example.txt"],
+    "configFiles": ["package.json"],
+    "benchmarkFiles": ["agentlighthouse.tasks.yaml"],
+    "ignoredPaths": [],
+    "warnings": [],
+    "errors": [],
+    "scanStats": {
+      "filesScanned": 9,
+      "textFilesRead": 8,
+      "bytesRead": 4504,
+      "docsMarkdownFileCount": 1,
+      "openApiFileCount": 0,
+      "benchmarkFileCount": 1
+    },
+    "packageJson": {
+      "path": "package.json",
+      "name": "mcp-good-project",
+      "scripts": {
+        "test": "node --test",
+        "lint": "echo lint-ok",
+        "typecheck": "echo typecheck-ok"
+      },
+      "dependencies": ["@modelcontextprotocol/sdk", "zod"],
+      "devDependencies": []
+    },
+    "textByPath": {
+      "AGENTS.md": "# Agent Instructions\n\n## Project Overview\n\nThis project demonstrates clear MCP tool metadata.\n\n## Setup Commands\n\n```bash\nnpm test\n```\n\n```bash\nnpm run lint\n```\n\n```bash\nnpm run typecheck\n```\n\n## Architecture Map\n\n- `src/mcp-server.example.txt`: MCP tool registrations.\n- `agentlighthouse.tasks.yaml`: benchmark workflows.\n\n## Coding Conventions\n\nTool names must be action-resource specific and descriptions must explain when not to use the tool.\n\n## Common Mistakes\n\n- Do not use generic tool names like `run`.\n- Do not edit generated build output.\n- Do not omit privacy notes for tools that touch user data.\n\n## Security and Privacy\n\nNever expose secrets. Tools that access private data must state auth and privacy constraints.\n\n## Ownership\n\nMaintainers review any tool that writes, revokes, deletes, or accesses private data.\n",
+      "CLAUDE.md": "# Claude Memory\n\nMCP Good Project is a static MCP readiness fixture.\n\n## Workflow\n\n- Run `npm test`, `npm run lint`, and `npm run typecheck`.\n- Keep tool names action-resource specific.\n\n## Boundaries\n\nDo not add real credentials or production side effects to sample tools.\n",
+      "README.md": "# MCP Good Project\n\n## Quickstart\n\n```bash\nnpm test\n```\n\n## Example\n\nThe server exposes `search_public_docs` for read-only documentation search and `revoke_sandbox_token` for explicitly approved sandbox token cleanup.\n\n## Architecture\n\n- `src/mcp-server.example.txt` contains MCP tool definitions.\n- `agentlighthouse.tasks.yaml` contains verifiable agent workflows.\n- `AGENTS.md` contains agent operating instructions.\n\n## Troubleshooting\n\nIf auth fails, use an `EXAMPLE_TOKEN` placeholder and never paste real secrets into prompts.\n",
+      "agentlighthouse.tasks.yaml": "version: 0.1.0\nproject: mcp-good-project\ntasks:\n  - id: add-readonly-tool-example\n    title: Add a read-only MCP tool example\n    persona: MCP server maintainer\n    objective: Add an example invocation for search_public_docs that uses safe placeholder input and documents the output shape.\n    projectAreas:\n      - src/mcp-server.example.txt\n      - README.md\n    requiredDocs:\n      - README.md\n      - AGENTS.md\n    allowedFiles:\n      - src/mcp-server.example.txt\n      - README.md\n    disallowedFiles:\n      - .env\n    expectedActions:\n      - Preserve auth and privacy guidance.\n    expectedOutputs:\n      - Example invocation and expected output summary.\n    successCriteria:\n      - Example does not include secrets.\n      - Example shows the required query parameter.\n    verificationCommands:\n      - npm test\n    riskLevel: low\n    commonFailureModes:\n      - Uses a private-data tool for public docs.\n      - Omits required schema fields.\n",
+      "docs/ARCHITECTURE.md": "# Architecture\n\n- `src/mcp-server.example.txt` contains static MCP tool examples.\n- `agentlighthouse.tasks.yaml` defines verifiable agent workflows.\n- `AGENTS.md` defines agent operating rules.\n\nTool metadata should explain intent, schemas, examples, auth/privacy requirements, and errors.\n",
+      "llms.txt": "# MCP Good Project\n\n- [README](README.md)\n- [Server](src/mcp-server.example.txt)\n- [Tasks](agentlighthouse.tasks.yaml)\n- [Instructions](AGENTS.md)\n",
+      "package.json": "{\n  \"name\": \"mcp-good-project\",\n  \"version\": \"0.1.0\",\n  \"type\": \"module\",\n  \"dependencies\": {\n    \"@modelcontextprotocol/sdk\": \"^1.0.0\",\n    \"zod\": \"^3.0.0\"\n  },\n  \"scripts\": {\n    \"test\": \"node --test\",\n    \"lint\": \"echo lint-ok\",\n    \"typecheck\": \"echo typecheck-ok\"\n  }\n}\n",
+      "src/mcp-server.example.txt": "import { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";\nimport { z } from \"zod\";\n\nconst server = new McpServer({ name: \"good-mcp\", version: \"1.0.0\" });\n\nserver.tool(\"search_public_docs\", {\n  description:\n    \"Search public documentation by keyword. Use this for docs lookup only; do not use it for private customer data. Returns matching page titles and URLs. Errors include not-found and rate-limit states.\",\n  inputSchema: z.object({\n    query: z.string().describe(\"Search query written in the user's words.\"),\n    limit: z.number().describe(\"Maximum number of public docs results to return.\")\n  }),\n  examples: [{ query: \"authentication quickstart\", limit: 3 }]\n});\n\nserver.tool(\"revoke_sandbox_token\", {\n  description:\n    \"Destructive sandbox-only token revocation tool. Requires explicit maintainer approval and a sandbox token ID. Never use for production tokens. Errors include unauthorized, not found, and already revoked.\",\n  inputSchema: z.object({\n    token_id: z.string().describe(\"Sandbox token identifier to revoke.\"),\n    reason: z.string().describe(\"Human-readable reason for audit logs.\")\n  }),\n  examples: [{ token_id: \"tok_example\", reason: \"cleanup test fixture\" }]\n});\n"
+    }
+  }
+}

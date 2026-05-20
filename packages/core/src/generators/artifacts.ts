@@ -26,7 +26,7 @@ export class StarterArtifactGenerator implements ArtifactGenerator {
         content: agentLighthouseIgnoreTemplate()
       },
       {
-        path: "benchmarks/agent-tasks.yaml",
+        path: "agentlighthouse.tasks.yaml",
         description: "Starter deterministic agent task benchmark",
         content: benchmarkTemplate(signals)
       }
@@ -130,7 +130,7 @@ ${signals.projectName} is designed to be inspected and improved by coding agents
 - [Development Guide](docs/DEVELOPMENT.md)
 - [Validation Guide](docs/VALIDATION.md)
 - [Agent Instructions](AGENTS.md)
-- [Agent Task Benchmark](benchmarks/agent-tasks.yaml)
+- [Agent Task Benchmark](agentlighthouse.tasks.yaml)
 
 ## Example Usage
 - Run a scan: \`agentlighthouse scan .\`
@@ -167,34 +167,98 @@ project: ${signals.projectName}
 tasks:
   - id: install-project
     title: Install the project
-    prompt: Install dependencies for this project and report the exact command used.
-    success_criteria:
+    persona: new contributor using an AI coding agent
+    objective: Install dependencies, identify the package manager, and verify the project reaches a working local state.
+    projectAreas:
+      - setup
+      - documentation
+    requiredDocs:
+      - README.md
+      - AGENTS.md
+    allowedFiles:
+      - package.json
+      - README.md
+      - AGENTS.md
+    disallowedFiles:
+      - node_modules/**
+      - .env
+    expectedActions:
+      - Read README and AGENTS.md before running commands.
+      - Identify the package manager from package metadata.
+    expectedOutputs:
+      - A short note with the install command and any missing prerequisite.
+    successCriteria:
       - Dependencies install without undocumented prerequisites.
       - The agent can identify the package manager.
+    verificationCommands:
+      - pnpm test
+    riskLevel: low
+    commonFailureModes:
+      - Runs an install command that is not documented.
+      - Ignores package manager metadata.
   - id: run-tests
     title: Run the test suite
-    prompt: Run the project's tests and summarize any failures with file paths.
-    success_criteria:
+    persona: maintainer checking a small change
+    objective: Run the documented verification commands and summarize failures with actionable file paths.
+    projectAreas:
+      - tests
+      - ci
+    requiredDocs:
+      - README.md
+      - AGENTS.md
+    allowedFiles:
+      - package.json
+      - packages/**
+      - apps/**
+    disallowedFiles:
+      - node_modules/**
+      - dist/**
+    expectedActions:
+      - Run the test command.
+      - Run typecheck or lint if documented.
+    expectedOutputs:
+      - Test result summary with failing command and file paths if any.
+    successCriteria:
       - The documented test command is discoverable.
       - Test output can be interpreted without hidden context.
+    verificationCommands:
+      - pnpm test
+      - pnpm typecheck
+    riskLevel: low
+    commonFailureModes:
+      - Reports success without running the documented command.
+      - Omits failing file paths.
   - id: add-small-scanner-rule
     title: Add a small scanner rule
-    prompt: Add a deterministic scanner rule for a missing documentation signal and cover it with a unit test.
-    success_criteria:
+    persona: product engineer extending deterministic analysis
+    objective: Add a deterministic scanner rule for a missing documentation signal and cover it with a unit test.
+    projectAreas:
+      - packages/core
+      - tests
+    requiredDocs:
+      - docs/ARCHITECTURE.md
+      - docs/RULES.md
+      - AGENTS.md
+    allowedFiles:
+      - packages/core/**
+      - docs/RULES.md
+    disallowedFiles:
+      - validation/reports/external/**
+    expectedActions:
+      - Add a stable finding rule ID.
+      - Add or update a focused unit test.
+    expectedOutputs:
+      - Code change plus passing test command.
+    successCriteria:
       - The agent finds the scanner and analyzer modules.
       - The new rule produces a structured finding.
       - Tests pass.
-  - id: find-scoring-implementation
-    title: Find scoring implementation
-    prompt: Identify where the AgentLighthouse score is calculated and explain the severity weights.
-    success_criteria:
-      - The agent locates the scoring module.
-      - The explanation matches the current scoring model.
-  - id: generate-agent-instructions
-    title: Generate AGENTS.md for a sample project
-    prompt: Generate or update AGENTS.md for examples/sample-project without overwriting existing useful content.
-    success_criteria:
-      - The agent preserves existing user content.
-      - The generated file includes setup, tests, conventions, and safety guidance.
+    verificationCommands:
+      - pnpm test
+      - pnpm typecheck
+    riskLevel: medium
+    commonFailureModes:
+      - Adds a vague finding without an agent failure mode.
+      - Changes scoring globally without a test.
 `;
 }

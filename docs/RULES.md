@@ -177,6 +177,42 @@ AgentLighthouse findings use stable rule IDs. These IDs are intended to remain s
 - Why it matters: absence of MCP signals should reduce coverage rather than masquerade as success.
 - Fix: expose MCP server/tool definitions with descriptions and schemas.
 
+### `OPENAPI_*`
+
+- Category: `api_schema`
+- Default severity: `low` to `high`
+- Checks: operation IDs, descriptions, examples, auth, server URLs, error responses, pagination, rate limits, and destructive-operation markings.
+- Why it matters: agents often generate API clients from specs and need enough context to avoid invented calls or unsafe write operations.
+- Fix: add specific operation IDs, useful descriptions, request/response examples, auth schemes, error responses, pagination/rate-limit guidance, and safety notes for destructive endpoints.
+- Bad: `operationId: delete` with no error responses or warning.
+- Good: `operationId: revokeSandboxToken` with auth, examples, 401/403/404/429 responses, and destructive-action guidance.
+
+### `MCP_*`
+
+- Category: `mcp_tools`
+- Default severity: `low` to `high`
+- Checks: tool names, descriptions, input schemas, examples, destructive behavior, auth/privacy guidance, and error behavior.
+- Why it matters: MCP tools are direct agent affordances; ambiguity can cause the wrong tool call or unsafe side effects.
+- Fix: use action-resource names, describe when to use and avoid each tool, add schemas and examples, and mark sensitive tools clearly.
+- Bad: `server.tool("run", { description: "Runs stuff." })`
+- Good: `server.tool("search_public_docs", { description, inputSchema, examples })`
+
+### `COMMAND_*`
+
+- Category: `setup_and_tests`
+- Default severity: `info` to `high`
+- Checks: opt-in command probe status, skipped scripts, failures, timeouts, and redacted output.
+- Why it matters: commands may be documented but broken; agents need verifiable setup and test feedback.
+- Fix: add stable scripts, keep fast verification commands, and avoid printing secrets.
+
+### `TASK_*`
+
+- Category: `task_benchmarks`
+- Default severity: `low` to `medium`
+- Checks: richer benchmark tasks in `agentlighthouse.tasks.yaml`.
+- Why it matters: future agent benchmark evaluation needs concrete tasks, success criteria, docs, outputs, verification commands, risk levels, and common failure modes.
+- Fix: add concrete objectives, required docs, expected outputs, verification commands, risk level, and failure modes.
+
 ## Security
 
 ### `security.missing-agentlighthouseignore`

@@ -13,7 +13,15 @@ export const findingCategories = [
   "repo_structure",
   "freshness_and_consistency"
 ] as const;
-export const scanProfiles = ["default", "devtool", "api", "docs", "library", "internal"] as const;
+export const scanProfiles = [
+  "default",
+  "devtool",
+  "api",
+  "mcp",
+  "docs",
+  "library",
+  "internal"
+] as const;
 export const scoreConfidenceLevels = ["high", "medium", "low"] as const;
 export const suggestedFixTypes = [
   "create_file",
@@ -53,6 +61,9 @@ export const findingSchema = z.object({
   evidence: z.array(z.string()),
   recommendation: z.string(),
   affectedFile: z.string().optional(),
+  agentFailureMode: z.string().optional(),
+  fixExample: z.string().optional(),
+  docsLinks: z.array(z.string()).optional(),
   suggestedFixType: suggestedFixTypeSchema
 });
 
@@ -149,6 +160,88 @@ export const scoreCapSchema = z.object({
   reason: z.string()
 });
 
+export const scoreInterpretationSectionSchema = z.object({
+  score: z.number().min(0).max(100),
+  summary: z.string(),
+  signals: z.array(z.string())
+});
+
+export const scoreInterpretationSchema = z.object({
+  agentReadinessScore: z.number().min(0).max(100),
+  humanReadableProjectSignals: scoreInterpretationSectionSchema,
+  agentSpecificContextLayer: scoreInterpretationSectionSchema,
+  verifiability: scoreInterpretationSectionSchema
+});
+
+export const apiOperationAnalysisSchema = z.object({
+  method: z.string(),
+  path: z.string(),
+  operationId: z.string().optional(),
+  summary: z.string().optional(),
+  destructive: z.boolean(),
+  hasRequestExample: z.boolean(),
+  hasResponseExample: z.boolean(),
+  hasErrorResponses: z.boolean(),
+  weak: z.boolean(),
+  riskReasons: z.array(z.string())
+});
+
+export const apiAnalysisSchema = z.object({
+  specFiles: z.array(z.string()),
+  operationCount: z.number().nonnegative(),
+  operationsWithExamples: z.number().nonnegative(),
+  operationsMissingDescriptions: z.number().nonnegative(),
+  destructiveOperations: z.array(z.string()),
+  authSchemes: z.array(z.string()),
+  weakOperations: z.array(z.string()),
+  highRiskOperations: z.array(z.string())
+});
+
+export const mcpToolAnalysisSchema = z.object({
+  name: z.string(),
+  file: z.string(),
+  description: z.string().optional(),
+  hasInputSchema: z.boolean(),
+  hasExamples: z.boolean(),
+  destructive: z.boolean(),
+  privacySensitive: z.boolean(),
+  weak: z.boolean(),
+  riskReasons: z.array(z.string())
+});
+
+export const mcpAnalysisSchema = z.object({
+  detected: z.boolean(),
+  files: z.array(z.string()),
+  toolCount: z.number().nonnegative(),
+  toolsWithSchemas: z.number().nonnegative(),
+  toolsWithExamples: z.number().nonnegative(),
+  ambiguousTools: z.array(z.string()),
+  destructiveTools: z.array(z.string()),
+  privacySensitiveTools: z.array(z.string()),
+  weakTools: z.array(z.string())
+});
+
+export const commandProbeResultSchema = z.object({
+  command: z.string(),
+  script: z.string(),
+  status: z.enum(["passed", "failed", "timed_out", "skipped"]),
+  exitCode: z.number().nullable(),
+  durationMs: z.number().nonnegative(),
+  stdoutExcerpt: z.string().optional(),
+  stderrExcerpt: z.string().optional(),
+  reason: z.string().optional()
+});
+
+export const commandProbeSummarySchema = z.object({
+  enabled: z.boolean(),
+  attempted: z.number().nonnegative(),
+  skipped: z.number().nonnegative(),
+  passed: z.number().nonnegative(),
+  failed: z.number().nonnegative(),
+  timedOut: z.number().nonnegative(),
+  results: z.array(commandProbeResultSchema)
+});
+
 export const scanResultSchema = z.object({
   scanId: z.string(),
   scannedPath: z.string(),
@@ -165,10 +258,14 @@ export const scanResultSchema = z.object({
   scoreConfidenceScore: z.number().min(0).max(100),
   coverage: coverageSchema,
   scoringCaps: z.array(scoreCapSchema),
+  scoreInterpretation: scoreInterpretationSchema,
   summary: z.string(),
   subscores: z.array(subscoreSchema),
   findings: z.array(findingSchema),
   recommendations: z.array(z.string()),
+  apiAnalysis: apiAnalysisSchema,
+  mcpAnalysis: mcpAnalysisSchema,
+  commandProbes: commandProbeSummarySchema,
   detectedProject: detectedProjectSchema,
   detectedArtifacts: z.array(detectedArtifactSchema),
   scanStats: scanStatsSchema,
@@ -203,6 +300,13 @@ export type DetectedArtifact = z.infer<typeof detectedArtifactSchema>;
 export type ScanStats = z.infer<typeof scanStatsSchema>;
 export type Coverage = z.infer<typeof coverageSchema>;
 export type ScoreCap = z.infer<typeof scoreCapSchema>;
+export type ScoreInterpretation = z.infer<typeof scoreInterpretationSchema>;
+export type ApiOperationAnalysis = z.infer<typeof apiOperationAnalysisSchema>;
+export type ApiAnalysis = z.infer<typeof apiAnalysisSchema>;
+export type McpToolAnalysis = z.infer<typeof mcpToolAnalysisSchema>;
+export type McpAnalysis = z.infer<typeof mcpAnalysisSchema>;
+export type CommandProbeResult = z.infer<typeof commandProbeResultSchema>;
+export type CommandProbeSummary = z.infer<typeof commandProbeSummarySchema>;
 export type ScanResult = z.infer<typeof scanResultSchema>;
 export type GeneratedArtifact = z.infer<typeof generatedArtifactSchema>;
 
@@ -211,6 +315,11 @@ export interface ScanOptions {
   exclude?: string[];
   maxFileSizeBytes?: number;
   profile?: ScanProfile;
+  probes?: {
+    commands?: boolean;
+    timeoutMs?: number;
+    allowedScripts?: string[];
+  };
 }
 
 export interface SourceConnector {

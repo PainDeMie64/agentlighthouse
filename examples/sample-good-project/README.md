@@ -29,7 +29,7 @@ The example API exposes a health helper in `src/index.ts`.
 
 - `src/` contains TypeScript source code.
 - `docs/` contains architecture and API guidance.
-- `benchmarks/` contains realistic agent task workflows.
+- `agentlighthouse.tasks.yaml` contains realistic agent task workflows.
 
 ## Development Commands
 
@@ -39,3 +39,7 @@ pnpm typecheck
 pnpm test
 pnpm build
 ```
+
+## Troubleshooting
+
+If commands fail, verify Node.js 22+, run `pnpm install`, and confirm `EXAMPLE_API_KEY` is used instead of real credentials.

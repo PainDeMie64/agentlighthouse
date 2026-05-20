@@ -1,8 +1,20 @@
-import type { ScanOptions, ScanResult } from "./schemas/types.js";
+import type {
+  ApiAnalysis,
+  CommandProbeSummary,
+  McpAnalysis,
+  ProjectSignals,
+  ScanOptions,
+  ScanResult,
+  ScoreInterpretation
+} from "./schemas/types.js";
+import { analyzeMcp } from "./analyzers/mcp.js";
+import { analyzeOpenApi } from "./analyzers/openapi.js";
 import { ReadinessAnalyzer } from "./analyzers/readiness.js";
-import { resolveProfile } from "./config/profile.js";
+import { analyzeTaskBenchmarks } from "./analyzers/tasks.js";
+import { resolveConfig, resolveProfile } from "./config/profile.js";
 import { detectProject, detectedArtifacts } from "./detection/project.js";
 import { StarterArtifactGenerator } from "./generators/artifacts.js";
+import { runCommandProbes } from "./probes/commands.js";
 import { LocalFilesystemScanner } from "./scanners/filesystem.js";
 import { calibrateScore } from "./scoring/calibration.js";
 import { TransparentScoringModel } from "./scoring/model.js";
@@ -10,10 +22,14 @@ import { TransparentScoringModel } from "./scoring/model.js";
 export const agentLighthouseVersion = "0.1.0";
 
 export * from "./schemas/types.js";
+export * from "./analyzers/mcp.js";
+export * from "./analyzers/openapi.js";
 export * from "./analyzers/readiness.js";
+export * from "./analyzers/tasks.js";
 export * from "./config/profile.js";
 export * from "./detection/project.js";
 export * from "./generators/artifacts.js";
+export * from "./probes/commands.js";
 export * from "./reporters/cli.js";
 export * from "./scanners/filesystem.js";
 export * from "./scoring/model.js";
@@ -28,10 +44,28 @@ export async function scanProject(
   const warnings: string[] = [];
   const errors: string[] = [];
   let signals = await scanner.scan(projectPath, options);
+  const config = resolveConfig(signals);
   const profile = resolveProfile(signals, options).profile;
+  const probes = {
+    ...config.probes,
+    ...options.probes,
+    allowedScripts: options.probes?.allowedScripts ?? config.probes?.allowedScripts
+  };
   const analyzer = new ReadinessAnalyzer(profile);
   const detectedProject = detectProject(signals);
-  const findings = analyzer.analyze(signals);
+  const openApi = analyzeOpenApi(signals);
+  const mcp = analyzeMcp(signals);
+  const commandProbeRun = await runCommandProbes(signals, detectedProject, {
+    ...options,
+    probes
+  });
+  const findings = [
+    ...analyzer.analyze(signals),
+    ...openApi.findings,
+    ...mcp.findings,
+    ...analyzeTaskBenchmarks(signals),
+    ...commandProbeRun.findings
+  ];
   const scored = scoring.score(findings, signals);
   const artifacts = detectedArtifacts(signals);
   const calibrated = calibrateScore({
@@ -60,6 +94,16 @@ export async function scanProject(
     ...calibrated,
     projectName: signals.projectName,
     findings,
+    scoreInterpretation: interpretScore({
+      score: calibrated.score,
+      signals,
+      apiAnalysis: openApi.analysis,
+      mcpAnalysis: mcp.analysis,
+      commandProbes: commandProbeRun.summary
+    }),
+    apiAnalysis: openApi.analysis,
+    mcpAnalysis: mcp.analysis,
+    commandProbes: commandProbeRun.summary,
     detectedProject,
     detectedArtifacts: artifacts,
     scanStats: {
@@ -90,6 +134,76 @@ function createScanId(projectPath: string, startedAt: Date): string {
     hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
   }
   return `scan_${hash.toString(16).padStart(8, "0")}`;
+}
+
+function interpretScore(input: {
+  score: number;
+  signals: ProjectSignals;
+  apiAnalysis: ApiAnalysis;
+  mcpAnalysis: McpAnalysis;
+  commandProbes: CommandProbeSummary;
+}): ScoreInterpretation {
+  const humanSignals = [
+    input.signals.artifacts["README.md"]?.exists ? "README present" : undefined,
+    input.signals.docsMarkdownFiles.length > 0
+      ? `${input.signals.docsMarkdownFiles.length} Markdown doc file(s)`
+      : undefined,
+    input.signals.packageJson ? "package metadata present" : undefined,
+    input.apiAnalysis.specFiles.length > 0 ? "OpenAPI spec present" : undefined,
+    input.mcpAnalysis.detected ? "MCP files or dependencies present" : undefined
+  ].filter((signal): signal is string => Boolean(signal));
+  const agentSignals = [
+    input.signals.artifacts["AGENTS.md"]?.exists ? "AGENTS.md present" : undefined,
+    input.signals.artifacts["CLAUDE.md"]?.exists ? "CLAUDE.md present" : undefined,
+    input.signals.artifacts["llms.txt"]?.exists ? "llms.txt present" : undefined,
+    input.signals.artifacts[".cursor/rules"]?.exists ? "Cursor rules present" : undefined,
+    input.signals.artifacts[".github/copilot-instructions.md"]?.exists
+      ? "Copilot instructions present"
+      : undefined,
+    input.signals.benchmarkFiles.length > 0 ? "agent task benchmark present" : undefined
+  ].filter((signal): signal is string => Boolean(signal));
+  const verifiabilitySignals = [
+    input.signals.packageJson?.scripts.test ? "test script declared" : undefined,
+    input.signals.packageJson?.scripts.lint ? "lint script declared" : undefined,
+    input.signals.packageJson?.scripts.typecheck ? "typecheck script declared" : undefined,
+    input.apiAnalysis.operationsWithExamples > 0
+      ? `${input.apiAnalysis.operationsWithExamples} API operation(s) have examples`
+      : undefined,
+    input.commandProbes.enabled
+      ? `${input.commandProbes.passed}/${input.commandProbes.attempted} command probes passed`
+      : "command probes not run"
+  ].filter((signal): signal is string => Boolean(signal));
+
+  return {
+    agentReadinessScore: input.score,
+    humanReadableProjectSignals: {
+      score: boundedScore(
+        humanSignals.length * 20 + Math.min(input.apiAnalysis.operationCount, 5) * 3
+      ),
+      summary:
+        "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      signals: humanSignals
+    },
+    agentSpecificContextLayer: {
+      score: boundedScore(agentSignals.length * 17),
+      summary:
+        "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      signals: agentSignals
+    },
+    verifiability: {
+      score: boundedScore(
+        verifiabilitySignals.filter((signal) => signal !== "command probes not run").length * 20 +
+          (input.commandProbes.enabled ? 15 : 0)
+      ),
+      summary:
+        "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      signals: verifiabilitySignals
+    }
+  };
+}
+
+function boundedScore(value: number): number {
+  return Math.max(0, Math.min(100, Math.round(value)));
 }
 
 export const sampleScanResult: ScanResult = {
@@ -128,6 +242,27 @@ export const sampleScanResult: ScanResult = {
       reason: "No realistic agent task benchmark file was found."
     }
   ],
+  scoreInterpretation: {
+    agentReadinessScore: 72,
+    humanReadableProjectSignals: {
+      score: 75,
+      summary:
+        "Human-readable project signals describe conventional repo, docs, examples, and API context.",
+      signals: ["README present", "package metadata present", "OpenAPI spec present"]
+    },
+    agentSpecificContextLayer: {
+      score: 51,
+      summary:
+        "Agent-specific context is the machine-readable layer that helps coding agents work safely.",
+      signals: ["AGENTS.md present", "agent task benchmark present"]
+    },
+    verifiability: {
+      score: 60,
+      summary:
+        "Verifiability measures whether setup, tests, examples, and workflows can be checked.",
+      signals: ["test script declared", "command probes not run"]
+    }
+  },
   summary: "Useful foundation, but 2 high-priority readiness issue(s) should be fixed.",
   subscores: [
     { id: "agent_instructions", label: "Agent Instructions", score: 78, findingsCount: 2 },
@@ -156,15 +291,15 @@ export const sampleScanResult: ScanResult = {
       suggestedFixType: "add_script"
     },
     {
-      id: "benchmarks.missing-agent-task-file",
-      ruleId: "benchmarks.missing-agent-task-file",
+      id: "TASK_BENCHMARK_MISSING",
+      ruleId: "TASK_BENCHMARK_MISSING",
       title: "Missing agent task benchmark file",
       severity: "medium",
       category: "task_benchmarks",
       description: "The project has no task benchmark describing realistic agent workflows.",
       evidence: ["No benchmark file was found."],
       recommendation: "Add a benchmark file with realistic developer tasks.",
-      affectedFile: "benchmarks/agent-tasks.yaml",
+      affectedFile: "agentlighthouse.tasks.yaml",
       suggestedFixType: "create_file"
     },
     {
@@ -187,6 +322,36 @@ export const sampleScanResult: ScanResult = {
     "Add task benchmarks for the top developer workflows agents should complete.",
     "Document secret-handling and privacy rules for agent workflows."
   ],
+  apiAnalysis: {
+    specFiles: ["openapi.yaml"],
+    operationCount: 8,
+    operationsWithExamples: 4,
+    operationsMissingDescriptions: 2,
+    destructiveOperations: ["openapi.yaml: DELETE /v1/widgets/{id} (deleteWidget)"],
+    authSchemes: ["bearerAuth"],
+    weakOperations: ["openapi.yaml: POST /v1/widgets (createWidget)"],
+    highRiskOperations: ["openapi.yaml: DELETE /v1/widgets/{id} (deleteWidget)"]
+  },
+  mcpAnalysis: {
+    detected: false,
+    files: [],
+    toolCount: 0,
+    toolsWithSchemas: 0,
+    toolsWithExamples: 0,
+    ambiguousTools: [],
+    destructiveTools: [],
+    privacySensitiveTools: [],
+    weakTools: []
+  },
+  commandProbes: {
+    enabled: false,
+    attempted: 0,
+    skipped: 3,
+    passed: 0,
+    failed: 0,
+    timedOut: 0,
+    results: []
+  },
   detectedProject: {
     type: "node_typescript",
     name: "sample-agent-ready-project",

@@ -12,6 +12,15 @@
 - Include an intentionally imperfect sample project.
 - Include tests and CI.
 
+## Phase 2A Capabilities
+
+- Deterministic OpenAPI semantic analysis for operation descriptions, examples, auth, error recovery, pagination, rate limits, and destructive operations.
+- Static MCP tool analysis for names, descriptions, schemas, examples, privacy, auth, and side effects.
+- Opt-in command probes that run only safe configured package scripts in trusted environments.
+- Richer `agentlighthouse.tasks.yaml` benchmark schema.
+- Findings can include agent failure modes and concrete fix examples.
+- Reports distinguish human-readable project signals, agent-specific context, and verifiability.
+
 ## Future Features
 
 - GitHub Action with score gates and PR annotations.

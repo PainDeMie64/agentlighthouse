@@ -1,11 +1,12 @@
 # AgentLighthouse Report: agentlighthouse
 
-Score: **94/100**
+Score: **85/100**
 
 Strong agent-readiness with 0 high-priority issue(s) remaining.
 
-Confidence: **Medium** (74/100)  
-Coverage: **73%**
+Confidence: **Medium** (65/100)
+
+Coverage: **63%**
 
 ## Project Detection
 
@@ -15,18 +16,55 @@ Coverage: **73%**
 - Frameworks: TypeScript, Vitest
 - Evidence: package.json plus TypeScript config or source files detected.
 
+## Score Interpretation
+
+- Agent-Readiness Score: 85/100
+- Human-readable project signals: 60/100 - README present, 15 Markdown doc file(s), package metadata present
+- Agent-specific context layer: 68/100 - AGENTS.md present, CLAUDE.md present, llms.txt present, agent task benchmark present
+- Verifiability: 60/100 - test script declared, lint script declared, typecheck script declared, command probes not run
+
 ## Subscores
 
-- Agent Instructions: 96/100
-- Documentation: 98/100
+- Agent Instructions: 100/100
+- Documentation: 100/100
 - API & Tooling: 100/100
 - Examples & Tasks: 100/100
 - Security & Privacy: 100/100
 - Freshness & Consistency: 100/100
 
+## API Analysis
+
+- Spec files: none
+- Operations: 0
+- Operations with examples: 0
+- Operations missing descriptions: 0
+- Auth schemes: none
+- Destructive operations: none
+- Weak operations: none
+
+## MCP Analysis
+
+- Detected: no
+- Files: none
+- Tools: 0
+- Tools with schemas: 0
+- Tools with examples: 0
+- Ambiguous tools: none
+- Destructive tools: none
+- Weak tools: none
+
+## Command Probes
+
+- Enabled: no
+- Attempted: 0
+- Passed: 0
+- Failed: 0
+- Timed out: 0
+- Skipped: 3
+
 ## Coverage
 
-- Evaluated checks: 8
+- Evaluated checks: 5
 - Skipped checks: 0
 - Not applicable checks: 3
 - Not evaluated checks: 3
@@ -35,17 +73,16 @@ Coverage: **73%**
 
 ## Scoring Caps
 
+- cap.low-coverage: max 85. Less than 70% of applicable checks were evaluated.
 - cap.shallow-key-artifacts: max 95. One or more key agent-readiness artifacts are shallow or partial.
 
 ## Top Findings
 
-- **low**: AGENTS.md has too few fenced command examples (AGENTS.md)
-- **low**: README lacks troubleshooting guidance (README.md)
-- **low**: AGENTS.md lacks ownership or maintenance notes (AGENTS.md)
+No non-informational findings.
 
 ## Recommended Actions
 
-No prioritized actions.
+1. Use opt-in command probes in trusted environments to verify setup and tests.
 
 ## Detected Artifacts
 
@@ -61,45 +98,19 @@ No prioritized actions.
 
 ## Scan Metadata
 
-- Scan ID: `scan_52146573`
+- Scan ID: `scan_f0413b70`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:08:58.829Z
-- Completed: 2026-05-20T19:08:58.841Z
-- Duration: 12ms
-- Files scanned: 87
-- Text files read: 83
-- Ignored paths observed: 13
+- Started: 2026-05-20T19:47:28.439Z
+- Completed: 2026-05-20T19:47:28.450Z
+- Duration: 11ms
+- Files scanned: 84
+- Text files read: 81
+- Ignored paths observed: 12
 - Warnings: 0
 - Errors: 0
 
 ## Findings
-
-### Low
-
-#### AGENTS.md has too few fenced command examples
-
-- Severity: low
-- Category: agent_instructions
-- Affected file: AGENTS.md
-- Recommendation: Add fenced command examples for install, test, lint/typecheck, and build workflows.
-- Evidence: Detected 0 fenced shell command block(s).
-
-#### README lacks troubleshooting guidance
-
-- Severity: low
-- Category: documentation
-- Affected file: README.md
-- Recommendation: Add a short troubleshooting section with common setup and test failure fixes.
-- Evidence: No troubleshooting, debug, FAQ, or common-issue section was detected.
-
-#### AGENTS.md lacks ownership or maintenance notes
-
-- Severity: low
-- Category: agent_instructions
-- Affected file: AGENTS.md
-- Recommendation: Add maintenance and ownership notes for sensitive modules or review expectations.
-- Evidence: No ownership, maintainer, review, approval, or responsibility language was detected.
 
 ### Info
 
@@ -109,6 +120,8 @@ No prioritized actions.
 - Category: api_schema
 - Affected file: n/a
 - Recommendation: For API products, publish an OpenAPI spec with operation descriptions and examples.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: No openapi._ or swagger._ file was scanned.
 
 #### MCP readiness could not be evaluated yet
@@ -117,4 +130,16 @@ No prioritized actions.
 - Category: mcp_tools
 - Affected file: n/a
 - Recommendation: If this project exposes MCP tools, include server files and clear tool descriptions.
+- Agent failure mode: n/a
+- Fix example: n/a
 - Evidence: No file or package name matching MCP was scanned.
+
+#### Command verification probes were skipped
+
+- Severity: info
+- Category: setup_and_tests
+- Affected file: n/a
+- Recommendation: Use command probes in trusted local or CI environments when you want executable verification.
+- Agent failure mode: Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.
+- Fix example: agentlighthouse scan . --probe commands
+- Evidence: Run with --probe commands or --run-probes to execute safe script probes.

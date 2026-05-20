@@ -1,0 +1,24 @@
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { z } from "zod";
+
+const server = new McpServer({ name: "good-mcp", version: "1.0.0" });
+
+server.tool("search_public_docs", {
+  description:
+    "Search public documentation by keyword. Use this for docs lookup only; do not use it for private customer data. Returns matching page titles and URLs. Errors include not-found and rate-limit states.",
+  inputSchema: z.object({
+    query: z.string().describe("Search query written in the user's words."),
+    limit: z.number().describe("Maximum number of public docs results to return.")
+  }),
+  examples: [{ query: "authentication quickstart", limit: 3 }]
+});
+
+server.tool("revoke_sandbox_token", {
+  description:
+    "Destructive sandbox-only token revocation tool. Requires explicit maintainer approval and a sandbox token ID. Never use for production tokens. Errors include unauthorized, not found, and already revoked.",
+  inputSchema: z.object({
+    token_id: z.string().describe("Sandbox token identifier to revoke."),
+    reason: z.string().describe("Human-readable reason for audit logs.")
+  }),
+  examples: [{ token_id: "tok_example", reason: "cleanup test fixture" }]
+});

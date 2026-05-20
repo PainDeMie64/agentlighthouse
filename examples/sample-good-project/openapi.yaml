@@ -2,11 +2,22 @@ openapi: 3.0.3
 info:
   title: Sample Good Project API
   version: 0.1.0
+  description: Sample Good Project API for health checks and widget workflows with clear sandbox authentication, examples, error responses, and retry guidance for generated clients.
+servers:
+  - url: https://api.sample-good.example/v1
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
 paths:
   /health:
     get:
+      operationId: getServiceHealth
       summary: Check service health
-      description: Returns a simple health payload that agents can use to verify the API is reachable during local development.
+      description: Returns a simple health payload that agents can use to verify the API is reachable during local development. This endpoint does not mutate data and may be retried after 429 Retry-After responses.
       responses:
         "200":
           description: Health response
@@ -14,3 +25,7 @@ paths:
             application/json:
               example:
                 ok: true
+        "401":
+          description: Missing or invalid bearer token.
+        "429":
+          description: Too many requests; retry after the Retry-After header.

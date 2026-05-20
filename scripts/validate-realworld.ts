@@ -25,6 +25,26 @@ const targets = [
     path: path.join(repoRoot, "examples", "sample-bad-project"),
     save: true
   },
+  {
+    name: "openapi-good-project",
+    path: path.join(repoRoot, "examples", "openapi-good-project"),
+    save: true
+  },
+  {
+    name: "openapi-bad-project",
+    path: path.join(repoRoot, "examples", "openapi-bad-project"),
+    save: true
+  },
+  {
+    name: "mcp-good-project",
+    path: path.join(repoRoot, "examples", "mcp-good-project"),
+    save: true
+  },
+  {
+    name: "mcp-bad-project",
+    path: path.join(repoRoot, "examples", "mcp-bad-project"),
+    save: true
+  },
   { name: "agentlighthouse", path: repoRoot, save: true },
   ...(await optionalValidationRepos())
 ] satisfies ValidationTarget[];
