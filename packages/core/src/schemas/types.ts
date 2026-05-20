@@ -13,6 +13,8 @@ export const findingCategories = [
   "repo_structure",
   "freshness_and_consistency"
 ] as const;
+export const scanProfiles = ["default", "devtool", "api", "docs", "library", "internal"] as const;
+export const scoreConfidenceLevels = ["high", "medium", "low"] as const;
 export const suggestedFixTypes = [
   "create_file",
   "update_file",
@@ -38,9 +40,12 @@ export const severitySchema = z.enum(severities);
 export const findingCategorySchema = z.enum(findingCategories);
 export const suggestedFixTypeSchema = z.enum(suggestedFixTypes);
 export const projectTypeSchema = z.enum(projectTypes);
+export const scanProfileSchema = z.enum(scanProfiles);
+export const scoreConfidenceLevelSchema = z.enum(scoreConfidenceLevels);
 
 export const findingSchema = z.object({
   id: z.string(),
+  ruleId: z.string(),
   title: z.string(),
   severity: severitySchema,
   category: findingCategorySchema,
@@ -128,6 +133,22 @@ export const scanStatsSchema = z.object({
   findingCount: z.number().nonnegative()
 });
 
+export const coverageSchema = z.object({
+  evaluatedChecks: z.number().nonnegative(),
+  skippedChecks: z.number().nonnegative(),
+  notApplicableChecks: z.number().nonnegative(),
+  notEvaluatedChecks: z.number().nonnegative(),
+  evaluatedCategories: z.array(findingCategorySchema),
+  missingCategories: z.array(findingCategorySchema),
+  coveragePercent: z.number().min(0).max(100)
+});
+
+export const scoreCapSchema = z.object({
+  id: z.string(),
+  maxScore: z.number().min(0).max(100),
+  reason: z.string()
+});
+
 export const scanResultSchema = z.object({
   scanId: z.string(),
   scannedPath: z.string(),
@@ -135,9 +156,15 @@ export const scanResultSchema = z.object({
   completedAt: z.string(),
   durationMs: z.number().nonnegative(),
   agentLighthouseVersion: z.string(),
+  profile: scanProfileSchema,
   projectName: z.string(),
   scoringModelVersion: z.string(),
   score: z.number().min(0).max(100),
+  rawScore: z.number().min(0).max(100),
+  scoreConfidence: scoreConfidenceLevelSchema,
+  scoreConfidenceScore: z.number().min(0).max(100),
+  coverage: coverageSchema,
+  scoringCaps: z.array(scoreCapSchema),
   summary: z.string(),
   subscores: z.array(subscoreSchema),
   findings: z.array(findingSchema),
@@ -164,6 +191,8 @@ export type Severity = z.infer<typeof severitySchema>;
 export type FindingCategory = z.infer<typeof findingCategorySchema>;
 export type SuggestedFixType = z.infer<typeof suggestedFixTypeSchema>;
 export type ProjectType = z.infer<typeof projectTypeSchema>;
+export type ScanProfile = z.infer<typeof scanProfileSchema>;
+export type ScoreConfidenceLevel = z.infer<typeof scoreConfidenceLevelSchema>;
 export type Finding = z.infer<typeof findingSchema>;
 export type ArtifactSignal = z.infer<typeof artifactSignalSchema>;
 export type PackageJsonSignal = z.infer<typeof packageJsonSignalSchema>;
@@ -172,6 +201,8 @@ export type Subscore = z.infer<typeof subscoreSchema>;
 export type DetectedProject = z.infer<typeof detectedProjectSchema>;
 export type DetectedArtifact = z.infer<typeof detectedArtifactSchema>;
 export type ScanStats = z.infer<typeof scanStatsSchema>;
+export type Coverage = z.infer<typeof coverageSchema>;
+export type ScoreCap = z.infer<typeof scoreCapSchema>;
 export type ScanResult = z.infer<typeof scanResultSchema>;
 export type GeneratedArtifact = z.infer<typeof generatedArtifactSchema>;
 
@@ -179,6 +210,7 @@ export interface ScanOptions {
   include?: string[];
   exclude?: string[];
   maxFileSizeBytes?: number;
+  profile?: ScanProfile;
 }
 
 export interface SourceConnector {

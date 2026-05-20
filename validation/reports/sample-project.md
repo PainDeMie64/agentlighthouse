@@ -1,8 +1,11 @@
 # AgentLighthouse Report: sample-widget-api
 
-Score: **23/100**
+Score: **19/100**
 
 Agent-readiness needs focused work before agents can reliably use this project.
+
+Confidence: **Medium** (64/100)  
+Coverage: **92%**
 
 ## Project Detection
 
@@ -15,11 +18,27 @@ Agent-readiness needs focused work before agents can reliably use this project.
 ## Subscores
 
 - Agent Instructions: 70/100
-- Documentation: 95/100
+- Documentation: 91/100
 - API & Tooling: 75/100
 - Examples & Tasks: 95/100
 - Security & Privacy: 90/100
 - Freshness & Consistency: 98/100
+
+## Coverage
+
+- Evaluated checks: 23
+- Skipped checks: 0
+- Not applicable checks: 2
+- Not evaluated checks: 2
+- Evaluated categories: agent_instructions, documentation, api_schema, setup_and_tests, security_and_privacy, task_benchmarks, freshness_and_consistency
+- Missing categories: examples
+
+## Scoring Caps
+
+- cap.no-agent-instructions: max 80. No agent instruction artifact exists.
+- cap.setup-or-tests-not-verifiable: max 85. Setup or test commands are not verifiable from project scripts.
+- cap.no-task-benchmarks: max 90. No realistic agent task benchmark file was found.
+- cap.shallow-key-artifacts: max 95. One or more key agent-readiness artifacts are shallow or partial.
 
 ## Top Findings
 
@@ -27,7 +46,7 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - **medium**: Missing CLAUDE.md (CLAUDE.md)
 - **medium**: README.md exists, but does not include clear test command (README.md)
 - **medium**: README.md exists, but does not include architecture or repo map (README.md)
-- **medium**: Missing llms.txt (llms.txt)
+- **low**: README has installation guidance but no verification step (README.md)
 
 ## Recommended Actions
 
@@ -51,12 +70,12 @@ Agent-readiness needs focused work before agents can reliably use this project.
 
 ## Scan Metadata
 
-- Scan ID: `scan_0ee6b9e6`
+- Scan ID: `scan_d4c62bf4`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T18:51:31.735Z
-- Completed: 2026-05-20T18:51:31.739Z
-- Duration: 4ms
+- Started: 2026-05-20T19:08:58.661Z
+- Completed: 2026-05-20T19:08:58.668Z
+- Duration: 7ms
 - Files scanned: 4
 - Text files read: 4
 - Ignored paths observed: 0
@@ -174,6 +193,22 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - Evidence: No secret/privacy guidance was detected in AGENTS.md.
 
 ### Low
+
+#### README has installation guidance but no verification step
+
+- Severity: low
+- Category: documentation
+- Affected file: README.md
+- Recommendation: Add a short verification step such as running tests, typecheck, build, or a health command.
+- Evidence: README does not show an obvious test, build, healthcheck, or smoke-test step after installation.
+
+#### README lacks troubleshooting guidance
+
+- Severity: low
+- Category: documentation
+- Affected file: README.md
+- Recommendation: Add a short troubleshooting section with common setup and test failure fixes.
+- Evidence: No troubleshooting, debug, FAQ, or common-issue section was detected.
 
 #### Docs contain TODO/deprecated-looking terms without migration guidance
 

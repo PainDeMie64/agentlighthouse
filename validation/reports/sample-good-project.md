@@ -1,8 +1,11 @@
 # AgentLighthouse Report: sample-good-project
 
-Score: **100/100**
+Score: **95/100**
 
 Strong agent-readiness with 0 high-priority issue(s) remaining.
+
+Confidence: **Medium** (72/100)  
+Coverage: **73%**
 
 ## Project Detection
 
@@ -14,16 +17,30 @@ Strong agent-readiness with 0 high-priority issue(s) remaining.
 
 ## Subscores
 
-- Agent Instructions: 100/100
-- Documentation: 100/100
+- Agent Instructions: 98/100
+- Documentation: 98/100
 - API & Tooling: 100/100
 - Examples & Tasks: 100/100
 - Security & Privacy: 100/100
 - Freshness & Consistency: 100/100
 
+## Coverage
+
+- Evaluated checks: 8
+- Skipped checks: 0
+- Not applicable checks: 2
+- Not evaluated checks: 3
+- Evaluated categories: agent_instructions, documentation, api_schema, setup_and_tests, security_and_privacy, task_benchmarks
+- Missing categories: examples, freshness_and_consistency
+
+## Scoring Caps
+
+- cap.shallow-key-artifacts: max 95. One or more key agent-readiness artifacts are shallow or partial.
+
 ## Top Findings
 
-No non-informational findings.
+- **low**: AGENTS.md has too few fenced command examples (AGENTS.md)
+- **low**: README lacks troubleshooting guidance (README.md)
 
 ## Recommended Actions
 
@@ -43,12 +60,12 @@ No prioritized actions.
 
 ## Scan Metadata
 
-- Scan ID: `scan_3303de69`
+- Scan ID: `scan_f8e351cc`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T18:51:31.831Z
-- Completed: 2026-05-20T18:51:31.834Z
-- Duration: 3ms
+- Started: 2026-05-20T19:08:58.768Z
+- Completed: 2026-05-20T19:08:58.772Z
+- Duration: 4ms
 - Files scanned: 13
 - Text files read: 12
 - Ignored paths observed: 0
@@ -56,6 +73,24 @@ No prioritized actions.
 - Errors: 0
 
 ## Findings
+
+### Low
+
+#### AGENTS.md has too few fenced command examples
+
+- Severity: low
+- Category: agent_instructions
+- Affected file: AGENTS.md
+- Recommendation: Add fenced command examples for install, test, lint/typecheck, and build workflows.
+- Evidence: Detected 0 fenced shell command block(s).
+
+#### README lacks troubleshooting guidance
+
+- Severity: low
+- Category: documentation
+- Affected file: README.md
+- Recommendation: Add a short troubleshooting section with common setup and test failure fixes.
+- Evidence: No troubleshooting, debug, FAQ, or common-issue section was detected.
 
 ### Info
 

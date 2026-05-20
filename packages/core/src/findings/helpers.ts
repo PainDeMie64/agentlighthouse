@@ -2,6 +2,7 @@ import type { Finding, FindingCategory, Severity, SuggestedFixType } from "../sc
 
 export function finding(input: {
   id: string;
+  ruleId?: string;
   title: string;
   severity: Severity;
   category: FindingCategory;
@@ -11,7 +12,10 @@ export function finding(input: {
   affectedFile?: string;
   suggestedFixType: SuggestedFixType;
 }): Finding {
-  return input;
+  return {
+    ...input,
+    ruleId: input.ruleId ?? input.id
+  };
 }
 
 export function textIncludesAny(text: string | undefined, needles: readonly string[]): boolean {

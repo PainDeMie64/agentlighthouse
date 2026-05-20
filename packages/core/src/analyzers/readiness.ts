@@ -1,18 +1,20 @@
-import type { Analyzer, Finding, ProjectSignals } from "../schemas/types.js";
+import type { Analyzer, Finding, ProjectSignals, ScanProfile } from "../schemas/types.js";
 import { detectProject } from "../detection/project.js";
 import { finding, hasUsefulMarkdownLinks, textIncludesAny } from "../findings/helpers.js";
 
 export class ReadinessAnalyzer implements Analyzer {
   readonly id = "readiness-analyzer";
 
+  constructor(private readonly profile: ScanProfile = "default") {}
+
   analyze(signals: ProjectSignals): Finding[] {
     return [
       ...agentInstructionFindings(signals),
-      ...artifactQualityFindings(signals),
+      ...artifactQualityFindings(signals, this.profile),
       ...llmsFindings(signals),
       ...documentationFindings(signals),
       ...setupFindings(signals),
-      ...apiFindings(signals),
+      ...apiFindings(signals, this.profile),
       ...mcpFindings(signals),
       ...benchmarkFindings(signals),
       ...securityFindings(signals),
@@ -391,11 +393,11 @@ function setupFindings(signals: ProjectSignals): Finding[] {
   return findings;
 }
 
-function apiFindings(signals: ProjectSignals): Finding[] {
+function apiFindings(signals: ProjectSignals, profile: ScanProfile): Finding[] {
   const detected = detectProject(signals);
   const relevantOpenApiFiles = signals.openApiFiles.filter((file) => !file.startsWith("examples/"));
   if (relevantOpenApiFiles.length === 0) {
-    const severity = detected.type === "openapi_project" ? "high" : "info";
+    const severity = detected.type === "openapi_project" || profile === "api" ? "high" : "info";
     return [
       finding({
         id: "api.openapi-not-detected",
@@ -522,7 +524,7 @@ function mcpFindings(signals: ProjectSignals): Finding[] {
   return findings;
 }
 
-function artifactQualityFindings(signals: ProjectSignals): Finding[] {
+function artifactQualityFindings(signals: ProjectSignals, profile: ScanProfile): Finding[] {
   const findings: Finding[] = [];
   const checks = [
     {
@@ -611,6 +613,153 @@ function artifactQualityFindings(signals: ProjectSignals): Finding[] {
         );
       }
     }
+  }
+
+  findings.push(...strongSignalFindings(signals, profile));
+
+  return findings;
+}
+
+function strongSignalFindings(signals: ProjectSignals, profile: ScanProfile): Finding[] {
+  const findings: Finding[] = [];
+  const agents = signals.textByPath["AGENTS.md"];
+  const readme = signals.textByPath["README.md"];
+  const llms = signals.textByPath["llms.txt"];
+  const benchmarkContent = signals.benchmarkFiles
+    .map((file) => signals.textByPath[file] ?? "")
+    .join("\n");
+
+  if (agents && fencedCommandCount(agents) < 3) {
+    findings.push(
+      finding({
+        id: "artifact-quality.agents-missing-command-blocks",
+        title: "AGENTS.md has too few fenced command examples",
+        severity: "low",
+        category: "agent_instructions",
+        description:
+          "Agent instructions are easier to execute when setup, test, and build commands are shown as fenced command blocks.",
+        evidence: [`Detected ${fencedCommandCount(agents)} fenced shell command block(s).`],
+        recommendation:
+          "Add fenced command examples for install, test, lint/typecheck, and build workflows.",
+        affectedFile: "AGENTS.md",
+        suggestedFixType: "update_file"
+      })
+    );
+  }
+
+  if (readme && !hasVerificationStep(readme)) {
+    findings.push(
+      finding({
+        id: "artifact-quality.readme-missing-verification-step",
+        title: "README has installation guidance but no verification step",
+        severity: "low",
+        category: "documentation",
+        description: "Agents need a quick command to verify the project works after installation.",
+        evidence: [
+          "README does not show an obvious test, build, healthcheck, or smoke-test step after installation."
+        ],
+        recommendation:
+          "Add a short verification step such as running tests, typecheck, build, or a health command.",
+        affectedFile: "README.md",
+        suggestedFixType: "add_section"
+      })
+    );
+  }
+
+  if (readme && signals.packageJson && !commandsMatchScripts(readme, signals.packageJson.scripts)) {
+    findings.push(
+      finding({
+        id: "artifact-quality.readme-commands-not-grounded-in-scripts",
+        title: "README commands are not clearly grounded in package.json scripts",
+        severity: "low",
+        category: "freshness_and_consistency",
+        description:
+          "Commands are more trustworthy when README examples match executable project scripts.",
+        evidence: [
+          "No fenced README command references a package.json script such as test, lint, typecheck, dev, or build."
+        ],
+        recommendation: "Show package-manager commands that map directly to package.json scripts.",
+        affectedFile: "README.md",
+        suggestedFixType: "update_file"
+      })
+    );
+  }
+
+  if (llms && findLocalReferences(llms).length < 4) {
+    findings.push(
+      finding({
+        id: "artifact-quality.llms-too-few-project-links",
+        title: "llms.txt links to too few concrete project files",
+        severity: "low",
+        category: "agent_instructions",
+        description:
+          "A useful llms.txt should route agents to README, architecture, development, examples, and task workflows.",
+        evidence: [`Detected ${findLocalReferences(llms).length} local link(s).`],
+        recommendation:
+          "Add links to concrete docs, source entry points, examples, and benchmark tasks.",
+        affectedFile: "llms.txt",
+        suggestedFixType: "update_file"
+      })
+    );
+  }
+
+  if (benchmarkContent && !/success_criteria:\s*\n\s*-/i.test(benchmarkContent)) {
+    findings.push(
+      finding({
+        id: "artifact-quality.benchmarks-not-verifiable",
+        title: "Benchmark tasks are not verifiable",
+        severity: "medium",
+        category: "task_benchmarks",
+        description:
+          "Benchmark tasks need explicit success criteria so agent completion can be evaluated.",
+        evidence: ["No success_criteria list was detected."],
+        recommendation: "Add success criteria to each benchmark task.",
+        affectedFile: signals.benchmarkFiles[0],
+        suggestedFixType: "update_file"
+      })
+    );
+  }
+
+  if (
+    (profile === "devtool" || profile === "api") &&
+    readme &&
+    !/troubleshoot|debug|common issue|faq/i.test(readme)
+  ) {
+    findings.push(
+      finding({
+        id: "artifact-quality.readme-missing-troubleshooting",
+        title: "README lacks troubleshooting guidance",
+        severity: "low",
+        category: "documentation",
+        description:
+          "Developer-tool and API projects benefit from troubleshooting notes because agents often need to recover from local setup failures.",
+        evidence: ["No troubleshooting, debug, FAQ, or common-issue section was detected."],
+        recommendation:
+          "Add a short troubleshooting section with common setup and test failure fixes.",
+        affectedFile: "README.md",
+        suggestedFixType: "add_section"
+      })
+    );
+  }
+
+  if (agents && !/owner|maintain|review|approval|responsible/i.test(agents)) {
+    findings.push(
+      finding({
+        id: "artifact-quality.agents-missing-ownership-notes",
+        title: "AGENTS.md lacks ownership or maintenance notes",
+        severity: "low",
+        category: "agent_instructions",
+        description:
+          "Agents need to know when to preserve ownership boundaries, ask for review, or avoid changing maintained areas.",
+        evidence: [
+          "No ownership, maintainer, review, approval, or responsibility language was detected."
+        ],
+        recommendation:
+          "Add maintenance and ownership notes for sensitive modules or review expectations.",
+        affectedFile: "AGENTS.md",
+        suggestedFixType: "add_section"
+      })
+    );
   }
 
   return findings;
@@ -747,12 +896,13 @@ function freshnessFindings(signals: ProjectSignals): Finding[] {
     .filter(([file]) => file.endsWith(".md") || file.endsWith(".txt"))
     .flatMap(([file, content]) => {
       const lines = content.split(/\r?\n/);
-      return lines.flatMap((line, index) =>
-        /\b(TODO|coming soon|legacy|deprecated|old)\b/i.test(line) &&
-        !/migration|replace|instead|new/i.test(line)
+      return lines.flatMap((line, index) => {
+        const proseLine = stripInlineCode(line);
+        return /\b(TODO|coming soon|legacy|deprecated|old)\b/i.test(proseLine) &&
+          !/migration|replace|instead|new/i.test(proseLine)
           ? [`${file}:${index + 1}: ${line.trim().slice(0, 120)}`]
-          : []
-      );
+          : [];
+      });
     });
   if (staleMatches.length === 0) {
     return [];
@@ -769,6 +919,10 @@ function freshnessFindings(signals: ProjectSignals): Finding[] {
       suggestedFixType: "update_file"
     })
   ];
+}
+
+function stripInlineCode(value: string): string {
+  return value.replace(/`[^`]*`/g, "");
 }
 
 function findLocalReferences(text: string | undefined): string[] {
@@ -791,4 +945,30 @@ function slug(value: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function fencedCommandCount(text: string): number {
+  return [...text.matchAll(/```(?:bash|sh|shell|zsh)?\n([\s\S]*?)```/gi)].filter((match) =>
+    /\b(pnpm|npm|yarn|bun|pip|poetry|cargo|go)\s+[a-z0-9:_-]+/i.test(match[1] ?? "")
+  ).length;
+}
+
+function hasVerificationStep(text: string): boolean {
+  return (
+    /\b(pnpm|npm|yarn|bun)\s+(test|build|typecheck|lint)\b/i.test(text) ||
+    /\b(pytest|cargo test|go test)\b/i.test(text) ||
+    /\bverify|verification|smoke test|healthcheck\b/i.test(text)
+  );
+}
+
+function commandsMatchScripts(text: string, scripts: Record<string, string>): boolean {
+  const scriptNames = Object.keys(scripts);
+  if (scriptNames.length === 0) return false;
+  return scriptNames.some((script) =>
+    new RegExp(`\\b(pnpm|npm run|yarn|bun)\\s+${escapeRegex(script)}\\b`, "i").test(text)
+  );
+}
+
+function escapeRegex(value: string): string {
+  return value.replace(/[|\\{}()[\]^$+?.*]/g, "\\$&");
 }

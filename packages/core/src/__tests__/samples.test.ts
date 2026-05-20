@@ -10,6 +10,7 @@ describe("sample project scoring", () => {
     const bad = await scanProject(path.join(repoRoot, "examples/sample-bad-project"));
 
     expect(good.score).toBeGreaterThanOrEqual(75);
+    expect(good.score).toBeLessThan(100);
     expect(bad.score).toBeLessThanOrEqual(55);
     expect(good.score - bad.score).toBeGreaterThanOrEqual(25);
   });

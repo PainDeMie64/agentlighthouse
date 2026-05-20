@@ -19,6 +19,16 @@ export function ProjectSummary({ result }: { result: ScanResult }) {
           <span>Package manager</span>
           <span className="font-semibold text-ink">{result.detectedProject.packageManager}</span>
         </div>
+        <div className="flex justify-between gap-4">
+          <span>Score confidence</span>
+          <span className="font-semibold text-ink">
+            {result.scoreConfidence} ({result.scoreConfidenceScore}/100)
+          </span>
+        </div>
+        <div className="flex justify-between gap-4">
+          <span>Coverage</span>
+          <span className="font-semibold text-ink">{result.coverage.coveragePercent}%</span>
+        </div>
         <div>
           <span>Evidence</span>
           <p className="mt-1 leading-6 text-ink/70">{result.detectedProject.evidence.join(" ")}</p>

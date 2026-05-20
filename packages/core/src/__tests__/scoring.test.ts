@@ -58,6 +58,7 @@ describe("TransparentScoringModel", () => {
 function baseFinding(severity: Finding["severity"]): Finding {
   return {
     id: `finding.${severity}`,
+    ruleId: `finding.${severity}`,
     title: "Finding",
     severity,
     category: "agent_instructions",

@@ -6,6 +6,7 @@ coverage/
 .turbo/
 .vercel/
 .tmp/
+validation/reports/external/
 vendor/
 *.log
 .env

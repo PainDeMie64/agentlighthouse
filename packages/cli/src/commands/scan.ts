@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { renderCliReport, renderMarkdownReport, scanProject } from "@agentlighthouse/core";
+import type { ScanProfile } from "@agentlighthouse/core";
 import { resolveFromInvocationCwd } from "../pathing.js";
 
 export type ScanFormat = "text" | "json" | "markdown";
@@ -8,6 +9,7 @@ export type ScanFormat = "text" | "json" | "markdown";
 export interface ScanCommandOptions {
   json?: boolean;
   format?: ScanFormat;
+  profile?: ScanProfile;
   output?: string;
   failUnder?: string;
   include?: string[];
@@ -20,15 +22,22 @@ export async function runScanCommand(
   options: ScanCommandOptions
 ): Promise<void> {
   const scanPath = resolveFromInvocationCwd(targetPath);
-  const result = await scanProject(scanPath, {
-    include: options.include ?? [],
-    exclude: options.exclude ?? []
-  });
-  const failUnder = options.failUnder ? Number.parseInt(options.failUnder, 10) : undefined;
   const format = options.json ? "json" : (options.format ?? "text");
   if (!["text", "json", "markdown"].includes(format)) {
     throw new Error(`Unsupported format "${format}". Use text, json, or markdown.`);
   }
+  if (
+    options.profile &&
+    !["default", "devtool", "api", "docs", "library", "internal"].includes(options.profile)
+  ) {
+    throw new Error(`Unsupported profile "${options.profile}".`);
+  }
+  const result = await scanProject(scanPath, {
+    include: options.include ?? [],
+    exclude: options.exclude ?? [],
+    profile: options.profile
+  });
+  const failUnder = options.failUnder ? Number.parseInt(options.failUnder, 10) : undefined;
   const rendered = renderResult(result, format, options.color ?? true);
   if (options.output) {
     const outputPath = resolveFromInvocationCwd(options.output);

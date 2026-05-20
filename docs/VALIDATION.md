@@ -60,6 +60,13 @@ Reports should not contain secrets or sensitive local paths. Sanitize before com
 - `validation/reports/agentlighthouse.json`
 - `validation/reports/agentlighthouse.md`
 
+When repositories are present under `.tmp/validation-repos/`, the same command also writes sanitized external reports under:
+
+- `validation/reports/external/external-<repo>.json`
+- `validation/reports/external/external-<repo>.md`
+
+External reports are ignored by git by default because JSON reports can include third-party text snippets used as evidence. Review them locally, then commit only summarized calibration notes unless there is a clear reason to preserve a specific report.
+
 ## Useful Findings
 
 Useful findings have evidence and point to an agent-facing improvement: missing setup commands, stale docs links, absent benchmark tasks, missing secret-handling rules, unclear API examples, or inconsistent package scripts.

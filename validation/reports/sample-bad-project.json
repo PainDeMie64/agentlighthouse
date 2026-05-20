@@ -1,12 +1,13 @@
 {
-  "scanId": "scan_da5afe8f",
+  "scanId": "scan_a03a745e",
   "scannedPath": "<repo>/examples/sample-bad-project",
-  "startedAt": "2026-05-20T18:51:31.855Z",
-  "completedAt": "2026-05-20T18:51:31.856Z",
+  "startedAt": "2026-05-20T19:08:58.791Z",
+  "completedAt": "2026-05-20T19:08:58.792Z",
   "durationMs": 1,
   "agentLighthouseVersion": "0.1.0",
+  "profile": "library",
   "scoringModelVersion": "0.1.0",
-  "score": 3,
+  "score": 0,
   "summary": "Agent-readiness needs focused work before agents can reliably use this project.",
   "subscores": [
     {
@@ -18,8 +19,8 @@
     {
       "id": "documentation",
       "label": "Documentation",
-      "score": 80,
-      "findingsCount": 4
+      "score": 78,
+      "findingsCount": 5
     },
     {
       "id": "api_and_tooling",
@@ -42,8 +43,8 @@
     {
       "id": "freshness_and_consistency",
       "label": "Freshness & Consistency",
-      "score": 98,
-      "findingsCount": 1
+      "score": 96,
+      "findingsCount": 2
     }
   ],
   "recommendations": [
@@ -52,6 +53,47 @@
     "Improve README and docs so agents can find quickstart, install, and examples.",
     "Add task benchmarks for the top developer workflows agents should complete.",
     "Document secret-handling and privacy rules for agent workflows."
+  ],
+  "rawScore": 0,
+  "scoreConfidence": "low",
+  "scoreConfidenceScore": 58,
+  "coverage": {
+    "evaluatedChecks": 25,
+    "skippedChecks": 0,
+    "notApplicableChecks": 3,
+    "notEvaluatedChecks": 2,
+    "evaluatedCategories": [
+      "agent_instructions",
+      "documentation",
+      "setup_and_tests",
+      "security_and_privacy",
+      "task_benchmarks",
+      "freshness_and_consistency"
+    ],
+    "missingCategories": ["examples"],
+    "coveragePercent": 93
+  },
+  "scoringCaps": [
+    {
+      "id": "cap.no-agent-instructions",
+      "maxScore": 80,
+      "reason": "No agent instruction artifact exists."
+    },
+    {
+      "id": "cap.setup-or-tests-not-verifiable",
+      "maxScore": 85,
+      "reason": "Setup or test commands are not verifiable from project scripts."
+    },
+    {
+      "id": "cap.no-task-benchmarks",
+      "maxScore": 90,
+      "reason": "No realistic agent task benchmark file was found."
+    },
+    {
+      "id": "cap.shallow-key-artifacts",
+      "maxScore": 95,
+      "reason": "One or more key agent-readiness artifacts are shallow or partial."
+    }
   ],
   "projectName": "sample-bad-project",
   "findings": [
@@ -64,7 +106,8 @@
       "evidence": ["AGENTS.md was not found at the repository root."],
       "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
       "affectedFile": "AGENTS.md",
-      "suggestedFixType": "create_file"
+      "suggestedFixType": "create_file",
+      "ruleId": "agent-instructions.missing-agents-md"
     },
     {
       "id": "agent-instructions.missing-claude-md",
@@ -75,7 +118,8 @@
       "evidence": ["CLAUDE.md was not found at the repository root."],
       "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
       "affectedFile": "CLAUDE.md",
-      "suggestedFixType": "create_file"
+      "suggestedFixType": "create_file",
+      "ruleId": "agent-instructions.missing-claude-md"
     },
     {
       "id": "artifact-quality.READMEmd.missing-clear-test-command",
@@ -88,7 +132,8 @@
       ],
       "recommendation": "Add clear test command to README.md.",
       "affectedFile": "README.md",
-      "suggestedFixType": "add_section"
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command"
     },
     {
       "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
@@ -101,7 +146,36 @@
       ],
       "recommendation": "Add architecture or repo map to README.md.",
       "affectedFile": "README.md",
-      "suggestedFixType": "add_section"
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map"
+    },
+    {
+      "id": "artifact-quality.readme-missing-verification-step",
+      "title": "README has installation guidance but no verification step",
+      "severity": "low",
+      "category": "documentation",
+      "description": "Agents need a quick command to verify the project works after installation.",
+      "evidence": [
+        "README does not show an obvious test, build, healthcheck, or smoke-test step after installation."
+      ],
+      "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section",
+      "ruleId": "artifact-quality.readme-missing-verification-step"
+    },
+    {
+      "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
+      "title": "README commands are not clearly grounded in package.json scripts",
+      "severity": "low",
+      "category": "freshness_and_consistency",
+      "description": "Commands are more trustworthy when README examples match executable project scripts.",
+      "evidence": [
+        "No fenced README command references a package.json script such as test, lint, typecheck, dev, or build."
+      ],
+      "recommendation": "Show package-manager commands that map directly to package.json scripts.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "update_file",
+      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts"
     },
     {
       "id": "llms.missing",
@@ -112,7 +186,8 @@
       "evidence": ["llms.txt was not found at the repository root."],
       "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
       "affectedFile": "llms.txt",
-      "suggestedFixType": "create_file"
+      "suggestedFixType": "create_file",
+      "ruleId": "llms.missing"
     },
     {
       "id": "docs.readme-no-quickstart",
@@ -123,7 +198,8 @@
       "evidence": ["README.md does not contain any of: quickstart, quick start, getting started."],
       "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
       "affectedFile": "README.md",
-      "suggestedFixType": "add_section"
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-quickstart"
     },
     {
       "id": "docs.readme-no-install",
@@ -134,7 +210,8 @@
       "evidence": ["README.md does not contain any of: install, pnpm, npm, yarn, pip."],
       "recommendation": "Add installation commands and prerequisites.",
       "affectedFile": "README.md",
-      "suggestedFixType": "add_section"
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-install"
     },
     {
       "id": "docs.readme-no-examples",
@@ -145,7 +222,8 @@
       "evidence": ["README.md does not contain any of: example, usage, demo."],
       "recommendation": "Add concrete examples showing expected usage and output.",
       "affectedFile": "README.md",
-      "suggestedFixType": "add_section"
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.readme-no-examples"
     },
     {
       "id": "docs.no-markdown",
@@ -156,7 +234,8 @@
       "evidence": ["docs/ exists but no .md or .mdx files were scanned."],
       "recommendation": "Add Markdown documentation or ensure docs source is not ignored.",
       "affectedFile": "docs/",
-      "suggestedFixType": "add_section"
+      "suggestedFixType": "add_section",
+      "ruleId": "docs.no-markdown"
     },
     {
       "id": "setup.package-json-no-scripts",
@@ -167,7 +246,8 @@
       "evidence": ["package.json scripts object is empty."],
       "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
       "affectedFile": "package.json",
-      "suggestedFixType": "add_script"
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.package-json-no-scripts"
     },
     {
       "id": "setup.missing-test-script",
@@ -178,7 +258,8 @@
       "evidence": ["package.json scripts does not include \"test\"."],
       "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
-      "suggestedFixType": "add_script"
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-test-script"
     },
     {
       "id": "setup.missing-lint-script",
@@ -189,7 +270,8 @@
       "evidence": ["package.json scripts does not include \"lint\"."],
       "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
-      "suggestedFixType": "add_script"
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-lint-script"
     },
     {
       "id": "setup.missing-typecheck-script",
@@ -200,7 +282,8 @@
       "evidence": ["package.json scripts does not include \"typecheck\"."],
       "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
-      "suggestedFixType": "add_script"
+      "suggestedFixType": "add_script",
+      "ruleId": "setup.missing-typecheck-script"
     },
     {
       "id": "api.openapi-not-detected",
@@ -210,7 +293,8 @@
       "description": "No OpenAPI schema was found. This may be fine for projects without an HTTP API.",
       "evidence": ["No openapi.* or swagger.* file was scanned."],
       "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
-      "suggestedFixType": "review_manually"
+      "suggestedFixType": "review_manually",
+      "ruleId": "api.openapi-not-detected"
     },
     {
       "id": "mcp.not-evaluated",
@@ -220,7 +304,8 @@
       "description": "No MCP server/config/package signal was detected.",
       "evidence": ["No file or package name matching MCP was scanned."],
       "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
-      "suggestedFixType": "review_manually"
+      "suggestedFixType": "review_manually",
+      "ruleId": "mcp.not-evaluated"
     },
     {
       "id": "benchmarks.missing-agent-task-file",
@@ -231,7 +316,8 @@
       "evidence": ["No benchmarks/agent-tasks.yaml or .agentlighthouse/tasks.yaml file was found."],
       "recommendation": "Add a benchmark file with tasks such as install, run tests, add a small feature, and find core modules.",
       "affectedFile": "benchmarks/agent-tasks.yaml",
-      "suggestedFixType": "create_file"
+      "suggestedFixType": "create_file",
+      "ruleId": "benchmarks.missing-agent-task-file"
     },
     {
       "id": "security.missing-agentlighthouseignore",
@@ -242,7 +328,8 @@
       "evidence": [".agentlighthouseignore was not found at the repository root."],
       "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
       "affectedFile": ".agentlighthouseignore",
-      "suggestedFixType": "create_file"
+      "suggestedFixType": "create_file",
+      "ruleId": "security.missing-agentlighthouseignore"
     },
     {
       "id": "security.agent-secret-guidance-missing",
@@ -253,7 +340,8 @@
       "evidence": ["No secret/privacy guidance was detected in AGENTS.md."],
       "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
       "affectedFile": "AGENTS.md",
-      "suggestedFixType": "add_section"
+      "suggestedFixType": "add_section",
+      "ruleId": "security.agent-secret-guidance-missing"
     },
     {
       "id": "freshness.deprecated-or-todo-terms",
@@ -263,7 +351,8 @@
       "description": "Stale markers can confuse agents unless they include replacement guidance.",
       "evidence": ["README.md:3: Coming soon.", "README.md:5: TODO old setup."],
       "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
-      "suggestedFixType": "update_file"
+      "suggestedFixType": "update_file",
+      "ruleId": "freshness.deprecated-or-todo-terms"
     }
   ],
   "detectedProject": {
@@ -345,13 +434,13 @@
     "docsMarkdownFileCount": 0,
     "openApiFileCount": 0,
     "benchmarkFileCount": 0,
-    "findingCount": 19
+    "findingCount": 21
   },
   "ignoredPaths": [],
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-bad-project",
-  "scannedAt": "2026-05-20T18:51:31.856Z",
+  "scannedAt": "2026-05-20T19:08:58.792Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

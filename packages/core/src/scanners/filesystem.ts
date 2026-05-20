@@ -246,7 +246,8 @@ function isConfigFile(file: string): boolean {
     "eslint.config.mjs",
     "next.config.ts",
     "vite.config.ts",
-    "vitest.config.ts"
+    "vitest.config.ts",
+    "agentlighthouse.config.json"
   ].includes(file);
 }
 

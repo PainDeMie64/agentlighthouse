@@ -51,6 +51,7 @@ The dashboard runs from `apps/web` through the root `pnpm dev` script.
 agentlighthouse scan <path>
 agentlighthouse scan <path> --json --output report.json
 agentlighthouse scan <path> --format markdown --output report.md
+agentlighthouse scan <path> --profile devtool
 agentlighthouse scan <path> --fail-under 70
 agentlighthouse init <path> --dry-run
 agentlighthouse init <path> --force
@@ -82,6 +83,18 @@ AgentLighthouse can run as a score gate in GitHub Actions:
 ```
 
 The command writes the report before returning a non-zero exit code when the score is below the threshold.
+
+## Configuration
+
+Add `agentlighthouse.config.json` to set a default profile:
+
+```json
+{
+  "profile": "devtool"
+}
+```
+
+Supported profiles are `default`, `devtool`, `api`, `docs`, `library`, and `internal`.
 
 ## Repository Structure
 

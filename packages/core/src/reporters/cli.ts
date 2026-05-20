@@ -5,6 +5,10 @@ const severityOrder: Finding["severity"][] = ["critical", "high", "medium", "low
 export function renderCliReport(result: ScanResult, color = false): string {
   const lines: string[] = [];
   lines.push(`AgentLighthouse Score: ${result.score}/100`);
+  lines.push(
+    `Confidence: ${titleCase(result.scoreConfidence)} (${result.scoreConfidenceScore}/100)`
+  );
+  lines.push(`Coverage: ${result.coverage.coveragePercent}%`);
   lines.push(`Project: ${result.detectedProject.name} (${result.detectedProject.type})`);
   lines.push("");
   lines.push("Subscores:");
@@ -82,6 +86,9 @@ Score: **${result.score}/100**
 
 ${result.summary}
 
+Confidence: **${titleCase(result.scoreConfidence)}** (${result.scoreConfidenceScore}/100)  
+Coverage: **${result.coverage.coveragePercent}%**
+
 ## Project Detection
 
 - Type: \`${result.detectedProject.type}\`
@@ -93,6 +100,19 @@ ${result.summary}
 ## Subscores
 
 ${result.subscores.map((subscore) => `- ${subscore.label}: ${subscore.score}/100`).join("\n")}
+
+## Coverage
+
+- Evaluated checks: ${result.coverage.evaluatedChecks}
+- Skipped checks: ${result.coverage.skippedChecks}
+- Not applicable checks: ${result.coverage.notApplicableChecks}
+- Not evaluated checks: ${result.coverage.notEvaluatedChecks}
+- Evaluated categories: ${result.coverage.evaluatedCategories.join(", ") || "none"}
+- Missing categories: ${result.coverage.missingCategories.join(", ") || "none"}
+
+## Scoring Caps
+
+${result.scoringCaps.map((cap) => `- ${cap.id}: max ${cap.maxScore}. ${cap.reason}`).join("\n") || "No scoring caps applied."}
 
 ## Top Findings
 

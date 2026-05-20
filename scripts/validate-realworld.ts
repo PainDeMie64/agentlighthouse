@@ -6,6 +6,13 @@ import { format } from "prettier";
 const repoRoot = process.cwd();
 const reportDir = path.join(repoRoot, "validation", "reports");
 
+type ValidationTarget = {
+  name: string;
+  path: string;
+  save: boolean;
+  subdir?: string;
+};
+
 const targets = [
   { name: "sample-project", path: path.join(repoRoot, "examples", "sample-project"), save: true },
   {
@@ -20,7 +27,7 @@ const targets = [
   },
   { name: "agentlighthouse", path: repoRoot, save: true },
   ...(await optionalValidationRepos())
-];
+] satisfies ValidationTarget[];
 
 await mkdir(reportDir, { recursive: true });
 
@@ -30,8 +37,10 @@ for (const target of targets) {
     `${target.name}: ${result.score}/100 (${result.findings.length} findings)\n`
   );
   if (target.save) {
+    const targetReportDir = path.join(reportDir, target.subdir ?? "");
+    await mkdir(targetReportDir, { recursive: true });
     await writeFile(
-      path.join(reportDir, `${target.name}.json`),
+      path.join(targetReportDir, `${target.name}.json`),
       await format(JSON.stringify(sanitizeResult(result, repoRoot), null, 2), {
         parser: "json",
         printWidth: 100
@@ -39,7 +48,7 @@ for (const target of targets) {
       "utf8"
     );
     await writeFile(
-      path.join(reportDir, `${target.name}.md`),
+      path.join(targetReportDir, `${target.name}.md`),
       await format(renderMarkdownReport(sanitizeResult(result, repoRoot)), {
         parser: "markdown",
         printWidth: 100
@@ -49,9 +58,7 @@ for (const target of targets) {
   }
 }
 
-async function optionalValidationRepos(): Promise<
-  Array<{ name: string; path: string; save: boolean }>
-> {
+async function optionalValidationRepos(): Promise<ValidationTarget[]> {
   const validationRoot = path.join(repoRoot, ".tmp", "validation-repos");
   try {
     const entries = await readdir(validationRoot, { withFileTypes: true });
@@ -60,7 +67,8 @@ async function optionalValidationRepos(): Promise<
       .map((entry) => ({
         name: `external-${entry.name}`,
         path: path.join(validationRoot, entry.name),
-        save: false
+        save: true,
+        subdir: "external"
       }));
   } catch {
     return [];

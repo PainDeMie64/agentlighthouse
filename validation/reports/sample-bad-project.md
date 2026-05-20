@@ -1,8 +1,11 @@
 # AgentLighthouse Report: sample-bad-project
 
-Score: **3/100**
+Score: **0/100**
 
 Agent-readiness needs focused work before agents can reliably use this project.
+
+Confidence: **Low** (58/100)  
+Coverage: **93%**
 
 ## Project Detection
 
@@ -15,11 +18,27 @@ Agent-readiness needs focused work before agents can reliably use this project.
 ## Subscores
 
 - Agent Instructions: 70/100
-- Documentation: 80/100
+- Documentation: 78/100
 - API & Tooling: 70/100
 - Examples & Tasks: 95/100
 - Security & Privacy: 90/100
-- Freshness & Consistency: 98/100
+- Freshness & Consistency: 96/100
+
+## Coverage
+
+- Evaluated checks: 25
+- Skipped checks: 0
+- Not applicable checks: 3
+- Not evaluated checks: 2
+- Evaluated categories: agent_instructions, documentation, setup_and_tests, security_and_privacy, task_benchmarks, freshness_and_consistency
+- Missing categories: examples
+
+## Scoring Caps
+
+- cap.no-agent-instructions: max 80. No agent instruction artifact exists.
+- cap.setup-or-tests-not-verifiable: max 85. Setup or test commands are not verifiable from project scripts.
+- cap.no-task-benchmarks: max 90. No realistic agent task benchmark file was found.
+- cap.shallow-key-artifacts: max 95. One or more key agent-readiness artifacts are shallow or partial.
 
 ## Top Findings
 
@@ -27,7 +46,7 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - **medium**: Missing CLAUDE.md (CLAUDE.md)
 - **medium**: README.md exists, but does not include clear test command (README.md)
 - **medium**: README.md exists, but does not include architecture or repo map (README.md)
-- **medium**: Missing llms.txt (llms.txt)
+- **low**: README has installation guidance but no verification step (README.md)
 
 ## Recommended Actions
 
@@ -51,11 +70,11 @@ Agent-readiness needs focused work before agents can reliably use this project.
 
 ## Scan Metadata
 
-- Scan ID: `scan_da5afe8f`
+- Scan ID: `scan_a03a745e`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T18:51:31.855Z
-- Completed: 2026-05-20T18:51:31.856Z
+- Started: 2026-05-20T19:08:58.791Z
+- Completed: 2026-05-20T19:08:58.792Z
 - Duration: 1ms
 - Files scanned: 3
 - Text files read: 2
@@ -198,6 +217,22 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - Evidence: No secret/privacy guidance was detected in AGENTS.md.
 
 ### Low
+
+#### README has installation guidance but no verification step
+
+- Severity: low
+- Category: documentation
+- Affected file: README.md
+- Recommendation: Add a short verification step such as running tests, typecheck, build, or a health command.
+- Evidence: README does not show an obvious test, build, healthcheck, or smoke-test step after installation.
+
+#### README commands are not clearly grounded in package.json scripts
+
+- Severity: low
+- Category: freshness_and_consistency
+- Affected file: README.md
+- Recommendation: Show package-manager commands that map directly to package.json scripts.
+- Evidence: No fenced README command references a package.json script such as test, lint, typecheck, dev, or build.
 
 #### Docs contain TODO/deprecated-looking terms without migration guidance
 

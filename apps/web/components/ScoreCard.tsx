@@ -12,6 +12,14 @@ export function ScoreCard({ result }: { result: ScanResult }) {
           <h2 className="mt-2 text-4xl font-semibold tracking-normal text-ink">
             {result.score}/100
           </h2>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold uppercase">
+            <span className="rounded bg-teal-50 px-2 py-1 text-harbor">
+              {result.scoreConfidence} confidence
+            </span>
+            <span className="rounded bg-yellow-50 px-2 py-1 text-yellow-800">
+              {result.coverage.coveragePercent}% coverage
+            </span>
+          </div>
           <p className="mt-3 max-w-md text-sm leading-6 text-ink/70">{result.summary}</p>
         </div>
         <svg

@@ -15,6 +15,7 @@ program
   .argument("[path]", "Project path to scan", ".")
   .option("--json", "Print JSON output")
   .option("--format <format>", "Output format: text, json, or markdown", "text")
+  .option("--profile <profile>", "Scan profile: default, devtool, api, docs, library, or internal")
   .option("--output <file>", "Write report output to a file")
   .option("--fail-under <score>", "Exit with code 1 when score is below the threshold")
   .option("--include <glob...>", "Only include paths containing these patterns")

@@ -1,14 +1,17 @@
 import type { ScanOptions, ScanResult } from "./schemas/types.js";
 import { ReadinessAnalyzer } from "./analyzers/readiness.js";
+import { resolveProfile } from "./config/profile.js";
 import { detectProject, detectedArtifacts } from "./detection/project.js";
 import { StarterArtifactGenerator } from "./generators/artifacts.js";
 import { LocalFilesystemScanner } from "./scanners/filesystem.js";
+import { calibrateScore } from "./scoring/calibration.js";
 import { TransparentScoringModel } from "./scoring/model.js";
 
 export const agentLighthouseVersion = "0.1.0";
 
 export * from "./schemas/types.js";
 export * from "./analyzers/readiness.js";
+export * from "./config/profile.js";
 export * from "./detection/project.js";
 export * from "./generators/artifacts.js";
 export * from "./reporters/cli.js";
@@ -21,14 +24,24 @@ export async function scanProject(
 ): Promise<ScanResult> {
   const startedAt = new Date();
   const scanner = new LocalFilesystemScanner();
-  const analyzer = new ReadinessAnalyzer();
   const scoring = new TransparentScoringModel();
   const warnings: string[] = [];
   const errors: string[] = [];
   let signals = await scanner.scan(projectPath, options);
+  const profile = resolveProfile(signals, options).profile;
+  const analyzer = new ReadinessAnalyzer(profile);
   const detectedProject = detectProject(signals);
   const findings = analyzer.analyze(signals);
   const scored = scoring.score(findings, signals);
+  const artifacts = detectedArtifacts(signals);
+  const calibrated = calibrateScore({
+    rawScore: scored.score,
+    findings,
+    signals,
+    detectedProject,
+    detectedArtifacts: artifacts,
+    profile
+  });
   const completedAt = new Date();
   signals = {
     ...signals,
@@ -42,11 +55,13 @@ export async function scanProject(
     completedAt: completedAt.toISOString(),
     durationMs: completedAt.getTime() - startedAt.getTime(),
     agentLighthouseVersion,
+    profile,
     ...scored,
+    ...calibrated,
     projectName: signals.projectName,
     findings,
     detectedProject,
-    detectedArtifacts: detectedArtifacts(signals),
+    detectedArtifacts: artifacts,
     scanStats: {
       ...signals.scanStats,
       findingCount: findings.length
@@ -84,9 +99,35 @@ export const sampleScanResult: ScanResult = {
   completedAt: "2026-05-20T00:00:00.120Z",
   durationMs: 120,
   agentLighthouseVersion,
+  profile: "devtool",
   projectName: "sample-agent-ready-project",
   scoringModelVersion: "0.1.0",
   score: 72,
+  rawScore: 82,
+  scoreConfidence: "medium",
+  scoreConfidenceScore: 76,
+  coverage: {
+    evaluatedChecks: 12,
+    skippedChecks: 0,
+    notApplicableChecks: 2,
+    notEvaluatedChecks: 3,
+    evaluatedCategories: [
+      "agent_instructions",
+      "documentation",
+      "setup_and_tests",
+      "security_and_privacy",
+      "freshness_and_consistency"
+    ],
+    missingCategories: ["examples", "task_benchmarks"],
+    coveragePercent: 80
+  },
+  scoringCaps: [
+    {
+      id: "cap.no-task-benchmarks",
+      maxScore: 90,
+      reason: "No realistic agent task benchmark file was found."
+    }
+  ],
   summary: "Useful foundation, but 2 high-priority readiness issue(s) should be fixed.",
   subscores: [
     { id: "agent_instructions", label: "Agent Instructions", score: 78, findingsCount: 2 },
@@ -104,6 +145,7 @@ export const sampleScanResult: ScanResult = {
   findings: [
     {
       id: "setup.missing-test-script",
+      ruleId: "setup.missing-test-script",
       title: "No test script in package.json",
       severity: "high",
       category: "setup_and_tests",
@@ -115,6 +157,7 @@ export const sampleScanResult: ScanResult = {
     },
     {
       id: "benchmarks.missing-agent-task-file",
+      ruleId: "benchmarks.missing-agent-task-file",
       title: "Missing agent task benchmark file",
       severity: "medium",
       category: "task_benchmarks",
@@ -126,6 +169,7 @@ export const sampleScanResult: ScanResult = {
     },
     {
       id: "security.agent-secret-guidance-missing",
+      ruleId: "security.agent-secret-guidance-missing",
       title: "Instructions do not tell agents how to handle secrets",
       severity: "medium",
       category: "security_and_privacy",
