@@ -1,9 +1,12 @@
 import { deriveFindingIdentity, stableFingerprint } from "../findings/helpers.js";
+import { normalizeChangedPath } from "../changes/files.js";
 import type {
+  ChangedFile,
   ComparisonFinding,
   ComparisonResult,
   ComparisonScanSnapshot,
   Finding,
+  PrImpact,
   ScanResult,
   Severity
 } from "../schemas/types.js";
@@ -13,7 +16,11 @@ export const comparisonModelVersion = "0.1.0";
 
 const severities: Severity[] = ["critical", "high", "medium", "low", "info"];
 
-export function compareScanResults(baseline: ScanResult, current: ScanResult): ComparisonResult {
+export function compareScanResults(
+  baseline: ScanResult,
+  current: ScanResult,
+  options: { changedFiles?: ChangedFile[] } = {}
+): ComparisonResult {
   const baselineFindings = baseline.findings.map(ensureFindingIdentity);
   const currentFindings = current.findings.map(ensureFindingIdentity);
   const baselineByFingerprint = mapByFingerprint(baselineFindings);
@@ -67,6 +74,16 @@ export function compareScanResults(baseline: ScanResult, current: ScanResult): C
     worsenedFindings.length > 0;
   const improvementDetected =
     scoreDelta > 0 || resolvedFindings.length > 0 || improvedFindings.length > 0;
+  const prImpact =
+    options.changedFiles && options.changedFiles.length > 0
+      ? classifyPrImpact(options.changedFiles, {
+          newFindings,
+          resolvedFindings,
+          unchangedFindings,
+          worsenedFindings,
+          improvedFindings
+        })
+      : undefined;
   const verdict =
     caveats.some((caveat) => caveat.includes("incompatible")) ||
     (baselineFindings.length + currentFindings.length > 0 &&
@@ -100,6 +117,7 @@ export function compareScanResults(baseline: ScanResult, current: ScanResult): C
       worsened: sortFindings(worsenedFindings),
       improved: sortFindings(improvedFindings)
     },
+    ...(prImpact ? { prImpact } : {}),
     summary: {
       verdict,
       regressionDetected,
@@ -113,6 +131,67 @@ export function compareScanResults(baseline: ScanResult, current: ScanResult): C
       agentLighthouseVersion: current.agentLighthouseVersion,
       comparisonModelVersion
     }
+  };
+}
+
+export function classifyPrImpact(
+  changedFiles: ChangedFile[],
+  findings: {
+    newFindings: ComparisonFinding[];
+    resolvedFindings: ComparisonFinding[];
+    unchangedFindings: ComparisonFinding[];
+    worsenedFindings: ComparisonFinding[];
+    improvedFindings: ComparisonFinding[];
+  }
+): PrImpact {
+  const normalizedChangedFiles = changedFiles.map((file) => ({
+    ...file,
+    path: normalizeChangedPath(file.path),
+    ...(file.oldPath ? { oldPath: normalizeChangedPath(file.oldPath) } : {})
+  }));
+  const changedPathSet = new Set(
+    normalizedChangedFiles.flatMap((file) => [file.path, file.oldPath].filter(Boolean) as string[])
+  );
+  const classify = (finding: ComparisonFinding): ComparisonFinding => ({
+    ...finding,
+    prImpactClassification: classifyFinding(finding, changedPathSet)
+  });
+  const newClassified = findings.newFindings.map(classify);
+  const resolvedClassified = findings.resolvedFindings.map(classify);
+  const unchangedClassified = findings.unchangedFindings.map(classify);
+  const changedNew = newClassified.filter(isChangedImpact);
+  const changedResolved = resolvedClassified.filter(isChangedImpact);
+  const changedUnchanged = unchangedClassified.filter(isChangedImpact);
+  const globalNew = newClassified.filter((finding) => finding.prImpactClassification === "global");
+  const globalResolved = resolvedClassified.filter(
+    (finding) => finding.prImpactClassification === "global"
+  );
+  const unknown = [...newClassified, ...resolvedClassified, ...unchangedClassified].filter(
+    (finding) => finding.prImpactClassification === "unknown"
+  );
+  const unrelatedExisting = unchangedClassified.filter(
+    (finding) => finding.prImpactClassification === "unrelated"
+  );
+  const impactedFiles = [...changedNew, ...changedResolved, ...changedUnchanged]
+    .map((finding) => normalizeFindingFile(finding))
+    .filter((file): file is string => Boolean(file));
+  const highestChangedFileSeverity = [...changedNew, ...changedResolved]
+    .map((finding) => finding.severity)
+    .sort((a, b) => severityRank(b) - severityRank(a))[0];
+
+  return {
+    changedFiles: normalizedChangedFiles,
+    changedFileCount: normalizedChangedFiles.length,
+    newFindingsOnChangedFiles: sortFindings(changedNew),
+    resolvedFindingsOnChangedFiles: sortFindings(changedResolved),
+    unchangedFindingsOnChangedFiles: sortFindings(changedUnchanged),
+    globalNewFindings: sortFindings(globalNew),
+    globalResolvedFindings: sortFindings(globalResolved),
+    unknownLocationFindings: sortFindings(unknown),
+    unrelatedExistingFindings: sortFindings(unrelatedExisting),
+    filesWithAgentReadinessImpact: [...new Set(impactedFiles)].sort(),
+    ...(highestChangedFileSeverity ? { highestChangedFileSeverity } : {}),
+    summary: summarizePrImpact(changedNew, globalNew, unknown, normalizedChangedFiles.length)
   };
 }
 
@@ -298,4 +377,49 @@ function createComparisonId(baseline: ScanResult, current: ScanResult): string {
     hash = Math.imul(hash, 16777619);
   }
   return `cmp_${(hash >>> 0).toString(16).padStart(8, "0")}`;
+}
+
+function classifyFinding(
+  finding: ComparisonFinding,
+  changedPathSet: Set<string>
+): NonNullable<ComparisonFinding["prImpactClassification"]> {
+  const file = normalizeFindingFile(finding);
+  if (file && changedPathSet.has(file)) return "touched";
+  if (
+    file &&
+    [...changedPathSet].some((changedFile) => finding.locationKey?.includes(changedFile))
+  ) {
+    return "related";
+  }
+  if (isGlobalFinding(finding)) return "global";
+  if (!file) return "unknown";
+  return "unrelated";
+}
+
+function normalizeFindingFile(finding: ComparisonFinding): string | undefined {
+  const file = finding.location?.file ?? finding.affectedFile;
+  if (!file || file === "n/a") return undefined;
+  return normalizeChangedPath(file);
+}
+
+function isChangedImpact(finding: ComparisonFinding): boolean {
+  return (
+    finding.prImpactClassification === "touched" || finding.prImpactClassification === "related"
+  );
+}
+
+function isGlobalFinding(finding: ComparisonFinding): boolean {
+  if (!finding.affectedFile && !finding.location?.file) return true;
+  return /^(COMMAND_VERIFICATION_SKIPPED|api\.openapi-not-detected|mcp\.not-evaluated)$/.test(
+    finding.ruleId
+  );
+}
+
+function summarizePrImpact(
+  changedNew: ComparisonFinding[],
+  globalNew: ComparisonFinding[],
+  unknown: ComparisonFinding[],
+  changedFileCount: number
+): string {
+  return `${changedFileCount} changed file(s) analyzed; ${changedNew.length} new finding(s) on changed files, ${globalNew.length} new global finding(s), ${unknown.length} unknown-location finding(s).`;
 }

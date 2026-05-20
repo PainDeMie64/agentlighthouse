@@ -626,13 +626,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "bbdfc3d7"
+            "agentLighthouseFinding": "alh_3a0ad1c7"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "high",
             "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "AGENTS.md",
+            "locationKey": "agents.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -654,13 +657,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "a843b0cb"
+            "agentLighthouseFinding": "alh_2919953b"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "CLAUDE.md",
+            "locationKey": "claude.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -682,13 +688,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "f2b5304b"
+            "agentLighthouseFinding": "alh_e3728b0d"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Add clear test command to README.md.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -710,13 +719,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e3912ecf"
+            "agentLighthouseFinding": "alh_182aba10"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Add architecture or repo map to README.md.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -738,13 +750,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "c3aa03c8"
+            "agentLighthouseFinding": "alh_15490f29"
           },
           "properties": {
             "category": "documentation",
             "severity": "low",
             "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -766,13 +781,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "d0bfbb00"
+            "agentLighthouseFinding": "alh_94d45e83"
           },
           "properties": {
             "category": "documentation",
             "severity": "low",
             "recommendation": "Add a short troubleshooting section with common setup and test failure fixes.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -794,13 +812,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "c9911083"
+            "agentLighthouseFinding": "alh_dcee23b7"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "llms.txt",
+            "locationKey": "llms.txt",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -822,13 +843,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "2244bb45"
+            "agentLighthouseFinding": "alh_b662d04a"
           },
           "properties": {
             "category": "documentation",
             "severity": "medium",
             "recommendation": "Add concrete examples showing expected usage and output.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -850,13 +874,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e8a86105"
+            "agentLighthouseFinding": "alh_2c1c9c49"
           },
           "properties": {
             "category": "setup_and_tests",
             "severity": "high",
             "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "package.json",
+            "locationKey": "package.json",
+            "sourceKind": "config"
           }
         },
         {
@@ -878,13 +905,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "5a826661"
+            "agentLighthouseFinding": "alh_6630a79a"
           },
           "properties": {
             "category": "setup_and_tests",
             "severity": "medium",
             "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "package.json",
+            "locationKey": "package.json",
+            "sourceKind": "config"
           }
         },
         {
@@ -906,13 +936,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e3e65515"
+            "agentLighthouseFinding": "alh_101dfc87"
           },
           "properties": {
             "category": "setup_and_tests",
             "severity": "medium",
             "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "package.json",
+            "locationKey": "package.json",
+            "sourceKind": "config"
           }
         },
         {
@@ -934,13 +967,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "bc0414a8"
+            "agentLighthouseFinding": "alh_d4b63c10"
           },
           "properties": {
             "category": "api_schema",
             "severity": "info",
             "recommendation": "Keep API descriptions, examples, and auth details current.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "openapi.yaml",
+            "locationKey": "openapi.yaml",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -962,13 +998,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "272a30bc"
+            "agentLighthouseFinding": "alh_f43ab7f9"
           },
           "properties": {
             "category": "api_schema",
             "severity": "medium",
             "recommendation": "Add examples near the API spec or link examples from the API documentation.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "openapi.yaml",
+            "locationKey": "openapi.yaml",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -977,14 +1016,29 @@
           "message": {
             "text": "MCP readiness could not be evaluated yet: If this project exposes MCP tools, include server files and clear tool descriptions."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "No file or package name matching MCP was scanned."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "79ec46eb"
+            "agentLighthouseFinding": "alh_0a02b750"
           },
           "properties": {
             "category": "mcp_tools",
             "severity": "info",
             "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "No file or package name matching MCP was scanned.",
+            "locationKey": "no file or package name matching mcp was scanned.",
+            "sourceKind": "unknown"
           }
         },
         {
@@ -1006,13 +1060,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "3a4d3909"
+            "agentLighthouseFinding": "alh_5848d659"
           },
           "properties": {
             "category": "security_and_privacy",
             "severity": "medium",
             "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": ".agentlighthouseignore",
+            "locationKey": ".agentlighthouseignore",
+            "sourceKind": "unknown"
           }
         },
         {
@@ -1034,13 +1091,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "90841091"
+            "agentLighthouseFinding": "alh_7624eb5d"
           },
           "properties": {
             "category": "security_and_privacy",
             "severity": "medium",
             "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "AGENTS.md",
+            "locationKey": "agents.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -1049,14 +1109,29 @@
           "message": {
             "text": "Docs contain TODO/deprecated-looking terms without migration guidance: Resolve TODOs or add explicit migration/replacement guidance."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e058c327"
+            "agentLighthouseFinding": "alh_7b00650a"
           },
           "properties": {
             "category": "freshness_and_consistency",
             "severity": "low",
             "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md:14: TODO: add more complete docs soon.",
+            "locationKey": "readme.md:14: todo: add more complete docs soon.",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -1078,7 +1153,7 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e39ad9c4"
+            "agentLighthouseFinding": "alh_06f3a785"
           },
           "properties": {
             "category": "api_schema",
@@ -1086,7 +1161,10 @@
             "agentFailureMode": "A coding agent may jump straight to endpoints without understanding product nouns, authentication, or workflow ordering.",
             "recommendation": "Add a concise overview of the API domain, common workflows, auth model, and safe usage constraints.",
             "fixExample": "Describe the main resources, required authentication, common create/list/update flows, and where to find examples.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "openapi.yaml",
+            "locationKey": "openapi.yaml",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1108,7 +1186,7 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "cbafc1bc"
+            "agentLighthouseFinding": "alh_a3eec027"
           },
           "properties": {
             "category": "api_schema",
@@ -1116,7 +1194,10 @@
             "agentFailureMode": "A coding agent may generate client code without the required Authorization header or may invent unsafe credential handling.",
             "recommendation": "Document the auth scheme, required headers, scopes, and placeholder-safe example credentials.",
             "fixExample": "Add an HTTP bearer or API key security scheme and a request example using EXAMPLE_API_KEY.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "openapi.yaml",
+            "locationKey": "openapi.yaml",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1138,7 +1219,7 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "49ea63fc"
+            "agentLighthouseFinding": "alh_8e9e4ef8"
           },
           "properties": {
             "category": "api_schema",
@@ -1146,7 +1227,10 @@
             "agentFailureMode": "A coding agent may invent a base URL or hardcode the wrong host.",
             "recommendation": "Add production and sandbox server URLs, or explain how agents should configure the base URL.",
             "fixExample": "Add servers: [{ url: 'https://api.example.com/v1' }].",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "openapi.yaml",
+            "locationKey": "openapi.yaml",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1162,13 +1246,13 @@
                   "uri": "openapi.yaml"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 7
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "a8f05b00"
+            "agentLighthouseFinding": "alh_fb4b43f1"
           },
           "properties": {
             "category": "api_schema",
@@ -1176,7 +1260,10 @@
             "agentFailureMode": "A coding agent may generate confusing client methods or call the wrong endpoint when operation IDs are missing or generic.",
             "recommendation": "Give every operation a stable, specific operationId such as createWorkspaceInvite or listCustomerInvoices.",
             "fixExample": "Use verb+noun names that distinguish similar operations, for example revokeApiKey instead of delete.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "GET /widgets",
+            "locationKey": "openapi.yaml#/paths/~1widgets/get",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1192,13 +1279,13 @@
                   "uri": "openapi.yaml"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 7
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "be98c6c9"
+            "agentLighthouseFinding": "alh_031a936a"
           },
           "properties": {
             "category": "api_schema",
@@ -1206,7 +1293,10 @@
             "agentFailureMode": "A coding agent may write incorrect parsing code because expected response shapes are not exemplified.",
             "recommendation": "Add response examples for successful and important error cases.",
             "fixExample": "Add 200/201 response examples with IDs, timestamps, pagination cursors, and nested objects.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "GET /widgets",
+            "locationKey": "openapi.yaml#/paths/~1widgets/get",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1222,13 +1312,13 @@
                   "uri": "openapi.yaml"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 7
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e1c4e4e4"
+            "agentLighthouseFinding": "alh_b2d24df5"
           },
           "properties": {
             "category": "api_schema",
@@ -1236,7 +1326,10 @@
             "agentFailureMode": "A coding agent may generate happy-path-only integrations with no auth, retry, or validation recovery.",
             "recommendation": "Document likely 400/401/403/404/409/429/500 responses and how callers should recover.",
             "fixExample": "Add 401, 404, 409, and 429 responses with short descriptions and example error payloads.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "GET /widgets",
+            "locationKey": "openapi.yaml#/paths/~1widgets/get",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1252,13 +1345,13 @@
                   "uri": "openapi.yaml"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 7
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "976dbd99"
+            "agentLighthouseFinding": "alh_fc279e1a"
           },
           "properties": {
             "category": "api_schema",
@@ -1266,7 +1359,10 @@
             "agentFailureMode": "A coding agent may fetch only the first page or invent unsupported pagination parameters.",
             "recommendation": "Document pagination parameters, cursors, limits, and response fields.",
             "fixExample": "Describe limit and cursor parameters and include a response example with next_cursor.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "GET /widgets",
+            "locationKey": "openapi.yaml#/paths/~1widgets/get",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1275,8 +1371,20 @@
           "message": {
             "text": "OpenAPI rate-limit behavior is unclear: Document rate limits and retry behavior for generated clients."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "No operation mentions 429, Retry-After, or rate limits."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e209b153"
+            "agentLighthouseFinding": "alh_4946d639"
           },
           "properties": {
             "category": "api_schema",
@@ -1284,7 +1392,10 @@
             "agentFailureMode": "A coding agent may create brittle retry loops or ignore throttling responses.",
             "recommendation": "Document rate limits and retry behavior for generated clients.",
             "fixExample": "Add a 429 response with Retry-After guidance and an example error payload.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "No operation mentions 429, Retry-After, or rate limits.",
+            "locationKey": "no operation mentions 429, retry-after, or rate limits.",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1306,7 +1417,7 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "3b1642bc"
+            "agentLighthouseFinding": "alh_92fffcef"
           },
           "properties": {
             "category": "task_benchmarks",
@@ -1314,7 +1425,10 @@
             "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
             "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
             "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "agentlighthouse.tasks.yaml",
+            "locationKey": "agentlighthouse.tasks.yaml",
+            "sourceKind": "task"
           }
         },
         {
@@ -1323,8 +1437,20 @@
           "message": {
             "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Run with --probe commands or --run-probes to execute safe script probes."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "2960598d"
+            "agentLighthouseFinding": "alh_ac2d574f"
           },
           "properties": {
             "category": "setup_and_tests",
@@ -1332,7 +1458,10 @@
             "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
             "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
             "fixExample": "agentlighthouse scan . --probe commands",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+            "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+            "sourceKind": "unknown"
           }
         }
       ]

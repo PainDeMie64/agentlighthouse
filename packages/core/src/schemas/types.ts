@@ -23,6 +23,31 @@ export const scanProfiles = [
   "internal"
 ] as const;
 export const scoreConfidenceLevels = ["high", "medium", "low"] as const;
+export const changedFileStatuses = [
+  "added",
+  "modified",
+  "deleted",
+  "renamed",
+  "copied",
+  "unknown"
+] as const;
+export const changedFileSources = ["explicit", "git", "github", "unknown"] as const;
+export const findingSourceKinds = [
+  "markdown",
+  "openapi",
+  "mcp",
+  "task",
+  "config",
+  "project",
+  "unknown"
+] as const;
+export const prImpactClassifications = [
+  "touched",
+  "related",
+  "global",
+  "unrelated",
+  "unknown"
+] as const;
 export const suggestedFixTypes = [
   "create_file",
   "update_file",
@@ -50,6 +75,22 @@ export const suggestedFixTypeSchema = z.enum(suggestedFixTypes);
 export const projectTypeSchema = z.enum(projectTypes);
 export const scanProfileSchema = z.enum(scanProfiles);
 export const scoreConfidenceLevelSchema = z.enum(scoreConfidenceLevels);
+export const changedFileStatusSchema = z.enum(changedFileStatuses);
+export const changedFileSourceSchema = z.enum(changedFileSources);
+export const findingSourceKindSchema = z.enum(findingSourceKinds);
+export const prImpactClassificationSchema = z.enum(prImpactClassifications);
+
+export const findingLocationSchema = z.object({
+  file: z.string(),
+  startLine: z.number().int().positive().optional(),
+  startColumn: z.number().int().positive().optional(),
+  endLine: z.number().int().positive().optional(),
+  endColumn: z.number().int().positive().optional(),
+  locationKey: z.string().optional(),
+  subject: z.string().optional(),
+  symbol: z.string().optional(),
+  sourceKind: findingSourceKindSchema
+});
 
 export const findingSchema = z.object({
   id: z.string(),
@@ -65,6 +106,7 @@ export const findingSchema = z.object({
   evidence: z.array(z.string()),
   recommendation: z.string(),
   affectedFile: z.string().optional(),
+  location: findingLocationSchema.optional(),
   agentFailureMode: z.string().optional(),
   fixExample: z.string().optional(),
   docsLinks: z.array(z.string()).optional(),
@@ -303,7 +345,30 @@ export const comparisonScanSnapshotSchema = z.object({
 
 export const comparisonFindingSchema = findingSchema.extend({
   previousSeverity: severitySchema.optional(),
-  currentSeverity: severitySchema.optional()
+  currentSeverity: severitySchema.optional(),
+  prImpactClassification: prImpactClassificationSchema.optional()
+});
+
+export const changedFileSchema = z.object({
+  path: z.string(),
+  status: changedFileStatusSchema,
+  oldPath: z.string().optional(),
+  source: changedFileSourceSchema
+});
+
+export const prImpactSchema = z.object({
+  changedFiles: z.array(changedFileSchema),
+  changedFileCount: z.number().nonnegative(),
+  newFindingsOnChangedFiles: z.array(comparisonFindingSchema),
+  resolvedFindingsOnChangedFiles: z.array(comparisonFindingSchema),
+  unchangedFindingsOnChangedFiles: z.array(comparisonFindingSchema),
+  globalNewFindings: z.array(comparisonFindingSchema),
+  globalResolvedFindings: z.array(comparisonFindingSchema),
+  unknownLocationFindings: z.array(comparisonFindingSchema),
+  unrelatedExistingFindings: z.array(comparisonFindingSchema),
+  filesWithAgentReadinessImpact: z.array(z.string()),
+  highestChangedFileSeverity: severitySchema.optional(),
+  summary: z.string()
 });
 
 export const comparisonResultSchema = z.object({
@@ -324,6 +389,7 @@ export const comparisonResultSchema = z.object({
     worsened: z.array(comparisonFindingSchema),
     improved: z.array(comparisonFindingSchema)
   }),
+  prImpact: prImpactSchema.optional(),
   summary: z.object({
     verdict: comparisonVerdictSchema,
     regressionDetected: z.boolean(),
@@ -351,6 +417,11 @@ export type SuggestedFixType = z.infer<typeof suggestedFixTypeSchema>;
 export type ProjectType = z.infer<typeof projectTypeSchema>;
 export type ScanProfile = z.infer<typeof scanProfileSchema>;
 export type ScoreConfidenceLevel = z.infer<typeof scoreConfidenceLevelSchema>;
+export type ChangedFileStatus = z.infer<typeof changedFileStatusSchema>;
+export type ChangedFileSource = z.infer<typeof changedFileSourceSchema>;
+export type FindingSourceKind = z.infer<typeof findingSourceKindSchema>;
+export type PrImpactClassification = z.infer<typeof prImpactClassificationSchema>;
+export type FindingLocation = z.infer<typeof findingLocationSchema>;
 export type Finding = z.infer<typeof findingSchema>;
 export type ArtifactSignal = z.infer<typeof artifactSignalSchema>;
 export type PackageJsonSignal = z.infer<typeof packageJsonSignalSchema>;
@@ -372,6 +443,8 @@ export type ScanResult = z.infer<typeof scanResultSchema>;
 export type ComparisonVerdict = z.infer<typeof comparisonVerdictSchema>;
 export type ComparisonScanSnapshot = z.infer<typeof comparisonScanSnapshotSchema>;
 export type ComparisonFinding = z.infer<typeof comparisonFindingSchema>;
+export type ChangedFile = z.infer<typeof changedFileSchema>;
+export type PrImpact = z.infer<typeof prImpactSchema>;
 export type ComparisonResult = z.infer<typeof comparisonResultSchema>;
 export type GeneratedArtifact = z.infer<typeof generatedArtifactSchema>;
 

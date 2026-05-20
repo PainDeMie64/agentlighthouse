@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_cea4b84f",
+  "scanId": "scan_3f55bfb3",
   "scannedPath": "<repo>/examples/openapi-bad-project",
-  "startedAt": "2026-05-20T20:22:52.842Z",
-  "completedAt": "2026-05-20T20:22:52.844Z",
-  "durationMs": 2,
+  "startedAt": "2026-05-20T20:44:21.143Z",
+  "completedAt": "2026-05-20T20:44:21.146Z",
+  "durationMs": 3,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -112,7 +112,14 @@
       "fingerprint": "alh_3a0ad1c7",
       "identityParts": ["agent-instructions.missing-agents-md", "agents.md", "agents.md"],
       "locationKey": "agents.md",
-      "subject": "AGENTS.md"
+      "subject": "AGENTS.md",
+      "location": {
+        "file": "AGENTS.md",
+        "locationKey": "agents.md",
+        "subject": "AGENTS.md",
+        "symbol": "AGENTS.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "agent-instructions.missing-claude-md",
@@ -128,7 +135,14 @@
       "fingerprint": "alh_2919953b",
       "identityParts": ["agent-instructions.missing-claude-md", "claude.md", "claude.md"],
       "locationKey": "claude.md",
-      "subject": "CLAUDE.md"
+      "subject": "CLAUDE.md",
+      "location": {
+        "file": "CLAUDE.md",
+        "locationKey": "claude.md",
+        "subject": "CLAUDE.md",
+        "symbol": "CLAUDE.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.READMEmd.missing-clear-test-command",
@@ -150,7 +164,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
@@ -172,7 +194,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.readme-missing-verification-step",
@@ -194,7 +224,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
@@ -216,7 +254,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.readme-missing-troubleshooting",
@@ -236,7 +282,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "llms.missing",
@@ -252,7 +306,14 @@
       "fingerprint": "alh_dcee23b7",
       "identityParts": ["llms.missing", "llms.txt", "llms.txt"],
       "locationKey": "llms.txt",
-      "subject": "llms.txt"
+      "subject": "llms.txt",
+      "location": {
+        "file": "llms.txt",
+        "locationKey": "llms.txt",
+        "subject": "llms.txt",
+        "symbol": "llms.txt",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.readme-no-quickstart",
@@ -268,7 +329,15 @@
       "fingerprint": "alh_2fb4df74",
       "identityParts": ["docs.readme-no-quickstart", "readme.md", "readme.md"],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.readme-no-install",
@@ -284,7 +353,15 @@
       "fingerprint": "alh_e1c052e4",
       "identityParts": ["docs.readme-no-install", "readme.md", "readme.md"],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.readme-no-examples",
@@ -300,7 +377,15 @@
       "fingerprint": "alh_b662d04a",
       "identityParts": ["docs.readme-no-examples", "readme.md", "readme.md"],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.directory-missing",
@@ -316,7 +401,14 @@
       "fingerprint": "alh_80dc9ef2",
       "identityParts": ["docs.directory-missing", "docs/", "docs/"],
       "locationKey": "docs/",
-      "subject": "docs/"
+      "subject": "docs/",
+      "location": {
+        "file": "docs/",
+        "locationKey": "docs/",
+        "subject": "docs/",
+        "symbol": "docs/",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "setup.package-json-no-scripts",
@@ -332,7 +424,15 @@
       "fingerprint": "alh_59ea6562",
       "identityParts": ["setup.package-json-no-scripts", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "setup.missing-test-script",
@@ -348,7 +448,15 @@
       "fingerprint": "alh_2c1c9c49",
       "identityParts": ["setup.missing-test-script", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "setup.missing-lint-script",
@@ -364,7 +472,15 @@
       "fingerprint": "alh_6630a79a",
       "identityParts": ["setup.missing-lint-script", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "setup.missing-typecheck-script",
@@ -380,7 +496,15 @@
       "fingerprint": "alh_101dfc87",
       "identityParts": ["setup.missing-typecheck-script", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "api.openapi-detected",
@@ -396,7 +520,15 @@
       "fingerprint": "alh_d4b63c10",
       "identityParts": ["api.openapi-detected", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "api.openapi-no-nearby-examples",
@@ -412,7 +544,15 @@
       "fingerprint": "alh_f43ab7f9",
       "identityParts": ["api.openapi-no-nearby-examples", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "api.openapi-thin-descriptions",
@@ -428,7 +568,15 @@
       "fingerprint": "alh_722b737f",
       "identityParts": ["api.openapi-thin-descriptions", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "mcp.not-evaluated",
@@ -447,7 +595,14 @@
         "no file or package name matching mcp was scanned."
       ],
       "locationKey": "no file or package name matching mcp was scanned.",
-      "subject": "No file or package name matching MCP was scanned."
+      "subject": "No file or package name matching MCP was scanned.",
+      "location": {
+        "file": "No file or package name matching MCP was scanned.",
+        "locationKey": "no file or package name matching mcp was scanned.",
+        "subject": "No file or package name matching MCP was scanned.",
+        "symbol": "No file or package name matching MCP was scanned.",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "security.missing-agentlighthouseignore",
@@ -467,7 +622,14 @@
         ".agentlighthouseignore"
       ],
       "locationKey": ".agentlighthouseignore",
-      "subject": ".agentlighthouseignore"
+      "subject": ".agentlighthouseignore",
+      "location": {
+        "file": ".agentlighthouseignore",
+        "locationKey": ".agentlighthouseignore",
+        "subject": ".agentlighthouseignore",
+        "symbol": ".agentlighthouseignore",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "security.agent-secret-guidance-missing",
@@ -483,7 +645,14 @@
       "fingerprint": "alh_7624eb5d",
       "identityParts": ["security.agent-secret-guidance-missing", "agents.md", "agents.md"],
       "locationKey": "agents.md",
-      "subject": "AGENTS.md"
+      "subject": "AGENTS.md",
+      "location": {
+        "file": "AGENTS.md",
+        "locationKey": "agents.md",
+        "subject": "AGENTS.md",
+        "symbol": "AGENTS.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "freshness.deprecated-or-todo-terms",
@@ -502,7 +671,15 @@
         "readme.md:3: api docs coming soon."
       ],
       "locationKey": "readme.md:3: api docs coming soon.",
-      "subject": "README.md:3: API docs coming soon."
+      "subject": "README.md:3: API docs coming soon.",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md:3: api docs coming soon.",
+        "subject": "README.md:3: API docs coming soon.",
+        "symbol": "README.md:3: API docs coming soon.",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "OPENAPI_WEAK_SPEC_DESCRIPTION",
@@ -520,7 +697,15 @@
       "fingerprint": "alh_06f3a785",
       "identityParts": ["OPENAPI_WEAK_SPEC_DESCRIPTION", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_AUTH_UNCLEAR",
@@ -540,7 +725,15 @@
       "fingerprint": "alh_a3eec027",
       "identityParts": ["OPENAPI_AUTH_UNCLEAR", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_SERVER_URL_MISSING",
@@ -558,7 +751,15 @@
       "fingerprint": "alh_8e9e4ef8",
       "identityParts": ["OPENAPI_SERVER_URL_MISSING", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_MISSING_OPERATION_ID",
@@ -584,7 +785,15 @@
         "get /items"
       ],
       "locationKey": "openapi.yaml#/paths/~1items/get",
-      "subject": "GET /items"
+      "subject": "GET /items",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 7,
+        "locationKey": "openapi.yaml#/paths/~1items/get",
+        "subject": "GET /items",
+        "symbol": "GET /items",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_WEAK_OPERATION_DESCRIPTION",
@@ -610,7 +819,15 @@
         "get /items"
       ],
       "locationKey": "openapi.yaml#/paths/~1items/get",
-      "subject": "GET /items"
+      "subject": "GET /items",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 7,
+        "locationKey": "openapi.yaml#/paths/~1items/get",
+        "subject": "GET /items",
+        "symbol": "GET /items",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_MISSING_REQUEST_EXAMPLE",
@@ -632,7 +849,15 @@
         "post /items"
       ],
       "locationKey": "openapi.yaml#/paths/~1items/post",
-      "subject": "POST /items"
+      "subject": "POST /items",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 13,
+        "locationKey": "openapi.yaml#/paths/~1items/post",
+        "subject": "POST /items",
+        "symbol": "POST /items",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_MISSING_RESPONSE_EXAMPLE",
@@ -658,7 +883,15 @@
         "get /items"
       ],
       "locationKey": "openapi.yaml#/paths/~1items/get",
-      "subject": "GET /items"
+      "subject": "GET /items",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 7,
+        "locationKey": "openapi.yaml#/paths/~1items/get",
+        "subject": "GET /items",
+        "symbol": "GET /items",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_MISSING_ERROR_RESPONSES",
@@ -684,7 +917,15 @@
         "get /items"
       ],
       "locationKey": "openapi.yaml#/paths/~1items/get",
-      "subject": "GET /items"
+      "subject": "GET /items",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 7,
+        "locationKey": "openapi.yaml#/paths/~1items/get",
+        "subject": "GET /items",
+        "symbol": "GET /items",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_AMBIGUOUS_OPERATION_NAME",
@@ -710,7 +951,15 @@
         "get /items"
       ],
       "locationKey": "openapi.yaml#/paths/~1items/get",
-      "subject": "GET /items"
+      "subject": "GET /items",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 7,
+        "locationKey": "openapi.yaml#/paths/~1items/get",
+        "subject": "GET /items",
+        "symbol": "GET /items",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED",
@@ -732,7 +981,15 @@
         "delete /items/{id}"
       ],
       "locationKey": "openapi.yaml#/paths/~1items~1{id}/delete",
-      "subject": "DELETE /items/{id}"
+      "subject": "DELETE /items/{id}",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 25,
+        "locationKey": "openapi.yaml#/paths/~1items~1{id}/delete",
+        "subject": "DELETE /items/{id}",
+        "symbol": "DELETE /items/{id}",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_PAGINATION_UNCLEAR",
@@ -754,7 +1011,15 @@
         "get /items"
       ],
       "locationKey": "openapi.yaml#/paths/~1items/get",
-      "subject": "GET /items"
+      "subject": "GET /items",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 7,
+        "locationKey": "openapi.yaml#/paths/~1items/get",
+        "subject": "GET /items",
+        "symbol": "GET /items",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "OPENAPI_RATE_LIMIT_UNCLEAR",
@@ -775,7 +1040,14 @@
         "no operation mentions 429, retry-after, or rate limits."
       ],
       "locationKey": "no operation mentions 429, retry-after, or rate limits.",
-      "subject": "No operation mentions 429, Retry-After, or rate limits."
+      "subject": "No operation mentions 429, Retry-After, or rate limits.",
+      "location": {
+        "file": "No operation mentions 429, Retry-After, or rate limits.",
+        "locationKey": "no operation mentions 429, retry-after, or rate limits.",
+        "subject": "No operation mentions 429, Retry-After, or rate limits.",
+        "symbol": "No operation mentions 429, Retry-After, or rate limits.",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "TASK_BENCHMARK_MISSING",
@@ -797,7 +1069,14 @@
         "agentlighthouse.tasks.yaml"
       ],
       "locationKey": "agentlighthouse.tasks.yaml",
-      "subject": "agentlighthouse.tasks.yaml"
+      "subject": "agentlighthouse.tasks.yaml",
+      "location": {
+        "file": "agentlighthouse.tasks.yaml",
+        "locationKey": "agentlighthouse.tasks.yaml",
+        "subject": "agentlighthouse.tasks.yaml",
+        "symbol": "agentlighthouse.tasks.yaml",
+        "sourceKind": "task"
+      }
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -818,7 +1097,14 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+      "location": {
+        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "sourceKind": "unknown"
+      }
     }
   ],
   "scoreInterpretation": {
@@ -962,7 +1248,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/openapi-bad-project",
-  "scannedAt": "2026-05-20T20:22:52.844Z",
+  "scannedAt": "2026-05-20T20:44:21.146Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

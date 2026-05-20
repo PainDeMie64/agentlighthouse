@@ -54,6 +54,28 @@
               }
             },
             {
+              "id": "freshness.deprecated-or-todo-terms",
+              "name": "Docs contain TODO/deprecated-looking terms without migration guidance",
+              "shortDescription": {
+                "text": "Docs contain TODO/deprecated-looking terms without migration guidance"
+              },
+              "fullDescription": {
+                "text": "Stale markers can confuse agents unless they include replacement guidance."
+              },
+              "help": {
+                "text": "Resolve TODOs or add explicit migration/replacement guidance.",
+                "markdown": "Resolve TODOs or add explicit migration/replacement guidance."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "freshness_and_consistency",
+                "severity": "low",
+                "tags": ["agent-readiness", "freshness_and_consistency", "low"]
+              }
+            },
+            {
               "id": "COMMAND_VERIFICATION_SKIPPED",
               "name": "Command verification probes were skipped",
               "shortDescription": {
@@ -85,14 +107,29 @@
           "message": {
             "text": "OpenAPI file not detected: For API products, publish an OpenAPI spec with operation descriptions and examples."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "No openapi.* or swagger.* file was scanned."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "02e8d6c1"
+            "agentLighthouseFinding": "alh_64a67cea"
           },
           "properties": {
             "category": "api_schema",
             "severity": "info",
             "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "No openapi.* or swagger.* file was scanned.",
+            "locationKey": "no openapi.* or swagger.* file was scanned.",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -101,14 +138,60 @@
           "message": {
             "text": "MCP readiness could not be evaluated yet: If this project exposes MCP tools, include server files and clear tool descriptions."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "No file or package name matching MCP was scanned."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "79ec46eb"
+            "agentLighthouseFinding": "alh_0a02b750"
           },
           "properties": {
             "category": "mcp_tools",
             "severity": "info",
             "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "No file or package name matching MCP was scanned.",
+            "locationKey": "no file or package name matching mcp was scanned.",
+            "sourceKind": "unknown"
+          }
+        },
+        {
+          "ruleId": "freshness.deprecated-or-todo-terms",
+          "level": "note",
+          "message": {
+            "text": "Docs contain TODO/deprecated-looking terms without migration guidance: Resolve TODOs or add explicit migration/replacement guidance."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/PR_AWARE_ANALYSIS.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "alh_803cbab6"
+          },
+          "properties": {
+            "category": "freshness_and_consistency",
+            "severity": "low",
+            "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
+            "confidence": "medium",
+            "subject": "docs/PR_AWARE_ANALYSIS.md:69: - `related`: the finding is linked through a location key, old path, or source file.",
+            "locationKey": "docs/pr_aware_analysis.md:69: - `related`: the finding is linked through a location key, old path, or source file.",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -117,8 +200,20 @@
           "message": {
             "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Run with --probe commands or --run-probes to execute safe script probes."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "2960598d"
+            "agentLighthouseFinding": "alh_ac2d574f"
           },
           "properties": {
             "category": "setup_and_tests",
@@ -126,7 +221,10 @@
             "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
             "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
             "fixExample": "agentlighthouse scan . --probe commands",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+            "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+            "sourceKind": "unknown"
           }
         }
       ]

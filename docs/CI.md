@@ -44,12 +44,15 @@ agentlighthouse scan . --fail-on-severity high
 agentlighthouse scan . --fail-under 80 --fail-on-severity critical
 agentlighthouse compare --baseline baseline.json --current current.json --fail-on-regression
 agentlighthouse compare --baseline baseline.json --current current.json --fail-on-score-drop 5 --fail-on-new-severity high
+agentlighthouse compare --baseline baseline.json --current current.json --changed-files changed-files.txt --fail-on-new-changed-high
+agentlighthouse compare --baseline baseline.json --current current.json --git-base origin/main --git-head HEAD --fail-on-pr-regression
 ```
 
 - `--fail-under` fails when the score is below a threshold.
 - `--fail-on-severity` fails when any finding is at or above a severity.
 - `--min-confidence` fails when the score confidence is too low.
 - Compare gates fail on regressions between two saved JSON scan reports.
+- PR-aware compare gates fail on new findings introduced on changed files.
 - `--probe commands` is opt-in and should only be used in trusted CI jobs.
 
 ## Output Formats
@@ -68,6 +71,23 @@ agentlighthouse compare --baseline agentlighthouse-baseline.json --current curre
 ```
 
 Delta reports show score, confidence, coverage, new findings, resolved findings, and regression gate status.
+
+## PR-Aware Delta Reports
+
+```bash
+agentlighthouse scan . --format json --output current.json
+git diff --name-status origin/main...HEAD > changed-files.txt
+agentlighthouse compare \
+  --baseline agentlighthouse-baseline.json \
+  --current current.json \
+  --changed-files changed-files.txt \
+  --format pr-summary \
+  --output agentlighthouse-pr-delta.md
+```
+
+Changed-file awareness is for prioritization. AgentLighthouse still compares full scan results and shows global findings separately so PRs cannot hide project-level agent-readiness regressions.
+
+For git-ref detection in GitHub Actions, use `actions/checkout` with `fetch-depth: 0` and pass `--git-base origin/main --git-head HEAD`.
 
 ## GitHub Step Summary
 

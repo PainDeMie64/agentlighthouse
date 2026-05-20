@@ -48,8 +48,8 @@ describe("CI reporters", () => {
         results: Array<{
           ruleId: string;
           level: string;
-          locations?: unknown[];
-          properties: { agentFailureMode?: string };
+          locations?: Array<{ physicalLocation: { region: { startLine?: number } } }>;
+          properties: { agentFailureMode?: string; subject?: string };
         }>;
       }>;
     };
@@ -59,6 +59,7 @@ describe("CI reporters", () => {
     expect(sarif.runs[0]?.results[0]?.ruleId).toBe("setup.missing-test-script");
     expect(sarif.runs[0]?.results[0]?.level).toBe("error");
     expect(sarif.runs[0]?.results[0]?.locations).toHaveLength(1);
+    expect(sarif.runs[0]?.results[0]?.locations?.[0]?.physicalLocation.region.startLine).toBe(1);
     expect(sarif.runs[0]?.results[0]?.properties.agentFailureMode).toContain("skip verification");
   });
 

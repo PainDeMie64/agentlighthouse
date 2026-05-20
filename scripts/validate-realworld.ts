@@ -1,7 +1,8 @@
-import { mkdir, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
   compareScanResults,
+  parseChangedFilesText,
   renderComparisonJsonReport,
   renderComparisonMarkdownReport,
   renderComparisonPrSummaryReport,
@@ -135,6 +136,15 @@ await writeComparisonReport({
   baseline: requiredResult(savedResults, "sample-good-project"),
   current: requiredResult(savedResults, "sample-bad-project")
 });
+await writeComparisonReport({
+  name: "pr-aware-comparison",
+  baseline: requiredResult(savedResults, "sample-good-project"),
+  current: requiredResult(savedResults, "sample-bad-project"),
+  changedFiles: parseChangedFilesText(
+    await readFile(path.join(repoRoot, "examples", "comparison", "changed-files.txt"), "utf8"),
+    "explicit"
+  )
+});
 
 async function optionalValidationRepos(): Promise<ValidationTarget[]> {
   const validationRoot = path.join(repoRoot, ".tmp", "validation-repos");
@@ -172,8 +182,12 @@ async function writeComparisonReport(input: {
   name: string;
   baseline: Awaited<ReturnType<typeof scanProject>>;
   current: Awaited<ReturnType<typeof scanProject>>;
+  changedFiles?: Parameters<typeof compareScanResults>[2]["changedFiles"];
 }): Promise<void> {
-  const comparison = sanitizeResult(compareScanResults(input.baseline, input.current), repoRoot);
+  const comparison = sanitizeResult(
+    compareScanResults(input.baseline, input.current, { changedFiles: input.changedFiles }),
+    repoRoot
+  );
   process.stdout.write(
     `${input.name}: ${comparison.summary.verdict} (${comparison.deltas.scoreDelta >= 0 ? "+" : ""}${comparison.deltas.scoreDelta} score)\n`
   );

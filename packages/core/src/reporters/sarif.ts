@@ -41,7 +41,12 @@ interface SarifResult {
   locations?: Array<{
     physicalLocation: {
       artifactLocation: { uri: string };
-      region: { startLine: number };
+      region: {
+        startLine: number;
+        startColumn?: number;
+        endLine?: number;
+        endColumn?: number;
+      };
     };
   }>;
   partialFingerprints: {
@@ -54,6 +59,9 @@ interface SarifResult {
     recommendation: string;
     fixExample?: string;
     confidence: ScanResult["scoreConfidence"];
+    subject?: string;
+    locationKey?: string;
+    sourceKind?: string;
   };
 }
 
@@ -117,13 +125,13 @@ function findingToResult(finding: Finding, result: ScanResult): SarifResult {
     message: {
       text: `${finding.title}: ${finding.recommendation}`
     },
-    ...(finding.affectedFile
+    ...(finding.location?.file || finding.affectedFile
       ? {
           locations: [
             {
               physicalLocation: {
-                artifactLocation: { uri: finding.affectedFile },
-                region: { startLine: 1 }
+                artifactLocation: { uri: finding.location?.file ?? finding.affectedFile! },
+                region: sarifRegion(finding)
               }
             }
           ]
@@ -138,8 +146,26 @@ function findingToResult(finding: Finding, result: ScanResult): SarifResult {
       ...(finding.agentFailureMode ? { agentFailureMode: finding.agentFailureMode } : {}),
       recommendation: finding.recommendation,
       ...(finding.fixExample ? { fixExample: finding.fixExample } : {}),
-      confidence: result.scoreConfidence
+      confidence: result.scoreConfidence,
+      ...(finding.subject || finding.location?.subject
+        ? { subject: finding.subject ?? finding.location?.subject }
+        : {}),
+      ...(finding.locationKey || finding.location?.locationKey
+        ? { locationKey: finding.locationKey ?? finding.location?.locationKey }
+        : {}),
+      ...(finding.location?.sourceKind ? { sourceKind: finding.location.sourceKind } : {})
     }
+  };
+}
+
+function sarifRegion(
+  finding: Finding
+): NonNullable<SarifResult["locations"]>[number]["physicalLocation"]["region"] {
+  return {
+    startLine: finding.location?.startLine ?? 1,
+    ...(finding.location?.startColumn ? { startColumn: finding.location.startColumn } : {}),
+    ...(finding.location?.endLine ? { endLine: finding.location.endLine } : {}),
+    ...(finding.location?.endColumn ? { endColumn: finding.location.endColumn } : {})
   };
 }
 
@@ -154,6 +180,9 @@ function severityToSarifLevel(severity: Severity): SarifLevel {
 }
 
 function stableFingerprint(finding: Finding): string {
+  if (finding.fingerprint) {
+    return finding.fingerprint;
+  }
   const input = `${finding.ruleId}:${finding.affectedFile ?? ""}:${finding.evidence.join("|")}`;
   let hash = 2166136261;
   for (const character of input) {

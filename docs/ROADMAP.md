@@ -31,7 +31,7 @@
 - SARIF reporter.
 - PR-friendly summaries and GitHub step summaries.
 - Composite GitHub Action.
-- Future: token-backed PR comments, GitHub Checks, baseline comparison, and patch suggestions.
+- Future: token-backed PR comments, GitHub Checks, and patch suggestions.
 
 ## Phase 2C: Baseline Comparison + PR Delta Reporting
 
@@ -41,6 +41,15 @@
 - Regression gates for score, confidence, coverage, and new severities.
 - GitHub Action baseline input.
 - Dashboard comparison demo.
+
+## Phase 2D: Changed-Files-Aware PR Analysis
+
+- Changed-file input from explicit lists or local git refs.
+- PR impact classification for touched, related, global, unrelated, and unknown-location findings.
+- PR-focused gates for new findings on changed files.
+- Better line-level finding locations for Markdown, OpenAPI, MCP, and task benchmark findings.
+- SARIF regions when line information is available.
+- Dashboard PR impact demo.
 
 ## Phase 3: Docs Crawler + Deeper API/MCP Resolution
 

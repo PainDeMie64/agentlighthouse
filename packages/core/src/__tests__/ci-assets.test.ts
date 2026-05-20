@@ -22,5 +22,11 @@ describe("CI distribution assets", () => {
     await expect(
       access(path.join(repoRoot, "examples/github-actions/pr-delta.yml"))
     ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/pr-aware-delta.yml"))
+    ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/changed-files-list.yml"))
+    ).resolves.toBeUndefined();
   });
 });

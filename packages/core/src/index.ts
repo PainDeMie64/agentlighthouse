@@ -14,6 +14,7 @@ import { analyzeTaskBenchmarks } from "./analyzers/tasks.js";
 import { compareScanResults } from "./comparison/compare.js";
 import { resolveConfig, resolveProfile } from "./config/profile.js";
 import { detectProject, detectedArtifacts } from "./detection/project.js";
+import { enrichFindingLocations } from "./findings/locations.js";
 import { StarterArtifactGenerator } from "./generators/artifacts.js";
 import { runCommandProbes } from "./probes/commands.js";
 import { LocalFilesystemScanner } from "./scanners/filesystem.js";
@@ -27,10 +28,12 @@ export * from "./analyzers/mcp.js";
 export * from "./analyzers/openapi.js";
 export * from "./analyzers/readiness.js";
 export * from "./analyzers/tasks.js";
+export * from "./changes/files.js";
 export * from "./config/profile.js";
 export * from "./comparison/compare.js";
 export * from "./detection/project.js";
 export * from "./findings/helpers.js";
+export * from "./findings/locations.js";
 export * from "./generators/artifacts.js";
 export * from "./probes/commands.js";
 export * from "./reporters/cli.js";
@@ -69,13 +72,13 @@ export async function scanProject(
     ...options,
     probes
   });
-  const findings = [
+  const findings = enrichFindingLocations(signals, [
     ...analyzer.analyze(signals),
     ...openApi.findings,
     ...mcp.findings,
     ...analyzeTaskBenchmarks(signals),
     ...commandProbeRun.findings
-  ];
+  ]);
   const scored = scoring.score(findings, signals);
   const artifacts = detectedArtifacts(signals);
   const calibrated = calibrateScore({
@@ -481,5 +484,12 @@ export const sampleComparisonResult = compareScanResults(
       }
     ]
   },
-  sampleScanResult
+  sampleScanResult,
+  {
+    changedFiles: [
+      { path: "package.json", status: "modified", source: "explicit" },
+      { path: "AGENTS.md", status: "modified", source: "explicit" },
+      { path: "llms.txt", status: "added", source: "explicit" }
+    ]
+  }
 );

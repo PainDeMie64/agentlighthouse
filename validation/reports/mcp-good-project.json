@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_bc84858a",
+  "scanId": "scan_2d358cb0",
   "scannedPath": "<repo>/examples/mcp-good-project",
-  "startedAt": "2026-05-20T20:22:52.915Z",
-  "completedAt": "2026-05-20T20:22:52.919Z",
-  "durationMs": 4,
+  "startedAt": "2026-05-20T20:44:21.214Z",
+  "completedAt": "2026-05-20T20:44:21.217Z",
+  "durationMs": 3,
   "agentLighthouseVersion": "0.1.0",
   "profile": "mcp",
   "scoringModelVersion": "0.1.0",
@@ -92,7 +92,15 @@
       "fingerprint": "alh_d545fec5",
       "identityParts": ["agent-instructions.claude-vague", "claude.md", "claude.md"],
       "locationKey": "claude.md",
-      "subject": "CLAUDE.md"
+      "subject": "CLAUDE.md",
+      "location": {
+        "file": "CLAUDE.md",
+        "startLine": 1,
+        "locationKey": "claude.md",
+        "subject": "CLAUDE.md",
+        "symbol": "CLAUDE.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "api.openapi-not-detected",
@@ -111,7 +119,14 @@
         "no openapi.* or swagger.* file was scanned."
       ],
       "locationKey": "no openapi.* or swagger.* file was scanned.",
-      "subject": "No openapi.* or swagger.* file was scanned."
+      "subject": "No openapi.* or swagger.* file was scanned.",
+      "location": {
+        "file": "No openapi.* or swagger.* file was scanned.",
+        "locationKey": "no openapi.* or swagger.* file was scanned.",
+        "subject": "No openapi.* or swagger.* file was scanned.",
+        "symbol": "No openapi.* or swagger.* file was scanned.",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "mcp.detected",
@@ -127,7 +142,15 @@
       "fingerprint": "alh_0a35bf27",
       "identityParts": ["mcp.detected", "src/mcp-server.example.txt", "src/mcp-server.example.txt"],
       "locationKey": "src/mcp-server.example.txt",
-      "subject": "src/mcp-server.example.txt"
+      "subject": "src/mcp-server.example.txt",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 1,
+        "locationKey": "src/mcp-server.example.txt",
+        "subject": "src/mcp-server.example.txt",
+        "symbol": "src/mcp-server.example.txt",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -148,7 +171,14 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+      "location": {
+        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "sourceKind": "unknown"
+      }
     }
   ],
   "scoreInterpretation": {
@@ -326,7 +356,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-good-project",
-  "scannedAt": "2026-05-20T20:22:52.919Z",
+  "scannedAt": "2026-05-20T20:44:21.217Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

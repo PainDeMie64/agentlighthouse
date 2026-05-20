@@ -87,6 +87,9 @@ CI gates should combine score, severity, and confidence:
 ```bash
 agentlighthouse scan . --fail-under 80 --min-confidence medium
 agentlighthouse scan . --fail-on-severity high
+agentlighthouse compare --baseline baseline.json --current current.json --changed-files changed-files.txt --fail-on-new-changed-high
 ```
 
 A low score in CI means the project is not yet agent-ready under the selected profile. It does not mean the software is low quality for humans.
+
+PR-aware gates compare full scan results first, then use changed-file classification to decide whether new findings are likely introduced by the pull request. Global regressions are still reported because a PR can damage project-level agent context without a neat file-level owner.

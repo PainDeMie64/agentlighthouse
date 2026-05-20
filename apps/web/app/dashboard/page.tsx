@@ -1,9 +1,12 @@
 import { sampleComparisonResult, sampleScanResult } from "@agentlighthouse/core";
+import { ChangedFilesSummary } from "../../components/ChangedFilesSummary";
 import { DeltaSummary } from "../../components/DeltaSummary";
 import { FindingList } from "../../components/FindingList";
 import { FindingDeltaList } from "../../components/FindingDeltaList";
+import { ChangedFindingList, GlobalFindingList } from "../../components/PrFindingLists";
 import { ProductHeader } from "../../components/ProductHeader";
 import { ProjectSummary } from "../../components/ProjectSummary";
+import { PrImpactSummary } from "../../components/PrImpactSummary";
 import { RecommendationList } from "../../components/RecommendationList";
 import { ReportPreview } from "../../components/ReportPreview";
 import { ScoreCard } from "../../components/ScoreCard";
@@ -30,11 +33,19 @@ export default function DashboardPage() {
             <SubscoreGrid result={sampleScanResult} />
             <ScoreDeltaCard comparison={sampleComparisonResult} />
             <DeltaSummary comparison={sampleComparisonResult} />
+            <PrImpactSummary comparison={sampleComparisonResult} />
+            <ChangedFilesSummary comparison={sampleComparisonResult} />
             <FindingDeltaList comparison={sampleComparisonResult} />
             <FindingList result={sampleScanResult} />
           </div>
           <div className="space-y-6">
             <RecommendationList result={sampleScanResult} />
+            <ChangedFindingList
+              findings={sampleComparisonResult.prImpact?.newFindingsOnChangedFiles ?? []}
+            />
+            <GlobalFindingList
+              findings={sampleComparisonResult.prImpact?.globalNewFindings ?? []}
+            />
             <ReportPreview result={sampleScanResult} />
           </div>
         </div>

@@ -98,13 +98,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "bc0414a8"
+            "agentLighthouseFinding": "alh_d4b63c10"
           },
           "properties": {
             "category": "api_schema",
             "severity": "info",
             "recommendation": "Keep API descriptions, examples, and auth details current.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "openapi.yaml",
+            "locationKey": "openapi.yaml",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -113,14 +116,29 @@
           "message": {
             "text": "MCP readiness could not be evaluated yet: If this project exposes MCP tools, include server files and clear tool descriptions."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "No file or package name matching MCP was scanned."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "79ec46eb"
+            "agentLighthouseFinding": "alh_0a02b750"
           },
           "properties": {
             "category": "mcp_tools",
             "severity": "info",
             "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "No file or package name matching MCP was scanned.",
+            "locationKey": "no file or package name matching mcp was scanned.",
+            "sourceKind": "unknown"
           }
         },
         {
@@ -129,8 +147,20 @@
           "message": {
             "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Run with --probe commands or --run-probes to execute safe script probes."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "2960598d"
+            "agentLighthouseFinding": "alh_ac2d574f"
           },
           "properties": {
             "category": "setup_and_tests",
@@ -138,7 +168,10 @@
             "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
             "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
             "fixExample": "agentlighthouse scan . --probe commands",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+            "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+            "sourceKind": "unknown"
           }
         }
       ]

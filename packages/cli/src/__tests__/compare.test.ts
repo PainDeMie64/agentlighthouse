@@ -67,6 +67,27 @@ describe("runCompareCommand", () => {
     expect(report).toContain("AgentLighthouse PR Delta");
     expect(process.exitCode).toBe(1);
   });
+
+  it("writes PR-aware summaries and fails changed-file gates after writing output", async () => {
+    const { baselinePath, currentPath, outputDir } = await comparisonFixture();
+    const changedFilesPath = path.join(outputDir, "changed-files.txt");
+    const outputPath = path.join(outputDir, "delta.md");
+    await writeFile(changedFilesPath, "M\tREADME.md\nM\tpackage.json\nA\tAGENTS.md\n", "utf8");
+
+    await runCompareCommand({
+      baseline: baselinePath,
+      current: currentPath,
+      changedFiles: changedFilesPath,
+      format: "pr-summary",
+      output: outputPath,
+      failOnNewChangedHigh: true
+    });
+
+    const report = await readFile(outputPath, "utf8");
+    expect(report).toContain("Changed files analyzed");
+    expect(report).toContain("New Findings On Changed Files");
+    expect(process.exitCode).toBe(1);
+  });
 });
 
 async function comparisonFixture(): Promise<{

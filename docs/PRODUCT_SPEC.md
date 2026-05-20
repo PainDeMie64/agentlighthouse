@@ -39,10 +39,19 @@
 - GitHub Action baseline input for token-free PR delta reports.
 - Dashboard comparison demo using the same comparison result shape as the CLI.
 
+## Phase 2D Capabilities
+
+- Changed-file context from explicit files or local git refs.
+- PR impact buckets for touched, related, global, unrelated, and unknown-location findings.
+- PR-focused gates for new high-risk findings on changed files.
+- Improved finding locations for Markdown sections, OpenAPI operations, MCP tools, and task benchmarks.
+- SARIF line regions when locations are available.
+- Dashboard PR impact demo.
+
 ## Future Features
 
 - GitHub Checks reports and token-backed PR comments.
-- Baseline comparison and score regression detection.
+- Scan-plus-baseline convenience mode.
 - Docs-site crawler.
 - Deeper OpenAPI operation and example validation.
 - MCP server introspection and tool-description scoring.

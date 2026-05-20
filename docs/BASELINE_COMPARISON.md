@@ -10,7 +10,7 @@ Phase 2C implements baseline comparison for saved AgentLighthouse JSON scan resu
 - Detect new high-severity findings.
 - Detect resolved findings.
 - Generate PR delta summaries.
-- Support changed-files-only mode when useful.
+- Support PR-aware changed-file classification without making changed-files-only scans the default.
 - Compare pull requests against the main branch.
 - Feed GitHub Checks without requiring a hosted service.
 
@@ -23,9 +23,13 @@ agentlighthouse compare --baseline main.json --current current.json --format mar
 agentlighthouse compare --baseline main.json --current current.json --format pr-summary --output pr-delta.md
 agentlighthouse compare --baseline main.json --current current.json --fail-on-regression
 agentlighthouse compare --baseline main.json --current current.json --fail-on-score-drop 5 --fail-on-new-severity high
+agentlighthouse compare --baseline main.json --current current.json --changed-files changed-files.txt --format pr-summary
+agentlighthouse compare --baseline main.json --current current.json --git-base origin/main --git-head HEAD --fail-on-pr-regression
 ```
 
 The compare command does not rescan. It reads two saved JSON reports, which keeps CI deterministic and makes it easy to compare local, artifact, or branch-generated reports.
+
+Changed-file inputs are optional. Full scans remain the source of truth; changed files classify which findings are most relevant to the pull request.
 
 ## Baseline Storage Strategies
 
@@ -79,8 +83,24 @@ Score deltas are shown alongside confidence and coverage deltas so a project is 
 - `--fail-on-new-severity <severity>`
 - `--fail-on-new-critical`
 - `--fail-on-new-high`
+- `--fail-on-new-changed-severity <severity>`
+- `--fail-on-new-changed-critical`
+- `--fail-on-new-changed-high`
+- `--fail-on-pr-regression`
 
 Reports are written before gates fail.
+
+## PR-Aware Changed Files
+
+Use either an explicit changed-files list or local git refs:
+
+```bash
+git diff --name-status origin/main...HEAD > changed-files.txt
+agentlighthouse compare --baseline baseline.json --current current.json --changed-files changed-files.txt
+agentlighthouse compare --baseline baseline.json --current current.json --git-base origin/main --git-head HEAD
+```
+
+If both explicit changed files and git refs are supplied, the CLI exits with a clear error. The comparison report separates new findings on changed files from global findings and unrelated existing findings.
 
 ## Open Questions
 

@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_06e2acf4",
+  "scanId": "scan_7793b496",
   "scannedPath": "<repo>/examples/sample-good-project",
-  "startedAt": "2026-05-20T20:22:52.724Z",
-  "completedAt": "2026-05-20T20:22:52.730Z",
+  "startedAt": "2026-05-20T20:44:21.027Z",
+  "completedAt": "2026-05-20T20:44:21.033Z",
   "durationMs": 6,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
@@ -97,7 +97,15 @@
       "fingerprint": "alh_d4b63c10",
       "identityParts": ["api.openapi-detected", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "mcp.not-evaluated",
@@ -116,7 +124,14 @@
         "no file or package name matching mcp was scanned."
       ],
       "locationKey": "no file or package name matching mcp was scanned.",
-      "subject": "No file or package name matching MCP was scanned."
+      "subject": "No file or package name matching MCP was scanned.",
+      "location": {
+        "file": "No file or package name matching MCP was scanned.",
+        "locationKey": "no file or package name matching mcp was scanned.",
+        "subject": "No file or package name matching MCP was scanned.",
+        "symbol": "No file or package name matching MCP was scanned.",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -137,7 +152,14 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+      "location": {
+        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "sourceKind": "unknown"
+      }
     }
   ],
   "scoreInterpretation": {
@@ -318,7 +340,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-good-project",
-  "scannedAt": "2026-05-20T20:22:52.730Z",
+  "scannedAt": "2026-05-20T20:44:21.033Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_9b50675d",
+  "scanId": "scan_0c016e45",
   "scannedPath": "<repo>/examples/mcp-bad-project",
-  "startedAt": "2026-05-20T20:22:52.938Z",
-  "completedAt": "2026-05-20T20:22:52.940Z",
+  "startedAt": "2026-05-20T20:44:21.235Z",
+  "completedAt": "2026-05-20T20:44:21.237Z",
   "durationMs": 2,
   "agentLighthouseVersion": "0.1.0",
   "profile": "mcp",
@@ -112,7 +112,14 @@
       "fingerprint": "alh_3a0ad1c7",
       "identityParts": ["agent-instructions.missing-agents-md", "agents.md", "agents.md"],
       "locationKey": "agents.md",
-      "subject": "AGENTS.md"
+      "subject": "AGENTS.md",
+      "location": {
+        "file": "AGENTS.md",
+        "locationKey": "agents.md",
+        "subject": "AGENTS.md",
+        "symbol": "AGENTS.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "agent-instructions.missing-claude-md",
@@ -128,7 +135,14 @@
       "fingerprint": "alh_2919953b",
       "identityParts": ["agent-instructions.missing-claude-md", "claude.md", "claude.md"],
       "locationKey": "claude.md",
-      "subject": "CLAUDE.md"
+      "subject": "CLAUDE.md",
+      "location": {
+        "file": "CLAUDE.md",
+        "locationKey": "claude.md",
+        "subject": "CLAUDE.md",
+        "symbol": "CLAUDE.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.READMEmd.missing-clear-test-command",
@@ -150,7 +164,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
@@ -172,7 +194,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.readme-missing-verification-step",
@@ -194,7 +224,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
@@ -216,7 +254,15 @@
         "readme.md"
       ],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "llms.missing",
@@ -232,7 +278,14 @@
       "fingerprint": "alh_dcee23b7",
       "identityParts": ["llms.missing", "llms.txt", "llms.txt"],
       "locationKey": "llms.txt",
-      "subject": "llms.txt"
+      "subject": "llms.txt",
+      "location": {
+        "file": "llms.txt",
+        "locationKey": "llms.txt",
+        "subject": "llms.txt",
+        "symbol": "llms.txt",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.readme-no-quickstart",
@@ -248,7 +301,15 @@
       "fingerprint": "alh_2fb4df74",
       "identityParts": ["docs.readme-no-quickstart", "readme.md", "readme.md"],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.readme-no-install",
@@ -264,7 +325,15 @@
       "fingerprint": "alh_e1c052e4",
       "identityParts": ["docs.readme-no-install", "readme.md", "readme.md"],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.readme-no-examples",
@@ -280,7 +349,15 @@
       "fingerprint": "alh_b662d04a",
       "identityParts": ["docs.readme-no-examples", "readme.md", "readme.md"],
       "locationKey": "readme.md",
-      "subject": "README.md"
+      "subject": "README.md",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md",
+        "subject": "README.md",
+        "symbol": "README.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "docs.directory-missing",
@@ -296,7 +373,14 @@
       "fingerprint": "alh_80dc9ef2",
       "identityParts": ["docs.directory-missing", "docs/", "docs/"],
       "locationKey": "docs/",
-      "subject": "docs/"
+      "subject": "docs/",
+      "location": {
+        "file": "docs/",
+        "locationKey": "docs/",
+        "subject": "docs/",
+        "symbol": "docs/",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "setup.package-json-no-scripts",
@@ -312,7 +396,15 @@
       "fingerprint": "alh_59ea6562",
       "identityParts": ["setup.package-json-no-scripts", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "setup.missing-test-script",
@@ -328,7 +420,15 @@
       "fingerprint": "alh_2c1c9c49",
       "identityParts": ["setup.missing-test-script", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "setup.missing-lint-script",
@@ -344,7 +444,15 @@
       "fingerprint": "alh_6630a79a",
       "identityParts": ["setup.missing-lint-script", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "setup.missing-typecheck-script",
@@ -360,7 +468,15 @@
       "fingerprint": "alh_101dfc87",
       "identityParts": ["setup.missing-typecheck-script", "package.json", "package.json"],
       "locationKey": "package.json",
-      "subject": "package.json"
+      "subject": "package.json",
+      "location": {
+        "file": "package.json",
+        "startLine": 1,
+        "locationKey": "package.json",
+        "subject": "package.json",
+        "symbol": "package.json",
+        "sourceKind": "config"
+      }
     },
     {
       "id": "api.openapi-not-detected",
@@ -379,7 +495,14 @@
         "no openapi.* or swagger.* file was scanned."
       ],
       "locationKey": "no openapi.* or swagger.* file was scanned.",
-      "subject": "No openapi.* or swagger.* file was scanned."
+      "subject": "No openapi.* or swagger.* file was scanned.",
+      "location": {
+        "file": "No openapi.* or swagger.* file was scanned.",
+        "locationKey": "no openapi.* or swagger.* file was scanned.",
+        "subject": "No openapi.* or swagger.* file was scanned.",
+        "symbol": "No openapi.* or swagger.* file was scanned.",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "mcp.detected",
@@ -395,7 +518,15 @@
       "fingerprint": "alh_0a35bf27",
       "identityParts": ["mcp.detected", "src/mcp-server.example.txt", "src/mcp-server.example.txt"],
       "locationKey": "src/mcp-server.example.txt",
-      "subject": "src/mcp-server.example.txt"
+      "subject": "src/mcp-server.example.txt",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 1,
+        "locationKey": "src/mcp-server.example.txt",
+        "subject": "src/mcp-server.example.txt",
+        "symbol": "src/mcp-server.example.txt",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "security.missing-agentlighthouseignore",
@@ -415,7 +546,14 @@
         ".agentlighthouseignore"
       ],
       "locationKey": ".agentlighthouseignore",
-      "subject": ".agentlighthouseignore"
+      "subject": ".agentlighthouseignore",
+      "location": {
+        "file": ".agentlighthouseignore",
+        "locationKey": ".agentlighthouseignore",
+        "subject": ".agentlighthouseignore",
+        "symbol": ".agentlighthouseignore",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "security.agent-secret-guidance-missing",
@@ -431,7 +569,14 @@
       "fingerprint": "alh_7624eb5d",
       "identityParts": ["security.agent-secret-guidance-missing", "agents.md", "agents.md"],
       "locationKey": "agents.md",
-      "subject": "AGENTS.md"
+      "subject": "AGENTS.md",
+      "location": {
+        "file": "AGENTS.md",
+        "locationKey": "agents.md",
+        "subject": "AGENTS.md",
+        "symbol": "AGENTS.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "freshness.deprecated-or-todo-terms",
@@ -450,7 +595,15 @@
         "readme.md:3: tools coming soon."
       ],
       "locationKey": "readme.md:3: tools coming soon.",
-      "subject": "README.md:3: Tools coming soon."
+      "subject": "README.md:3: Tools coming soon.",
+      "location": {
+        "file": "README.md",
+        "startLine": 1,
+        "locationKey": "readme.md:3: tools coming soon.",
+        "subject": "README.md:3: Tools coming soon.",
+        "symbol": "README.md:3: Tools coming soon.",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "MCP_TOOL_NAME_AMBIGUOUS",
@@ -468,7 +621,15 @@
       "fingerprint": "alh_1fd7cdd1",
       "identityParts": ["MCP_TOOL_NAME_AMBIGUOUS", "src/mcp-server.example.txt#tool:run", "run"],
       "locationKey": "src/mcp-server.example.txt#tool:run",
-      "subject": "run"
+      "subject": "run",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 5,
+        "locationKey": "src/mcp-server.example.txt#tool:run",
+        "subject": "run",
+        "symbol": "run",
+        "sourceKind": "mcp"
+      }
     },
     {
       "id": "MCP_TOOL_DESCRIPTION_SHALLOW",
@@ -490,7 +651,15 @@
         "run"
       ],
       "locationKey": "src/mcp-server.example.txt#tool:run",
-      "subject": "run"
+      "subject": "run",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 5,
+        "locationKey": "src/mcp-server.example.txt#tool:run",
+        "subject": "run",
+        "symbol": "run",
+        "sourceKind": "mcp"
+      }
     },
     {
       "id": "MCP_TOOL_INPUT_SCHEMA_MISSING",
@@ -512,7 +681,15 @@
         "run"
       ],
       "locationKey": "src/mcp-server.example.txt#tool:run",
-      "subject": "run"
+      "subject": "run",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 5,
+        "locationKey": "src/mcp-server.example.txt#tool:run",
+        "subject": "run",
+        "symbol": "run",
+        "sourceKind": "mcp"
+      }
     },
     {
       "id": "MCP_TOOL_EXAMPLE_MISSING",
@@ -530,7 +707,15 @@
       "fingerprint": "alh_fcf7d67a",
       "identityParts": ["MCP_TOOL_EXAMPLE_MISSING", "src/mcp-server.example.txt#tool:run", "run"],
       "locationKey": "src/mcp-server.example.txt#tool:run",
-      "subject": "run"
+      "subject": "run",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 5,
+        "locationKey": "src/mcp-server.example.txt#tool:run",
+        "subject": "run",
+        "symbol": "run",
+        "sourceKind": "mcp"
+      }
     },
     {
       "id": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED",
@@ -552,7 +737,15 @@
         "delete"
       ],
       "locationKey": "src/mcp-server.example.txt#tool:delete",
-      "subject": "delete"
+      "subject": "delete",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 9,
+        "locationKey": "src/mcp-server.example.txt#tool:delete",
+        "subject": "delete",
+        "symbol": "delete",
+        "sourceKind": "mcp"
+      }
     },
     {
       "id": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR",
@@ -574,7 +767,15 @@
         "run"
       ],
       "locationKey": "src/mcp-server.example.txt#tool:run",
-      "subject": "run"
+      "subject": "run",
+      "location": {
+        "file": "src/mcp-server.example.txt",
+        "startLine": 5,
+        "locationKey": "src/mcp-server.example.txt#tool:run",
+        "subject": "run",
+        "symbol": "run",
+        "sourceKind": "mcp"
+      }
     },
     {
       "id": "TASK_BENCHMARK_MISSING",
@@ -596,7 +797,14 @@
         "agentlighthouse.tasks.yaml"
       ],
       "locationKey": "agentlighthouse.tasks.yaml",
-      "subject": "agentlighthouse.tasks.yaml"
+      "subject": "agentlighthouse.tasks.yaml",
+      "location": {
+        "file": "agentlighthouse.tasks.yaml",
+        "locationKey": "agentlighthouse.tasks.yaml",
+        "subject": "agentlighthouse.tasks.yaml",
+        "symbol": "agentlighthouse.tasks.yaml",
+        "sourceKind": "task"
+      }
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -617,7 +825,14 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+      "location": {
+        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "sourceKind": "unknown"
+      }
     }
   ],
   "scoreInterpretation": {
@@ -753,7 +968,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-bad-project",
-  "scannedAt": "2026-05-20T20:22:52.940Z",
+  "scannedAt": "2026-05-20T20:44:21.237Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

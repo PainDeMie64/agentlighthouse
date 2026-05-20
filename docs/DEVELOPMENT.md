@@ -26,6 +26,7 @@ pnpm --filter @agentlighthouse/cli dev scan . --json
 pnpm --filter @agentlighthouse/cli dev scan . --format sarif --output agentlighthouse.sarif
 pnpm --filter @agentlighthouse/cli dev scan . --format pr-summary --github-step-summary
 pnpm --filter @agentlighthouse/cli dev compare --baseline validation/reports/sample-good-project.json --current validation/reports/sample-bad-project.json --format markdown
+pnpm --filter @agentlighthouse/cli dev compare --baseline validation/reports/sample-good-project.json --current validation/reports/sample-bad-project.json --changed-files examples/comparison/changed-files.txt --format pr-summary
 pnpm --filter @agentlighthouse/cli dev init . --dry-run
 ```
 

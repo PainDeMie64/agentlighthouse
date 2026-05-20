@@ -16,7 +16,10 @@ AgentLighthouse includes a first composite GitHub Action for CI use. It scans th
     baseline: agentlighthouse-baseline.json
     comparison-output: agentlighthouse-delta.md
     comparison-format: pr-summary
+    git-base: origin/main
+    git-head: HEAD
     fail-on-regression: "true"
+    fail-on-pr-regression: "true"
 ```
 
 ## Inputs
@@ -33,6 +36,10 @@ AgentLighthouse includes a first composite GitHub Action for CI use. It scans th
 - `comparison-output`: optional comparison report output path.
 - `comparison-format`: `text`, `json`, `markdown`, or `pr-summary`.
 - `fail-on-regression`, `fail-on-score-drop`, `fail-on-coverage-drop`, `fail-on-confidence-drop`, `fail-on-new-severity`: comparison gates.
+- `changed-files`: optional changed-files list path for PR-aware comparison.
+- `git-base`, `git-head`: optional local git refs used to compute changed files.
+- `pr-mode`: documentation flag for PR-aware usage; changed-file inputs activate PR impact output.
+- `fail-on-new-changed-severity`, `fail-on-new-changed-high`, `fail-on-new-changed-critical`, `fail-on-pr-regression`: PR-focused gates.
 
 ## Important Behavior
 
@@ -41,3 +48,19 @@ The action scans `${{ github.workspace }}`, not the action repository. Reports a
 This phase uses a source checkout action that installs and builds AgentLighthouse from the action path. A packaged action or npm distribution should make this faster later.
 
 When `baseline` is provided, the action writes a current JSON report and runs `agentlighthouse compare`. No GitHub token is required for the comparison itself.
+
+For PR-aware git comparison, configure checkout with full history:
+
+```yaml
+- uses: actions/checkout@v4
+  with:
+    fetch-depth: 0
+- uses: PainDeMie64/agentlighthouse@main
+  with:
+    baseline: agentlighthouse-baseline.json
+    git-base: origin/${{ github.base_ref }}
+    git-head: HEAD
+    fail-on-pr-regression: "true"
+```
+
+If a workflow already generates `changed-files.txt`, pass it with `changed-files`. Do not pass both `changed-files` and `git-base`/`git-head`; the CLI rejects ambiguous changed-file sources.

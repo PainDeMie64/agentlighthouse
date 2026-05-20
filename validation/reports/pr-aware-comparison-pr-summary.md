@@ -5,6 +5,23 @@
 Score: **85 -> 0** (-85)
 Confidence: **medium -> low** (-8)
 Coverage: **67% -> 93%** (+26%)
+Changed files analyzed: **5**
+
+### New Findings On Changed Files
+
+1. **high** `agent-instructions.missing-agents-md`: Missing AGENTS.md (AGENTS.md, AGENTS.md)
+2. **high** `setup.missing-test-script`: No test script in package.json (package.json:1, package.json)
+3. **high** `setup.package-json-no-scripts`: package.json has no scripts (package.json:1, package.json)
+4. **medium** `artifact-quality.READMEmd.missing-architecture-or-repo-map`: README.md exists, but does not include architecture or repo map (README.md:1, README.md)
+5. **medium** `artifact-quality.READMEmd.missing-clear-test-command`: README.md exists, but does not include clear test command (README.md:1, README.md)
+
+### Resolved Findings On Changed Files
+
+None.
+
+### New Global Findings
+
+1. **info** `api.openapi-not-detected`: OpenAPI file not detected (No openapi._ or swagger._ file was scanned., No openapi._ or swagger._ file was scanned.)
 
 ### New High-Severity Findings
 
@@ -34,5 +51,5 @@ Coverage: **67% -> 93%** (+26%)
 
 ### Reports
 
-- validation/reports/comparison-regressed.json
-- validation/reports/comparison-regressed.md
+- validation/reports/pr-aware-comparison.json
+- validation/reports/pr-aware-comparison.md

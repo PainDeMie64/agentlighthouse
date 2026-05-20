@@ -14,7 +14,8 @@ pnpm --filter @agentlighthouse/cli dev scan . --format sarif --output agentlight
 - `low` and `info` findings become SARIF `note` results.
 - Every emitted finding rule ID becomes a SARIF rule definition.
 - Affected files become SARIF locations when available.
-- Finding metadata is preserved in SARIF properties: category, severity, recommendation, agent failure mode, fix example, and score confidence.
+- Line regions are emitted when AgentLighthouse can locate a Markdown heading, OpenAPI operation, MCP tool registration, or benchmark task.
+- Finding metadata is preserved in SARIF properties: category, severity, recommendation, agent failure mode, fix example, score confidence, subject, location key, and source kind.
 
 SARIF output is deterministic and token-free. It does not upload anything by itself.
 
@@ -35,4 +36,4 @@ Use the generated SARIF with `github/codeql-action/upload-sarif`:
 
 ## Limitations
 
-AgentLighthouse does not yet emit SARIF quick fixes or precise source line numbers for every rule. Most findings are repository-artifact issues, so file-level annotations are the first useful layer.
+AgentLighthouse does not yet emit SARIF quick fixes or precise source line numbers for every rule. Some project-level findings intentionally have no location, and unknown-location findings should be handled in Markdown/PR summaries until scanner localization improves.

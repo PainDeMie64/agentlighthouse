@@ -73,6 +73,38 @@ inputs:
     description: Fail when a new finding is at or above this severity.
     required: false
     default: ""
+  changed-files:
+    description: Optional changed-files list path inside the caller workspace.
+    required: false
+    default: ""
+  git-base:
+    description: Optional git base ref for PR-aware comparison.
+    required: false
+    default: ""
+  git-head:
+    description: Optional git head ref for PR-aware comparison.
+    required: false
+    default: ""
+  pr-mode:
+    description: Set to "true" to enable PR-aware comparison summaries when changed-file context is available.
+    required: false
+    default: "false"
+  fail-on-new-changed-severity:
+    description: Fail when a new finding at or above this severity appears on changed files.
+    required: false
+    default: ""
+  fail-on-new-changed-high:
+    description: Fail when a new high or critical finding appears on changed files.
+    required: false
+    default: "false"
+  fail-on-new-changed-critical:
+    description: Fail when a new critical finding appears on changed files.
+    required: false
+    default: "false"
+  fail-on-pr-regression:
+    description: Fail when score drops or a high/critical finding appears on changed files.
+    required: false
+    default: "false"
 runs:
   using: composite
   steps:
@@ -184,10 +216,45 @@ runs:
             compare_gate_args+=(--fail-on-new-severity "${{ inputs.fail-on-new-severity }}")
           fi
 
+          if [ -n "${{ inputs.changed-files }}" ]; then
+            compare_gate_args+=(--changed-files "$GITHUB_WORKSPACE/${{ inputs.changed-files }}")
+          elif [ -n "${{ inputs.git-base }}" ] || [ -n "${{ inputs.git-head }}" ]; then
+            compare_gate_args+=(--git-base "${{ inputs.git-base }}" --git-head "${{ inputs.git-head }}")
+          fi
+
+          if [ -n "${{ inputs.fail-on-new-changed-severity }}" ]; then
+            compare_gate_args+=(--fail-on-new-changed-severity "${{ inputs.fail-on-new-changed-severity }}")
+          fi
+
+          if [ "${{ inputs.fail-on-new-changed-high }}" = "true" ]; then
+            compare_gate_args+=(--fail-on-new-changed-high)
+          fi
+
+          if [ "${{ inputs.fail-on-new-changed-critical }}" = "true" ]; then
+            compare_gate_args+=(--fail-on-new-changed-critical)
+          fi
+
+          if [ "${{ inputs.fail-on-pr-regression }}" = "true" ]; then
+            compare_gate_args+=(--fail-on-pr-regression)
+          fi
+
+          set +e
           pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev compare \
             --baseline "$GITHUB_WORKSPACE/${{ inputs.baseline }}" \
             --current "$GITHUB_WORKSPACE/agentlighthouse-report.json" \
             --format "${{ inputs.comparison-format }}" \
             --output "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}" \
             "${compare_gate_args[@]}"
+          compare_status=$?
+          set -e
+
+          if [ "${{ inputs.github-step-summary }}" = "true" ] && [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+            {
+              echo ""
+              echo "---"
+              cat "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          exit "$compare_status"
         fi

@@ -244,4 +244,8 @@ Findings also include stable fingerprints derived from rule ID, normalized affec
 
 ## SARIF Notes
 
-Every emitted rule becomes a SARIF rule definition. Findings with an affected file become file-level annotations. Future phases may add line-precise locations and SARIF quick fixes.
+Every emitted rule becomes a SARIF rule definition. Findings with an affected file become annotations, and rules with reliable Markdown/OpenAPI/MCP/task anchors include line regions. Future phases may add SARIF quick fixes.
+
+## PR-Aware Notes
+
+Rule IDs and fingerprints are stable inputs to baseline comparison. When a finding includes `location`, `subject`, and `locationKey`, AgentLighthouse can classify it as touched, related, global, unrelated, or unknown during PR-aware comparison.

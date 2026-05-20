@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_f3c79802",
+  "scanId": "scan_64789f47",
   "scannedPath": "<repo>/examples/openapi-good-project",
-  "startedAt": "2026-05-20T20:22:52.814Z",
-  "completedAt": "2026-05-20T20:22:52.821Z",
-  "durationMs": 7,
+  "startedAt": "2026-05-20T20:44:21.114Z",
+  "completedAt": "2026-05-20T20:44:21.120Z",
+  "durationMs": 6,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -92,7 +92,15 @@
       "fingerprint": "alh_fe530980",
       "identityParts": ["agent-instructions.agents-too-short", "agents.md", "agents.md"],
       "locationKey": "agents.md",
-      "subject": "AGENTS.md"
+      "subject": "AGENTS.md",
+      "location": {
+        "file": "AGENTS.md",
+        "startLine": 1,
+        "locationKey": "agents.md",
+        "subject": "AGENTS.md",
+        "symbol": "AGENTS.md",
+        "sourceKind": "markdown"
+      }
     },
     {
       "id": "api.openapi-detected",
@@ -108,7 +116,15 @@
       "fingerprint": "alh_d4b63c10",
       "identityParts": ["api.openapi-detected", "openapi.yaml", "openapi.yaml"],
       "locationKey": "openapi.yaml",
-      "subject": "openapi.yaml"
+      "subject": "openapi.yaml",
+      "location": {
+        "file": "openapi.yaml",
+        "startLine": 1,
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml",
+        "symbol": "openapi.yaml",
+        "sourceKind": "openapi"
+      }
     },
     {
       "id": "mcp.not-evaluated",
@@ -127,7 +143,14 @@
         "no file or package name matching mcp was scanned."
       ],
       "locationKey": "no file or package name matching mcp was scanned.",
-      "subject": "No file or package name matching MCP was scanned."
+      "subject": "No file or package name matching MCP was scanned.",
+      "location": {
+        "file": "No file or package name matching MCP was scanned.",
+        "locationKey": "no file or package name matching mcp was scanned.",
+        "subject": "No file or package name matching MCP was scanned.",
+        "symbol": "No file or package name matching MCP was scanned.",
+        "sourceKind": "unknown"
+      }
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -148,7 +171,14 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+      "location": {
+        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
+        "sourceKind": "unknown"
+      }
     }
   ],
   "scoreInterpretation": {
@@ -320,7 +350,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/openapi-good-project",
-  "scannedAt": "2026-05-20T20:22:52.821Z",
+  "scannedAt": "2026-05-20T20:44:21.120Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

@@ -13,6 +13,62 @@ AgentLighthouse compares **agent-readiness**, not general software quality. A sc
 | Coverage         |      67% |     93% |  +26% |
 | Findings         |        3 |      22 |   +19 |
 
+## PR Impact Summary
+
+5 changed file(s) analyzed; 16 new finding(s) on changed files, 1 new global finding(s), 0 unknown-location finding(s).
+
+| Bucket                             | Count |
+| ---------------------------------- | ----: |
+| Changed files                      |     5 |
+| New findings on changed files      |    16 |
+| Resolved findings on changed files |     0 |
+| New global findings                |     1 |
+| Unknown-location findings          |     0 |
+| Unrelated existing findings        |     0 |
+
+## Changed Files
+
+- modified: README.md
+- modified: package.json
+- added: AGENTS.md
+- added: llms.txt
+- added: agentlighthouse.tasks.yaml
+
+## New Findings On Changed Files
+
+1. **high** `agent-instructions.missing-agents-md`: Missing AGENTS.md (AGENTS.md, AGENTS.md)
+2. **high** `setup.missing-test-script`: No test script in package.json (package.json:1, package.json)
+3. **high** `setup.package-json-no-scripts`: package.json has no scripts (package.json:1, package.json)
+4. **medium** `artifact-quality.READMEmd.missing-architecture-or-repo-map`: README.md exists, but does not include architecture or repo map (README.md:1, README.md)
+5. **medium** `artifact-quality.READMEmd.missing-clear-test-command`: README.md exists, but does not include clear test command (README.md:1, README.md)
+6. **medium** `docs.readme-no-examples`: README.md has no examples (README.md:1, README.md)
+7. **medium** `docs.readme-no-install`: README.md has no installation instructions (README.md:1, README.md)
+8. **medium** `docs.readme-no-quickstart`: README.md has no quickstart section (README.md:1, README.md)
+9. **medium** `llms.missing`: Missing llms.txt (llms.txt, llms.txt)
+10. **medium** `security.agent-secret-guidance-missing`: Instructions do not tell agents how to handle secrets (AGENTS.md, AGENTS.md)
+11. **medium** `setup.missing-lint-script`: No lint script in package.json (package.json:1, package.json)
+12. **medium** `setup.missing-typecheck-script`: No typecheck script in package.json (package.json:1, package.json)
+13. **medium** `TASK_BENCHMARK_MISSING`: Missing agent task benchmark file (agentlighthouse.tasks.yaml, agentlighthouse.tasks.yaml)
+14. **low** `artifact-quality.readme-commands-not-grounded-in-scripts`: README commands are not clearly grounded in package.json scripts (README.md:1, README.md)
+15. **low** `artifact-quality.readme-missing-verification-step`: README has installation guidance but no verification step (README.md:1, README.md)
+16. **low** `freshness.deprecated-or-todo-terms`: Docs contain TODO/deprecated-looking terms without migration guidance (README.md:1, README.md:3: Coming soon.)
+
+## Resolved Findings On Changed Files
+
+None.
+
+## New Global Findings
+
+1. **info** `api.openapi-not-detected`: OpenAPI file not detected (No openapi._ or swagger._ file was scanned., No openapi._ or swagger._ file was scanned.)
+
+## Unknown-Location Findings
+
+None.
+
+## Unrelated Existing Findings Summary
+
+0 unchanged finding(s) are outside the changed-file set.
+
 ## Gate Status
 
 No comparison gate status was provided.

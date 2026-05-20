@@ -1,7 +1,11 @@
+import { execFile } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { promisify } from "node:util";
 import {
   compareScanResults,
+  parseChangedFilesText,
+  parseGitNameStatus,
   renderComparisonCliReport,
   renderComparisonJsonReport,
   renderComparisonMarkdownReport,
@@ -9,10 +13,12 @@ import {
   scanResultSchema,
   severityRank
 } from "@agentlighthouse/core";
-import type { ComparisonResult, Severity } from "@agentlighthouse/core";
+import type { ChangedFile, ComparisonResult, Severity } from "@agentlighthouse/core";
 import { resolveFromInvocationCwd } from "../pathing.js";
 
 export type CompareFormat = "text" | "json" | "markdown" | "pr-summary";
+
+const execFileAsync = promisify(execFile);
 
 export interface CompareCommandOptions {
   baseline?: string;
@@ -26,6 +32,13 @@ export interface CompareCommandOptions {
   failOnNewSeverity?: Severity;
   failOnNewCritical?: boolean;
   failOnNewHigh?: boolean;
+  changedFiles?: string;
+  gitBase?: string;
+  gitHead?: string;
+  failOnNewChangedSeverity?: Severity;
+  failOnNewChangedCritical?: boolean;
+  failOnNewChangedHigh?: boolean;
+  failOnPrRegression?: boolean;
 }
 
 export async function runCompareCommand(options: CompareCommandOptions): Promise<void> {
@@ -41,7 +54,8 @@ export async function runCompareCommand(options: CompareCommandOptions): Promise
   }
   const baseline = await readScanResult(options.baseline);
   const current = await readScanResult(options.current);
-  const comparison = compareScanResults(baseline, current);
+  const changedFiles = await readChangedFiles(options);
+  const comparison = compareScanResults(baseline, current, { changedFiles });
   const gateResult = evaluateComparisonGates(comparison, options);
   const outputOption = options.output;
   const outputPath = outputOption ? resolveFromInvocationCwd(outputOption) : undefined;
@@ -69,7 +83,51 @@ export async function runCompareCommand(options: CompareCommandOptions): Promise
 async function readScanResult(filePath: string) {
   const resolved = resolveFromInvocationCwd(filePath);
   const parsed = JSON.parse(await readFile(resolved, "utf8")) as unknown;
+  if (parsed && typeof parsed === "object" && "comparisonId" in parsed && !("scanId" in parsed)) {
+    throw new Error(
+      `${filePath} is a comparison report. The compare command expects saved scan result JSON files for --baseline and --current.`
+    );
+  }
   return scanResultSchema.parse(parsed);
+}
+
+async function readChangedFiles(
+  options: CompareCommandOptions
+): Promise<ChangedFile[] | undefined> {
+  const hasExplicit = Boolean(options.changedFiles);
+  const hasGit = Boolean(options.gitBase || options.gitHead);
+  if (hasExplicit && hasGit) {
+    throw new Error("Use either --changed-files or --git-base/--git-head, not both.");
+  }
+  if (options.changedFiles) {
+    const resolved = resolveFromInvocationCwd(options.changedFiles);
+    return parseChangedFilesText(await readFile(resolved, "utf8"), "explicit");
+  }
+  if (options.gitBase || options.gitHead) {
+    if (!options.gitBase || !options.gitHead) {
+      throw new Error(
+        "Both --git-base and --git-head are required for git changed-file detection."
+      );
+    }
+    try {
+      const { stdout } = await execFileAsync(
+        "git",
+        ["diff", "--name-status", "-z", `${options.gitBase}...${options.gitHead}`],
+        {
+          cwd: process.cwd(),
+          encoding: "utf8",
+          maxBuffer: 1024 * 1024
+        }
+      );
+      return parseGitNameStatus(stdout, "git");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      throw new Error(
+        `Unable to read changed files from git refs ${options.gitBase}...${options.gitHead}: ${message}`
+      );
+    }
+  }
+  return undefined;
 }
 
 function renderComparisonResult(
@@ -81,7 +139,7 @@ function renderComparisonResult(
     return renderComparisonJsonReport(result);
   }
   if (format === "markdown") {
-    return renderComparisonMarkdownReport(result);
+    return renderComparisonMarkdownReport(result, options);
   }
   if (format === "pr-summary") {
     return renderComparisonPrSummaryReport(result, options);
@@ -105,6 +163,11 @@ function evaluateComparisonGates(
     : options.failOnNewHigh
       ? "high"
       : options.failOnNewSeverity;
+  const newChangedSeverity = options.failOnNewChangedCritical
+    ? "critical"
+    : options.failOnNewChangedHigh
+      ? "high"
+      : options.failOnNewChangedSeverity;
 
   if (options.failOnRegression && result.summary.regressionDetected) {
     reasons.push(`AgentLighthouse comparison verdict is ${result.summary.verdict}.`);
@@ -136,6 +199,42 @@ function evaluateComparisonGates(
       reasons.push(
         `AgentLighthouse found ${newFindings.length} new finding(s) at or above ${newSeverity} severity.`
       );
+    }
+  }
+  if (newChangedSeverity) {
+    if (!["critical", "high", "medium", "low", "info"].includes(newChangedSeverity)) {
+      throw new Error(`Unsupported fail-on-new-changed-severity "${newChangedSeverity}".`);
+    }
+    if (!result.prImpact) {
+      reasons.push(
+        "Changed-file gate requested, but no changed-file information was supplied. Use --changed-files or --git-base/--git-head."
+      );
+    } else {
+      const threshold = severityRank(newChangedSeverity);
+      const changedFindings = result.prImpact.newFindingsOnChangedFiles.filter(
+        (finding) => severityRank(finding.severity) >= threshold
+      );
+      if (changedFindings.length > 0) {
+        reasons.push(
+          `AgentLighthouse found ${changedFindings.length} new finding(s) at or above ${newChangedSeverity} severity on changed files.`
+        );
+      }
+    }
+  }
+  if (options.failOnPrRegression) {
+    if (!result.prImpact) {
+      reasons.push(
+        "PR regression gate requested, but no changed-file information was supplied. Use --changed-files or --git-base/--git-head."
+      );
+    } else {
+      const changedHighRisk = result.prImpact.newFindingsOnChangedFiles.filter(
+        (finding) => severityRank(finding.severity) >= severityRank("high")
+      );
+      if (result.deltas.scoreDelta < 0 || changedHighRisk.length > 0) {
+        reasons.push(
+          `AgentLighthouse PR regression detected: score delta ${result.deltas.scoreDelta}, ${changedHighRisk.length} new high/critical finding(s) on changed files.`
+        );
+      }
     }
   }
   return { failed: reasons.length > 0, reasons };

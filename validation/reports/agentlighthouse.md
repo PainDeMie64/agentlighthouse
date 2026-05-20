@@ -2,13 +2,13 @@
 
 AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
 
-Score: **85/100**
+Score: **95/100**
 
 Strong agent-readiness with 0 high-priority issue(s) remaining.
 
-Confidence: **Medium** (65/100)
+Confidence: **Medium** (76/100)
 
-Coverage: **63%**
+Coverage: **78%**
 
 ## Project Detection
 
@@ -21,8 +21,8 @@ Coverage: **63%**
 
 ## Score Interpretation
 
-- Agent-Readiness Score: 85/100
-- Human-readable project signals: 60/100 - README present, 19 Markdown doc file(s), package metadata present
+- Agent-Readiness Score: 95/100
+- Human-readable project signals: 60/100 - README present, 20 Markdown doc file(s), package metadata present
 - Agent-specific context layer: 68/100 - AGENTS.md present, CLAUDE.md present, llms.txt present, agent task benchmark present
 - Verifiability: 60/100 - test script declared, lint script declared, typecheck script declared, command probes not run
 
@@ -39,7 +39,7 @@ Coverage: **63%**
 - API & Tooling: 100/100
 - Examples & Tasks: 100/100
 - Security & Privacy: 100/100
-- Freshness & Consistency: 100/100
+- Freshness & Consistency: 98/100
 
 ## API Analysis
 
@@ -73,21 +73,20 @@ Coverage: **63%**
 
 ## Coverage
 
-- Evaluated checks: 5
+- Evaluated checks: 7
 - Skipped checks: 0
 - Not applicable checks: 3
-- Not evaluated checks: 3
-- Evaluated categories: agent_instructions, documentation, setup_and_tests, security_and_privacy, task_benchmarks
-- Missing categories: examples, freshness_and_consistency
+- Not evaluated checks: 2
+- Evaluated categories: agent_instructions, documentation, setup_and_tests, security_and_privacy, task_benchmarks, freshness_and_consistency
+- Missing categories: examples
 
 ## Scoring Caps
 
-- cap.low-coverage: max 85. Less than 70% of applicable checks were evaluated.
 - cap.shallow-key-artifacts: max 95. One or more key agent-readiness artifacts are shallow or partial.
 
 ## Top Findings
 
-No non-informational findings.
+- **low**: Docs contain TODO/deprecated-looking terms without migration guidance
 
 ## Recommended Actions
 
@@ -107,19 +106,32 @@ No non-informational findings.
 
 ## Scan Metadata
 
-- Scan ID: `scan_60145ae1`
+- Scan ID: `scan_d0c5614d`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T20:22:52.988Z
-- Completed: 2026-05-20T20:22:53.001Z
-- Duration: 13ms
-- Files scanned: 104
-- Text files read: 101
+- Started: 2026-05-20T20:44:21.281Z
+- Completed: 2026-05-20T20:44:21.295Z
+- Duration: 14ms
+- Files scanned: 110
+- Text files read: 107
 - Ignored paths observed: 12
 - Warnings: 0
 - Errors: 0
 
 ## Findings
+
+### Low
+
+#### Docs contain TODO/deprecated-looking terms without migration guidance
+
+- Rule ID: `freshness.deprecated-or-todo-terms`
+- Severity: low
+- Category: freshness_and_consistency
+- Affected file: n/a
+- Recommendation: Resolve TODOs or add explicit migration/replacement guidance.
+- Agent failure mode: n/a
+- Fix example: n/a
+- Evidence: docs/PR_AWARE_ANALYSIS.md:69: - `related`: the finding is linked through a location key, old path, or source file.
 
 ### Info
 

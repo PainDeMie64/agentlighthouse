@@ -63,6 +63,28 @@ program
   )
   .option("--fail-on-new-critical", "Exit with code 1 when a new critical finding appears")
   .option("--fail-on-new-high", "Exit with code 1 when a new high or critical finding appears")
+  .option(
+    "--changed-files <file>",
+    "Classify comparison findings using an explicit changed-files list"
+  )
+  .option("--git-base <ref>", "Read changed files from git diff using this base ref")
+  .option("--git-head <ref>", "Read changed files from git diff using this head ref")
+  .option(
+    "--fail-on-new-changed-severity <severity>",
+    "Exit with code 1 when a new finding at or above severity appears on changed files"
+  )
+  .option(
+    "--fail-on-new-changed-critical",
+    "Exit with code 1 when a new critical finding appears on changed files"
+  )
+  .option(
+    "--fail-on-new-changed-high",
+    "Exit with code 1 when a new high or critical finding appears on changed files"
+  )
+  .option(
+    "--fail-on-pr-regression",
+    "Exit with code 1 when score drops or new high/critical findings appear on changed files"
+  )
   .description("Compare two saved AgentLighthouse JSON scan reports.")
   .action((options: Parameters<typeof runCompareCommand>[0]) => {
     runCompareCommand(options).catch(handleError);

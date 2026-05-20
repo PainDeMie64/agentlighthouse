@@ -1,0 +1,25 @@
+name: AgentLighthouse changed-files list
+
+on:
+  pull_request:
+
+jobs:
+  agent-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build changed file list
+        shell: bash
+        run: |
+          git diff --name-status "${{ github.event.pull_request.base.sha }}"..."${{ github.sha }}" > changed-files.txt
+      - name: Run AgentLighthouse with explicit changed files
+        uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          baseline: agentlighthouse-baseline.json
+          comparison-format: markdown
+          comparison-output: agentlighthouse-pr-delta.md
+          changed-files: changed-files.txt
+          fail-on-new-changed-high: "true"

@@ -648,13 +648,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "bbdfc3d7"
+            "agentLighthouseFinding": "alh_3a0ad1c7"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "high",
             "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "AGENTS.md",
+            "locationKey": "agents.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -676,13 +679,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "a843b0cb"
+            "agentLighthouseFinding": "alh_2919953b"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "CLAUDE.md",
+            "locationKey": "claude.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -704,13 +710,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "f2b5304b"
+            "agentLighthouseFinding": "alh_e3728b0d"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Add clear test command to README.md.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -732,13 +741,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e3912ecf"
+            "agentLighthouseFinding": "alh_182aba10"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Add architecture or repo map to README.md.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -760,13 +772,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "c3aa03c8"
+            "agentLighthouseFinding": "alh_15490f29"
           },
           "properties": {
             "category": "documentation",
             "severity": "low",
             "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -788,13 +803,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "78b74532"
+            "agentLighthouseFinding": "alh_44385cfc"
           },
           "properties": {
             "category": "freshness_and_consistency",
             "severity": "low",
             "recommendation": "Show package-manager commands that map directly to package.json scripts.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -816,13 +834,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "c9911083"
+            "agentLighthouseFinding": "alh_dcee23b7"
           },
           "properties": {
             "category": "agent_instructions",
             "severity": "medium",
             "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "llms.txt",
+            "locationKey": "llms.txt",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -844,13 +865,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "7fc722a6"
+            "agentLighthouseFinding": "alh_2fb4df74"
           },
           "properties": {
             "category": "documentation",
             "severity": "medium",
             "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -872,13 +896,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "aa3304cd"
+            "agentLighthouseFinding": "alh_e1c052e4"
           },
           "properties": {
             "category": "documentation",
             "severity": "medium",
             "recommendation": "Add installation commands and prerequisites.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -900,13 +927,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "2244bb45"
+            "agentLighthouseFinding": "alh_b662d04a"
           },
           "properties": {
             "category": "documentation",
             "severity": "medium",
             "recommendation": "Add concrete examples showing expected usage and output.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md",
+            "locationKey": "readme.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -928,13 +958,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "72746fd1"
+            "agentLighthouseFinding": "alh_80dc9ef2"
           },
           "properties": {
             "category": "documentation",
             "severity": "low",
             "recommendation": "Add docs/ for architecture, development, API, and operational context.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "docs/",
+            "locationKey": "docs/",
+            "sourceKind": "unknown"
           }
         },
         {
@@ -956,13 +989,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e571ad68"
+            "agentLighthouseFinding": "alh_59ea6562"
           },
           "properties": {
             "category": "setup_and_tests",
             "severity": "high",
             "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "package.json",
+            "locationKey": "package.json",
+            "sourceKind": "config"
           }
         },
         {
@@ -984,13 +1020,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e8a86105"
+            "agentLighthouseFinding": "alh_2c1c9c49"
           },
           "properties": {
             "category": "setup_and_tests",
             "severity": "high",
             "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "package.json",
+            "locationKey": "package.json",
+            "sourceKind": "config"
           }
         },
         {
@@ -1012,13 +1051,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "5a826661"
+            "agentLighthouseFinding": "alh_6630a79a"
           },
           "properties": {
             "category": "setup_and_tests",
             "severity": "medium",
             "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "package.json",
+            "locationKey": "package.json",
+            "sourceKind": "config"
           }
         },
         {
@@ -1040,13 +1082,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "e3e65515"
+            "agentLighthouseFinding": "alh_101dfc87"
           },
           "properties": {
             "category": "setup_and_tests",
             "severity": "medium",
             "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "package.json",
+            "locationKey": "package.json",
+            "sourceKind": "config"
           }
         },
         {
@@ -1055,14 +1100,29 @@
           "message": {
             "text": "OpenAPI file not detected: For API products, publish an OpenAPI spec with operation descriptions and examples."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "No openapi.* or swagger.* file was scanned."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "02e8d6c1"
+            "agentLighthouseFinding": "alh_64a67cea"
           },
           "properties": {
             "category": "api_schema",
             "severity": "info",
             "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "No openapi.* or swagger.* file was scanned.",
+            "locationKey": "no openapi.* or swagger.* file was scanned.",
+            "sourceKind": "openapi"
           }
         },
         {
@@ -1084,13 +1144,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "ddaabb6b"
+            "agentLighthouseFinding": "alh_0a35bf27"
           },
           "properties": {
             "category": "mcp_tools",
             "severity": "info",
             "recommendation": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "src/mcp-server.example.txt",
+            "locationKey": "src/mcp-server.example.txt",
+            "sourceKind": "unknown"
           }
         },
         {
@@ -1112,13 +1175,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "3a4d3909"
+            "agentLighthouseFinding": "alh_5848d659"
           },
           "properties": {
             "category": "security_and_privacy",
             "severity": "medium",
             "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": ".agentlighthouseignore",
+            "locationKey": ".agentlighthouseignore",
+            "sourceKind": "unknown"
           }
         },
         {
@@ -1140,13 +1206,16 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "90841091"
+            "agentLighthouseFinding": "alh_7624eb5d"
           },
           "properties": {
             "category": "security_and_privacy",
             "severity": "medium",
             "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "AGENTS.md",
+            "locationKey": "agents.md",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -1155,14 +1224,29 @@
           "message": {
             "text": "Docs contain TODO/deprecated-looking terms without migration guidance: Resolve TODOs or add explicit migration/replacement guidance."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "497ad34d"
+            "agentLighthouseFinding": "alh_fd432ff8"
           },
           "properties": {
             "category": "freshness_and_consistency",
             "severity": "low",
             "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "README.md:3: Tools coming soon.",
+            "locationKey": "readme.md:3: tools coming soon.",
+            "sourceKind": "markdown"
           }
         },
         {
@@ -1178,13 +1262,13 @@
                   "uri": "src/mcp-server.example.txt"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 5
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "f3e80f1c"
+            "agentLighthouseFinding": "alh_1fd7cdd1"
           },
           "properties": {
             "category": "mcp_tools",
@@ -1192,7 +1276,10 @@
             "agentFailureMode": "A coding agent may choose a generic tool like run or query for the wrong workflow.",
             "recommendation": "Rename generic tools so the action and resource are obvious.",
             "fixExample": "Use names such as search_docs, create_workspace_ticket, or revoke_api_key.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "run",
+            "locationKey": "src/mcp-server.example.txt#tool:run",
+            "sourceKind": "mcp"
           }
         },
         {
@@ -1208,13 +1295,13 @@
                   "uri": "src/mcp-server.example.txt"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 5
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "30ac961b"
+            "agentLighthouseFinding": "alh_461ecd92"
           },
           "properties": {
             "category": "mcp_tools",
@@ -1222,7 +1309,10 @@
             "agentFailureMode": "A coding agent may not distinguish similar tools without usage context.",
             "recommendation": "Expand tool descriptions with intent, constraints, and safe usage guidance.",
             "fixExample": "Mention input expectations, side effects, auth requirements, and error behavior.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "run",
+            "locationKey": "src/mcp-server.example.txt#tool:run",
+            "sourceKind": "mcp"
           }
         },
         {
@@ -1238,13 +1328,13 @@
                   "uri": "src/mcp-server.example.txt"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 5
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "519ec3b5"
+            "agentLighthouseFinding": "alh_5b6494d4"
           },
           "properties": {
             "category": "mcp_tools",
@@ -1252,7 +1342,10 @@
             "agentFailureMode": "A coding agent may pass malformed arguments or omit required identifiers.",
             "recommendation": "Add structured input schemas with required fields and descriptions.",
             "fixExample": "Use a zod/object schema with workspace_id and query fields plus descriptions.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "run",
+            "locationKey": "src/mcp-server.example.txt#tool:run",
+            "sourceKind": "mcp"
           }
         },
         {
@@ -1268,13 +1361,13 @@
                   "uri": "src/mcp-server.example.txt"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 5
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "cef33413"
+            "agentLighthouseFinding": "alh_fcf7d67a"
           },
           "properties": {
             "category": "mcp_tools",
@@ -1282,7 +1375,10 @@
             "agentFailureMode": "A coding agent may not know the expected argument shape or output semantics.",
             "recommendation": "Add examples or usage notes for common calls.",
             "fixExample": "Include an example invocation showing realistic placeholder arguments.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "run",
+            "locationKey": "src/mcp-server.example.txt#tool:run",
+            "sourceKind": "mcp"
           }
         },
         {
@@ -1298,13 +1394,13 @@
                   "uri": "src/mcp-server.example.txt"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 9
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "679a7551"
+            "agentLighthouseFinding": "alh_8c691aa6"
           },
           "properties": {
             "category": "mcp_tools",
@@ -1312,7 +1408,10 @@
             "agentFailureMode": "A coding agent may call a write/delete tool without realizing it changes external state.",
             "recommendation": "Mark destructive tools and document confirmation, permissions, and safe testing behavior.",
             "fixExample": "State that the tool mutates data and requires explicit user approval outside test fixtures.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "delete",
+            "locationKey": "src/mcp-server.example.txt#tool:delete",
+            "sourceKind": "mcp"
           }
         },
         {
@@ -1328,13 +1427,13 @@
                   "uri": "src/mcp-server.example.txt"
                 },
                 "region": {
-                  "startLine": 1
+                  "startLine": 5
                 }
               }
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "f8126b7a"
+            "agentLighthouseFinding": "alh_95ff4f47"
           },
           "properties": {
             "category": "mcp_tools",
@@ -1342,7 +1441,10 @@
             "agentFailureMode": "A coding agent may retry unsafe operations or fail silently when a tool returns an error.",
             "recommendation": "Explain common errors and whether retry or user follow-up is appropriate.",
             "fixExample": "Document not-found, unauthorized, rate-limit, and validation failures.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "run",
+            "locationKey": "src/mcp-server.example.txt#tool:run",
+            "sourceKind": "mcp"
           }
         },
         {
@@ -1364,7 +1466,7 @@
             }
           ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "3b1642bc"
+            "agentLighthouseFinding": "alh_92fffcef"
           },
           "properties": {
             "category": "task_benchmarks",
@@ -1372,7 +1474,10 @@
             "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
             "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
             "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "agentlighthouse.tasks.yaml",
+            "locationKey": "agentlighthouse.tasks.yaml",
+            "sourceKind": "task"
           }
         },
         {
@@ -1381,8 +1486,20 @@
           "message": {
             "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
           },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Run with --probe commands or --run-probes to execute safe script probes."
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
           "partialFingerprints": {
-            "agentLighthouseFinding": "2960598d"
+            "agentLighthouseFinding": "alh_ac2d574f"
           },
           "properties": {
             "category": "setup_and_tests",
@@ -1390,7 +1507,10 @@
             "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
             "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
             "fixExample": "agentlighthouse scan . --probe commands",
-            "confidence": "medium"
+            "confidence": "medium",
+            "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
+            "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+            "sourceKind": "unknown"
           }
         }
       ]

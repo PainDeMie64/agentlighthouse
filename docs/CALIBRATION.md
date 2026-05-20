@@ -45,6 +45,7 @@ pnpm validate:realworld
 - Added score interpretation for human-readable signals, agent-specific context, and verifiability.
 - Added Phase 2B CI reporters and gates: SARIF, PR summaries, GitHub step summary output, severity gates, and confidence gates.
 - Added Phase 2C baseline comparison with stable finding fingerprints, delta reporters, and regression gates.
+- Added Phase 2D PR-aware changed-file classification, line-level locations where practical, SARIF regions, and gates for new findings on changed files.
 
 ## False Positives Found
 
@@ -67,6 +68,7 @@ pnpm validate:realworld
 - Command probes run only when explicitly enabled and do not execute install commands or arbitrary docs commands.
 - Profiles are still minimal and do not yet support user-defined rule-level severity overrides.
 - Scan+baseline convenience mode is deferred; compare-only is the stable CI primitive for now.
+- Changed-file classification is heuristic and depends on findings having useful locations; unknown-location findings remain visible instead of being hidden.
 
 ## What To Test Next
 

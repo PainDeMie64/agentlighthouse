@@ -1,0 +1,22 @@
+name: AgentLighthouse PR-aware delta
+
+on:
+  pull_request:
+
+jobs:
+  agent-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run AgentLighthouse with git diff context
+        uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          baseline: agentlighthouse-baseline.json
+          comparison-format: pr-summary
+          comparison-output: agentlighthouse-pr-delta.md
+          git-base: origin/${{ github.base_ref }}
+          git-head: HEAD
+          fail-on-pr-regression: "true"
