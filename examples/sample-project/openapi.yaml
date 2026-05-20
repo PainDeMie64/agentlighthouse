@@ -1,0 +1,12 @@
+openapi: 3.0.3
+info:
+  title: Sample Widget API
+  version: 0.1.0
+paths:
+  /widgets:
+    get:
+      summary: List widgets
+      description: List widgets available to the current demo user.
+      responses:
+        "200":
+          description: OK

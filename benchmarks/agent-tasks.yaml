@@ -1,0 +1,22 @@
+version: 0.1.0
+project: AgentLighthouse
+tasks:
+  - id: install-project
+    title: Install AgentLighthouse
+    prompt: Install dependencies and report the package manager used.
+    success_criteria:
+      - Dependencies install with pnpm.
+      - No model-provider API key is required.
+  - id: run-core-tests
+    title: Run core tests
+    prompt: Run the AgentLighthouse unit tests and summarize any failures.
+    success_criteria:
+      - The test command is discoverable.
+      - Test failures include file paths and likely cause.
+  - id: add-scanner-rule
+    title: Add a scanner rule
+    prompt: Add a deterministic analyzer finding for a missing agent-readiness artifact and cover it with a test.
+    success_criteria:
+      - The rule is implemented in packages/core.
+      - The finding includes evidence and a recommendation.
+      - Tests pass.

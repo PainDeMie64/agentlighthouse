@@ -1,0 +1,26 @@
+# AgentLighthouse
+
+AgentLighthouse is Lighthouse for AI agents: a deterministic, local-first scanner for agent-readiness.
+
+## Key Links
+
+- [README](README.md)
+- [Project Brief](docs/PROJECT_BRIEF.md)
+- [Product Spec](docs/PRODUCT_SPEC.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Scoring Model](docs/SCORING_MODEL.md)
+- [Development Guide](docs/DEVELOPMENT.md)
+- [Validation Guide](docs/VALIDATION.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Decisions](docs/DECISIONS.md)
+- [Agent Instructions](AGENTS.md)
+- [Claude Memory](CLAUDE.md)
+- [Core Package](packages/core/src/index.ts)
+- [CLI Package](packages/cli/src/index.ts)
+- [Sample Project](examples/sample-project/README.md)
+
+## Example Usage
+
+- Scan sample project: `pnpm --filter @agentlighthouse/cli dev scan examples/sample-project`
+- Scan this repo: `pnpm --filter @agentlighthouse/cli dev scan .`
+- Generate starter files safely: `pnpm --filter @agentlighthouse/cli dev init . --dry-run`

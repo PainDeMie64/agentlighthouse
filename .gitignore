@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.turbo/
+.vercel/
+.tmp/
+vendor/
+*.log
+.env
+.env.*
+!.env.example
+pnpm-debug.log*

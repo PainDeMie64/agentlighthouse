@@ -1,0 +1,261 @@
+{
+  "projectPath": "<repo>/examples/sample-project",
+  "projectName": "sample-widget-api",
+  "scoringModelVersion": "0.1.0",
+  "score": 33,
+  "summary": "Agent-readiness needs focused work before agents can reliably use this project.",
+  "subscores": [
+    {
+      "id": "agent_instructions",
+      "label": "Agent Instructions",
+      "score": 80
+    },
+    {
+      "id": "documentation",
+      "label": "Documentation",
+      "score": 95
+    },
+    {
+      "id": "api_and_tooling",
+      "label": "API & Tooling",
+      "score": 75
+    },
+    {
+      "id": "examples_and_tasks",
+      "label": "Examples & Tasks",
+      "score": 95
+    },
+    {
+      "id": "security_and_privacy",
+      "label": "Security & Privacy",
+      "score": 90
+    },
+    {
+      "id": "freshness_and_consistency",
+      "label": "Freshness & Consistency",
+      "score": 98
+    }
+  ],
+  "findings": [
+    {
+      "id": "agent-instructions.missing-agents-md",
+      "title": "Missing AGENTS.md",
+      "severity": "high",
+      "category": "agent_instructions",
+      "description": "The repo has no AGENTS.md, so coding agents lack a stable project guide.",
+      "evidence": ["AGENTS.md was not found at the repository root."],
+      "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+      "affectedFile": "AGENTS.md",
+      "suggestedFixType": "create_file"
+    },
+    {
+      "id": "agent-instructions.missing-claude-md",
+      "title": "Missing CLAUDE.md",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "Claude Code users do not have a concise project memory file.",
+      "evidence": ["CLAUDE.md was not found at the repository root."],
+      "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+      "affectedFile": "CLAUDE.md",
+      "suggestedFixType": "create_file"
+    },
+    {
+      "id": "llms.missing",
+      "title": "Missing llms.txt",
+      "severity": "medium",
+      "category": "agent_instructions",
+      "description": "The project does not expose a compact, machine-readable map for LLMs and agents.",
+      "evidence": ["llms.txt was not found at the repository root."],
+      "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+      "affectedFile": "llms.txt",
+      "suggestedFixType": "create_file"
+    },
+    {
+      "id": "docs.readme-no-examples",
+      "title": "README.md has no examples",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: example, usage, demo."],
+      "recommendation": "Add concrete examples showing expected usage and output.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section"
+    },
+    {
+      "id": "setup.missing-test-script",
+      "title": "No test script in package.json",
+      "severity": "high",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run test without a package script.",
+      "evidence": ["package.json scripts does not include \"test\"."],
+      "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script"
+    },
+    {
+      "id": "setup.missing-lint-script",
+      "title": "No lint script in package.json",
+      "severity": "medium",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run lint without a package script.",
+      "evidence": ["package.json scripts does not include \"lint\"."],
+      "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script"
+    },
+    {
+      "id": "setup.missing-typecheck-script",
+      "title": "No typecheck script in package.json",
+      "severity": "medium",
+      "category": "setup_and_tests",
+      "description": "Agents cannot reliably run typecheck without a package script.",
+      "evidence": ["package.json scripts does not include \"typecheck\"."],
+      "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script"
+    },
+    {
+      "id": "api.openapi-detected",
+      "title": "OpenAPI file detected",
+      "severity": "info",
+      "category": "api_schema",
+      "description": "The scanner found an API schema that agents can use.",
+      "evidence": ["openapi.yaml"],
+      "recommendation": "Keep API descriptions, examples, and auth details current.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "none"
+    },
+    {
+      "id": "api.openapi-no-nearby-examples",
+      "title": "OpenAPI exists but no examples are nearby",
+      "severity": "medium",
+      "category": "api_schema",
+      "description": "Agents need request and response examples in addition to schemas.",
+      "evidence": ["OpenAPI files: openapi.yaml"],
+      "recommendation": "Add examples near the API spec or link examples from the API documentation.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "add_example"
+    },
+    {
+      "id": "mcp.not-evaluated",
+      "title": "MCP readiness could not be evaluated yet",
+      "severity": "info",
+      "category": "mcp_tools",
+      "description": "No MCP server/config/package signal was detected.",
+      "evidence": ["No file or package name matching MCP was scanned."],
+      "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+      "suggestedFixType": "review_manually"
+    },
+    {
+      "id": "benchmarks.missing-agent-task-file",
+      "title": "Missing agent task benchmark file",
+      "severity": "medium",
+      "category": "task_benchmarks",
+      "description": "The project has no task benchmark describing realistic agent workflows.",
+      "evidence": ["No benchmarks/agent-tasks.yaml or .agentlighthouse/tasks.yaml file was found."],
+      "recommendation": "Add a benchmark file with tasks such as install, run tests, add a small feature, and find core modules.",
+      "affectedFile": "benchmarks/agent-tasks.yaml",
+      "suggestedFixType": "create_file"
+    },
+    {
+      "id": "security.missing-agentlighthouseignore",
+      "title": "Missing .agentlighthouseignore",
+      "severity": "medium",
+      "category": "security_and_privacy",
+      "description": "Scans should explicitly exclude generated, private, and secret-bearing paths.",
+      "evidence": [".agentlighthouseignore was not found at the repository root."],
+      "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+      "affectedFile": ".agentlighthouseignore",
+      "suggestedFixType": "create_file"
+    },
+    {
+      "id": "security.agent-secret-guidance-missing",
+      "title": "Instructions do not tell agents how to handle secrets",
+      "severity": "medium",
+      "category": "security_and_privacy",
+      "description": "Agent-facing instructions should state how to avoid exposing secrets or private data.",
+      "evidence": ["No secret/privacy guidance was detected in AGENTS.md."],
+      "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
+      "affectedFile": "AGENTS.md",
+      "suggestedFixType": "add_section"
+    },
+    {
+      "id": "freshness.deprecated-or-todo-terms",
+      "title": "Docs contain TODO/deprecated-looking terms without migration guidance",
+      "severity": "low",
+      "category": "freshness_and_consistency",
+      "description": "Stale markers can confuse agents unless they include replacement guidance.",
+      "evidence": [
+        "README.md:14: TODO: add more complete docs soon.",
+        "docs/overview.md:5: The legacy v1 endpoint is deprecated."
+      ],
+      "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
+      "suggestedFixType": "update_file"
+    }
+  ],
+  "recommendedActions": [
+    "Run: agentlighthouse init .",
+    "Add or document setup, test, lint, and typecheck commands.",
+    "Improve README and docs so agents can find quickstart, install, and examples.",
+    "Add task benchmarks for the top developer workflows agents should complete.",
+    "Document secret-handling and privacy rules for agent workflows."
+  ],
+  "scannedAt": "2026-05-20T18:20:39.266Z",
+  "signals": {
+    "rootPath": "<repo>/examples/sample-project",
+    "projectName": "sample-widget-api",
+    "scannedFiles": ["README.md", "docs/overview.md", "openapi.yaml", "package.json"],
+    "artifacts": {
+      "AGENTS.md": {
+        "path": "AGENTS.md",
+        "exists": false
+      },
+      "CLAUDE.md": {
+        "path": "CLAUDE.md",
+        "exists": false
+      },
+      "llms.txt": {
+        "path": "llms.txt",
+        "exists": false
+      },
+      "README.md": {
+        "path": "README.md",
+        "exists": true,
+        "sizeBytes": 229,
+        "contentPreview": "# Sample Widget API\n\nThis intentionally imperfect project is used to validate AgentLighthouse.\n\n## Quickstart\n\nInstall dependencies and start the server.\n\n```bash\nnpm install\nnpm run start\n```\n\nTODO: add more complete docs soon.\n"
+      },
+      ".cursor/rules": {
+        "path": ".cursor/rules",
+        "exists": false
+      },
+      ".github/copilot-instructions.md": {
+        "path": ".github/copilot-instructions.md",
+        "exists": false
+      },
+      ".agentlighthouseignore": {
+        "path": ".agentlighthouseignore",
+        "exists": false
+      }
+    },
+    "docsMarkdownFiles": ["docs/overview.md"],
+    "openApiFiles": ["openapi.yaml"],
+    "mcpFiles": [],
+    "configFiles": ["package.json"],
+    "benchmarkFiles": [],
+    "packageJson": {
+      "path": "package.json",
+      "name": "sample-widget-api",
+      "scripts": {
+        "start": "node src/index.js"
+      },
+      "dependencies": ["express"],
+      "devDependencies": []
+    },
+    "textByPath": {
+      "README.md": "# Sample Widget API\n\nThis intentionally imperfect project is used to validate AgentLighthouse.\n\n## Quickstart\n\nInstall dependencies and start the server.\n\n```bash\nnpm install\nnpm run start\n```\n\nTODO: add more complete docs soon.\n",
+      "docs/overview.md": "# Overview\n\nSample Widget API is a small demo service. It has partial documentation by design so AgentLighthouse can surface missing test, lint, benchmark, safety, and agent instruction gaps.\n\nThe legacy v1 endpoint is deprecated.\n",
+      "openapi.yaml": "openapi: 3.0.3\ninfo:\n  title: Sample Widget API\n  version: 0.1.0\npaths:\n  /widgets:\n    get:\n      summary: List widgets\n      description: List widgets available to the current demo user.\n      responses:\n        \"200\":\n          description: OK\n",
+      "package.json": "{\n  \"name\": \"sample-widget-api\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"start\": \"node src/index.js\"\n  },\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  }\n}\n"
+    }
+  }
+}
