@@ -19,6 +19,7 @@
 ## Phase 2: GitHub Action + PR Suggestions
 
 - Score gates in CI.
+- SARIF reporter.
 - PR comments and annotations.
 - Patch suggestions for instruction and docs improvements.
 

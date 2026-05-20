@@ -1,10 +1,13 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { renderCliReport, scanProject } from "@agentlighthouse/core";
+import { renderCliReport, renderMarkdownReport, scanProject } from "@agentlighthouse/core";
 import { resolveFromInvocationCwd } from "../pathing.js";
+
+export type ScanFormat = "text" | "json" | "markdown";
 
 export interface ScanCommandOptions {
   json?: boolean;
+  format?: ScanFormat;
   output?: string;
   failUnder?: string;
   include?: string[];
@@ -22,19 +25,17 @@ export async function runScanCommand(
     exclude: options.exclude ?? []
   });
   const failUnder = options.failUnder ? Number.parseInt(options.failUnder, 10) : undefined;
+  const format = options.json ? "json" : (options.format ?? "text");
+  if (!["text", "json", "markdown"].includes(format)) {
+    throw new Error(`Unsupported format "${format}". Use text, json, or markdown.`);
+  }
+  const rendered = renderResult(result, format, options.color ?? true);
   if (options.output) {
     const outputPath = resolveFromInvocationCwd(options.output);
     await mkdir(path.dirname(outputPath), { recursive: true });
-    await writeFile(
-      outputPath,
-      options.json ? JSON.stringify(result, null, 2) : renderCliReport(result),
-      "utf8"
-    );
+    await writeFile(outputPath, rendered, "utf8");
   }
 
-  const rendered = options.json
-    ? JSON.stringify(result, null, 2)
-    : renderCliReport(result, options.color ?? true);
   process.stdout.write(`${rendered}\n`);
 
   if (failUnder !== undefined && result.score < failUnder) {
@@ -43,4 +44,18 @@ export async function runScanCommand(
     );
     process.exitCode = 1;
   }
+}
+
+function renderResult(
+  result: Awaited<ReturnType<typeof scanProject>>,
+  format: ScanFormat,
+  color: boolean
+): string {
+  if (format === "json") {
+    return JSON.stringify(result, null, 2);
+  }
+  if (format === "markdown") {
+    return renderMarkdownReport(result);
+  }
+  return renderCliReport(result, color);
 }

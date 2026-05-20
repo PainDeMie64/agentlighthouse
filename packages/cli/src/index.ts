@@ -14,6 +14,7 @@ program
   .command("scan")
   .argument("[path]", "Project path to scan", ".")
   .option("--json", "Print JSON output")
+  .option("--format <format>", "Output format: text, json, or markdown", "text")
   .option("--output <file>", "Write report output to a file")
   .option("--fail-under <score>", "Exit with code 1 when score is below the threshold")
   .option("--include <glob...>", "Only include paths containing these patterns")

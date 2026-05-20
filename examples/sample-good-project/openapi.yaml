@@ -1,0 +1,16 @@
+openapi: 3.0.3
+info:
+  title: Sample Good Project API
+  version: 0.1.0
+paths:
+  /health:
+    get:
+      summary: Check service health
+      description: Returns a simple health payload that agents can use to verify the API is reachable during local development.
+      responses:
+        "200":
+          description: Health response
+          content:
+            application/json:
+              example:
+                ok: true

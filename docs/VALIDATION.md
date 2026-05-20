@@ -16,6 +16,8 @@ pnpm --filter @agentlighthouse/cli dev scan .
 
 ```bash
 pnpm --filter @agentlighthouse/cli dev scan examples/sample-project
+pnpm --filter @agentlighthouse/cli dev scan examples/sample-good-project
+pnpm --filter @agentlighthouse/cli dev scan examples/sample-bad-project
 ```
 
 ## Run Against Any Local Repo
@@ -47,6 +49,17 @@ pnpm --filter @agentlighthouse/cli dev scan examples/sample-project --json --out
 
 Reports should not contain secrets or sensitive local paths. Sanitize before committing if needed.
 
+`pnpm validate:realworld` generates:
+
+- `validation/reports/sample-project.json`
+- `validation/reports/sample-project.md`
+- `validation/reports/sample-good-project.json`
+- `validation/reports/sample-good-project.md`
+- `validation/reports/sample-bad-project.json`
+- `validation/reports/sample-bad-project.md`
+- `validation/reports/agentlighthouse.json`
+- `validation/reports/agentlighthouse.md`
+
 ## Useful Findings
 
 Useful findings have evidence and point to an agent-facing improvement: missing setup commands, stale docs links, absent benchmark tasks, missing secret-handling rules, unclear API examples, or inconsistent package scripts.
@@ -64,6 +77,8 @@ The first implementation was exercised against:
 
 - AgentLighthouse itself for dogfooding.
 - `examples/sample-project` as an intentionally imperfect setup target.
+- `examples/sample-good-project` as a high-readiness reference.
+- `examples/sample-bad-project` as a low-readiness reference.
 - `sindresorhus/is` as a small JavaScript/TypeScript library.
 - `modelcontextprotocol/typescript-sdk` as a developer-tool and MCP/API-focused project.
 - `expressjs/expressjs.com` as a documentation-heavy project.

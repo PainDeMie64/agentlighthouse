@@ -55,15 +55,24 @@ export class LocalFilesystemScanner implements Scanner {
     const rootPath = path.resolve(projectPath);
     const maxFileSizeBytes = options.maxFileSizeBytes ?? 512_000;
     const ignoreRules = await readIgnoreRules(rootPath, options.exclude ?? []);
-    const scannedFiles = await walk(rootPath, rootPath, ignoreRules, options.include ?? []);
+    const ignoredPaths: string[] = [];
+    const scannedFiles = await walk(
+      rootPath,
+      rootPath,
+      ignoreRules,
+      options.include ?? [],
+      ignoredPaths
+    );
     const textByPath: Record<string, string> = {};
     const artifacts: Record<string, ArtifactSignal> = {};
+    let bytesRead = 0;
 
     for (const relativePath of scannedFiles) {
       const absolutePath = path.join(rootPath, relativePath);
       const stat = await fs.stat(absolutePath);
       if (stat.size <= maxFileSizeBytes && isTextFile(relativePath)) {
         textByPath[relativePath] = await fs.readFile(absolutePath, "utf8");
+        bytesRead += stat.size;
       }
     }
 
@@ -99,6 +108,17 @@ export class LocalFilesystemScanner implements Scanner {
       mcpFiles: [...new Set([...mcpFiles, ...mcpPackageSignals(packageJson)])],
       configFiles,
       benchmarkFiles,
+      ignoredPaths: ignoredPaths.sort(),
+      warnings: [],
+      errors: [],
+      scanStats: {
+        filesScanned: scannedFiles.length,
+        textFilesRead: Object.keys(textByPath).length,
+        bytesRead,
+        docsMarkdownFileCount: docsMarkdownFiles.length,
+        openApiFileCount: openApiFiles.length,
+        benchmarkFileCount: benchmarkFiles.length
+      },
       packageJson,
       textByPath
     };
@@ -115,11 +135,12 @@ async function artifactSignal(
     return {
       path: relativePath,
       exists: true,
+      kind: stat.isDirectory() ? "directory" : "file",
       sizeBytes: stat.size,
       contentPreview: textByPath[relativePath]?.slice(0, 500)
     };
   } catch {
-    return { path: relativePath, exists: false };
+    return { path: relativePath, exists: false, kind: "missing" };
   }
 }
 
@@ -145,7 +166,8 @@ async function walk(
   rootPath: string,
   currentPath: string,
   ignoreRules: string[],
-  includes: string[]
+  includes: string[],
+  ignoredPaths: string[]
 ): Promise<string[]> {
   const entries = await fs.readdir(currentPath, { withFileTypes: true });
   const files: string[] = [];
@@ -153,10 +175,13 @@ async function walk(
     const absolutePath = path.join(currentPath, entry.name);
     const relativePath = normalizePath(path.relative(rootPath, absolutePath));
     if (shouldIgnore(relativePath, entry.name, ignoreRules)) {
+      if (ignoredPaths.length < 500) {
+        ignoredPaths.push(relativePath);
+      }
       continue;
     }
     if (entry.isDirectory()) {
-      files.push(...(await walk(rootPath, absolutePath, ignoreRules, includes)));
+      files.push(...(await walk(rootPath, absolutePath, ignoreRules, includes, ignoredPaths)));
       continue;
     }
     if (entry.isFile() && matchesInclude(relativePath, includes)) {
@@ -232,6 +257,7 @@ function parsePackageJson(content: string | undefined): PackageJsonSignal | unde
   try {
     const parsed = JSON.parse(content) as {
       name?: string;
+      packageManager?: string;
       scripts?: Record<string, string>;
       dependencies?: Record<string, string>;
       devDependencies?: Record<string, string>;
@@ -239,6 +265,7 @@ function parsePackageJson(content: string | undefined): PackageJsonSignal | unde
     return {
       path: "package.json",
       name: parsed.name,
+      packageManager: parsed.packageManager,
       scripts: parsed.scripts ?? {},
       dependencies: Object.keys(parsed.dependencies ?? {}),
       devDependencies: Object.keys(parsed.devDependencies ?? {})

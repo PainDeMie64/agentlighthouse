@@ -1,12 +1,23 @@
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { renderMarkdownReport, scanProject } from "@agentlighthouse/core";
+import { format } from "prettier";
 
 const repoRoot = process.cwd();
 const reportDir = path.join(repoRoot, "validation", "reports");
 
 const targets = [
   { name: "sample-project", path: path.join(repoRoot, "examples", "sample-project"), save: true },
+  {
+    name: "sample-good-project",
+    path: path.join(repoRoot, "examples", "sample-good-project"),
+    save: true
+  },
+  {
+    name: "sample-bad-project",
+    path: path.join(repoRoot, "examples", "sample-bad-project"),
+    save: true
+  },
   { name: "agentlighthouse", path: repoRoot, save: true },
   ...(await optionalValidationRepos())
 ];
@@ -21,12 +32,18 @@ for (const target of targets) {
   if (target.save) {
     await writeFile(
       path.join(reportDir, `${target.name}.json`),
-      JSON.stringify(sanitizeResult(result, repoRoot), null, 2),
+      await format(JSON.stringify(sanitizeResult(result, repoRoot), null, 2), {
+        parser: "json",
+        printWidth: 100
+      }),
       "utf8"
     );
     await writeFile(
       path.join(reportDir, `${target.name}.md`),
-      renderMarkdownReport(sanitizeResult(result, repoRoot)),
+      await format(renderMarkdownReport(sanitizeResult(result, repoRoot)), {
+        parser: "markdown",
+        printWidth: 100
+      }),
       "utf8"
     );
   }

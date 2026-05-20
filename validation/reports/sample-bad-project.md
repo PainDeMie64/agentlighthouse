@@ -1,22 +1,22 @@
-# AgentLighthouse Report: sample-widget-api
+# AgentLighthouse Report: sample-bad-project
 
-Score: **23/100**
+Score: **3/100**
 
 Agent-readiness needs focused work before agents can reliably use this project.
 
 ## Project Detection
 
-- Type: `openapi_project`
-- Confidence: 85%
+- Type: `node_javascript`
+- Confidence: 80%
 - Package manager: `npm`
-- Frameworks: Express
-- Evidence: OpenAPI files detected: openapi.yaml.
+- Frameworks: none detected
+- Evidence: package.json detected.
 
 ## Subscores
 
 - Agent Instructions: 70/100
-- Documentation: 95/100
-- API & Tooling: 75/100
+- Documentation: 80/100
+- API & Tooling: 70/100
 - Examples & Tasks: 95/100
 - Security & Privacy: 90/100
 - Freshness & Consistency: 98/100
@@ -51,14 +51,14 @@ Agent-readiness needs focused work before agents can reliably use this project.
 
 ## Scan Metadata
 
-- Scan ID: `scan_0ee6b9e6`
+- Scan ID: `scan_da5afe8f`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T18:51:31.735Z
-- Completed: 2026-05-20T18:51:31.739Z
-- Duration: 4ms
-- Files scanned: 4
-- Text files read: 4
+- Started: 2026-05-20T18:51:31.855Z
+- Completed: 2026-05-20T18:51:31.856Z
+- Duration: 1ms
+- Files scanned: 3
+- Text files read: 2
 - Ignored paths observed: 0
 - Warnings: 0
 - Errors: 0
@@ -74,6 +74,14 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - Affected file: AGENTS.md
 - Recommendation: Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.
 - Evidence: AGENTS.md was not found at the repository root.
+
+#### package.json has no scripts
+
+- Severity: high
+- Category: setup_and_tests
+- Affected file: package.json
+- Recommendation: Add scripts for test, lint, typecheck, build, and local development.
+- Evidence: package.json scripts object is empty.
 
 #### No test script in package.json
 
@@ -117,6 +125,22 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - Recommendation: Create llms.txt with links to README, docs, architecture, examples, and API references.
 - Evidence: llms.txt was not found at the repository root.
 
+#### README.md has no quickstart section
+
+- Severity: medium
+- Category: documentation
+- Affected file: README.md
+- Recommendation: Add a quickstart that gets a new user to a working command quickly.
+- Evidence: README.md does not contain any of: quickstart, quick start, getting started.
+
+#### README.md has no installation instructions
+
+- Severity: medium
+- Category: documentation
+- Affected file: README.md
+- Recommendation: Add installation commands and prerequisites.
+- Evidence: README.md does not contain any of: install, pnpm, npm, yarn, pip.
+
 #### README.md has no examples
 
 - Severity: medium
@@ -124,6 +148,14 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - Affected file: README.md
 - Recommendation: Add concrete examples showing expected usage and output.
 - Evidence: README.md does not contain any of: example, usage, demo.
+
+#### Docs exist but no Markdown files are discoverable
+
+- Severity: medium
+- Category: documentation
+- Affected file: docs/
+- Recommendation: Add Markdown documentation or ensure docs source is not ignored.
+- Evidence: docs/ exists but no .md or .mdx files were scanned.
 
 #### No lint script in package.json
 
@@ -140,14 +172,6 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - Affected file: package.json
 - Recommendation: Add a package.json "typecheck" script or document the equivalent command clearly.
 - Evidence: package.json scripts does not include "typecheck".
-
-#### OpenAPI exists but no examples are nearby
-
-- Severity: medium
-- Category: api_schema
-- Affected file: openapi.yaml
-- Recommendation: Add examples near the API spec or link examples from the API documentation.
-- Evidence: OpenAPI files: openapi.yaml
 
 #### Missing agent task benchmark file
 
@@ -181,17 +205,17 @@ Agent-readiness needs focused work before agents can reliably use this project.
 - Category: freshness_and_consistency
 - Affected file: n/a
 - Recommendation: Resolve TODOs or add explicit migration/replacement guidance.
-- Evidence: README.md:14: TODO: add more complete docs soon.; docs/overview.md:5: The legacy v1 endpoint is deprecated.
+- Evidence: README.md:3: Coming soon.; README.md:5: TODO old setup.
 
 ### Info
 
-#### OpenAPI file detected
+#### OpenAPI file not detected
 
 - Severity: info
 - Category: api_schema
-- Affected file: openapi.yaml
-- Recommendation: Keep API descriptions, examples, and auth details current.
-- Evidence: openapi.yaml
+- Affected file: n/a
+- Recommendation: For API products, publish an OpenAPI spec with operation descriptions and examples.
+- Evidence: No openapi._ or swagger._ file was scanned.
 
 #### MCP readiness could not be evaluated yet
 

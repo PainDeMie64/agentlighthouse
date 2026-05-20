@@ -1,4 +1,5 @@
 import type { Analyzer, Finding, ProjectSignals } from "../schemas/types.js";
+import { detectProject } from "../detection/project.js";
 import { finding, hasUsefulMarkdownLinks, textIncludesAny } from "../findings/helpers.js";
 
 export class ReadinessAnalyzer implements Analyzer {
@@ -7,6 +8,7 @@ export class ReadinessAnalyzer implements Analyzer {
   analyze(signals: ProjectSignals): Finding[] {
     return [
       ...agentInstructionFindings(signals),
+      ...artifactQualityFindings(signals),
       ...llmsFindings(signals),
       ...documentationFindings(signals),
       ...setupFindings(signals),
@@ -290,23 +292,35 @@ function documentationFindings(signals: ProjectSignals): Finding[] {
 }
 
 function setupFindings(signals: ProjectSignals): Finding[] {
+  const detected = detectProject(signals);
   const packageJson = signals.packageJson;
   if (!packageJson) {
-    return [
-      finding({
-        id: "setup.package-json-missing",
-        title: "package.json missing",
-        severity: "low",
-        category: "setup_and_tests",
-        description:
-          "No Node package manifest was found. This may be expected for non-JS projects.",
-        evidence: ["package.json was not scanned."],
-        recommendation:
-          "If this is a JS/TS project, add package.json with scripts for install, test, lint, and typecheck.",
-        affectedFile: "package.json",
-        suggestedFixType: "review_manually"
-      })
-    ];
+    if (detected.type === "node_javascript" || detected.type === "node_typescript") {
+      return [
+        finding({
+          id: "setup.package-json-missing",
+          title: "package.json missing for detected Node project",
+          severity: "high",
+          category: "setup_and_tests",
+          description:
+            "Node projects need package.json scripts so agents can discover local workflows.",
+          evidence: detected.evidence,
+          recommendation:
+            "Add package.json with scripts for install, test, lint, typecheck, build, and local development.",
+          affectedFile: "package.json",
+          suggestedFixType: "review_manually"
+        })
+      ];
+    }
+    if (
+      detected.type === "docs_only" ||
+      detected.type === "python" ||
+      detected.type === "rust" ||
+      detected.type === "go"
+    ) {
+      return [];
+    }
+    return [];
   }
 
   const findings: Finding[] = [];
@@ -347,7 +361,7 @@ function setupFindings(signals: ProjectSignals): Finding[] {
   const readme = signals.textByPath["README.md"];
   if (readme) {
     const mentionedScripts = [
-      ...readme.matchAll(/\b(?:pnpm|npm run|yarn)\s+([a-zA-Z0-9:_-]+)/g)
+      ...readme.matchAll(/^\s*(?:[$>]\s*)?(?:pnpm|npm run|yarn)\s+([a-zA-Z0-9:_-]+)/gm)
     ].map((match) => match[1]);
     const missingScripts = [...new Set(mentionedScripts)].filter(
       (script) =>
@@ -378,12 +392,15 @@ function setupFindings(signals: ProjectSignals): Finding[] {
 }
 
 function apiFindings(signals: ProjectSignals): Finding[] {
-  if (signals.openApiFiles.length === 0) {
+  const detected = detectProject(signals);
+  const relevantOpenApiFiles = signals.openApiFiles.filter((file) => !file.startsWith("examples/"));
+  if (relevantOpenApiFiles.length === 0) {
+    const severity = detected.type === "openapi_project" ? "high" : "info";
     return [
       finding({
         id: "api.openapi-not-detected",
         title: "OpenAPI file not detected",
-        severity: "info",
+        severity,
         category: "api_schema",
         description:
           "No OpenAPI schema was found. This may be fine for projects without an HTTP API.",
@@ -402,14 +419,17 @@ function apiFindings(signals: ProjectSignals): Finding[] {
       severity: "info",
       category: "api_schema",
       description: "The scanner found an API schema that agents can use.",
-      evidence: signals.openApiFiles,
+      evidence: relevantOpenApiFiles,
       recommendation: "Keep API descriptions, examples, and auth details current.",
-      affectedFile: signals.openApiFiles[0],
+      affectedFile: relevantOpenApiFiles[0],
       suggestedFixType: "none"
     })
   ];
 
-  const hasNearbyExample = signals.scannedFiles.some((file) => /examples?\//i.test(file));
+  const openApiText = relevantOpenApiFiles.map((file) => signals.textByPath[file] ?? "").join("\n");
+  const hasNearbyExample =
+    signals.scannedFiles.some((file) => /examples?\//i.test(file)) ||
+    /\bexamples?:/i.test(openApiText);
   if (!hasNearbyExample) {
     findings.push(
       finding({
@@ -418,16 +438,15 @@ function apiFindings(signals: ProjectSignals): Finding[] {
         severity: "medium",
         category: "api_schema",
         description: "Agents need request and response examples in addition to schemas.",
-        evidence: [`OpenAPI files: ${signals.openApiFiles.join(", ")}`],
+        evidence: [`OpenAPI files: ${relevantOpenApiFiles.join(", ")}`],
         recommendation:
           "Add examples near the API spec or link examples from the API documentation.",
-        affectedFile: signals.openApiFiles[0],
+        affectedFile: relevantOpenApiFiles[0],
         suggestedFixType: "add_example"
       })
     );
   }
 
-  const openApiText = signals.openApiFiles.map((file) => signals.textByPath[file] ?? "").join("\n");
   if (
     !/description:\s*.{20,}/i.test(openApiText) &&
     !/"description"\s*:\s*".{20,}"/i.test(openApiText)
@@ -442,7 +461,7 @@ function apiFindings(signals: ProjectSignals): Finding[] {
         evidence: ["No operation description longer than 20 characters was detected."],
         recommendation:
           "Add meaningful operation descriptions, auth notes, and representative examples.",
-        affectedFile: signals.openApiFiles[0],
+        affectedFile: relevantOpenApiFiles[0],
         suggestedFixType: "update_file"
       })
     );
@@ -451,12 +470,13 @@ function apiFindings(signals: ProjectSignals): Finding[] {
 }
 
 function mcpFindings(signals: ProjectSignals): Finding[] {
+  const detected = detectProject(signals);
   if (signals.mcpFiles.length === 0) {
     return [
       finding({
         id: "mcp.not-evaluated",
         title: "MCP readiness could not be evaluated yet",
-        severity: "info",
+        severity: detected.type === "mcp_project" ? "high" : "info",
         category: "mcp_tools",
         description: "No MCP server/config/package signal was detected.",
         evidence: ["No file or package name matching MCP was scanned."],
@@ -499,6 +519,100 @@ function mcpFindings(signals: ProjectSignals): Finding[] {
       })
     );
   }
+  return findings;
+}
+
+function artifactQualityFindings(signals: ProjectSignals): Finding[] {
+  const findings: Finding[] = [];
+  const checks = [
+    {
+      file: "AGENTS.md",
+      label: "AGENTS.md",
+      optional: false,
+      required: [
+        ["architecture map", ["architecture", "packages/", "apps/", "src/"]],
+        ["common mistakes or avoid-list", ["avoid", "do not", "don't", "common mistake"]],
+        ["generated-file warnings", ["generated", "dist", "build output", "do not edit"]]
+      ]
+    },
+    {
+      file: "CLAUDE.md",
+      label: "CLAUDE.md",
+      optional: false,
+      required: [
+        ["testing expectations", ["test", "testing", "vitest", "pytest"]],
+        ["product boundaries", ["non-goal", "boundary", "not a", "do not build"]],
+        ["development workflow", ["workflow", "pnpm", "npm", "setup"]]
+      ]
+    },
+    {
+      file: "README.md",
+      label: "README.md",
+      optional: false,
+      required: [
+        [
+          "clear test command",
+          ["test", "pnpm test", "npm test", "pytest", "cargo test", "go test"]
+        ],
+        [
+          "architecture or repo map",
+          ["architecture", "repo structure", "packages/", "apps/", "src/"]
+        ]
+      ]
+    },
+    {
+      file: ".github/copilot-instructions.md",
+      label: "GitHub Copilot instructions",
+      optional: true,
+      required: [
+        ["setup commands", ["install", "setup", "pnpm", "npm", "pip"]],
+        ["test commands", ["test", "pytest", "vitest", "jest"]],
+        ["security/privacy guidance", ["secret", "privacy", "credential", "sensitive"]]
+      ]
+    },
+    {
+      file: ".cursor/rules",
+      label: "Cursor rules",
+      optional: true,
+      required: [
+        ["coding conventions", ["convention", "style", "format", "naming"]],
+        ["architecture map", ["architecture", "packages/", "apps/", "src/"]],
+        ["generated-file warnings", ["generated", "dist", "build output", "do not edit"]]
+      ]
+    }
+  ] as const;
+
+  for (const artifact of checks) {
+    const exists = signals.artifacts[artifact.file]?.exists;
+    if (!exists) {
+      continue;
+    }
+    const content =
+      signals.textByPath[artifact.file] ??
+      Object.entries(signals.textByPath)
+        .filter(([file]) => file.startsWith(`${artifact.file}/`))
+        .map(([, value]) => value)
+        .join("\n");
+    for (const [label, terms] of artifact.required) {
+      if (!textIncludesAny(content, terms)) {
+        findings.push(
+          finding({
+            id: `artifact-quality.${artifact.file.replaceAll("/", "-").replaceAll(".", "")}.missing-${slug(label)}`,
+            title: `${artifact.label} exists, but does not include ${label}`,
+            severity: artifact.optional ? "low" : "medium",
+            category: "agent_instructions",
+            description:
+              "A detected agent-facing artifact is missing specific guidance agents need for reliable work.",
+            evidence: [`${artifact.label} does not contain any of: ${terms.join(", ")}.`],
+            recommendation: `Add ${label} to ${artifact.label}.`,
+            affectedFile: artifact.file,
+            suggestedFixType: "add_section"
+          })
+        );
+      }
+    }
+  }
+
   return findings;
 }
 
@@ -670,4 +784,11 @@ function findLocalReferences(text: string | undefined): string[] {
 
 function maskSecret(value: string): string {
   return value.length <= 12 ? "[masked]" : `${value.slice(0, 8)}...[masked]`;
+}
+
+function slug(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }

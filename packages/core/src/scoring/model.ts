@@ -1,10 +1,4 @@
-import type {
-  Finding,
-  ProjectSignals,
-  ScanResult,
-  ScoringModule,
-  Subscore
-} from "../schemas/types.js";
+import type { Finding, ProjectSignals, ScoringModule, Subscore } from "../schemas/types.js";
 
 export const scoringModelVersion = "0.1.0";
 
@@ -53,7 +47,17 @@ export class TransparentScoringModel implements ScoringModule {
   readonly id = "transparent-severity-scoring";
   readonly version = scoringModelVersion;
 
-  score(findings: Finding[], signals: ProjectSignals): Omit<ScanResult, "signals" | "scannedAt"> {
+  score(
+    findings: Finding[],
+    _signals: ProjectSignals
+  ): {
+    scoringModelVersion: string;
+    score: number;
+    summary: string;
+    subscores: Subscore[];
+    recommendations: string[];
+  } {
+    void _signals;
     const score = clampScore(100 - totalPenalty(findings));
     const subscores = subscoreDefinitions.map<Subscore>((definition) => {
       const relevantFindings = findings.filter((finding) =>
@@ -62,19 +66,17 @@ export class TransparentScoringModel implements ScoringModule {
       return {
         id: definition.id,
         label: definition.label,
-        score: clampScore(100 - totalPenalty(relevantFindings))
+        score: clampScore(100 - totalPenalty(relevantFindings)),
+        findingsCount: relevantFindings.filter((finding) => finding.severity !== "info").length
       };
     });
 
     return {
-      projectPath: signals.rootPath,
-      projectName: signals.projectName,
       scoringModelVersion,
       score,
       summary: summarize(score, findings),
       subscores,
-      findings,
-      recommendedActions: recommendedActions(findings)
+      recommendations: recommendedActions(findings)
     };
   }
 }

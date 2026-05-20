@@ -12,6 +12,17 @@ const signals: ProjectSignals = {
   mcpFiles: [],
   configFiles: [],
   benchmarkFiles: [],
+  ignoredPaths: [],
+  warnings: [],
+  errors: [],
+  scanStats: {
+    filesScanned: 0,
+    textFilesRead: 0,
+    bytesRead: 0,
+    docsMarkdownFileCount: 0,
+    openApiFileCount: 0,
+    benchmarkFileCount: 0
+  },
   textByPath: {}
 };
 

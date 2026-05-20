@@ -3,7 +3,9 @@ import { ArrowRight, Github, Terminal } from "lucide-react";
 import { sampleScanResult } from "@agentlighthouse/core";
 import { FindingList } from "../components/FindingList";
 import { ProductHeader } from "../components/ProductHeader";
+import { ProjectSummary } from "../components/ProjectSummary";
 import { RecommendationList } from "../components/RecommendationList";
+import { ReportPreview } from "../components/ReportPreview";
 import { ScoreCard } from "../components/ScoreCard";
 import { SubscoreGrid } from "../components/SubscoreGrid";
 
@@ -57,10 +59,12 @@ export default function HomePage() {
       <section className="mx-auto grid max-w-6xl gap-6 px-5 py-12 lg:grid-cols-[1fr_0.8fr]">
         <div className="space-y-6">
           <SubscoreGrid result={sampleScanResult} />
+          <ProjectSummary result={sampleScanResult} />
           <FindingList result={sampleScanResult} />
         </div>
         <div className="space-y-6">
           <RecommendationList result={sampleScanResult} />
+          <ReportPreview result={sampleScanResult} />
           <section id="cli" className="rounded-lg border border-black/10 bg-white p-5">
             <div className="flex items-center gap-2">
               <Terminal className="h-5 w-5 text-harbor" aria-hidden="true" />
@@ -68,6 +72,7 @@ export default function HomePage() {
             </div>
             <pre className="mt-4 overflow-x-auto rounded-md bg-ink p-4 text-sm leading-6 text-white">
               <code>{`pnpm --filter @agentlighthouse/cli dev scan .
+pnpm --filter @agentlighthouse/cli dev scan . --format markdown --output agentlighthouse-report.md
 pnpm --filter @agentlighthouse/cli dev init . --dry-run
 pnpm validate:realworld`}</code>
             </pre>

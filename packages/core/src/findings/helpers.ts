@@ -14,7 +14,7 @@ export function finding(input: {
   return input;
 }
 
-export function textIncludesAny(text: string | undefined, needles: string[]): boolean {
+export function textIncludesAny(text: string | undefined, needles: readonly string[]): boolean {
   if (!text) {
     return false;
   }

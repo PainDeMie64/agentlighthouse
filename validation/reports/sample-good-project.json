@@ -1,0 +1,299 @@
+{
+  "scanId": "scan_3303de69",
+  "scannedPath": "<repo>/examples/sample-good-project",
+  "startedAt": "2026-05-20T18:51:31.831Z",
+  "completedAt": "2026-05-20T18:51:31.834Z",
+  "durationMs": 3,
+  "agentLighthouseVersion": "0.1.0",
+  "scoringModelVersion": "0.1.0",
+  "score": 100,
+  "summary": "Strong agent-readiness with 0 high-priority issue(s) remaining.",
+  "subscores": [
+    {
+      "id": "agent_instructions",
+      "label": "Agent Instructions",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "documentation",
+      "label": "Documentation",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "api_and_tooling",
+      "label": "API & Tooling",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "examples_and_tasks",
+      "label": "Examples & Tasks",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "security_and_privacy",
+      "label": "Security & Privacy",
+      "score": 100,
+      "findingsCount": 0
+    },
+    {
+      "id": "freshness_and_consistency",
+      "label": "Freshness & Consistency",
+      "score": 100,
+      "findingsCount": 0
+    }
+  ],
+  "recommendations": [],
+  "projectName": "sample-good-project",
+  "findings": [
+    {
+      "id": "api.openapi-detected",
+      "title": "OpenAPI file detected",
+      "severity": "info",
+      "category": "api_schema",
+      "description": "The scanner found an API schema that agents can use.",
+      "evidence": ["openapi.yaml"],
+      "recommendation": "Keep API descriptions, examples, and auth details current.",
+      "affectedFile": "openapi.yaml",
+      "suggestedFixType": "none"
+    },
+    {
+      "id": "mcp.not-evaluated",
+      "title": "MCP readiness could not be evaluated yet",
+      "severity": "info",
+      "category": "mcp_tools",
+      "description": "No MCP server/config/package signal was detected.",
+      "evidence": ["No file or package name matching MCP was scanned."],
+      "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+      "suggestedFixType": "review_manually"
+    }
+  ],
+  "detectedProject": {
+    "type": "openapi_project",
+    "name": "sample-good-project",
+    "confidence": 0.85,
+    "evidence": ["OpenAPI files detected: openapi.yaml."],
+    "packageManager": "npm",
+    "frameworks": ["Express", "TypeScript", "Vitest"]
+  },
+  "detectedArtifacts": [
+    {
+      "path": "AGENTS.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Primary coding-agent instructions",
+      "quality": "strong",
+      "notes": [
+        "Includes project overview.",
+        "Includes setup commands.",
+        "Includes test commands.",
+        "Includes lint/typecheck commands."
+      ]
+    },
+    {
+      "path": "CLAUDE.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Claude Code project memory",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes setup commands.",
+        "Includes test commands.",
+        "Includes lint/typecheck commands.",
+        "Missing architecture map.",
+        "Missing coding conventions.",
+        "Missing security/privacy guidance.",
+        "Missing generated-file warnings."
+      ]
+    },
+    {
+      "path": "llms.txt",
+      "exists": true,
+      "kind": "file",
+      "role": "LLM-readable project map",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes architecture map.",
+        "Includes docs links.",
+        "Includes examples."
+      ]
+    },
+    {
+      "path": "README.md",
+      "exists": true,
+      "kind": "file",
+      "role": "Human and agent entry point",
+      "quality": "partial",
+      "notes": [
+        "Includes project overview.",
+        "Includes setup commands.",
+        "Includes test commands.",
+        "Includes architecture map."
+      ]
+    },
+    {
+      "path": ".cursor/rules",
+      "exists": true,
+      "kind": "directory",
+      "role": "Cursor rules",
+      "quality": "partial",
+      "notes": ["Cursor rules directory detected."]
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "exists": true,
+      "kind": "file",
+      "role": "GitHub Copilot instructions",
+      "quality": "partial",
+      "notes": [
+        "Includes setup commands.",
+        "Includes test commands.",
+        "Includes lint/typecheck commands.",
+        "Includes architecture map.",
+        "Missing project overview.",
+        "Missing coding conventions.",
+        "Missing common mistakes.",
+        "Missing generated-file warnings."
+      ]
+    },
+    {
+      "path": ".agentlighthouseignore",
+      "exists": true,
+      "kind": "file",
+      "role": "AgentLighthouse ignore rules",
+      "quality": "unknown",
+      "notes": ["Artifact exists but no text content was available for quality checks."]
+    }
+  ],
+  "scanStats": {
+    "filesScanned": 13,
+    "textFilesRead": 12,
+    "bytesRead": 4959,
+    "docsMarkdownFileCount": 1,
+    "openApiFileCount": 1,
+    "benchmarkFileCount": 1,
+    "findingCount": 2
+  },
+  "ignoredPaths": [],
+  "warnings": [],
+  "errors": [],
+  "projectPath": "<repo>/examples/sample-good-project",
+  "scannedAt": "2026-05-20T18:51:31.834Z",
+  "recommendedActions": [],
+  "signals": {
+    "rootPath": "<repo>/examples/sample-good-project",
+    "projectName": "sample-good-project",
+    "scannedFiles": [
+      ".agentlighthouseignore",
+      ".cursor/rules/project.md",
+      ".github/copilot-instructions.md",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "benchmarks/agent-tasks.yaml",
+      "docs/ARCHITECTURE.md",
+      "llms.txt",
+      "openapi.yaml",
+      "package.json",
+      "src/index.ts",
+      "tsconfig.json"
+    ],
+    "artifacts": {
+      "AGENTS.md": {
+        "path": "AGENTS.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 1159,
+        "contentPreview": "# Agent Instructions for Sample Good Project\n\n## Project Overview\n\nSample Good Project is a TypeScript API service used to validate agent-readiness checks.\n\n## Setup Commands\n\n- Install dependencies: `pnpm install`\n- Start development: `pnpm dev`\n- Build: `pnpm build`\n\n## Test, Lint, and Typecheck Commands\n\n- Tests: `pnpm test`\n- Lint: `pnpm lint`\n- Typecheck: `pnpm typecheck`\n\n## Architecture Map\n\n- `src/` contains application code.\n- `docs/` contains architecture and API documentation.\n- `benc"
+      },
+      "CLAUDE.md": {
+        "path": "CLAUDE.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 497,
+        "contentPreview": "# Claude Project Memory: Sample Good Project\n\nSample Good Project is a small TypeScript API service for AgentLighthouse validation.\n\n## Development Workflow\n\n- Install with `pnpm install`.\n- Run `pnpm lint`, `pnpm typecheck`, and `pnpm test` before handing work back.\n\n## Testing Expectations\n\nCore behavior should have Vitest coverage. Keep examples deterministic and local.\n\n## Product Boundaries\n\nThis sample is not a production API, chatbot, or hosted SaaS. Do not build auth or billing here.\n"
+      },
+      "llms.txt": {
+        "path": "llms.txt",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 296,
+        "contentPreview": "# Sample Good Project\n\nMachine-readable map for coding agents.\n\n## Links\n\n- [README](README.md)\n- [Architecture](docs/ARCHITECTURE.md)\n- [Agent Instructions](AGENTS.md)\n- [Task Benchmarks](benchmarks/agent-tasks.yaml)\n\n## Example Usage\n\n- Run tests: `pnpm test`\n- Run typecheck: `pnpm typecheck`\n"
+      },
+      "README.md": {
+        "path": "README.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 632,
+        "contentPreview": "# Sample Good Project\n\nSample Good Project is a small TypeScript API service used to validate AgentLighthouse scoring on a well-documented repository.\n\n## Quickstart\n\n```bash\npnpm install\npnpm dev\n```\n\n## Installation\n\nUse pnpm with Node.js 22 or newer.\n\n```bash\npnpm install\n```\n\n## Usage Example\n\n```bash\npnpm test\n```\n\nThe example API exposes a health helper in `src/index.ts`.\n\n## Architecture\n\n- `src/` contains TypeScript source code.\n- `docs/` contains architecture and API guidance.\n- `benchm"
+      },
+      ".cursor/rules": {
+        "path": ".cursor/rules",
+        "exists": true,
+        "kind": "directory",
+        "sizeBytes": 20
+      },
+      ".github/copilot-instructions.md": {
+        "path": ".github/copilot-instructions.md",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 216,
+        "contentPreview": "# Copilot Instructions\n\nUse `pnpm install`, `pnpm lint`, `pnpm typecheck`, and `pnpm test`.\n\nKeep changes in `src/` unless docs or benchmarks need updates. Never expose secrets, credentials, tokens, or private data.\n"
+      },
+      ".agentlighthouseignore": {
+        "path": ".agentlighthouseignore",
+        "exists": true,
+        "kind": "file",
+        "sizeBytes": 71
+      }
+    },
+    "docsMarkdownFiles": ["docs/ARCHITECTURE.md"],
+    "openApiFiles": ["openapi.yaml"],
+    "mcpFiles": [],
+    "configFiles": ["package.json", "tsconfig.json"],
+    "benchmarkFiles": ["benchmarks/agent-tasks.yaml"],
+    "ignoredPaths": [],
+    "warnings": [],
+    "errors": [],
+    "scanStats": {
+      "filesScanned": 13,
+      "textFilesRead": 12,
+      "bytesRead": 4959,
+      "docsMarkdownFileCount": 1,
+      "openApiFileCount": 1,
+      "benchmarkFileCount": 1
+    },
+    "packageJson": {
+      "path": "package.json",
+      "name": "sample-good-project",
+      "scripts": {
+        "dev": "tsx src/index.ts",
+        "build": "tsc -p tsconfig.json",
+        "test": "vitest run",
+        "lint": "eslint .",
+        "typecheck": "tsc -p tsconfig.json --noEmit"
+      },
+      "dependencies": ["express"],
+      "devDependencies": ["typescript", "tsx", "vitest"]
+    },
+    "textByPath": {
+      ".cursor/rules/project.md": "# Cursor Rules\n\n- Follow the architecture map in `AGENTS.md`.\n- Use strict TypeScript coding conventions.\n- Do not edit generated `dist/`, `build/`, or `coverage/` output.\n",
+      ".github/copilot-instructions.md": "# Copilot Instructions\n\nUse `pnpm install`, `pnpm lint`, `pnpm typecheck`, and `pnpm test`.\n\nKeep changes in `src/` unless docs or benchmarks need updates. Never expose secrets, credentials, tokens, or private data.\n",
+      "AGENTS.md": "# Agent Instructions for Sample Good Project\n\n## Project Overview\n\nSample Good Project is a TypeScript API service used to validate agent-readiness checks.\n\n## Setup Commands\n\n- Install dependencies: `pnpm install`\n- Start development: `pnpm dev`\n- Build: `pnpm build`\n\n## Test, Lint, and Typecheck Commands\n\n- Tests: `pnpm test`\n- Lint: `pnpm lint`\n- Typecheck: `pnpm typecheck`\n\n## Architecture Map\n\n- `src/` contains application code.\n- `docs/` contains architecture and API documentation.\n- `benchmarks/` contains agent task workflows.\n\n## Coding Conventions\n\n- Use strict TypeScript.\n- Keep functions small and named for their behavior.\n- Prefer deterministic logic and explicit error handling.\n\n## Common Mistakes\n\n- Do not edit generated `dist/`, `coverage/`, or build output.\n- Avoid committing local environment files.\n\n## Privacy and Security\n\n- Never commit secrets, credentials, tokens, or private data.\n- Use placeholders such as `EXAMPLE_API_KEY`.\n- Do not send code or docs to external LLMs without user approval.\n\n## Task Workflows\n\n- Add a small endpoint.\n- Run lint, typecheck, and tests.\n- Update docs and benchmarks when behavior changes.\n",
+      "CLAUDE.md": "# Claude Project Memory: Sample Good Project\n\nSample Good Project is a small TypeScript API service for AgentLighthouse validation.\n\n## Development Workflow\n\n- Install with `pnpm install`.\n- Run `pnpm lint`, `pnpm typecheck`, and `pnpm test` before handing work back.\n\n## Testing Expectations\n\nCore behavior should have Vitest coverage. Keep examples deterministic and local.\n\n## Product Boundaries\n\nThis sample is not a production API, chatbot, or hosted SaaS. Do not build auth or billing here.\n",
+      "README.md": "# Sample Good Project\n\nSample Good Project is a small TypeScript API service used to validate AgentLighthouse scoring on a well-documented repository.\n\n## Quickstart\n\n```bash\npnpm install\npnpm dev\n```\n\n## Installation\n\nUse pnpm with Node.js 22 or newer.\n\n```bash\npnpm install\n```\n\n## Usage Example\n\n```bash\npnpm test\n```\n\nThe example API exposes a health helper in `src/index.ts`.\n\n## Architecture\n\n- `src/` contains TypeScript source code.\n- `docs/` contains architecture and API guidance.\n- `benchmarks/` contains realistic agent task workflows.\n\n## Development Commands\n\n```bash\npnpm lint\npnpm typecheck\npnpm test\npnpm build\n```\n",
+      "benchmarks/agent-tasks.yaml": "version: 0.1.0\nproject: sample-good-project\ntasks:\n  - id: run-quality-gates\n    title: Run quality gates\n    prompt: Install dependencies, then run lint, typecheck, and tests for this project.\n    success_criteria:\n      - The agent identifies pnpm as the package manager.\n      - The agent runs the documented commands.\n      - The agent reports failures with file paths.\n  - id: find-architecture\n    title: Find architecture map\n    prompt: Explain where source code, docs, and benchmark tasks live.\n    success_criteria:\n      - The agent references README, AGENTS.md, and docs/ARCHITECTURE.md.\n      - The explanation is consistent with the repository structure.\n",
+      "docs/ARCHITECTURE.md": "# Architecture\n\nSample Good Project keeps source code in `src/`, documentation in `docs/`, and agent task workflows in `benchmarks/`.\n\nThe main workflow is:\n\n```text\ninstall -> lint -> typecheck -> test -> build\n```\n",
+      "llms.txt": "# Sample Good Project\n\nMachine-readable map for coding agents.\n\n## Links\n\n- [README](README.md)\n- [Architecture](docs/ARCHITECTURE.md)\n- [Agent Instructions](AGENTS.md)\n- [Task Benchmarks](benchmarks/agent-tasks.yaml)\n\n## Example Usage\n\n- Run tests: `pnpm test`\n- Run typecheck: `pnpm typecheck`\n",
+      "openapi.yaml": "openapi: 3.0.3\ninfo:\n  title: Sample Good Project API\n  version: 0.1.0\npaths:\n  /health:\n    get:\n      summary: Check service health\n      description: Returns a simple health payload that agents can use to verify the API is reachable during local development.\n      responses:\n        \"200\":\n          description: Health response\n          content:\n            application/json:\n              example:\n                ok: true\n",
+      "package.json": "{\n  \"name\": \"sample-good-project\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"tsx src/index.ts\",\n    \"build\": \"tsc -p tsconfig.json\",\n    \"test\": \"vitest run\",\n    \"lint\": \"eslint .\",\n    \"typecheck\": \"tsc -p tsconfig.json --noEmit\"\n  },\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  },\n  \"devDependencies\": {\n    \"typescript\": \"^5.0.0\",\n    \"tsx\": \"^4.0.0\",\n    \"vitest\": \"^3.0.0\"\n  }\n}\n",
+      "src/index.ts": "export function health() {\n  return { ok: true };\n}\n",
+      "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"NodeNext\",\n    \"moduleResolution\": \"NodeNext\",\n    \"strict\": true,\n    \"noEmit\": true\n  },\n  \"include\": [\"src/**/*.ts\"]\n}\n"
+    }
+  }
+}

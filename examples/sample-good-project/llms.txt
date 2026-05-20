@@ -1,0 +1,15 @@
+# Sample Good Project
+
+Machine-readable map for coding agents.
+
+## Links
+
+- [README](README.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Agent Instructions](AGENTS.md)
+- [Task Benchmarks](benchmarks/agent-tasks.yaml)
+
+## Example Usage
+
+- Run tests: `pnpm test`
+- Run typecheck: `pnpm typecheck`

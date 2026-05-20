@@ -10,6 +10,7 @@ AgentLighthouse is Lighthouse for AI agents: a deterministic, local-first scanne
 - [Architecture](docs/ARCHITECTURE.md)
 - [Scoring Model](docs/SCORING_MODEL.md)
 - [Development Guide](docs/DEVELOPMENT.md)
+- [CI Usage](docs/CI.md)
 - [Validation Guide](docs/VALIDATION.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Decisions](docs/DECISIONS.md)
@@ -17,7 +18,7 @@ AgentLighthouse is Lighthouse for AI agents: a deterministic, local-first scanne
 - [Claude Memory](CLAUDE.md)
 - [Core Package](packages/core/src/index.ts)
 - [CLI Package](packages/cli/src/index.ts)
-- [Sample Project](examples/sample-project/README.md)
+- [Good Sample Project](examples/sample-good-project/README.md)
 
 ## Example Usage
 

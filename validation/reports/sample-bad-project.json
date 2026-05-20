@@ -1,12 +1,12 @@
 {
-  "scanId": "scan_0ee6b9e6",
-  "scannedPath": "<repo>/examples/sample-project",
-  "startedAt": "2026-05-20T18:51:31.735Z",
-  "completedAt": "2026-05-20T18:51:31.739Z",
-  "durationMs": 4,
+  "scanId": "scan_da5afe8f",
+  "scannedPath": "<repo>/examples/sample-bad-project",
+  "startedAt": "2026-05-20T18:51:31.855Z",
+  "completedAt": "2026-05-20T18:51:31.856Z",
+  "durationMs": 1,
   "agentLighthouseVersion": "0.1.0",
   "scoringModelVersion": "0.1.0",
-  "score": 23,
+  "score": 3,
   "summary": "Agent-readiness needs focused work before agents can reliably use this project.",
   "subscores": [
     {
@@ -18,13 +18,13 @@
     {
       "id": "documentation",
       "label": "Documentation",
-      "score": 95,
-      "findingsCount": 1
+      "score": 80,
+      "findingsCount": 4
     },
     {
       "id": "api_and_tooling",
       "label": "API & Tooling",
-      "score": 75,
+      "score": 70,
       "findingsCount": 4
     },
     {
@@ -53,7 +53,7 @@
     "Add task benchmarks for the top developer workflows agents should complete.",
     "Document secret-handling and privacy rules for agent workflows."
   ],
-  "projectName": "sample-widget-api",
+  "projectName": "sample-bad-project",
   "findings": [
     {
       "id": "agent-instructions.missing-agents-md",
@@ -115,6 +115,28 @@
       "suggestedFixType": "create_file"
     },
     {
+      "id": "docs.readme-no-quickstart",
+      "title": "README.md has no quickstart section",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: quickstart, quick start, getting started."],
+      "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section"
+    },
+    {
+      "id": "docs.readme-no-install",
+      "title": "README.md has no installation instructions",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "The README is missing a section agents commonly need to orient themselves.",
+      "evidence": ["README.md does not contain any of: install, pnpm, npm, yarn, pip."],
+      "recommendation": "Add installation commands and prerequisites.",
+      "affectedFile": "README.md",
+      "suggestedFixType": "add_section"
+    },
+    {
       "id": "docs.readme-no-examples",
       "title": "README.md has no examples",
       "severity": "medium",
@@ -124,6 +146,28 @@
       "recommendation": "Add concrete examples showing expected usage and output.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section"
+    },
+    {
+      "id": "docs.no-markdown",
+      "title": "Docs exist but no Markdown files are discoverable",
+      "severity": "medium",
+      "category": "documentation",
+      "description": "Agents work best when documentation source is available in text formats.",
+      "evidence": ["docs/ exists but no .md or .mdx files were scanned."],
+      "recommendation": "Add Markdown documentation or ensure docs source is not ignored.",
+      "affectedFile": "docs/",
+      "suggestedFixType": "add_section"
+    },
+    {
+      "id": "setup.package-json-no-scripts",
+      "title": "package.json has no scripts",
+      "severity": "high",
+      "category": "setup_and_tests",
+      "description": "Agents cannot discover standard local workflows from package.json.",
+      "evidence": ["package.json scripts object is empty."],
+      "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
+      "affectedFile": "package.json",
+      "suggestedFixType": "add_script"
     },
     {
       "id": "setup.missing-test-script",
@@ -159,26 +203,14 @@
       "suggestedFixType": "add_script"
     },
     {
-      "id": "api.openapi-detected",
-      "title": "OpenAPI file detected",
+      "id": "api.openapi-not-detected",
+      "title": "OpenAPI file not detected",
       "severity": "info",
       "category": "api_schema",
-      "description": "The scanner found an API schema that agents can use.",
-      "evidence": ["openapi.yaml"],
-      "recommendation": "Keep API descriptions, examples, and auth details current.",
-      "affectedFile": "openapi.yaml",
-      "suggestedFixType": "none"
-    },
-    {
-      "id": "api.openapi-no-nearby-examples",
-      "title": "OpenAPI exists but no examples are nearby",
-      "severity": "medium",
-      "category": "api_schema",
-      "description": "Agents need request and response examples in addition to schemas.",
-      "evidence": ["OpenAPI files: openapi.yaml"],
-      "recommendation": "Add examples near the API spec or link examples from the API documentation.",
-      "affectedFile": "openapi.yaml",
-      "suggestedFixType": "add_example"
+      "description": "No OpenAPI schema was found. This may be fine for projects without an HTTP API.",
+      "evidence": ["No openapi.* or swagger.* file was scanned."],
+      "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
+      "suggestedFixType": "review_manually"
     },
     {
       "id": "mcp.not-evaluated",
@@ -229,21 +261,18 @@
       "severity": "low",
       "category": "freshness_and_consistency",
       "description": "Stale markers can confuse agents unless they include replacement guidance.",
-      "evidence": [
-        "README.md:14: TODO: add more complete docs soon.",
-        "docs/overview.md:5: The legacy v1 endpoint is deprecated."
-      ],
+      "evidence": ["README.md:3: Coming soon.", "README.md:5: TODO old setup."],
       "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
       "suggestedFixType": "update_file"
     }
   ],
   "detectedProject": {
-    "type": "openapi_project",
-    "name": "sample-widget-api",
-    "confidence": 0.85,
-    "evidence": ["OpenAPI files detected: openapi.yaml."],
+    "type": "node_javascript",
+    "name": "sample-bad-project",
+    "confidence": 0.8,
+    "evidence": ["package.json detected."],
     "packageManager": "npm",
-    "frameworks": ["Express"]
+    "frameworks": []
   },
   "detectedArtifacts": [
     {
@@ -277,12 +306,11 @@
       "role": "Human and agent entry point",
       "quality": "thin",
       "notes": [
-        "Includes project overview.",
-        "Includes setup commands.",
         "Includes examples.",
+        "Missing project overview.",
+        "Missing setup commands.",
         "Missing test commands.",
-        "Missing architecture map.",
-        "Missing docs links."
+        "Missing architecture map."
       ]
     },
     {
@@ -311,19 +339,19 @@
     }
   ],
   "scanStats": {
-    "filesScanned": 4,
-    "textFilesRead": 4,
-    "bytesRead": 885,
-    "docsMarkdownFileCount": 1,
-    "openApiFileCount": 1,
+    "filesScanned": 3,
+    "textFilesRead": 2,
+    "bytesRead": 120,
+    "docsMarkdownFileCount": 0,
+    "openApiFileCount": 0,
     "benchmarkFileCount": 0,
-    "findingCount": 16
+    "findingCount": 19
   },
   "ignoredPaths": [],
   "warnings": [],
   "errors": [],
-  "projectPath": "<repo>/examples/sample-project",
-  "scannedAt": "2026-05-20T18:51:31.739Z",
+  "projectPath": "<repo>/examples/sample-bad-project",
+  "scannedAt": "2026-05-20T18:51:31.856Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",
@@ -332,9 +360,9 @@
     "Document secret-handling and privacy rules for agent workflows."
   ],
   "signals": {
-    "rootPath": "<repo>/examples/sample-project",
-    "projectName": "sample-widget-api",
-    "scannedFiles": ["README.md", "docs/overview.md", "openapi.yaml", "package.json"],
+    "rootPath": "<repo>/examples/sample-bad-project",
+    "projectName": "sample-bad-project",
+    "scannedFiles": ["README.md", "docs/index.html", "package.json"],
     "artifacts": {
       "AGENTS.md": {
         "path": "AGENTS.md",
@@ -355,8 +383,8 @@
         "path": "README.md",
         "exists": true,
         "kind": "file",
-        "sizeBytes": 229,
-        "contentPreview": "# Sample Widget API\n\nThis intentionally imperfect project is used to validate AgentLighthouse.\n\n## Quickstart\n\nInstall dependencies and start the server.\n\n```bash\nnpm install\nnpm run start\n```\n\nTODO: add more complete docs soon.\n"
+        "sizeBytes": 44,
+        "contentPreview": "# Bad Sample\n\nComing soon.\n\nTODO old setup.\n"
       },
       ".cursor/rules": {
         "path": ".cursor/rules",
@@ -374,8 +402,8 @@
         "kind": "missing"
       }
     },
-    "docsMarkdownFiles": ["docs/overview.md"],
-    "openApiFiles": ["openapi.yaml"],
+    "docsMarkdownFiles": [],
+    "openApiFiles": [],
     "mcpFiles": [],
     "configFiles": ["package.json"],
     "benchmarkFiles": [],
@@ -383,27 +411,23 @@
     "warnings": [],
     "errors": [],
     "scanStats": {
-      "filesScanned": 4,
-      "textFilesRead": 4,
-      "bytesRead": 885,
-      "docsMarkdownFileCount": 1,
-      "openApiFileCount": 1,
+      "filesScanned": 3,
+      "textFilesRead": 2,
+      "bytesRead": 120,
+      "docsMarkdownFileCount": 0,
+      "openApiFileCount": 0,
       "benchmarkFileCount": 0
     },
     "packageJson": {
       "path": "package.json",
-      "name": "sample-widget-api",
-      "scripts": {
-        "start": "node src/index.js"
-      },
-      "dependencies": ["express"],
+      "name": "sample-bad-project",
+      "scripts": {},
+      "dependencies": [],
       "devDependencies": []
     },
     "textByPath": {
-      "README.md": "# Sample Widget API\n\nThis intentionally imperfect project is used to validate AgentLighthouse.\n\n## Quickstart\n\nInstall dependencies and start the server.\n\n```bash\nnpm install\nnpm run start\n```\n\nTODO: add more complete docs soon.\n",
-      "docs/overview.md": "# Overview\n\nSample Widget API is a small demo service. It has partial documentation by design so AgentLighthouse can surface missing test, lint, benchmark, safety, and agent instruction gaps.\n\nThe legacy v1 endpoint is deprecated.\n",
-      "openapi.yaml": "openapi: 3.0.3\ninfo:\n  title: Sample Widget API\n  version: 0.1.0\npaths:\n  /widgets:\n    get:\n      summary: List widgets\n      description: List widgets available to the current demo user.\n      responses:\n        \"200\":\n          description: OK\n",
-      "package.json": "{\n  \"name\": \"sample-widget-api\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"start\": \"node src/index.js\"\n  },\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  }\n}\n"
+      "README.md": "# Bad Sample\n\nComing soon.\n\nTODO old setup.\n",
+      "package.json": "{\n  \"name\": \"sample-bad-project\",\n  \"version\": \"0.1.0\",\n  \"private\": true\n}\n"
     }
   }
 }

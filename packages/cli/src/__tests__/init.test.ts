@@ -1,10 +1,18 @@
 import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { runInitCommand } from "../commands/init.js";
 
 describe("runInitCommand", () => {
+  beforeEach(() => {
+    vi.spyOn(process.stdout, "write").mockImplementation(() => true);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it("does not overwrite existing files unless forced", async () => {
     const root = await mkdtemp(path.join(tmpdir(), "agentlighthouse-init-"));
     await mkdir(path.join(root, "docs"));

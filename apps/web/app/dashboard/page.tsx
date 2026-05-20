@@ -1,7 +1,9 @@
 import { sampleScanResult } from "@agentlighthouse/core";
 import { FindingList } from "../../components/FindingList";
 import { ProductHeader } from "../../components/ProductHeader";
+import { ProjectSummary } from "../../components/ProjectSummary";
 import { RecommendationList } from "../../components/RecommendationList";
+import { ReportPreview } from "../../components/ReportPreview";
 import { ScoreCard } from "../../components/ScoreCard";
 import { SubscoreGrid } from "../../components/SubscoreGrid";
 
@@ -19,10 +21,14 @@ export default function DashboardPage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr]">
           <div className="space-y-6">
             <ScoreCard result={sampleScanResult} />
+            <ProjectSummary result={sampleScanResult} />
             <SubscoreGrid result={sampleScanResult} />
             <FindingList result={sampleScanResult} />
           </div>
-          <RecommendationList result={sampleScanResult} />
+          <div className="space-y-6">
+            <RecommendationList result={sampleScanResult} />
+            <ReportPreview result={sampleScanResult} />
+          </div>
         </div>
       </section>
     </main>

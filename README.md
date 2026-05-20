@@ -50,6 +50,7 @@ The dashboard runs from `apps/web` through the root `pnpm dev` script.
 ```bash
 agentlighthouse scan <path>
 agentlighthouse scan <path> --json --output report.json
+agentlighthouse scan <path> --format markdown --output report.md
 agentlighthouse scan <path> --fail-under 70
 agentlighthouse init <path> --dry-run
 agentlighthouse init <path> --force
@@ -70,6 +71,17 @@ pnpm dev
 ```
 
 Then open the local Next.js URL printed by the dev server. The initial dashboard uses sample scan data from `@agentlighthouse/core`.
+
+## CI Usage
+
+AgentLighthouse can run as a score gate in GitHub Actions:
+
+```yaml
+- name: AgentLighthouse scan
+  run: pnpm --filter @agentlighthouse/cli dev scan . --fail-under 75 --format markdown --output agentlighthouse-report.md
+```
+
+The command writes the report before returning a non-zero exit code when the score is below the threshold.
 
 ## Repository Structure
 
