@@ -1,5 +1,8 @@
 name: AgentLighthouse
-description: Run AgentLighthouse agent-readiness scans in CI without cloud services.
+description: Experimental source-based AgentLighthouse action for local-first agent-readiness scans in CI.
+branding:
+  icon: activity
+  color: blue
 inputs:
   path:
     description: Path inside the caller workspace to scan.

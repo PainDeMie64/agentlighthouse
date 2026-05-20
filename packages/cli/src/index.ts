@@ -14,7 +14,7 @@ const program = new Command();
 program
   .name("agentlighthouse")
   .description("Lighthouse for AI agents: scan projects for agent-readiness.")
-  .version("0.1.0");
+  .version("0.1.0-alpha.0");
 
 program
   .command("scan")

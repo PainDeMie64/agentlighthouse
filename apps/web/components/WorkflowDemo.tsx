@@ -19,6 +19,13 @@ const artifacts = [
   "agentlighthouse-reports/comparison-pr-summary.md"
 ];
 
+const alphaStatus = [
+  ["Local-first", "Scans and reports run without cloud services or model-provider keys."],
+  ["Packaging", "Core and CLI packages are alpha-ready; npm publication is still pending."],
+  ["CI", "Use report bundles, SARIF, baselines, and PR-aware gates from source today."],
+  ["Scope", "No SaaS, auth, billing, GitHub API comments, or agent execution in this phase."]
+];
+
 export function WorkflowDemo() {
   return (
     <section className="rounded-lg border border-black/10 bg-white p-5">
@@ -39,6 +46,15 @@ export function WorkflowDemo() {
           </li>
         ))}
       </ul>
+      <h3 className="mt-5 text-sm font-semibold uppercase text-ink/60">Public alpha status</h3>
+      <div className="mt-2 grid gap-2 md:grid-cols-2">
+        {alphaStatus.map(([label, detail]) => (
+          <div key={label} className="rounded border border-black/10 p-3">
+            <p className="text-sm font-semibold text-ink">{label}</p>
+            <p className="mt-1 text-sm leading-6 text-ink/70">{detail}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

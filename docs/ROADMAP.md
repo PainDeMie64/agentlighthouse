@@ -60,6 +60,14 @@
 - Dogfood GitHub workflow for AgentLighthouse itself.
 - Clearer errors for scan-result versus comparison-result JSON.
 
+## Phase 2F: Release Readiness + Public Alpha Packaging
+
+- Package metadata, exports, bins, and files fields for publishable packages.
+- Packed install smoke tests for the CLI.
+- Release check and npm dry-run scripts.
+- Changelog, versioning, release, and schema stability documentation.
+- Public-alpha repo hygiene and honest GitHub Action status.
+
 ## Phase 3: Docs Crawler + Deeper API/MCP Resolution
 
 - Crawl documentation sites safely.

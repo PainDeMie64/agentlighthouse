@@ -1,22 +1,50 @@
 {
   "name": "@agentlighthouse/cli",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0",
   "description": "AgentLighthouse command-line interface.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PainDeMie64/agentlighthouse.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/PainDeMie64/agentlighthouse#readme",
+  "bugs": {
+    "url": "https://github.com/PainDeMie64/agentlighthouse/issues"
+  },
+  "keywords": [
+    "agent-readiness",
+    "cli",
+    "ci",
+    "sarif",
+    "github-actions",
+    "openapi",
+    "mcp"
+  ],
   "type": "module",
+  "sideEffects": false,
   "files": [
     "dist",
-    "src",
-    "!src/__tests__",
     "!dist/__tests__",
+    "!dist/.tsbuildinfo",
     "package.json",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "bin": {
     "agentlighthouse": "./dist/index.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsx src/index.ts",
@@ -24,7 +52,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@agentlighthouse/core": "workspace:*",
+    "@agentlighthouse/core": "workspace:^",
     "commander": "^14.0.0"
   },
   "devDependencies": {

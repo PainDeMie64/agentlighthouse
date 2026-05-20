@@ -1,11 +1,22 @@
 {
   "name": "agentlighthouse",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0",
   "private": true,
   "description": "Lighthouse for AI agents: scan repositories, docs, APIs, and workflows for agent-readiness.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PainDeMie64/agentlighthouse.git"
+  },
+  "homepage": "https://github.com/PainDeMie64/agentlighthouse#readme",
+  "bugs": {
+    "url": "https://github.com/PainDeMie64/agentlighthouse/issues"
+  },
   "packageManager": "pnpm@10.33.0",
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "@agentlighthouse/core": "workspace:*"
   },
@@ -16,8 +27,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "typecheck": "pnpm -r typecheck",
-    "validate:realworld": "tsx scripts/validate-realworld.ts"
+    "typecheck": "pnpm --filter @agentlighthouse/core build && pnpm -r typecheck",
+    "validate:realworld": "tsx scripts/validate-realworld.ts",
+    "release:smoke": "tsx scripts/release-smoke.ts",
+    "release:check": "tsx scripts/release-check.ts",
+    "release:dry-run": "tsx scripts/release-dry-run.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

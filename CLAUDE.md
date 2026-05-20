@@ -6,6 +6,7 @@ AgentLighthouse is an agent-readiness scanner, not a coding agent or model wrapp
 
 - Install with `pnpm install`.
 - Run `pnpm test`, `pnpm typecheck`, and `pnpm lint` after code changes.
+- Run `pnpm release:check` and `pnpm release:dry-run` for packaging or release-readiness changes.
 - Use `pnpm --filter @agentlighthouse/cli dev scan .` to dogfood scanner behavior.
 - Keep core logic in `packages/core`; keep CLI and web thin.
 

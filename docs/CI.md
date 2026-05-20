@@ -2,6 +2,8 @@
 
 AgentLighthouse is local-first and can run in GitHub Actions or any CI as a deterministic score gate. It measures agent-readiness, not general software quality.
 
+The npm package is not published yet. Use workspace commands from a source checkout today. After public alpha publication, the same examples can switch to `npx @agentlighthouse/cli`.
+
 ## Markdown Report and Score Gate
 
 ```yaml
@@ -25,6 +27,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm build
       - run: pnpm --filter @agentlighthouse/cli dev scan . --fail-under 75 --format markdown --output agentlighthouse-report.md
       - uses: actions/upload-artifact@v4
         if: always()
@@ -38,6 +41,7 @@ The scanner writes reports before applying CI gates, so CI can keep artifacts ev
 ## Gates
 
 ```bash
+pnpm --filter @agentlighthouse/cli dev scan . --fail-under 80
 agentlighthouse scan . --fail-under 80
 agentlighthouse scan . --fail-under 80 --min-confidence medium
 agentlighthouse scan . --fail-on-severity high
@@ -108,3 +112,14 @@ agentlighthouse scan . --format pr-summary --github-step-summary
 ```
 
 If `GITHUB_STEP_SUMMARY` is set, AgentLighthouse appends a concise summary. If it is not set, the CLI prints a warning and continues.
+
+## Release Readiness In CI
+
+Before publishing an alpha package, run:
+
+```bash
+pnpm release:check
+pnpm release:dry-run
+```
+
+These commands do not publish packages or create tags.

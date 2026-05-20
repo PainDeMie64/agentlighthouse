@@ -16,6 +16,9 @@ pnpm build
 pnpm dev
 pnpm validate:realworld
 pnpm format:check
+pnpm release:smoke
+pnpm release:check
+pnpm release:dry-run
 ```
 
 ## CLI Development
@@ -32,6 +35,18 @@ pnpm --filter @agentlighthouse/cli dev compare --baseline validation/reports/sam
 pnpm --filter @agentlighthouse/cli dev compare --baseline validation/reports/sample-good-project.json --current validation/reports/sample-bad-project.json --changed-files examples/comparison/changed-files.txt --format pr-summary
 pnpm --filter @agentlighthouse/cli dev init . --dry-run
 ```
+
+## Release Readiness
+
+Public alpha packaging is tested locally before any publish step:
+
+```bash
+pnpm release:smoke
+pnpm release:check
+pnpm release:dry-run
+```
+
+These commands pack and dry-run publish checks for `@agentlighthouse/core` and `@agentlighthouse/cli`. They do not publish packages or create tags.
 
 ## Coding Standards
 

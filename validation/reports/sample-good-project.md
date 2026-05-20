@@ -107,11 +107,11 @@ No non-informational findings.
 
 ## Scan Metadata
 
-- Scan ID: `scan_cf6a2683`
-- AgentLighthouse version: `0.1.0`
+- Scan ID: `scan_b0f11bf9`
+- AgentLighthouse version: `0.1.0-alpha.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T21:08:14.171Z
-- Completed: 2026-05-20T21:08:14.179Z
+- Started: 2026-05-20T21:29:31.504Z
+- Completed: 2026-05-20T21:29:31.512Z
 - Duration: 8ms
 - Files scanned: 14
 - Text files read: 13

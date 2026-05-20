@@ -138,8 +138,8 @@ None.
 
 ## Metadata
 
-- Baseline scan: `scan_cf6a2683` (2026-05-20T21:08:14.179Z)
-- Current scan: `scan_76c199bb` (2026-05-20T21:08:14.211Z)
+- Baseline scan: `scan_b0f11bf9` (2026-05-20T21:29:31.512Z)
+- Current scan: `scan_58483fff` (2026-05-20T21:29:31.540Z)
 - Baseline profile: `api`
 - Current profile: `library`
 - Comparison model: `0.1.0`

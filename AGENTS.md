@@ -44,6 +44,13 @@ pnpm format:check
 
 Run tests and typecheck after changing scanner, scoring, generator, CLI, or shared schema logic.
 
+Release-readiness changes should also run:
+
+```bash
+pnpm release:check
+pnpm release:dry-run
+```
+
 ## Coding Conventions
 
 - Use strict TypeScript with explicit contracts at package boundaries.
@@ -67,6 +74,7 @@ Run tests and typecheck after changing scanner, scoring, generator, CLI, or shar
 
 - Do not edit `node_modules`, `dist`, `.next`, `coverage`, `.tmp`, or third-party validation repositories.
 - Do not commit cloned third-party repos.
+- Do not commit package tarballs or `.tmp/release-*` smoke-test directories.
 - Do not commit local environment files, secrets, generated private reports, or credentials.
 - Avoid unrelated formatting churn.
 

@@ -21,7 +21,7 @@ import { LocalFilesystemScanner } from "./scanners/filesystem.js";
 import { calibrateScore } from "./scoring/calibration.js";
 import { TransparentScoringModel } from "./scoring/model.js";
 
-export const agentLighthouseVersion = "0.1.0";
+export const agentLighthouseVersion = "0.1.0-alpha.0";
 
 export * from "./schemas/types.js";
 export * from "./analyzers/mcp.js";

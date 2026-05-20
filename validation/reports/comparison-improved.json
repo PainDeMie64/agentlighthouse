@@ -1,24 +1,24 @@
 {
-  "comparisonId": "cmp_b02135e4",
+  "comparisonId": "cmp_8ea62969",
   "baseline": {
-    "scanId": "scan_76c199bb",
+    "scanId": "scan_58483fff",
     "scannedPath": "<repo>/examples/sample-bad-project",
     "score": 0,
     "confidence": "low",
     "confidenceScore": 45,
     "coverage": 40,
     "profile": "library",
-    "completedAt": "2026-05-20T21:08:14.211Z"
+    "completedAt": "2026-05-20T21:29:31.540Z"
   },
   "current": {
-    "scanId": "scan_cf6a2683",
+    "scanId": "scan_b0f11bf9",
     "scannedPath": "<repo>/examples/sample-good-project",
     "score": 85,
     "confidence": "medium",
     "confidenceScore": 66,
     "coverage": 67,
     "profile": "api",
-    "completedAt": "2026-05-20T21:08:14.179Z"
+    "completedAt": "2026-05-20T21:29:31.512Z"
   },
   "deltas": {
     "scoreDelta": 85,
@@ -633,7 +633,7 @@
     ]
   },
   "metadata": {
-    "agentLighthouseVersion": "0.1.0",
+    "agentLighthouseVersion": "0.1.0-alpha.0",
     "comparisonModelVersion": "0.1.0"
   }
 }

@@ -1,10 +1,10 @@
 {
-  "scanId": "scan_850c5cd3",
+  "scanId": "scan_6692f7f3",
   "scannedPath": "<repo>/examples/mcp-good-project",
-  "startedAt": "2026-05-20T21:08:14.401Z",
-  "completedAt": "2026-05-20T21:08:14.404Z",
+  "startedAt": "2026-05-20T21:29:31.702Z",
+  "completedAt": "2026-05-20T21:29:31.705Z",
   "durationMs": 3,
-  "agentLighthouseVersion": "0.1.0",
+  "agentLighthouseVersion": "0.1.0-alpha.0",
   "profile": "mcp",
   "scoringModelVersion": "0.1.0",
   "score": 95,
@@ -342,7 +342,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-good-project",
-  "scannedAt": "2026-05-20T21:08:14.404Z",
+  "scannedAt": "2026-05-20T21:29:31.705Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

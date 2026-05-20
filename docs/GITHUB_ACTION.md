@@ -1,6 +1,8 @@
 # GitHub Action
 
-AgentLighthouse includes a first composite GitHub Action for CI use. It scans the caller workspace and writes local report artifacts. It does not require a GitHub token unless you choose to upload SARIF.
+AgentLighthouse includes an experimental source-based composite GitHub Action for CI use. It scans the caller workspace and writes local report artifacts. It does not require a GitHub token unless you choose to upload SARIF.
+
+For public alpha, direct CLI commands are still the recommended GitHub Actions path until `@agentlighthouse/cli` is published to npm. The composite action is useful for dogfooding and early adopters who are comfortable building the action from source.
 
 ```yaml
 - uses: actions/checkout@v4
@@ -49,6 +51,14 @@ AgentLighthouse includes a first composite GitHub Action for CI use. It scans th
 The action scans `${{ github.workspace }}`, not the action repository. Reports are written before score gates fail.
 
 This phase uses a source checkout action that installs and builds AgentLighthouse from the action path. A packaged action or npm distribution should make this faster later.
+
+Public-alpha limitations:
+
+- It requires `pnpm`.
+- It builds AgentLighthouse from source on every run.
+- It is expected to work as `uses: PainDeMie64/agentlighthouse@main`, but release-tagged action usage should wait for an explicit alpha tag.
+- It does not upload artifacts or SARIF by itself; use standard GitHub Actions steps for that.
+- It does not call the GitHub API or write token-backed PR comments.
 
 When `baseline` is provided, the action uses `agentlighthouse scan --baseline` so the current scan and comparison run as one workflow. No GitHub token is required for the comparison itself.
 

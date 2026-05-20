@@ -27,8 +27,13 @@ It prepares projects so existing and future agents can use them more reliably.
 
 ## Quickstart
 
+AgentLighthouse is prepared for public alpha packaging, but it has not been published to npm yet. Use the local workspace commands today.
+
+Current local development:
+
 ```bash
 pnpm install
+pnpm build
 pnpm --filter @agentlighthouse/cli dev scan .
 pnpm --filter @agentlighthouse/cli dev scan . --report-dir agentlighthouse-reports
 ```
@@ -39,6 +44,16 @@ The report bundle writes:
 - `scan.md`
 - `scan.sarif`
 - `pr-summary.md`
+
+Future npm install path after publication:
+
+```bash
+npm install -g @agentlighthouse/cli
+agentlighthouse scan .
+npx @agentlighthouse/cli scan .
+```
+
+Those npm commands are documented as the intended public-alpha experience, not as currently published packages.
 
 ## Baselines
 
@@ -105,6 +120,8 @@ Reports are written before gates fail.
 
 ## GitHub Action
 
+The GitHub Action is experimental for public alpha. It works from source and is useful for dogfooding, but direct pnpm CLI commands are the recommended CI path until `@agentlighthouse/cli` is published.
+
 ```yaml
 - uses: actions/checkout@v4
   with:
@@ -119,7 +136,7 @@ Reports are written before gates fail.
     fail-on-pr-regression: "true"
 ```
 
-The current action is source-based: it installs and builds AgentLighthouse from the checked-out action path. A future npm distribution will make this faster.
+The current action is source-based: it installs and builds AgentLighthouse from the checked-out action path, then scans the caller workspace through `GITHUB_WORKSPACE`. A future npm distribution will make this faster and simpler.
 
 ## Example Output
 
@@ -197,10 +214,10 @@ The goal is to explain what an AI coding agent is likely to misunderstand and ho
 
 ```bash
 pnpm install
+pnpm build
 pnpm test
 pnpm typecheck
 pnpm lint
-pnpm build
 pnpm validate:realworld
 pnpm dev
 ```
@@ -227,6 +244,7 @@ validation/reports      safe generated scan reports
 
 ## Current Limitations
 
+- Packages are not published to npm yet.
 - No hosted SaaS yet.
 - No auth or billing.
 - No token-backed PR comments.
@@ -234,6 +252,17 @@ validation/reports      safe generated scan reports
 - No AI agent execution.
 - OpenAPI `$ref` and MCP static extraction are useful but not complete.
 - The GitHub Action is source-based until packaging is finalized.
+
+## Release Readiness
+
+Local release checks are available without publishing anything:
+
+```bash
+pnpm release:check
+pnpm release:dry-run
+```
+
+`pnpm release:smoke` packs the core and CLI packages, installs the tarballs in a temporary clean project, and runs the installed `agentlighthouse` binary. No release script publishes packages or creates git tags.
 
 ## Roadmap
 
@@ -251,3 +280,5 @@ validation/reports      safe generated scan reports
 - [Scoring Model](docs/SCORING_MODEL.md)
 - [Rules](docs/RULES.md)
 - [Release Process](docs/RELEASE.md)
+- [Versioning](docs/VERSIONING.md)
+- [Schema Stability](docs/SCHEMA_STABILITY.md)

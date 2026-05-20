@@ -6,6 +6,8 @@ coverage/
 .turbo/
 .vercel/
 .tmp/
+*.tgz
+*.tar.gz
 validation/reports/external/
 agentlighthouse-reports/
 agentlighthouse-delta.md
