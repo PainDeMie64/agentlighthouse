@@ -1,5 +1,7 @@
 # AgentLighthouse Report: openapi-good-project
 
+AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
+
 Score: **95/100**
 
 Strong agent-readiness with 0 high-priority issue(s) remaining.
@@ -11,6 +13,7 @@ Coverage: **70%**
 ## Project Detection
 
 - Type: `openapi_project`
+- Profile: `api`
 - Confidence: 85%
 - Package manager: `npm`
 - Frameworks: none detected
@@ -22,6 +25,12 @@ Coverage: **70%**
 - Human-readable project signals: 89/100 - README present, 1 Markdown doc file(s), package metadata present, OpenAPI spec present
 - Agent-specific context layer: 68/100 - AGENTS.md present, CLAUDE.md present, llms.txt present, agent task benchmark present
 - Verifiability: 80/100 - test script declared, lint script declared, typecheck script declared, 3 API operation(s) have examples, command probes not run
+
+## CI Interpretation
+
+- This score should be used as an agent-readiness gate, not as a judgment of overall engineering quality.
+- Low scores usually mean agents need more context files, clearer examples, verifiable commands, or safer API/MCP descriptions.
+- Command execution probes are opt-in; static analysis remains the default.
 
 ## Subscores
 
@@ -97,12 +106,12 @@ Coverage: **70%**
 
 ## Scan Metadata
 
-- Scan ID: `scan_83f4351e`
+- Scan ID: `scan_3ac8fd69`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:47:28.296Z
-- Completed: 2026-05-20T19:47:28.301Z
-- Duration: 5ms
+- Started: 2026-05-20T20:03:35.343Z
+- Completed: 2026-05-20T20:03:35.349Z
+- Duration: 6ms
 - Files scanned: 9
 - Text files read: 8
 - Ignored paths observed: 0
@@ -115,6 +124,7 @@ Coverage: **70%**
 
 #### AGENTS.md is too short
 
+- Rule ID: `agent-instructions.agents-too-short`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: AGENTS.md
@@ -127,6 +137,7 @@ Coverage: **70%**
 
 #### OpenAPI file detected
 
+- Rule ID: `api.openapi-detected`
 - Severity: info
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -137,6 +148,7 @@ Coverage: **70%**
 
 #### MCP readiness could not be evaluated yet
 
+- Rule ID: `mcp.not-evaluated`
 - Severity: info
 - Category: mcp_tools
 - Affected file: n/a
@@ -147,6 +159,7 @@ Coverage: **70%**
 
 #### Command verification probes were skipped
 
+- Rule ID: `COMMAND_VERIFICATION_SKIPPED`
 - Severity: info
 - Category: setup_and_tests
 - Affected file: n/a

@@ -1,0 +1,17 @@
+name: AgentLighthouse
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  agent-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          fail-under: "75"
+          github-step-summary: "true"

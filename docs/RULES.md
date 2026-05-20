@@ -2,6 +2,8 @@
 
 AgentLighthouse findings use stable rule IDs. These IDs are intended to remain stable for future JSON, Markdown, SARIF, GitHub Action, and dashboard consumers.
 
+Rule IDs are emitted in JSON, Markdown, PR summaries, and SARIF. Avoid renaming rules unless the meaning changes enough to justify a documented migration.
+
 ## Agent Instructions
 
 ### `agent-instructions.missing-agents-md`
@@ -237,3 +239,7 @@ AgentLighthouse findings use stable rule IDs. These IDs are intended to remain s
 - Default severity: `low`
 - Checks: Markdown for TODO/deprecated/legacy language without migration guidance.
 - Fix: resolve stale notes or add explicit replacement guidance.
+
+## SARIF Notes
+
+Every emitted rule becomes a SARIF rule definition. Findings with an affected file become file-level annotations. Future phases may add line-precise locations and SARIF quick fixes.

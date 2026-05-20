@@ -31,6 +31,12 @@ export * from "./detection/project.js";
 export * from "./generators/artifacts.js";
 export * from "./probes/commands.js";
 export * from "./reporters/cli.js";
+export * from "./reporters/github-summary.js";
+export * from "./reporters/json.js";
+export * from "./reporters/markdown.js";
+export * from "./reporters/pr-summary.js";
+export * from "./reporters/sarif.js";
+export * from "./reporters/shared.js";
 export * from "./scanners/filesystem.js";
 export * from "./scoring/model.js";
 

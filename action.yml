@@ -1,0 +1,123 @@
+name: AgentLighthouse
+description: Run AgentLighthouse agent-readiness scans in CI without cloud services.
+inputs:
+  path:
+    description: Path inside the caller workspace to scan.
+    required: false
+    default: "."
+  profile:
+    description: "Scan profile: default, devtool, api, mcp, docs, library, or internal."
+    required: false
+    default: ""
+  fail-under:
+    description: Fail when the AgentLighthouse score is below this number.
+    required: false
+    default: ""
+  fail-on-severity:
+    description: Fail when any finding is at or above this severity.
+    required: false
+    default: ""
+  min-confidence:
+    description: Fail when score confidence is below this level.
+    required: false
+    default: ""
+  probes:
+    description: Set to "commands" to enable opt-in command probes.
+    required: false
+    default: ""
+  output-json:
+    description: Write agentlighthouse-report.json.
+    required: false
+    default: "true"
+  output-markdown:
+    description: Write agentlighthouse-report.md.
+    required: false
+    default: "true"
+  output-sarif:
+    description: Write agentlighthouse-report.sarif.
+    required: false
+    default: "false"
+  github-step-summary:
+    description: Append a concise summary to the GitHub step summary.
+    required: false
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10.33.0
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "22"
+        cache: pnpm
+        cache-dependency-path: ${{ github.action_path }}/pnpm-lock.yaml
+    - name: Install AgentLighthouse
+      shell: bash
+      run: pnpm --dir "$GITHUB_ACTION_PATH" install --frozen-lockfile
+    - name: Build AgentLighthouse
+      shell: bash
+      run: pnpm --dir "$GITHUB_ACTION_PATH" build
+    - name: Run AgentLighthouse
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        scan_path="$GITHUB_WORKSPACE/${{ inputs.path }}"
+        common_args=()
+        gate_args=()
+
+        if [ -n "${{ inputs.profile }}" ]; then
+          common_args+=(--profile "${{ inputs.profile }}")
+        fi
+
+        if [ "${{ inputs.probes }}" = "commands" ]; then
+          common_args+=(--probe commands)
+        fi
+
+        if [ -n "${{ inputs.fail-under }}" ]; then
+          gate_args+=(--fail-under "${{ inputs.fail-under }}")
+        fi
+
+        if [ -n "${{ inputs.fail-on-severity }}" ]; then
+          gate_args+=(--fail-on-severity "${{ inputs.fail-on-severity }}")
+        fi
+
+        if [ -n "${{ inputs.min-confidence }}" ]; then
+          gate_args+=(--min-confidence "${{ inputs.min-confidence }}")
+        fi
+
+        if [ "${{ inputs.output-json }}" = "true" ]; then
+          pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
+            "${common_args[@]}" \
+            --format json \
+            --output "$GITHUB_WORKSPACE/agentlighthouse-report.json"
+        fi
+
+        if [ "${{ inputs.output-markdown }}" = "true" ]; then
+          pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
+            "${common_args[@]}" \
+            --format markdown \
+            --output "$GITHUB_WORKSPACE/agentlighthouse-report.md"
+        fi
+
+        if [ "${{ inputs.output-sarif }}" = "true" ]; then
+          pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
+            "${common_args[@]}" \
+            --format sarif \
+            --output "$GITHUB_WORKSPACE/agentlighthouse-report.sarif"
+        fi
+
+        summary_args=()
+        if [ "${{ inputs.github-step-summary }}" = "true" ]; then
+          summary_args+=(--github-step-summary)
+        fi
+
+        pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
+          "${common_args[@]}" \
+          "${gate_args[@]}" \
+          "${summary_args[@]}" \
+          --format pr-summary \
+          --output "$GITHUB_WORKSPACE/agentlighthouse-pr-summary.md"

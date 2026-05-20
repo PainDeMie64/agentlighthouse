@@ -1,6 +1,6 @@
 # CI Usage
 
-AgentLighthouse is local-first and can run in GitHub Actions as a deterministic score gate.
+AgentLighthouse is local-first and can run in GitHub Actions or any CI as a deterministic score gate. It measures agent-readiness, not general software quality.
 
 ## Markdown Report and Score Gate
 
@@ -33,11 +33,34 @@ jobs:
           path: agentlighthouse-report.md
 ```
 
-The scanner writes JSON or Markdown output before applying `--fail-under`, so CI can keep the report even when the gate fails.
+The scanner writes reports before applying CI gates, so CI can keep artifacts even when the gate fails.
+
+## Gates
+
+```bash
+agentlighthouse scan . --fail-under 80
+agentlighthouse scan . --fail-under 80 --min-confidence medium
+agentlighthouse scan . --fail-on-severity high
+agentlighthouse scan . --fail-under 80 --fail-on-severity critical
+```
+
+- `--fail-under` fails when the score is below a threshold.
+- `--fail-on-severity` fails when any finding is at or above a severity.
+- `--min-confidence` fails when the score confidence is too low.
+- `--probe commands` is opt-in and should only be used in trusted CI jobs.
 
 ## Output Formats
 
 - Text: readable terminal output.
 - JSON: stable machine-readable output for future API ingestion and dashboards.
 - Markdown: issue-compatible report for GitHub comments, pull requests, or artifacts.
-- SARIF: planned, not implemented in Phase 1.
+- SARIF: GitHub code scanning and other SARIF consumers.
+- PR summary: short Markdown for PR comments, step summaries, Slack, or Linear.
+
+## GitHub Step Summary
+
+```bash
+agentlighthouse scan . --format pr-summary --github-step-summary
+```
+
+If `GITHUB_STEP_SUMMARY` is set, AgentLighthouse appends a concise summary. If it is not set, the CLI prints a warning and continues.

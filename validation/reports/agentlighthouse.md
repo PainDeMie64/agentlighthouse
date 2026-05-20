@@ -1,5 +1,7 @@
 # AgentLighthouse Report: agentlighthouse
 
+AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
+
 Score: **85/100**
 
 Strong agent-readiness with 0 high-priority issue(s) remaining.
@@ -11,6 +13,7 @@ Coverage: **63%**
 ## Project Detection
 
 - Type: `node_typescript`
+- Profile: `devtool`
 - Confidence: 90%
 - Package manager: `pnpm`
 - Frameworks: TypeScript, Vitest
@@ -19,9 +22,15 @@ Coverage: **63%**
 ## Score Interpretation
 
 - Agent-Readiness Score: 85/100
-- Human-readable project signals: 60/100 - README present, 15 Markdown doc file(s), package metadata present
+- Human-readable project signals: 60/100 - README present, 19 Markdown doc file(s), package metadata present
 - Agent-specific context layer: 68/100 - AGENTS.md present, CLAUDE.md present, llms.txt present, agent task benchmark present
 - Verifiability: 60/100 - test script declared, lint script declared, typecheck script declared, command probes not run
+
+## CI Interpretation
+
+- This score should be used as an agent-readiness gate, not as a judgment of overall engineering quality.
+- Low scores usually mean agents need more context files, clearer examples, verifiable commands, or safer API/MCP descriptions.
+- Command execution probes are opt-in; static analysis remains the default.
 
 ## Subscores
 
@@ -98,14 +107,14 @@ No non-informational findings.
 
 ## Scan Metadata
 
-- Scan ID: `scan_f0413b70`
+- Scan ID: `scan_a7160ae0`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:47:28.439Z
-- Completed: 2026-05-20T19:47:28.450Z
-- Duration: 11ms
-- Files scanned: 84
-- Text files read: 81
+- Started: 2026-05-20T20:03:35.503Z
+- Completed: 2026-05-20T20:03:35.515Z
+- Duration: 12ms
+- Files scanned: 96
+- Text files read: 93
 - Ignored paths observed: 12
 - Warnings: 0
 - Errors: 0
@@ -116,6 +125,7 @@ No non-informational findings.
 
 #### OpenAPI file not detected
 
+- Rule ID: `api.openapi-not-detected`
 - Severity: info
 - Category: api_schema
 - Affected file: n/a
@@ -126,6 +136,7 @@ No non-informational findings.
 
 #### MCP readiness could not be evaluated yet
 
+- Rule ID: `mcp.not-evaluated`
 - Severity: info
 - Category: mcp_tools
 - Affected file: n/a
@@ -136,6 +147,7 @@ No non-informational findings.
 
 #### Command verification probes were skipped
 
+- Rule ID: `COMMAND_VERIFICATION_SKIPPED`
 - Severity: info
 - Category: setup_and_tests
 - Affected file: n/a

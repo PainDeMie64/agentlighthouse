@@ -1,6 +1,12 @@
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { renderMarkdownReport, scanProject } from "@agentlighthouse/core";
+import {
+  renderJsonReport,
+  renderMarkdownReport,
+  renderPrSummaryReport,
+  renderSarifReport,
+  scanProject
+} from "@agentlighthouse/core";
 import { format } from "prettier";
 
 const repoRoot = process.cwd();
@@ -57,11 +63,12 @@ for (const target of targets) {
     `${target.name}: ${result.score}/100 (${result.findings.length} findings)\n`
   );
   if (target.save) {
+    const sanitizedResult = sanitizeResult(result, repoRoot);
     const targetReportDir = path.join(reportDir, target.subdir ?? "");
     await mkdir(targetReportDir, { recursive: true });
     await writeFile(
       path.join(targetReportDir, `${target.name}.json`),
-      await format(JSON.stringify(sanitizeResult(result, repoRoot), null, 2), {
+      await format(renderJsonReport(sanitizedResult), {
         parser: "json",
         printWidth: 100
       }),
@@ -69,10 +76,35 @@ for (const target of targets) {
     );
     await writeFile(
       path.join(targetReportDir, `${target.name}.md`),
-      await format(renderMarkdownReport(sanitizeResult(result, repoRoot)), {
+      await format(renderMarkdownReport(sanitizedResult), {
         parser: "markdown",
         printWidth: 100
       }),
+      "utf8"
+    );
+    await writeFile(
+      path.join(targetReportDir, `${target.name}.sarif`),
+      await format(renderSarifReport(sanitizedResult), {
+        parser: "json",
+        printWidth: 100
+      }),
+      "utf8"
+    );
+    await writeFile(
+      path.join(targetReportDir, `${target.name}-pr-summary.md`),
+      await format(
+        renderPrSummaryReport(sanitizedResult, {
+          reportPaths: [
+            `validation/reports/${target.subdir ? `${target.subdir}/` : ""}${target.name}.json`,
+            `validation/reports/${target.subdir ? `${target.subdir}/` : ""}${target.name}.md`,
+            `validation/reports/${target.subdir ? `${target.subdir}/` : ""}${target.name}.sarif`
+          ]
+        }),
+        {
+          parser: "markdown",
+          printWidth: 100
+        }
+      ),
       "utf8"
     );
   }

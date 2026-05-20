@@ -1,5 +1,7 @@
 # AgentLighthouse Report: openapi-bad-project
 
+AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
+
 Score: **0/100**
 
 Agent-readiness needs focused work before agents can reliably use this project.
@@ -11,6 +13,7 @@ Coverage: **95%**
 ## Project Detection
 
 - Type: `openapi_project`
+- Profile: `api`
 - Confidence: 85%
 - Package manager: `npm`
 - Frameworks: none detected
@@ -22,6 +25,12 @@ Coverage: **95%**
 - Human-readable project signals: 69/100 - README present, package metadata present, OpenAPI spec present
 - Agent-specific context layer: 0/100 - none detected
 - Verifiability: 0/100 - command probes not run
+
+## CI Interpretation
+
+- This score should be used as an agent-readiness gate, not as a judgment of overall engineering quality.
+- Low scores usually mean agents need more context files, clearer examples, verifiable commands, or safer API/MCP descriptions.
+- Command execution probes are opt-in; static analysis remains the default.
 
 ## Subscores
 
@@ -108,12 +117,12 @@ Coverage: **95%**
 
 ## Scan Metadata
 
-- Scan ID: `scan_5ed1a0fb`
+- Scan ID: `scan_15a61aaf`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:47:28.318Z
-- Completed: 2026-05-20T19:47:28.320Z
-- Duration: 2ms
+- Started: 2026-05-20T20:03:35.367Z
+- Completed: 2026-05-20T20:03:35.370Z
+- Duration: 3ms
 - Files scanned: 3
 - Text files read: 3
 - Ignored paths observed: 0
@@ -126,6 +135,7 @@ Coverage: **95%**
 
 #### Missing AGENTS.md
 
+- Rule ID: `agent-instructions.missing-agents-md`
 - Severity: high
 - Category: agent_instructions
 - Affected file: AGENTS.md
@@ -136,6 +146,7 @@ Coverage: **95%**
 
 #### package.json has no scripts
 
+- Rule ID: `setup.package-json-no-scripts`
 - Severity: high
 - Category: setup_and_tests
 - Affected file: package.json
@@ -146,6 +157,7 @@ Coverage: **95%**
 
 #### No test script in package.json
 
+- Rule ID: `setup.missing-test-script`
 - Severity: high
 - Category: setup_and_tests
 - Affected file: package.json
@@ -156,6 +168,7 @@ Coverage: **95%**
 
 #### OpenAPI authentication is unclear
 
+- Rule ID: `OPENAPI_AUTH_UNCLEAR`
 - Severity: high
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -166,6 +179,7 @@ Coverage: **95%**
 
 #### Destructive API operations are not clearly marked
 
+- Rule ID: `OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED`
 - Severity: high
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -178,6 +192,7 @@ Coverage: **95%**
 
 #### Missing CLAUDE.md
 
+- Rule ID: `agent-instructions.missing-claude-md`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: CLAUDE.md
@@ -188,6 +203,7 @@ Coverage: **95%**
 
 #### README.md exists, but does not include clear test command
 
+- Rule ID: `artifact-quality.READMEmd.missing-clear-test-command`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: README.md
@@ -198,6 +214,7 @@ Coverage: **95%**
 
 #### README.md exists, but does not include architecture or repo map
 
+- Rule ID: `artifact-quality.READMEmd.missing-architecture-or-repo-map`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: README.md
@@ -208,6 +225,7 @@ Coverage: **95%**
 
 #### Missing llms.txt
 
+- Rule ID: `llms.missing`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: llms.txt
@@ -218,6 +236,7 @@ Coverage: **95%**
 
 #### README.md has no quickstart section
 
+- Rule ID: `docs.readme-no-quickstart`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -228,6 +247,7 @@ Coverage: **95%**
 
 #### README.md has no installation instructions
 
+- Rule ID: `docs.readme-no-install`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -238,6 +258,7 @@ Coverage: **95%**
 
 #### README.md has no examples
 
+- Rule ID: `docs.readme-no-examples`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -248,6 +269,7 @@ Coverage: **95%**
 
 #### No lint script in package.json
 
+- Rule ID: `setup.missing-lint-script`
 - Severity: medium
 - Category: setup_and_tests
 - Affected file: package.json
@@ -258,6 +280,7 @@ Coverage: **95%**
 
 #### No typecheck script in package.json
 
+- Rule ID: `setup.missing-typecheck-script`
 - Severity: medium
 - Category: setup_and_tests
 - Affected file: package.json
@@ -268,6 +291,7 @@ Coverage: **95%**
 
 #### OpenAPI exists but no examples are nearby
 
+- Rule ID: `api.openapi-no-nearby-examples`
 - Severity: medium
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -278,6 +302,7 @@ Coverage: **95%**
 
 #### OpenAPI operation descriptions appear thin
 
+- Rule ID: `api.openapi-thin-descriptions`
 - Severity: medium
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -288,6 +313,7 @@ Coverage: **95%**
 
 #### Missing .agentlighthouseignore
 
+- Rule ID: `security.missing-agentlighthouseignore`
 - Severity: medium
 - Category: security_and_privacy
 - Affected file: .agentlighthouseignore
@@ -298,6 +324,7 @@ Coverage: **95%**
 
 #### Instructions do not tell agents how to handle secrets
 
+- Rule ID: `security.agent-secret-guidance-missing`
 - Severity: medium
 - Category: security_and_privacy
 - Affected file: AGENTS.md
@@ -308,6 +335,7 @@ Coverage: **95%**
 
 #### OpenAPI spec description is too thin for agents
 
+- Rule ID: `OPENAPI_WEAK_SPEC_DESCRIPTION`
 - Severity: medium
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -318,6 +346,7 @@ Coverage: **95%**
 
 #### OpenAPI operations have weak or missing operationIds
 
+- Rule ID: `OPENAPI_MISSING_OPERATION_ID`
 - Severity: medium
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -328,6 +357,7 @@ Coverage: **95%**
 
 #### OpenAPI operations have weak descriptions
 
+- Rule ID: `OPENAPI_WEAK_OPERATION_DESCRIPTION`
 - Severity: medium
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -338,6 +368,7 @@ Coverage: **95%**
 
 #### Write operations lack request examples
 
+- Rule ID: `OPENAPI_MISSING_REQUEST_EXAMPLE`
 - Severity: medium
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -348,6 +379,7 @@ Coverage: **95%**
 
 #### Operations lack common error responses
 
+- Rule ID: `OPENAPI_MISSING_ERROR_RESPONSES`
 - Severity: medium
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -358,6 +390,7 @@ Coverage: **95%**
 
 #### Missing agent task benchmark file
 
+- Rule ID: `TASK_BENCHMARK_MISSING`
 - Severity: medium
 - Category: task_benchmarks
 - Affected file: agentlighthouse.tasks.yaml
@@ -370,6 +403,7 @@ Coverage: **95%**
 
 #### README has installation guidance but no verification step
 
+- Rule ID: `artifact-quality.readme-missing-verification-step`
 - Severity: low
 - Category: documentation
 - Affected file: README.md
@@ -380,6 +414,7 @@ Coverage: **95%**
 
 #### README commands are not clearly grounded in package.json scripts
 
+- Rule ID: `artifact-quality.readme-commands-not-grounded-in-scripts`
 - Severity: low
 - Category: freshness_and_consistency
 - Affected file: README.md
@@ -390,6 +425,7 @@ Coverage: **95%**
 
 #### README lacks troubleshooting guidance
 
+- Rule ID: `artifact-quality.readme-missing-troubleshooting`
 - Severity: low
 - Category: documentation
 - Affected file: README.md
@@ -400,6 +436,7 @@ Coverage: **95%**
 
 #### Docs directory missing
 
+- Rule ID: `docs.directory-missing`
 - Severity: low
 - Category: documentation
 - Affected file: docs/
@@ -410,6 +447,7 @@ Coverage: **95%**
 
 #### Docs contain TODO/deprecated-looking terms without migration guidance
 
+- Rule ID: `freshness.deprecated-or-todo-terms`
 - Severity: low
 - Category: freshness_and_consistency
 - Affected file: n/a
@@ -420,6 +458,7 @@ Coverage: **95%**
 
 #### OpenAPI server URL is missing
 
+- Rule ID: `OPENAPI_SERVER_URL_MISSING`
 - Severity: low
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -430,6 +469,7 @@ Coverage: **95%**
 
 #### Operations lack response examples
 
+- Rule ID: `OPENAPI_MISSING_RESPONSE_EXAMPLE`
 - Severity: low
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -440,6 +480,7 @@ Coverage: **95%**
 
 #### OpenAPI operation names are ambiguous
 
+- Rule ID: `OPENAPI_AMBIGUOUS_OPERATION_NAME`
 - Severity: low
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -450,6 +491,7 @@ Coverage: **95%**
 
 #### List operations do not explain pagination
 
+- Rule ID: `OPENAPI_PAGINATION_UNCLEAR`
 - Severity: low
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -460,6 +502,7 @@ Coverage: **95%**
 
 #### OpenAPI rate-limit behavior is unclear
 
+- Rule ID: `OPENAPI_RATE_LIMIT_UNCLEAR`
 - Severity: low
 - Category: api_schema
 - Affected file: n/a
@@ -472,6 +515,7 @@ Coverage: **95%**
 
 #### OpenAPI file detected
 
+- Rule ID: `api.openapi-detected`
 - Severity: info
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -482,6 +526,7 @@ Coverage: **95%**
 
 #### MCP readiness could not be evaluated yet
 
+- Rule ID: `mcp.not-evaluated`
 - Severity: info
 - Category: mcp_tools
 - Affected file: n/a
@@ -492,6 +537,7 @@ Coverage: **95%**
 
 #### Command verification probes were skipped
 
+- Rule ID: `COMMAND_VERIFICATION_SKIPPED`
 - Severity: info
 - Category: setup_and_tests
 - Affected file: n/a

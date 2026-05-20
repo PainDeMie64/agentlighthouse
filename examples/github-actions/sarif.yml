@@ -1,0 +1,25 @@
+name: AgentLighthouse SARIF
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  code-scanning:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          output-sarif: "true"
+          fail-under: "75"
+          min-confidence: "medium"
+      - uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: agentlighthouse-report.sarif

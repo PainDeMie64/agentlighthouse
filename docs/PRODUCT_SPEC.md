@@ -21,10 +21,19 @@
 - Findings can include agent failure modes and concrete fix examples.
 - Reports distinguish human-readable project signals, agent-specific context, and verifiability.
 
+## Phase 2B Capabilities
+
+- SARIF output for code-scanning systems.
+- PR-friendly Markdown summaries.
+- GitHub step-summary output with no token requirement.
+- CI gates for score, severity, and confidence.
+- Composite GitHub Action for source-based CI usage.
+- Validation reports in JSON, Markdown, SARIF, and PR-summary formats.
+
 ## Future Features
 
-- GitHub Action with score gates and PR annotations.
-- Markdown, SARIF, and GitHub Checks reports.
+- GitHub Checks reports and token-backed PR comments.
+- Baseline comparison and score regression detection.
 - Docs-site crawler.
 - Deeper OpenAPI operation and example validation.
 - MCP server introspection and tool-description scoring.

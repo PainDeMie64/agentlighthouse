@@ -1,5 +1,7 @@
 # AgentLighthouse Report: sample-good-project
 
+AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
+
 Score: **85/100**
 
 Strong agent-readiness with 0 high-priority issue(s) remaining.
@@ -11,6 +13,7 @@ Coverage: **67%**
 ## Project Detection
 
 - Type: `openapi_project`
+- Profile: `api`
 - Confidence: 85%
 - Package manager: `pnpm`
 - Frameworks: Express, TypeScript, Vitest
@@ -22,6 +25,12 @@ Coverage: **67%**
 - Human-readable project signals: 83/100 - README present, 1 Markdown doc file(s), package metadata present, OpenAPI spec present
 - Agent-specific context layer: 100/100 - AGENTS.md present, CLAUDE.md present, llms.txt present, Cursor rules present, Copilot instructions present, agent task benchmark present
 - Verifiability: 80/100 - test script declared, lint script declared, typecheck script declared, 1 API operation(s) have examples, command probes not run
+
+## CI Interpretation
+
+- This score should be used as an agent-readiness gate, not as a judgment of overall engineering quality.
+- Low scores usually mean agents need more context files, clearer examples, verifiable commands, or safer API/MCP descriptions.
+- Command execution probes are opt-in; static analysis remains the default.
 
 ## Subscores
 
@@ -98,11 +107,11 @@ No non-informational findings.
 
 ## Scan Metadata
 
-- Scan ID: `scan_970f9fcc`
+- Scan ID: `scan_4de415bf`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:47:28.221Z
-- Completed: 2026-05-20T19:47:28.229Z
+- Started: 2026-05-20T20:03:35.260Z
+- Completed: 2026-05-20T20:03:35.268Z
 - Duration: 8ms
 - Files scanned: 14
 - Text files read: 13
@@ -116,6 +125,7 @@ No non-informational findings.
 
 #### OpenAPI file detected
 
+- Rule ID: `api.openapi-detected`
 - Severity: info
 - Category: api_schema
 - Affected file: openapi.yaml
@@ -126,6 +136,7 @@ No non-informational findings.
 
 #### MCP readiness could not be evaluated yet
 
+- Rule ID: `mcp.not-evaluated`
 - Severity: info
 - Category: mcp_tools
 - Affected file: n/a
@@ -136,6 +147,7 @@ No non-informational findings.
 
 #### Command verification probes were skipped
 
+- Rule ID: `COMMAND_VERIFICATION_SKIPPED`
 - Severity: info
 - Category: setup_and_tests
 - Affected file: n/a

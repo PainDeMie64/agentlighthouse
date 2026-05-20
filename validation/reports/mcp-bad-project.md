@@ -1,5 +1,7 @@
 # AgentLighthouse Report: mcp-bad-project
 
+AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
+
 Score: **0/100**
 
 Agent-readiness needs focused work before agents can reliably use this project.
@@ -11,6 +13,7 @@ Coverage: **97%**
 ## Project Detection
 
 - Type: `mcp_project`
+- Profile: `mcp`
 - Confidence: 90%
 - Package manager: `npm`
 - Frameworks: none detected
@@ -22,6 +25,12 @@ Coverage: **97%**
 - Human-readable project signals: 60/100 - README present, package metadata present, MCP files or dependencies present
 - Agent-specific context layer: 0/100 - none detected
 - Verifiability: 0/100 - command probes not run
+
+## CI Interpretation
+
+- This score should be used as an agent-readiness gate, not as a judgment of overall engineering quality.
+- Low scores usually mean agents need more context files, clearer examples, verifiable commands, or safer API/MCP descriptions.
+- Command execution probes are opt-in; static analysis remains the default.
 
 ## Subscores
 
@@ -108,11 +117,11 @@ Coverage: **97%**
 
 ## Scan Metadata
 
-- Scan ID: `scan_2b7cf89b`
+- Scan ID: `scan_e251c8c5`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:47:28.385Z
-- Completed: 2026-05-20T19:47:28.386Z
+- Started: 2026-05-20T20:03:35.455Z
+- Completed: 2026-05-20T20:03:35.456Z
 - Duration: 1ms
 - Files scanned: 3
 - Text files read: 3
@@ -126,6 +135,7 @@ Coverage: **97%**
 
 #### Missing AGENTS.md
 
+- Rule ID: `agent-instructions.missing-agents-md`
 - Severity: high
 - Category: agent_instructions
 - Affected file: AGENTS.md
@@ -136,6 +146,7 @@ Coverage: **97%**
 
 #### package.json has no scripts
 
+- Rule ID: `setup.package-json-no-scripts`
 - Severity: high
 - Category: setup_and_tests
 - Affected file: package.json
@@ -146,6 +157,7 @@ Coverage: **97%**
 
 #### No test script in package.json
 
+- Rule ID: `setup.missing-test-script`
 - Severity: high
 - Category: setup_and_tests
 - Affected file: package.json
@@ -156,6 +168,7 @@ Coverage: **97%**
 
 #### MCP tools are missing input schemas
 
+- Rule ID: `MCP_TOOL_INPUT_SCHEMA_MISSING`
 - Severity: high
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -166,6 +179,7 @@ Coverage: **97%**
 
 #### Destructive MCP tools are not clearly marked
 
+- Rule ID: `MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED`
 - Severity: high
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -178,6 +192,7 @@ Coverage: **97%**
 
 #### Missing CLAUDE.md
 
+- Rule ID: `agent-instructions.missing-claude-md`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: CLAUDE.md
@@ -188,6 +203,7 @@ Coverage: **97%**
 
 #### README.md exists, but does not include clear test command
 
+- Rule ID: `artifact-quality.READMEmd.missing-clear-test-command`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: README.md
@@ -198,6 +214,7 @@ Coverage: **97%**
 
 #### README.md exists, but does not include architecture or repo map
 
+- Rule ID: `artifact-quality.READMEmd.missing-architecture-or-repo-map`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: README.md
@@ -208,6 +225,7 @@ Coverage: **97%**
 
 #### Missing llms.txt
 
+- Rule ID: `llms.missing`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: llms.txt
@@ -218,6 +236,7 @@ Coverage: **97%**
 
 #### README.md has no quickstart section
 
+- Rule ID: `docs.readme-no-quickstart`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -228,6 +247,7 @@ Coverage: **97%**
 
 #### README.md has no installation instructions
 
+- Rule ID: `docs.readme-no-install`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -238,6 +258,7 @@ Coverage: **97%**
 
 #### README.md has no examples
 
+- Rule ID: `docs.readme-no-examples`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -248,6 +269,7 @@ Coverage: **97%**
 
 #### No lint script in package.json
 
+- Rule ID: `setup.missing-lint-script`
 - Severity: medium
 - Category: setup_and_tests
 - Affected file: package.json
@@ -258,6 +280,7 @@ Coverage: **97%**
 
 #### No typecheck script in package.json
 
+- Rule ID: `setup.missing-typecheck-script`
 - Severity: medium
 - Category: setup_and_tests
 - Affected file: package.json
@@ -268,6 +291,7 @@ Coverage: **97%**
 
 #### Missing .agentlighthouseignore
 
+- Rule ID: `security.missing-agentlighthouseignore`
 - Severity: medium
 - Category: security_and_privacy
 - Affected file: .agentlighthouseignore
@@ -278,6 +302,7 @@ Coverage: **97%**
 
 #### Instructions do not tell agents how to handle secrets
 
+- Rule ID: `security.agent-secret-guidance-missing`
 - Severity: medium
 - Category: security_and_privacy
 - Affected file: AGENTS.md
@@ -288,6 +313,7 @@ Coverage: **97%**
 
 #### MCP tool names are ambiguous
 
+- Rule ID: `MCP_TOOL_NAME_AMBIGUOUS`
 - Severity: medium
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -298,6 +324,7 @@ Coverage: **97%**
 
 #### MCP tool descriptions are too shallow
 
+- Rule ID: `MCP_TOOL_DESCRIPTION_SHALLOW`
 - Severity: medium
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -308,6 +335,7 @@ Coverage: **97%**
 
 #### Missing agent task benchmark file
 
+- Rule ID: `TASK_BENCHMARK_MISSING`
 - Severity: medium
 - Category: task_benchmarks
 - Affected file: agentlighthouse.tasks.yaml
@@ -320,6 +348,7 @@ Coverage: **97%**
 
 #### README has installation guidance but no verification step
 
+- Rule ID: `artifact-quality.readme-missing-verification-step`
 - Severity: low
 - Category: documentation
 - Affected file: README.md
@@ -330,6 +359,7 @@ Coverage: **97%**
 
 #### README commands are not clearly grounded in package.json scripts
 
+- Rule ID: `artifact-quality.readme-commands-not-grounded-in-scripts`
 - Severity: low
 - Category: freshness_and_consistency
 - Affected file: README.md
@@ -340,6 +370,7 @@ Coverage: **97%**
 
 #### Docs directory missing
 
+- Rule ID: `docs.directory-missing`
 - Severity: low
 - Category: documentation
 - Affected file: docs/
@@ -350,6 +381,7 @@ Coverage: **97%**
 
 #### Docs contain TODO/deprecated-looking terms without migration guidance
 
+- Rule ID: `freshness.deprecated-or-todo-terms`
 - Severity: low
 - Category: freshness_and_consistency
 - Affected file: n/a
@@ -360,6 +392,7 @@ Coverage: **97%**
 
 #### MCP tools lack examples or usage notes
 
+- Rule ID: `MCP_TOOL_EXAMPLE_MISSING`
 - Severity: low
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -370,6 +403,7 @@ Coverage: **97%**
 
 #### MCP tool error behavior is unclear
 
+- Rule ID: `MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR`
 - Severity: low
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -382,6 +416,7 @@ Coverage: **97%**
 
 #### OpenAPI file not detected
 
+- Rule ID: `api.openapi-not-detected`
 - Severity: info
 - Category: api_schema
 - Affected file: n/a
@@ -392,6 +427,7 @@ Coverage: **97%**
 
 #### MCP-related files or packages detected
 
+- Rule ID: `mcp.detected`
 - Severity: info
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -402,6 +438,7 @@ Coverage: **97%**
 
 #### Command verification probes were skipped
 
+- Rule ID: `COMMAND_VERIFICATION_SKIPPED`
 - Severity: info
 - Category: setup_and_tests
 - Affected file: n/a

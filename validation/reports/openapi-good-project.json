@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_83f4351e",
+  "scanId": "scan_3ac8fd69",
   "scannedPath": "<repo>/examples/openapi-good-project",
-  "startedAt": "2026-05-20T19:47:28.296Z",
-  "completedAt": "2026-05-20T19:47:28.301Z",
-  "durationMs": 5,
+  "startedAt": "2026-05-20T20:03:35.343Z",
+  "completedAt": "2026-05-20T20:03:35.349Z",
+  "durationMs": 6,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -296,7 +296,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/openapi-good-project",
-  "scannedAt": "2026-05-20T19:47:28.301Z",
+  "scannedAt": "2026-05-20T20:03:35.349Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

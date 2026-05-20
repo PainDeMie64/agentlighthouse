@@ -15,6 +15,7 @@ pnpm lint
 pnpm build
 pnpm dev
 pnpm validate:realworld
+pnpm format:check
 ```
 
 ## CLI Development
@@ -22,6 +23,8 @@ pnpm validate:realworld
 ```bash
 pnpm --filter @agentlighthouse/cli dev scan examples/sample-project
 pnpm --filter @agentlighthouse/cli dev scan . --json
+pnpm --filter @agentlighthouse/cli dev scan . --format sarif --output agentlighthouse.sarif
+pnpm --filter @agentlighthouse/cli dev scan . --format pr-summary --github-step-summary
 pnpm --filter @agentlighthouse/cli dev init . --dry-run
 ```
 
@@ -32,3 +35,4 @@ pnpm --filter @agentlighthouse/cli dev init . --dry-run
 - Add tests for core scanner, analyzer, scoring, and generator behavior.
 - Prefer deterministic checks with clear evidence.
 - Avoid new dependencies unless they simplify real product complexity.
+- Keep reporters thin: they render `ScanResult` and should not duplicate scanner or scoring logic.

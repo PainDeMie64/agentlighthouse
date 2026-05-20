@@ -1,0 +1,1849 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "AgentLighthouse",
+          "semanticVersion": "0.1.0",
+          "informationUri": "https://github.com/PainDeMie64/agentlighthouse",
+          "rules": [
+            {
+              "id": "agent-instructions.missing-agents-md",
+              "name": "Missing AGENTS.md",
+              "shortDescription": {
+                "text": "Missing AGENTS.md"
+              },
+              "fullDescription": {
+                "text": "The repo has no AGENTS.md, so coding agents lack a stable project guide."
+              },
+              "help": {
+                "text": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+                "markdown": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "high",
+                "tags": ["agent-readiness", "agent_instructions", "high"]
+              }
+            },
+            {
+              "id": "agent-instructions.missing-claude-md",
+              "name": "Missing CLAUDE.md",
+              "shortDescription": {
+                "text": "Missing CLAUDE.md"
+              },
+              "fullDescription": {
+                "text": "Claude Code users do not have a concise project memory file."
+              },
+              "help": {
+                "text": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+                "markdown": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "artifact-quality.READMEmd.missing-clear-test-command",
+              "name": "README.md exists, but does not include clear test command",
+              "shortDescription": {
+                "text": "README.md exists, but does not include clear test command"
+              },
+              "fullDescription": {
+                "text": "A detected agent-facing artifact is missing specific guidance agents need for reliable work."
+              },
+              "help": {
+                "text": "Add clear test command to README.md.",
+                "markdown": "Add clear test command to README.md."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+              "name": "README.md exists, but does not include architecture or repo map",
+              "shortDescription": {
+                "text": "README.md exists, but does not include architecture or repo map"
+              },
+              "fullDescription": {
+                "text": "A detected agent-facing artifact is missing specific guidance agents need for reliable work."
+              },
+              "help": {
+                "text": "Add architecture or repo map to README.md.",
+                "markdown": "Add architecture or repo map to README.md."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "artifact-quality.readme-missing-verification-step",
+              "name": "README has installation guidance but no verification step",
+              "shortDescription": {
+                "text": "README has installation guidance but no verification step"
+              },
+              "fullDescription": {
+                "text": "Agents need a quick command to verify the project works after installation."
+              },
+              "help": {
+                "text": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+                "markdown": "Add a short verification step such as running tests, typecheck, build, or a health command."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "low",
+                "tags": ["agent-readiness", "documentation", "low"]
+              }
+            },
+            {
+              "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
+              "name": "README commands are not clearly grounded in package.json scripts",
+              "shortDescription": {
+                "text": "README commands are not clearly grounded in package.json scripts"
+              },
+              "fullDescription": {
+                "text": "Commands are more trustworthy when README examples match executable project scripts."
+              },
+              "help": {
+                "text": "Show package-manager commands that map directly to package.json scripts.",
+                "markdown": "Show package-manager commands that map directly to package.json scripts."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "freshness_and_consistency",
+                "severity": "low",
+                "tags": ["agent-readiness", "freshness_and_consistency", "low"]
+              }
+            },
+            {
+              "id": "artifact-quality.readme-missing-troubleshooting",
+              "name": "README lacks troubleshooting guidance",
+              "shortDescription": {
+                "text": "README lacks troubleshooting guidance"
+              },
+              "fullDescription": {
+                "text": "Developer-tool and API projects benefit from troubleshooting notes because agents often need to recover from local setup failures."
+              },
+              "help": {
+                "text": "Add a short troubleshooting section with common setup and test failure fixes.",
+                "markdown": "Add a short troubleshooting section with common setup and test failure fixes."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "low",
+                "tags": ["agent-readiness", "documentation", "low"]
+              }
+            },
+            {
+              "id": "llms.missing",
+              "name": "Missing llms.txt",
+              "shortDescription": {
+                "text": "Missing llms.txt"
+              },
+              "fullDescription": {
+                "text": "The project does not expose a compact, machine-readable map for LLMs and agents."
+              },
+              "help": {
+                "text": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+                "markdown": "Create llms.txt with links to README, docs, architecture, examples, and API references."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "docs.readme-no-quickstart",
+              "name": "README.md has no quickstart section",
+              "shortDescription": {
+                "text": "README.md has no quickstart section"
+              },
+              "fullDescription": {
+                "text": "The README is missing a section agents commonly need to orient themselves."
+              },
+              "help": {
+                "text": "Add a quickstart that gets a new user to a working command quickly.",
+                "markdown": "Add a quickstart that gets a new user to a working command quickly."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "medium",
+                "tags": ["agent-readiness", "documentation", "medium"]
+              }
+            },
+            {
+              "id": "docs.readme-no-install",
+              "name": "README.md has no installation instructions",
+              "shortDescription": {
+                "text": "README.md has no installation instructions"
+              },
+              "fullDescription": {
+                "text": "The README is missing a section agents commonly need to orient themselves."
+              },
+              "help": {
+                "text": "Add installation commands and prerequisites.",
+                "markdown": "Add installation commands and prerequisites."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "medium",
+                "tags": ["agent-readiness", "documentation", "medium"]
+              }
+            },
+            {
+              "id": "docs.readme-no-examples",
+              "name": "README.md has no examples",
+              "shortDescription": {
+                "text": "README.md has no examples"
+              },
+              "fullDescription": {
+                "text": "The README is missing a section agents commonly need to orient themselves."
+              },
+              "help": {
+                "text": "Add concrete examples showing expected usage and output.",
+                "markdown": "Add concrete examples showing expected usage and output."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "medium",
+                "tags": ["agent-readiness", "documentation", "medium"]
+              }
+            },
+            {
+              "id": "docs.directory-missing",
+              "name": "Docs directory missing",
+              "shortDescription": {
+                "text": "Docs directory missing"
+              },
+              "fullDescription": {
+                "text": "No docs directory was detected for deeper project context."
+              },
+              "help": {
+                "text": "Add docs/ for architecture, development, API, and operational context.",
+                "markdown": "Add docs/ for architecture, development, API, and operational context."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "low",
+                "tags": ["agent-readiness", "documentation", "low"]
+              }
+            },
+            {
+              "id": "setup.package-json-no-scripts",
+              "name": "package.json has no scripts",
+              "shortDescription": {
+                "text": "package.json has no scripts"
+              },
+              "fullDescription": {
+                "text": "Agents cannot discover standard local workflows from package.json."
+              },
+              "help": {
+                "text": "Add scripts for test, lint, typecheck, build, and local development.",
+                "markdown": "Add scripts for test, lint, typecheck, build, and local development."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "high",
+                "tags": ["agent-readiness", "setup_and_tests", "high"]
+              }
+            },
+            {
+              "id": "setup.missing-test-script",
+              "name": "No test script in package.json",
+              "shortDescription": {
+                "text": "No test script in package.json"
+              },
+              "fullDescription": {
+                "text": "Agents cannot reliably run test without a package script."
+              },
+              "help": {
+                "text": "Add a package.json \"test\" script or document the equivalent command clearly.",
+                "markdown": "Add a package.json \"test\" script or document the equivalent command clearly."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "high",
+                "tags": ["agent-readiness", "setup_and_tests", "high"]
+              }
+            },
+            {
+              "id": "setup.missing-lint-script",
+              "name": "No lint script in package.json",
+              "shortDescription": {
+                "text": "No lint script in package.json"
+              },
+              "fullDescription": {
+                "text": "Agents cannot reliably run lint without a package script."
+              },
+              "help": {
+                "text": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+                "markdown": "Add a package.json \"lint\" script or document the equivalent command clearly."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "medium",
+                "tags": ["agent-readiness", "setup_and_tests", "medium"]
+              }
+            },
+            {
+              "id": "setup.missing-typecheck-script",
+              "name": "No typecheck script in package.json",
+              "shortDescription": {
+                "text": "No typecheck script in package.json"
+              },
+              "fullDescription": {
+                "text": "Agents cannot reliably run typecheck without a package script."
+              },
+              "help": {
+                "text": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+                "markdown": "Add a package.json \"typecheck\" script or document the equivalent command clearly."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "medium",
+                "tags": ["agent-readiness", "setup_and_tests", "medium"]
+              }
+            },
+            {
+              "id": "api.openapi-detected",
+              "name": "OpenAPI file detected",
+              "shortDescription": {
+                "text": "OpenAPI file detected"
+              },
+              "fullDescription": {
+                "text": "The scanner found an API schema that agents can use."
+              },
+              "help": {
+                "text": "Keep API descriptions, examples, and auth details current.",
+                "markdown": "Keep API descriptions, examples, and auth details current."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "info",
+                "tags": ["agent-readiness", "api_schema", "info"]
+              }
+            },
+            {
+              "id": "api.openapi-no-nearby-examples",
+              "name": "OpenAPI exists but no examples are nearby",
+              "shortDescription": {
+                "text": "OpenAPI exists but no examples are nearby"
+              },
+              "fullDescription": {
+                "text": "Agents need request and response examples in addition to schemas."
+              },
+              "help": {
+                "text": "Add examples near the API spec or link examples from the API documentation.",
+                "markdown": "Add examples near the API spec or link examples from the API documentation."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "medium",
+                "tags": ["agent-readiness", "api_schema", "medium"]
+              }
+            },
+            {
+              "id": "api.openapi-thin-descriptions",
+              "name": "OpenAPI operation descriptions appear thin",
+              "shortDescription": {
+                "text": "OpenAPI operation descriptions appear thin"
+              },
+              "fullDescription": {
+                "text": "The OpenAPI schema may not provide enough semantic guidance for agents."
+              },
+              "help": {
+                "text": "Add meaningful operation descriptions, auth notes, and representative examples.",
+                "markdown": "Add meaningful operation descriptions, auth notes, and representative examples."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "medium",
+                "tags": ["agent-readiness", "api_schema", "medium"]
+              }
+            },
+            {
+              "id": "mcp.not-evaluated",
+              "name": "MCP readiness could not be evaluated yet",
+              "shortDescription": {
+                "text": "MCP readiness could not be evaluated yet"
+              },
+              "fullDescription": {
+                "text": "No MCP server/config/package signal was detected."
+              },
+              "help": {
+                "text": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+                "markdown": "If this project exposes MCP tools, include server files and clear tool descriptions."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "info",
+                "tags": ["agent-readiness", "mcp_tools", "info"]
+              }
+            },
+            {
+              "id": "security.missing-agentlighthouseignore",
+              "name": "Missing .agentlighthouseignore",
+              "shortDescription": {
+                "text": "Missing .agentlighthouseignore"
+              },
+              "fullDescription": {
+                "text": "Scans should explicitly exclude generated, private, and secret-bearing paths."
+              },
+              "help": {
+                "text": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+                "markdown": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "security_and_privacy",
+                "severity": "medium",
+                "tags": ["agent-readiness", "security_and_privacy", "medium"]
+              }
+            },
+            {
+              "id": "security.agent-secret-guidance-missing",
+              "name": "Instructions do not tell agents how to handle secrets",
+              "shortDescription": {
+                "text": "Instructions do not tell agents how to handle secrets"
+              },
+              "fullDescription": {
+                "text": "Agent-facing instructions should state how to avoid exposing secrets or private data."
+              },
+              "help": {
+                "text": "Add a security section explaining secret handling and external LLM constraints.",
+                "markdown": "Add a security section explaining secret handling and external LLM constraints."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "security_and_privacy",
+                "severity": "medium",
+                "tags": ["agent-readiness", "security_and_privacy", "medium"]
+              }
+            },
+            {
+              "id": "freshness.deprecated-or-todo-terms",
+              "name": "Docs contain TODO/deprecated-looking terms without migration guidance",
+              "shortDescription": {
+                "text": "Docs contain TODO/deprecated-looking terms without migration guidance"
+              },
+              "fullDescription": {
+                "text": "Stale markers can confuse agents unless they include replacement guidance."
+              },
+              "help": {
+                "text": "Resolve TODOs or add explicit migration/replacement guidance.",
+                "markdown": "Resolve TODOs or add explicit migration/replacement guidance."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "freshness_and_consistency",
+                "severity": "low",
+                "tags": ["agent-readiness", "freshness_and_consistency", "low"]
+              }
+            },
+            {
+              "id": "OPENAPI_WEAK_SPEC_DESCRIPTION",
+              "name": "OpenAPI spec description is too thin for agents",
+              "shortDescription": {
+                "text": "OpenAPI spec description is too thin for agents"
+              },
+              "fullDescription": {
+                "text": "The API-level description does not explain product concepts, auth expectations, or common workflows."
+              },
+              "help": {
+                "text": "Add a concise overview of the API domain, common workflows, auth model, and safe usage constraints.",
+                "markdown": "Add a concise overview of the API domain, common workflows, auth model, and safe usage constraints.\n\nAgent failure mode: A coding agent may jump straight to endpoints without understanding product nouns, authentication, or workflow ordering.\n\nFix example: Describe the main resources, required authentication, common create/list/update flows, and where to find examples."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "medium",
+                "tags": ["agent-readiness", "api_schema", "medium"]
+              }
+            },
+            {
+              "id": "OPENAPI_AUTH_UNCLEAR",
+              "name": "OpenAPI authentication is unclear",
+              "shortDescription": {
+                "text": "OpenAPI authentication is unclear"
+              },
+              "fullDescription": {
+                "text": "No security scheme or clear authentication guidance was detected."
+              },
+              "help": {
+                "text": "Document the auth scheme, required headers, scopes, and placeholder-safe example credentials.",
+                "markdown": "Document the auth scheme, required headers, scopes, and placeholder-safe example credentials.\n\nAgent failure mode: A coding agent may generate client code without the required Authorization header or may invent unsafe credential handling.\n\nFix example: Add an HTTP bearer or API key security scheme and a request example using EXAMPLE_API_KEY."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "high",
+                "tags": ["agent-readiness", "api_schema", "high"]
+              }
+            },
+            {
+              "id": "OPENAPI_SERVER_URL_MISSING",
+              "name": "OpenAPI server URL is missing",
+              "shortDescription": {
+                "text": "OpenAPI server URL is missing"
+              },
+              "fullDescription": {
+                "text": "Agents need a base URL signal to generate usable client examples."
+              },
+              "help": {
+                "text": "Add production and sandbox server URLs, or explain how agents should configure the base URL.",
+                "markdown": "Add production and sandbox server URLs, or explain how agents should configure the base URL.\n\nAgent failure mode: A coding agent may invent a base URL or hardcode the wrong host.\n\nFix example: Add servers: [{ url: 'https://api.example.com/v1' }]."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "low",
+                "tags": ["agent-readiness", "api_schema", "low"]
+              }
+            },
+            {
+              "id": "OPENAPI_MISSING_OPERATION_ID",
+              "name": "OpenAPI operations have weak or missing operationIds",
+              "shortDescription": {
+                "text": "OpenAPI operations have weak or missing operationIds"
+              },
+              "fullDescription": {
+                "text": "3 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Give every operation a stable, specific operationId such as createWorkspaceInvite or listCustomerInvoices.",
+                "markdown": "Give every operation a stable, specific operationId such as createWorkspaceInvite or listCustomerInvoices.\n\nAgent failure mode: A coding agent may generate confusing client methods or call the wrong endpoint when operation IDs are missing or generic.\n\nFix example: Use verb+noun names that distinguish similar operations, for example revokeApiKey instead of delete."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "medium",
+                "tags": ["agent-readiness", "api_schema", "medium"]
+              }
+            },
+            {
+              "id": "OPENAPI_WEAK_OPERATION_DESCRIPTION",
+              "name": "OpenAPI operations have weak descriptions",
+              "shortDescription": {
+                "text": "OpenAPI operations have weak descriptions"
+              },
+              "fullDescription": {
+                "text": "3 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Add operation descriptions explaining when to use the endpoint, required context, side effects, and recovery behavior.",
+                "markdown": "Add operation descriptions explaining when to use the endpoint, required context, side effects, and recovery behavior.\n\nAgent failure mode: A coding agent may choose the wrong operation because summaries alone do not explain intent or preconditions.\n\nFix example: Add descriptions that mention required IDs, auth scope, side effects, and common failure handling."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "medium",
+                "tags": ["agent-readiness", "api_schema", "medium"]
+              }
+            },
+            {
+              "id": "OPENAPI_MISSING_REQUEST_EXAMPLE",
+              "name": "Write operations lack request examples",
+              "shortDescription": {
+                "text": "Write operations lack request examples"
+              },
+              "fullDescription": {
+                "text": "1 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Add request examples for create/update operations using realistic placeholder values.",
+                "markdown": "Add request examples for create/update operations using realistic placeholder values.\n\nAgent failure mode: A coding agent may send malformed payloads or omit required fields because no concrete request shape is shown.\n\nFix example: Add an example body with workspace_id, customer_id, and idempotency_key where relevant."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "medium",
+                "tags": ["agent-readiness", "api_schema", "medium"]
+              }
+            },
+            {
+              "id": "OPENAPI_MISSING_RESPONSE_EXAMPLE",
+              "name": "Operations lack response examples",
+              "shortDescription": {
+                "text": "Operations lack response examples"
+              },
+              "fullDescription": {
+                "text": "3 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Add response examples for successful and important error cases.",
+                "markdown": "Add response examples for successful and important error cases.\n\nAgent failure mode: A coding agent may write incorrect parsing code because expected response shapes are not exemplified.\n\nFix example: Add 200/201 response examples with IDs, timestamps, pagination cursors, and nested objects."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "low",
+                "tags": ["agent-readiness", "api_schema", "low"]
+              }
+            },
+            {
+              "id": "OPENAPI_MISSING_ERROR_RESPONSES",
+              "name": "Operations lack common error responses",
+              "shortDescription": {
+                "text": "Operations lack common error responses"
+              },
+              "fullDescription": {
+                "text": "3 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Document likely 400/401/403/404/409/429/500 responses and how callers should recover.",
+                "markdown": "Document likely 400/401/403/404/409/429/500 responses and how callers should recover.\n\nAgent failure mode: A coding agent may generate happy-path-only integrations with no auth, retry, or validation recovery.\n\nFix example: Add 401, 404, 409, and 429 responses with short descriptions and example error payloads."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "medium",
+                "tags": ["agent-readiness", "api_schema", "medium"]
+              }
+            },
+            {
+              "id": "OPENAPI_AMBIGUOUS_OPERATION_NAME",
+              "name": "OpenAPI operation names are ambiguous",
+              "shortDescription": {
+                "text": "OpenAPI operation names are ambiguous"
+              },
+              "fullDescription": {
+                "text": "3 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Rename generic operationIds so similar endpoints are distinguishable to code generators and agents.",
+                "markdown": "Rename generic operationIds so similar endpoints are distinguishable to code generators and agents.\n\nAgent failure mode: A coding agent may map multiple endpoints to vague client methods such as run, query, or update.\n\nFix example: Prefer syncCatalog, searchDocuments, or updateWorkspaceMember over generic names."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "low",
+                "tags": ["agent-readiness", "api_schema", "low"]
+              }
+            },
+            {
+              "id": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED",
+              "name": "Destructive API operations are not clearly marked",
+              "shortDescription": {
+                "text": "Destructive API operations are not clearly marked"
+              },
+              "fullDescription": {
+                "text": "1 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Mark destructive operations with permission, confirmation, irreversibility, and recovery guidance.",
+                "markdown": "Mark destructive operations with permission, confirmation, irreversibility, and recovery guidance.\n\nAgent failure mode: A coding agent may call a destructive endpoint during testing without understanding consequences.\n\nFix example: State whether delete/cancel/revoke is irreversible and include sandbox-safe examples."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "high",
+                "tags": ["agent-readiness", "api_schema", "high"]
+              }
+            },
+            {
+              "id": "OPENAPI_PAGINATION_UNCLEAR",
+              "name": "List operations do not explain pagination",
+              "shortDescription": {
+                "text": "List operations do not explain pagination"
+              },
+              "fullDescription": {
+                "text": "1 operation(s) need stronger agent-facing API documentation."
+              },
+              "help": {
+                "text": "Document pagination parameters, cursors, limits, and response fields.",
+                "markdown": "Document pagination parameters, cursors, limits, and response fields.\n\nAgent failure mode: A coding agent may fetch only the first page or invent unsupported pagination parameters.\n\nFix example: Describe limit and cursor parameters and include a response example with next_cursor."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "low",
+                "tags": ["agent-readiness", "api_schema", "low"]
+              }
+            },
+            {
+              "id": "OPENAPI_RATE_LIMIT_UNCLEAR",
+              "name": "OpenAPI rate-limit behavior is unclear",
+              "shortDescription": {
+                "text": "OpenAPI rate-limit behavior is unclear"
+              },
+              "fullDescription": {
+                "text": "No 429, Retry-After, or rate-limit guidance was detected."
+              },
+              "help": {
+                "text": "Document rate limits and retry behavior for generated clients.",
+                "markdown": "Document rate limits and retry behavior for generated clients.\n\nAgent failure mode: A coding agent may create brittle retry loops or ignore throttling responses.\n\nFix example: Add a 429 response with Retry-After guidance and an example error payload."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "low",
+                "tags": ["agent-readiness", "api_schema", "low"]
+              }
+            },
+            {
+              "id": "TASK_BENCHMARK_MISSING",
+              "name": "Missing agent task benchmark file",
+              "shortDescription": {
+                "text": "Missing agent task benchmark file"
+              },
+              "fullDescription": {
+                "text": "The project has no agentlighthouse.tasks.yaml or benchmark task file."
+              },
+              "help": {
+                "text": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+                "markdown": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.\n\nAgent failure mode: A team cannot tell whether agents can complete common workflows because no deterministic task set exists.\n\nFix example: Add tasks for installing the project, running tests, adding a small feature, and using the public API."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "task_benchmarks",
+                "severity": "medium",
+                "tags": ["agent-readiness", "task_benchmarks", "medium"]
+              }
+            },
+            {
+              "id": "COMMAND_VERIFICATION_SKIPPED",
+              "name": "Command verification probes were skipped",
+              "shortDescription": {
+                "text": "Command verification probes were skipped"
+              },
+              "fullDescription": {
+                "text": "Static analysis is default; project commands are not executed unless explicitly enabled."
+              },
+              "help": {
+                "text": "Use command probes in trusted local or CI environments when you want executable verification.",
+                "markdown": "Use command probes in trusted local or CI environments when you want executable verification.\n\nAgent failure mode: Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.\n\nFix example: agentlighthouse scan . --probe commands"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "info",
+                "tags": ["agent-readiness", "setup_and_tests", "info"]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "agent-instructions.missing-agents-md",
+          "level": "error",
+          "message": {
+            "text": "Missing AGENTS.md: Create AGENTS.md with setup, tests, architecture, conventions, and safety rules."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "AGENTS.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "bbdfc3d7"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "high",
+            "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "agent-instructions.missing-claude-md",
+          "level": "warning",
+          "message": {
+            "text": "Missing CLAUDE.md: Add CLAUDE.md with concise workflow, boundaries, and testing expectations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "CLAUDE.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "a843b0cb"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.READMEmd.missing-clear-test-command",
+          "level": "warning",
+          "message": {
+            "text": "README.md exists, but does not include clear test command: Add clear test command to README.md."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "f2b5304b"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Add clear test command to README.md.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+          "level": "warning",
+          "message": {
+            "text": "README.md exists, but does not include architecture or repo map: Add architecture or repo map to README.md."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e3912ecf"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Add architecture or repo map to README.md.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.readme-missing-verification-step",
+          "level": "note",
+          "message": {
+            "text": "README has installation guidance but no verification step: Add a short verification step such as running tests, typecheck, build, or a health command."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "c3aa03c8"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "low",
+            "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts",
+          "level": "note",
+          "message": {
+            "text": "README commands are not clearly grounded in package.json scripts: Show package-manager commands that map directly to package.json scripts."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "78b74532"
+          },
+          "properties": {
+            "category": "freshness_and_consistency",
+            "severity": "low",
+            "recommendation": "Show package-manager commands that map directly to package.json scripts.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.readme-missing-troubleshooting",
+          "level": "note",
+          "message": {
+            "text": "README lacks troubleshooting guidance: Add a short troubleshooting section with common setup and test failure fixes."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "d0bfbb00"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "low",
+            "recommendation": "Add a short troubleshooting section with common setup and test failure fixes.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "llms.missing",
+          "level": "warning",
+          "message": {
+            "text": "Missing llms.txt: Create llms.txt with links to README, docs, architecture, examples, and API references."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "llms.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "c9911083"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.readme-no-quickstart",
+          "level": "warning",
+          "message": {
+            "text": "README.md has no quickstart section: Add a quickstart that gets a new user to a working command quickly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "7fc722a6"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "medium",
+            "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.readme-no-install",
+          "level": "warning",
+          "message": {
+            "text": "README.md has no installation instructions: Add installation commands and prerequisites."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "aa3304cd"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "medium",
+            "recommendation": "Add installation commands and prerequisites.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.readme-no-examples",
+          "level": "warning",
+          "message": {
+            "text": "README.md has no examples: Add concrete examples showing expected usage and output."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "2244bb45"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "medium",
+            "recommendation": "Add concrete examples showing expected usage and output.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.directory-missing",
+          "level": "note",
+          "message": {
+            "text": "Docs directory missing: Add docs/ for architecture, development, API, and operational context."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "72746fd1"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "low",
+            "recommendation": "Add docs/ for architecture, development, API, and operational context.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.package-json-no-scripts",
+          "level": "error",
+          "message": {
+            "text": "package.json has no scripts: Add scripts for test, lint, typecheck, build, and local development."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e571ad68"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "high",
+            "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.missing-test-script",
+          "level": "error",
+          "message": {
+            "text": "No test script in package.json: Add a package.json \"test\" script or document the equivalent command clearly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e8a86105"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "high",
+            "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.missing-lint-script",
+          "level": "warning",
+          "message": {
+            "text": "No lint script in package.json: Add a package.json \"lint\" script or document the equivalent command clearly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "5a826661"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "medium",
+            "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.missing-typecheck-script",
+          "level": "warning",
+          "message": {
+            "text": "No typecheck script in package.json: Add a package.json \"typecheck\" script or document the equivalent command clearly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e3e65515"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "medium",
+            "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "api.openapi-detected",
+          "level": "note",
+          "message": {
+            "text": "OpenAPI file detected: Keep API descriptions, examples, and auth details current."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "bc0414a8"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "info",
+            "recommendation": "Keep API descriptions, examples, and auth details current.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "api.openapi-no-nearby-examples",
+          "level": "warning",
+          "message": {
+            "text": "OpenAPI exists but no examples are nearby: Add examples near the API spec or link examples from the API documentation."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "272a30bc"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "medium",
+            "recommendation": "Add examples near the API spec or link examples from the API documentation.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "api.openapi-thin-descriptions",
+          "level": "warning",
+          "message": {
+            "text": "OpenAPI operation descriptions appear thin: Add meaningful operation descriptions, auth notes, and representative examples."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "67df3061"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "medium",
+            "recommendation": "Add meaningful operation descriptions, auth notes, and representative examples.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "mcp.not-evaluated",
+          "level": "note",
+          "message": {
+            "text": "MCP readiness could not be evaluated yet: If this project exposes MCP tools, include server files and clear tool descriptions."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "79ec46eb"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "info",
+            "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "security.missing-agentlighthouseignore",
+          "level": "warning",
+          "message": {
+            "text": "Missing .agentlighthouseignore: Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agentlighthouseignore"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "3a4d3909"
+          },
+          "properties": {
+            "category": "security_and_privacy",
+            "severity": "medium",
+            "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "security.agent-secret-guidance-missing",
+          "level": "warning",
+          "message": {
+            "text": "Instructions do not tell agents how to handle secrets: Add a security section explaining secret handling and external LLM constraints."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "AGENTS.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "90841091"
+          },
+          "properties": {
+            "category": "security_and_privacy",
+            "severity": "medium",
+            "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "freshness.deprecated-or-todo-terms",
+          "level": "note",
+          "message": {
+            "text": "Docs contain TODO/deprecated-looking terms without migration guidance: Resolve TODOs or add explicit migration/replacement guidance."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "fddf8ad9"
+          },
+          "properties": {
+            "category": "freshness_and_consistency",
+            "severity": "low",
+            "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_WEAK_SPEC_DESCRIPTION",
+          "level": "warning",
+          "message": {
+            "text": "OpenAPI spec description is too thin for agents: Add a concise overview of the API domain, common workflows, auth model, and safe usage constraints."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e39ad9c4"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "medium",
+            "agentFailureMode": "A coding agent may jump straight to endpoints without understanding product nouns, authentication, or workflow ordering.",
+            "recommendation": "Add a concise overview of the API domain, common workflows, auth model, and safe usage constraints.",
+            "fixExample": "Describe the main resources, required authentication, common create/list/update flows, and where to find examples.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_AUTH_UNCLEAR",
+          "level": "error",
+          "message": {
+            "text": "OpenAPI authentication is unclear: Document the auth scheme, required headers, scopes, and placeholder-safe example credentials."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "cbafc1bc"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "high",
+            "agentFailureMode": "A coding agent may generate client code without the required Authorization header or may invent unsafe credential handling.",
+            "recommendation": "Document the auth scheme, required headers, scopes, and placeholder-safe example credentials.",
+            "fixExample": "Add an HTTP bearer or API key security scheme and a request example using EXAMPLE_API_KEY.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_SERVER_URL_MISSING",
+          "level": "note",
+          "message": {
+            "text": "OpenAPI server URL is missing: Add production and sandbox server URLs, or explain how agents should configure the base URL."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "49ea63fc"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "low",
+            "agentFailureMode": "A coding agent may invent a base URL or hardcode the wrong host.",
+            "recommendation": "Add production and sandbox server URLs, or explain how agents should configure the base URL.",
+            "fixExample": "Add servers: [{ url: 'https://api.example.com/v1' }].",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_MISSING_OPERATION_ID",
+          "level": "warning",
+          "message": {
+            "text": "OpenAPI operations have weak or missing operationIds: Give every operation a stable, specific operationId such as createWorkspaceInvite or listCustomerInvoices."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "05e0c4c0"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "medium",
+            "agentFailureMode": "A coding agent may generate confusing client methods or call the wrong endpoint when operation IDs are missing or generic.",
+            "recommendation": "Give every operation a stable, specific operationId such as createWorkspaceInvite or listCustomerInvoices.",
+            "fixExample": "Use verb+noun names that distinguish similar operations, for example revokeApiKey instead of delete.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_WEAK_OPERATION_DESCRIPTION",
+          "level": "warning",
+          "message": {
+            "text": "OpenAPI operations have weak descriptions: Add operation descriptions explaining when to use the endpoint, required context, side effects, and recovery behavior."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "ea02b2c1"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "medium",
+            "agentFailureMode": "A coding agent may choose the wrong operation because summaries alone do not explain intent or preconditions.",
+            "recommendation": "Add operation descriptions explaining when to use the endpoint, required context, side effects, and recovery behavior.",
+            "fixExample": "Add descriptions that mention required IDs, auth scope, side effects, and common failure handling.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_MISSING_REQUEST_EXAMPLE",
+          "level": "warning",
+          "message": {
+            "text": "Write operations lack request examples: Add request examples for create/update operations using realistic placeholder values."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "78508ab3"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "medium",
+            "agentFailureMode": "A coding agent may send malformed payloads or omit required fields because no concrete request shape is shown.",
+            "recommendation": "Add request examples for create/update operations using realistic placeholder values.",
+            "fixExample": "Add an example body with workspace_id, customer_id, and idempotency_key where relevant.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_MISSING_RESPONSE_EXAMPLE",
+          "level": "note",
+          "message": {
+            "text": "Operations lack response examples: Add response examples for successful and important error cases."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "353b5aed"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "low",
+            "agentFailureMode": "A coding agent may write incorrect parsing code because expected response shapes are not exemplified.",
+            "recommendation": "Add response examples for successful and important error cases.",
+            "fixExample": "Add 200/201 response examples with IDs, timestamps, pagination cursors, and nested objects.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_MISSING_ERROR_RESPONSES",
+          "level": "warning",
+          "message": {
+            "text": "Operations lack common error responses: Document likely 400/401/403/404/409/429/500 responses and how callers should recover."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "71c2a504"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "medium",
+            "agentFailureMode": "A coding agent may generate happy-path-only integrations with no auth, retry, or validation recovery.",
+            "recommendation": "Document likely 400/401/403/404/409/429/500 responses and how callers should recover.",
+            "fixExample": "Add 401, 404, 409, and 429 responses with short descriptions and example error payloads.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_AMBIGUOUS_OPERATION_NAME",
+          "level": "note",
+          "message": {
+            "text": "OpenAPI operation names are ambiguous: Rename generic operationIds so similar endpoints are distinguishable to code generators and agents."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "92bc8196"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "low",
+            "agentFailureMode": "A coding agent may map multiple endpoints to vague client methods such as run, query, or update.",
+            "recommendation": "Rename generic operationIds so similar endpoints are distinguishable to code generators and agents.",
+            "fixExample": "Prefer syncCatalog, searchDocuments, or updateWorkspaceMember over generic names.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED",
+          "level": "error",
+          "message": {
+            "text": "Destructive API operations are not clearly marked: Mark destructive operations with permission, confirmation, irreversibility, and recovery guidance."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "834291de"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "high",
+            "agentFailureMode": "A coding agent may call a destructive endpoint during testing without understanding consequences.",
+            "recommendation": "Mark destructive operations with permission, confirmation, irreversibility, and recovery guidance.",
+            "fixExample": "State whether delete/cancel/revoke is irreversible and include sandbox-safe examples.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_PAGINATION_UNCLEAR",
+          "level": "note",
+          "message": {
+            "text": "List operations do not explain pagination: Document pagination parameters, cursors, limits, and response fields."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "83565f5b"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "low",
+            "agentFailureMode": "A coding agent may fetch only the first page or invent unsupported pagination parameters.",
+            "recommendation": "Document pagination parameters, cursors, limits, and response fields.",
+            "fixExample": "Describe limit and cursor parameters and include a response example with next_cursor.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "OPENAPI_RATE_LIMIT_UNCLEAR",
+          "level": "note",
+          "message": {
+            "text": "OpenAPI rate-limit behavior is unclear: Document rate limits and retry behavior for generated clients."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e209b153"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "low",
+            "agentFailureMode": "A coding agent may create brittle retry loops or ignore throttling responses.",
+            "recommendation": "Document rate limits and retry behavior for generated clients.",
+            "fixExample": "Add a 429 response with Retry-After guidance and an example error payload.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "TASK_BENCHMARK_MISSING",
+          "level": "warning",
+          "message": {
+            "text": "Missing agent task benchmark file: Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "agentlighthouse.tasks.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "3b1642bc"
+          },
+          "properties": {
+            "category": "task_benchmarks",
+            "severity": "medium",
+            "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
+            "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+            "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+          "level": "note",
+          "message": {
+            "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "2960598d"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "info",
+            "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+            "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+            "fixExample": "agentlighthouse scan . --probe commands",
+            "confidence": "medium"
+          }
+        }
+      ]
+    }
+  ]
+}

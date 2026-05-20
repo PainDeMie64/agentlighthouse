@@ -79,3 +79,14 @@ Profiles tune applicability and future scoring emphasis:
 ## Evolution
 
 Future models should account for project type, rule confidence, validation task outcomes, docs coverage, API complexity, and historical regressions. Scoring changes must increment the model version and include migration notes.
+
+## CI Interpretation
+
+CI gates should combine score, severity, and confidence:
+
+```bash
+agentlighthouse scan . --fail-under 80 --min-confidence medium
+agentlighthouse scan . --fail-on-severity high
+```
+
+A low score in CI means the project is not yet agent-ready under the selected profile. It does not mean the software is low quality for humans.

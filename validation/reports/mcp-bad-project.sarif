@@ -1,0 +1,1399 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "AgentLighthouse",
+          "semanticVersion": "0.1.0",
+          "informationUri": "https://github.com/PainDeMie64/agentlighthouse",
+          "rules": [
+            {
+              "id": "agent-instructions.missing-agents-md",
+              "name": "Missing AGENTS.md",
+              "shortDescription": {
+                "text": "Missing AGENTS.md"
+              },
+              "fullDescription": {
+                "text": "The repo has no AGENTS.md, so coding agents lack a stable project guide."
+              },
+              "help": {
+                "text": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+                "markdown": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "high",
+                "tags": ["agent-readiness", "agent_instructions", "high"]
+              }
+            },
+            {
+              "id": "agent-instructions.missing-claude-md",
+              "name": "Missing CLAUDE.md",
+              "shortDescription": {
+                "text": "Missing CLAUDE.md"
+              },
+              "fullDescription": {
+                "text": "Claude Code users do not have a concise project memory file."
+              },
+              "help": {
+                "text": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+                "markdown": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "artifact-quality.READMEmd.missing-clear-test-command",
+              "name": "README.md exists, but does not include clear test command",
+              "shortDescription": {
+                "text": "README.md exists, but does not include clear test command"
+              },
+              "fullDescription": {
+                "text": "A detected agent-facing artifact is missing specific guidance agents need for reliable work."
+              },
+              "help": {
+                "text": "Add clear test command to README.md.",
+                "markdown": "Add clear test command to README.md."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+              "name": "README.md exists, but does not include architecture or repo map",
+              "shortDescription": {
+                "text": "README.md exists, but does not include architecture or repo map"
+              },
+              "fullDescription": {
+                "text": "A detected agent-facing artifact is missing specific guidance agents need for reliable work."
+              },
+              "help": {
+                "text": "Add architecture or repo map to README.md.",
+                "markdown": "Add architecture or repo map to README.md."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "artifact-quality.readme-missing-verification-step",
+              "name": "README has installation guidance but no verification step",
+              "shortDescription": {
+                "text": "README has installation guidance but no verification step"
+              },
+              "fullDescription": {
+                "text": "Agents need a quick command to verify the project works after installation."
+              },
+              "help": {
+                "text": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+                "markdown": "Add a short verification step such as running tests, typecheck, build, or a health command."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "low",
+                "tags": ["agent-readiness", "documentation", "low"]
+              }
+            },
+            {
+              "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
+              "name": "README commands are not clearly grounded in package.json scripts",
+              "shortDescription": {
+                "text": "README commands are not clearly grounded in package.json scripts"
+              },
+              "fullDescription": {
+                "text": "Commands are more trustworthy when README examples match executable project scripts."
+              },
+              "help": {
+                "text": "Show package-manager commands that map directly to package.json scripts.",
+                "markdown": "Show package-manager commands that map directly to package.json scripts."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "freshness_and_consistency",
+                "severity": "low",
+                "tags": ["agent-readiness", "freshness_and_consistency", "low"]
+              }
+            },
+            {
+              "id": "llms.missing",
+              "name": "Missing llms.txt",
+              "shortDescription": {
+                "text": "Missing llms.txt"
+              },
+              "fullDescription": {
+                "text": "The project does not expose a compact, machine-readable map for LLMs and agents."
+              },
+              "help": {
+                "text": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+                "markdown": "Create llms.txt with links to README, docs, architecture, examples, and API references."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "agent_instructions",
+                "severity": "medium",
+                "tags": ["agent-readiness", "agent_instructions", "medium"]
+              }
+            },
+            {
+              "id": "docs.readme-no-quickstart",
+              "name": "README.md has no quickstart section",
+              "shortDescription": {
+                "text": "README.md has no quickstart section"
+              },
+              "fullDescription": {
+                "text": "The README is missing a section agents commonly need to orient themselves."
+              },
+              "help": {
+                "text": "Add a quickstart that gets a new user to a working command quickly.",
+                "markdown": "Add a quickstart that gets a new user to a working command quickly."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "medium",
+                "tags": ["agent-readiness", "documentation", "medium"]
+              }
+            },
+            {
+              "id": "docs.readme-no-install",
+              "name": "README.md has no installation instructions",
+              "shortDescription": {
+                "text": "README.md has no installation instructions"
+              },
+              "fullDescription": {
+                "text": "The README is missing a section agents commonly need to orient themselves."
+              },
+              "help": {
+                "text": "Add installation commands and prerequisites.",
+                "markdown": "Add installation commands and prerequisites."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "medium",
+                "tags": ["agent-readiness", "documentation", "medium"]
+              }
+            },
+            {
+              "id": "docs.readme-no-examples",
+              "name": "README.md has no examples",
+              "shortDescription": {
+                "text": "README.md has no examples"
+              },
+              "fullDescription": {
+                "text": "The README is missing a section agents commonly need to orient themselves."
+              },
+              "help": {
+                "text": "Add concrete examples showing expected usage and output.",
+                "markdown": "Add concrete examples showing expected usage and output."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "medium",
+                "tags": ["agent-readiness", "documentation", "medium"]
+              }
+            },
+            {
+              "id": "docs.directory-missing",
+              "name": "Docs directory missing",
+              "shortDescription": {
+                "text": "Docs directory missing"
+              },
+              "fullDescription": {
+                "text": "No docs directory was detected for deeper project context."
+              },
+              "help": {
+                "text": "Add docs/ for architecture, development, API, and operational context.",
+                "markdown": "Add docs/ for architecture, development, API, and operational context."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "documentation",
+                "severity": "low",
+                "tags": ["agent-readiness", "documentation", "low"]
+              }
+            },
+            {
+              "id": "setup.package-json-no-scripts",
+              "name": "package.json has no scripts",
+              "shortDescription": {
+                "text": "package.json has no scripts"
+              },
+              "fullDescription": {
+                "text": "Agents cannot discover standard local workflows from package.json."
+              },
+              "help": {
+                "text": "Add scripts for test, lint, typecheck, build, and local development.",
+                "markdown": "Add scripts for test, lint, typecheck, build, and local development."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "high",
+                "tags": ["agent-readiness", "setup_and_tests", "high"]
+              }
+            },
+            {
+              "id": "setup.missing-test-script",
+              "name": "No test script in package.json",
+              "shortDescription": {
+                "text": "No test script in package.json"
+              },
+              "fullDescription": {
+                "text": "Agents cannot reliably run test without a package script."
+              },
+              "help": {
+                "text": "Add a package.json \"test\" script or document the equivalent command clearly.",
+                "markdown": "Add a package.json \"test\" script or document the equivalent command clearly."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "high",
+                "tags": ["agent-readiness", "setup_and_tests", "high"]
+              }
+            },
+            {
+              "id": "setup.missing-lint-script",
+              "name": "No lint script in package.json",
+              "shortDescription": {
+                "text": "No lint script in package.json"
+              },
+              "fullDescription": {
+                "text": "Agents cannot reliably run lint without a package script."
+              },
+              "help": {
+                "text": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+                "markdown": "Add a package.json \"lint\" script or document the equivalent command clearly."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "medium",
+                "tags": ["agent-readiness", "setup_and_tests", "medium"]
+              }
+            },
+            {
+              "id": "setup.missing-typecheck-script",
+              "name": "No typecheck script in package.json",
+              "shortDescription": {
+                "text": "No typecheck script in package.json"
+              },
+              "fullDescription": {
+                "text": "Agents cannot reliably run typecheck without a package script."
+              },
+              "help": {
+                "text": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+                "markdown": "Add a package.json \"typecheck\" script or document the equivalent command clearly."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "medium",
+                "tags": ["agent-readiness", "setup_and_tests", "medium"]
+              }
+            },
+            {
+              "id": "api.openapi-not-detected",
+              "name": "OpenAPI file not detected",
+              "shortDescription": {
+                "text": "OpenAPI file not detected"
+              },
+              "fullDescription": {
+                "text": "No OpenAPI schema was found. This may be fine for projects without an HTTP API."
+              },
+              "help": {
+                "text": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
+                "markdown": "For API products, publish an OpenAPI spec with operation descriptions and examples."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "info",
+                "tags": ["agent-readiness", "api_schema", "info"]
+              }
+            },
+            {
+              "id": "mcp.detected",
+              "name": "MCP-related files or packages detected",
+              "shortDescription": {
+                "text": "MCP-related files or packages detected"
+              },
+              "fullDescription": {
+                "text": "MCP signals were found and can be evaluated by future deeper analyzers."
+              },
+              "help": {
+                "text": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance.",
+                "markdown": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "info",
+                "tags": ["agent-readiness", "mcp_tools", "info"]
+              }
+            },
+            {
+              "id": "security.missing-agentlighthouseignore",
+              "name": "Missing .agentlighthouseignore",
+              "shortDescription": {
+                "text": "Missing .agentlighthouseignore"
+              },
+              "fullDescription": {
+                "text": "Scans should explicitly exclude generated, private, and secret-bearing paths."
+              },
+              "help": {
+                "text": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+                "markdown": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "security_and_privacy",
+                "severity": "medium",
+                "tags": ["agent-readiness", "security_and_privacy", "medium"]
+              }
+            },
+            {
+              "id": "security.agent-secret-guidance-missing",
+              "name": "Instructions do not tell agents how to handle secrets",
+              "shortDescription": {
+                "text": "Instructions do not tell agents how to handle secrets"
+              },
+              "fullDescription": {
+                "text": "Agent-facing instructions should state how to avoid exposing secrets or private data."
+              },
+              "help": {
+                "text": "Add a security section explaining secret handling and external LLM constraints.",
+                "markdown": "Add a security section explaining secret handling and external LLM constraints."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "security_and_privacy",
+                "severity": "medium",
+                "tags": ["agent-readiness", "security_and_privacy", "medium"]
+              }
+            },
+            {
+              "id": "freshness.deprecated-or-todo-terms",
+              "name": "Docs contain TODO/deprecated-looking terms without migration guidance",
+              "shortDescription": {
+                "text": "Docs contain TODO/deprecated-looking terms without migration guidance"
+              },
+              "fullDescription": {
+                "text": "Stale markers can confuse agents unless they include replacement guidance."
+              },
+              "help": {
+                "text": "Resolve TODOs or add explicit migration/replacement guidance.",
+                "markdown": "Resolve TODOs or add explicit migration/replacement guidance."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "freshness_and_consistency",
+                "severity": "low",
+                "tags": ["agent-readiness", "freshness_and_consistency", "low"]
+              }
+            },
+            {
+              "id": "MCP_TOOL_NAME_AMBIGUOUS",
+              "name": "MCP tool names are ambiguous",
+              "shortDescription": {
+                "text": "MCP tool names are ambiguous"
+              },
+              "fullDescription": {
+                "text": "2 MCP tool(s) need stronger agent-facing metadata."
+              },
+              "help": {
+                "text": "Rename generic tools so the action and resource are obvious.",
+                "markdown": "Rename generic tools so the action and resource are obvious.\n\nAgent failure mode: A coding agent may choose a generic tool like run or query for the wrong workflow.\n\nFix example: Use names such as search_docs, create_workspace_ticket, or revoke_api_key."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "medium",
+                "tags": ["agent-readiness", "mcp_tools", "medium"]
+              }
+            },
+            {
+              "id": "MCP_TOOL_DESCRIPTION_SHALLOW",
+              "name": "MCP tool descriptions are too shallow",
+              "shortDescription": {
+                "text": "MCP tool descriptions are too shallow"
+              },
+              "fullDescription": {
+                "text": "2 MCP tool(s) need stronger agent-facing metadata."
+              },
+              "help": {
+                "text": "Expand tool descriptions with intent, constraints, and safe usage guidance.",
+                "markdown": "Expand tool descriptions with intent, constraints, and safe usage guidance.\n\nAgent failure mode: A coding agent may not distinguish similar tools without usage context.\n\nFix example: Mention input expectations, side effects, auth requirements, and error behavior."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "medium",
+                "tags": ["agent-readiness", "mcp_tools", "medium"]
+              }
+            },
+            {
+              "id": "MCP_TOOL_INPUT_SCHEMA_MISSING",
+              "name": "MCP tools are missing input schemas",
+              "shortDescription": {
+                "text": "MCP tools are missing input schemas"
+              },
+              "fullDescription": {
+                "text": "2 MCP tool(s) need stronger agent-facing metadata."
+              },
+              "help": {
+                "text": "Add structured input schemas with required fields and descriptions.",
+                "markdown": "Add structured input schemas with required fields and descriptions.\n\nAgent failure mode: A coding agent may pass malformed arguments or omit required identifiers.\n\nFix example: Use a zod/object schema with workspace_id and query fields plus descriptions."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "high",
+                "tags": ["agent-readiness", "mcp_tools", "high"]
+              }
+            },
+            {
+              "id": "MCP_TOOL_EXAMPLE_MISSING",
+              "name": "MCP tools lack examples or usage notes",
+              "shortDescription": {
+                "text": "MCP tools lack examples or usage notes"
+              },
+              "fullDescription": {
+                "text": "2 MCP tool(s) need stronger agent-facing metadata."
+              },
+              "help": {
+                "text": "Add examples or usage notes for common calls.",
+                "markdown": "Add examples or usage notes for common calls.\n\nAgent failure mode: A coding agent may not know the expected argument shape or output semantics.\n\nFix example: Include an example invocation showing realistic placeholder arguments."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "low",
+                "tags": ["agent-readiness", "mcp_tools", "low"]
+              }
+            },
+            {
+              "id": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED",
+              "name": "Destructive MCP tools are not clearly marked",
+              "shortDescription": {
+                "text": "Destructive MCP tools are not clearly marked"
+              },
+              "fullDescription": {
+                "text": "1 MCP tool(s) need stronger agent-facing metadata."
+              },
+              "help": {
+                "text": "Mark destructive tools and document confirmation, permissions, and safe testing behavior.",
+                "markdown": "Mark destructive tools and document confirmation, permissions, and safe testing behavior.\n\nAgent failure mode: A coding agent may call a write/delete tool without realizing it changes external state.\n\nFix example: State that the tool mutates data and requires explicit user approval outside test fixtures."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "high",
+                "tags": ["agent-readiness", "mcp_tools", "high"]
+              }
+            },
+            {
+              "id": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR",
+              "name": "MCP tool error behavior is unclear",
+              "shortDescription": {
+                "text": "MCP tool error behavior is unclear"
+              },
+              "fullDescription": {
+                "text": "2 MCP tool(s) need stronger agent-facing metadata."
+              },
+              "help": {
+                "text": "Explain common errors and whether retry or user follow-up is appropriate.",
+                "markdown": "Explain common errors and whether retry or user follow-up is appropriate.\n\nAgent failure mode: A coding agent may retry unsafe operations or fail silently when a tool returns an error.\n\nFix example: Document not-found, unauthorized, rate-limit, and validation failures."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "low",
+                "tags": ["agent-readiness", "mcp_tools", "low"]
+              }
+            },
+            {
+              "id": "TASK_BENCHMARK_MISSING",
+              "name": "Missing agent task benchmark file",
+              "shortDescription": {
+                "text": "Missing agent task benchmark file"
+              },
+              "fullDescription": {
+                "text": "The project has no agentlighthouse.tasks.yaml or benchmark task file."
+              },
+              "help": {
+                "text": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+                "markdown": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.\n\nAgent failure mode: A team cannot tell whether agents can complete common workflows because no deterministic task set exists.\n\nFix example: Add tasks for installing the project, running tests, adding a small feature, and using the public API."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "category": "task_benchmarks",
+                "severity": "medium",
+                "tags": ["agent-readiness", "task_benchmarks", "medium"]
+              }
+            },
+            {
+              "id": "COMMAND_VERIFICATION_SKIPPED",
+              "name": "Command verification probes were skipped",
+              "shortDescription": {
+                "text": "Command verification probes were skipped"
+              },
+              "fullDescription": {
+                "text": "Static analysis is default; project commands are not executed unless explicitly enabled."
+              },
+              "help": {
+                "text": "Use command probes in trusted local or CI environments when you want executable verification.",
+                "markdown": "Use command probes in trusted local or CI environments when you want executable verification.\n\nAgent failure mode: Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.\n\nFix example: agentlighthouse scan . --probe commands"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "info",
+                "tags": ["agent-readiness", "setup_and_tests", "info"]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "agent-instructions.missing-agents-md",
+          "level": "error",
+          "message": {
+            "text": "Missing AGENTS.md: Create AGENTS.md with setup, tests, architecture, conventions, and safety rules."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "AGENTS.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "bbdfc3d7"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "high",
+            "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "agent-instructions.missing-claude-md",
+          "level": "warning",
+          "message": {
+            "text": "Missing CLAUDE.md: Add CLAUDE.md with concise workflow, boundaries, and testing expectations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "CLAUDE.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "a843b0cb"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.READMEmd.missing-clear-test-command",
+          "level": "warning",
+          "message": {
+            "text": "README.md exists, but does not include clear test command: Add clear test command to README.md."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "f2b5304b"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Add clear test command to README.md.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+          "level": "warning",
+          "message": {
+            "text": "README.md exists, but does not include architecture or repo map: Add architecture or repo map to README.md."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e3912ecf"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Add architecture or repo map to README.md.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.readme-missing-verification-step",
+          "level": "note",
+          "message": {
+            "text": "README has installation guidance but no verification step: Add a short verification step such as running tests, typecheck, build, or a health command."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "c3aa03c8"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "low",
+            "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts",
+          "level": "note",
+          "message": {
+            "text": "README commands are not clearly grounded in package.json scripts: Show package-manager commands that map directly to package.json scripts."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "78b74532"
+          },
+          "properties": {
+            "category": "freshness_and_consistency",
+            "severity": "low",
+            "recommendation": "Show package-manager commands that map directly to package.json scripts.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "llms.missing",
+          "level": "warning",
+          "message": {
+            "text": "Missing llms.txt: Create llms.txt with links to README, docs, architecture, examples, and API references."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "llms.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "c9911083"
+          },
+          "properties": {
+            "category": "agent_instructions",
+            "severity": "medium",
+            "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.readme-no-quickstart",
+          "level": "warning",
+          "message": {
+            "text": "README.md has no quickstart section: Add a quickstart that gets a new user to a working command quickly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "7fc722a6"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "medium",
+            "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.readme-no-install",
+          "level": "warning",
+          "message": {
+            "text": "README.md has no installation instructions: Add installation commands and prerequisites."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "aa3304cd"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "medium",
+            "recommendation": "Add installation commands and prerequisites.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.readme-no-examples",
+          "level": "warning",
+          "message": {
+            "text": "README.md has no examples: Add concrete examples showing expected usage and output."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "README.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "2244bb45"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "medium",
+            "recommendation": "Add concrete examples showing expected usage and output.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "docs.directory-missing",
+          "level": "note",
+          "message": {
+            "text": "Docs directory missing: Add docs/ for architecture, development, API, and operational context."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "72746fd1"
+          },
+          "properties": {
+            "category": "documentation",
+            "severity": "low",
+            "recommendation": "Add docs/ for architecture, development, API, and operational context.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.package-json-no-scripts",
+          "level": "error",
+          "message": {
+            "text": "package.json has no scripts: Add scripts for test, lint, typecheck, build, and local development."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e571ad68"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "high",
+            "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.missing-test-script",
+          "level": "error",
+          "message": {
+            "text": "No test script in package.json: Add a package.json \"test\" script or document the equivalent command clearly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e8a86105"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "high",
+            "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.missing-lint-script",
+          "level": "warning",
+          "message": {
+            "text": "No lint script in package.json: Add a package.json \"lint\" script or document the equivalent command clearly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "5a826661"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "medium",
+            "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "setup.missing-typecheck-script",
+          "level": "warning",
+          "message": {
+            "text": "No typecheck script in package.json: Add a package.json \"typecheck\" script or document the equivalent command clearly."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package.json"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "e3e65515"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "medium",
+            "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "api.openapi-not-detected",
+          "level": "note",
+          "message": {
+            "text": "OpenAPI file not detected: For API products, publish an OpenAPI spec with operation descriptions and examples."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "02e8d6c1"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "info",
+            "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "mcp.detected",
+          "level": "note",
+          "message": {
+            "text": "MCP-related files or packages detected: Ensure each MCP tool has a clear name, description, input schema, and safety guidance."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/mcp-server.example.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "ddaabb6b"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "info",
+            "recommendation": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "security.missing-agentlighthouseignore",
+          "level": "warning",
+          "message": {
+            "text": "Missing .agentlighthouseignore: Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agentlighthouseignore"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "3a4d3909"
+          },
+          "properties": {
+            "category": "security_and_privacy",
+            "severity": "medium",
+            "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "security.agent-secret-guidance-missing",
+          "level": "warning",
+          "message": {
+            "text": "Instructions do not tell agents how to handle secrets: Add a security section explaining secret handling and external LLM constraints."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "AGENTS.md"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "90841091"
+          },
+          "properties": {
+            "category": "security_and_privacy",
+            "severity": "medium",
+            "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "freshness.deprecated-or-todo-terms",
+          "level": "note",
+          "message": {
+            "text": "Docs contain TODO/deprecated-looking terms without migration guidance: Resolve TODOs or add explicit migration/replacement guidance."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "497ad34d"
+          },
+          "properties": {
+            "category": "freshness_and_consistency",
+            "severity": "low",
+            "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "MCP_TOOL_NAME_AMBIGUOUS",
+          "level": "warning",
+          "message": {
+            "text": "MCP tool names are ambiguous: Rename generic tools so the action and resource are obvious."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/mcp-server.example.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "f3e80f1c"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "medium",
+            "agentFailureMode": "A coding agent may choose a generic tool like run or query for the wrong workflow.",
+            "recommendation": "Rename generic tools so the action and resource are obvious.",
+            "fixExample": "Use names such as search_docs, create_workspace_ticket, or revoke_api_key.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "MCP_TOOL_DESCRIPTION_SHALLOW",
+          "level": "warning",
+          "message": {
+            "text": "MCP tool descriptions are too shallow: Expand tool descriptions with intent, constraints, and safe usage guidance."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/mcp-server.example.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "30ac961b"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "medium",
+            "agentFailureMode": "A coding agent may not distinguish similar tools without usage context.",
+            "recommendation": "Expand tool descriptions with intent, constraints, and safe usage guidance.",
+            "fixExample": "Mention input expectations, side effects, auth requirements, and error behavior.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "MCP_TOOL_INPUT_SCHEMA_MISSING",
+          "level": "error",
+          "message": {
+            "text": "MCP tools are missing input schemas: Add structured input schemas with required fields and descriptions."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/mcp-server.example.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "519ec3b5"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "high",
+            "agentFailureMode": "A coding agent may pass malformed arguments or omit required identifiers.",
+            "recommendation": "Add structured input schemas with required fields and descriptions.",
+            "fixExample": "Use a zod/object schema with workspace_id and query fields plus descriptions.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "MCP_TOOL_EXAMPLE_MISSING",
+          "level": "note",
+          "message": {
+            "text": "MCP tools lack examples or usage notes: Add examples or usage notes for common calls."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/mcp-server.example.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "cef33413"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "low",
+            "agentFailureMode": "A coding agent may not know the expected argument shape or output semantics.",
+            "recommendation": "Add examples or usage notes for common calls.",
+            "fixExample": "Include an example invocation showing realistic placeholder arguments.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED",
+          "level": "error",
+          "message": {
+            "text": "Destructive MCP tools are not clearly marked: Mark destructive tools and document confirmation, permissions, and safe testing behavior."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/mcp-server.example.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "679a7551"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "high",
+            "agentFailureMode": "A coding agent may call a write/delete tool without realizing it changes external state.",
+            "recommendation": "Mark destructive tools and document confirmation, permissions, and safe testing behavior.",
+            "fixExample": "State that the tool mutates data and requires explicit user approval outside test fixtures.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR",
+          "level": "note",
+          "message": {
+            "text": "MCP tool error behavior is unclear: Explain common errors and whether retry or user follow-up is appropriate."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/mcp-server.example.txt"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "f8126b7a"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "low",
+            "agentFailureMode": "A coding agent may retry unsafe operations or fail silently when a tool returns an error.",
+            "recommendation": "Explain common errors and whether retry or user follow-up is appropriate.",
+            "fixExample": "Document not-found, unauthorized, rate-limit, and validation failures.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "TASK_BENCHMARK_MISSING",
+          "level": "warning",
+          "message": {
+            "text": "Missing agent task benchmark file: Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "agentlighthouse.tasks.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "3b1642bc"
+          },
+          "properties": {
+            "category": "task_benchmarks",
+            "severity": "medium",
+            "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
+            "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+            "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+          "level": "note",
+          "message": {
+            "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "2960598d"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "info",
+            "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+            "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+            "fixExample": "agentlighthouse scan . --probe commands",
+            "confidence": "medium"
+          }
+        }
+      ]
+    }
+  ]
+}

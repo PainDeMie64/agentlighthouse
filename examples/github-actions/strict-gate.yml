@@ -1,0 +1,21 @@
+name: AgentLighthouse Strict Gate
+
+on:
+  pull_request:
+
+jobs:
+  strict-agent-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          profile: devtool
+          fail-under: "85"
+          fail-on-severity: high
+          min-confidence: medium
+          probes: commands
+          output-json: "true"
+          output-markdown: "true"
+          output-sarif: "true"

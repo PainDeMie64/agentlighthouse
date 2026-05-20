@@ -29,8 +29,9 @@
 
 - Score gates in CI.
 - SARIF reporter.
-- PR comments and annotations.
-- Patch suggestions for instruction and docs improvements.
+- PR-friendly summaries and GitHub step summaries.
+- Composite GitHub Action.
+- Future: token-backed PR comments, GitHub Checks, baseline comparison, and patch suggestions.
 
 ## Phase 3: Docs Crawler + Deeper API/MCP Resolution
 

@@ -1,0 +1,147 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "AgentLighthouse",
+          "semanticVersion": "0.1.0",
+          "informationUri": "https://github.com/PainDeMie64/agentlighthouse",
+          "rules": [
+            {
+              "id": "api.openapi-detected",
+              "name": "OpenAPI file detected",
+              "shortDescription": {
+                "text": "OpenAPI file detected"
+              },
+              "fullDescription": {
+                "text": "The scanner found an API schema that agents can use."
+              },
+              "help": {
+                "text": "Keep API descriptions, examples, and auth details current.",
+                "markdown": "Keep API descriptions, examples, and auth details current."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "api_schema",
+                "severity": "info",
+                "tags": ["agent-readiness", "api_schema", "info"]
+              }
+            },
+            {
+              "id": "mcp.not-evaluated",
+              "name": "MCP readiness could not be evaluated yet",
+              "shortDescription": {
+                "text": "MCP readiness could not be evaluated yet"
+              },
+              "fullDescription": {
+                "text": "No MCP server/config/package signal was detected."
+              },
+              "help": {
+                "text": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+                "markdown": "If this project exposes MCP tools, include server files and clear tool descriptions."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "mcp_tools",
+                "severity": "info",
+                "tags": ["agent-readiness", "mcp_tools", "info"]
+              }
+            },
+            {
+              "id": "COMMAND_VERIFICATION_SKIPPED",
+              "name": "Command verification probes were skipped",
+              "shortDescription": {
+                "text": "Command verification probes were skipped"
+              },
+              "fullDescription": {
+                "text": "Static analysis is default; project commands are not executed unless explicitly enabled."
+              },
+              "help": {
+                "text": "Use command probes in trusted local or CI environments when you want executable verification.",
+                "markdown": "Use command probes in trusted local or CI environments when you want executable verification.\n\nAgent failure mode: Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.\n\nFix example: agentlighthouse scan . --probe commands"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "category": "setup_and_tests",
+                "severity": "info",
+                "tags": ["agent-readiness", "setup_and_tests", "info"]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "api.openapi-detected",
+          "level": "note",
+          "message": {
+            "text": "OpenAPI file detected: Keep API descriptions, examples, and auth details current."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "openapi.yaml"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "agentLighthouseFinding": "bc0414a8"
+          },
+          "properties": {
+            "category": "api_schema",
+            "severity": "info",
+            "recommendation": "Keep API descriptions, examples, and auth details current.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "mcp.not-evaluated",
+          "level": "note",
+          "message": {
+            "text": "MCP readiness could not be evaluated yet: If this project exposes MCP tools, include server files and clear tool descriptions."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "79ec46eb"
+          },
+          "properties": {
+            "category": "mcp_tools",
+            "severity": "info",
+            "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+            "confidence": "medium"
+          }
+        },
+        {
+          "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+          "level": "note",
+          "message": {
+            "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
+          },
+          "partialFingerprints": {
+            "agentLighthouseFinding": "2960598d"
+          },
+          "properties": {
+            "category": "setup_and_tests",
+            "severity": "info",
+            "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+            "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+            "fixExample": "agentlighthouse scan . --probe commands",
+            "confidence": "medium"
+          }
+        }
+      ]
+    }
+  ]
+}

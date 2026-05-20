@@ -1,5 +1,7 @@
 # AgentLighthouse Report: sample-bad-project
 
+AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
+
 Score: **0/100**
 
 Agent-readiness needs focused work before agents can reliably use this project.
@@ -11,6 +13,7 @@ Coverage: **93%**
 ## Project Detection
 
 - Type: `node_javascript`
+- Profile: `library`
 - Confidence: 80%
 - Package manager: `npm`
 - Frameworks: none detected
@@ -22,6 +25,12 @@ Coverage: **93%**
 - Human-readable project signals: 40/100 - README present, package metadata present
 - Agent-specific context layer: 0/100 - none detected
 - Verifiability: 0/100 - command probes not run
+
+## CI Interpretation
+
+- This score should be used as an agent-readiness gate, not as a judgment of overall engineering quality.
+- Low scores usually mean agents need more context files, clearer examples, verifiable commands, or safer API/MCP descriptions.
+- Command execution probes are opt-in; static analysis remains the default.
 
 ## Subscores
 
@@ -108,11 +117,11 @@ Coverage: **93%**
 
 ## Scan Metadata
 
-- Scan ID: `scan_3e66c375`
+- Scan ID: `scan_f53b3987`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:47:28.253Z
-- Completed: 2026-05-20T19:47:28.254Z
+- Started: 2026-05-20T20:03:35.293Z
+- Completed: 2026-05-20T20:03:35.294Z
 - Duration: 1ms
 - Files scanned: 3
 - Text files read: 2
@@ -126,6 +135,7 @@ Coverage: **93%**
 
 #### Missing AGENTS.md
 
+- Rule ID: `agent-instructions.missing-agents-md`
 - Severity: high
 - Category: agent_instructions
 - Affected file: AGENTS.md
@@ -136,6 +146,7 @@ Coverage: **93%**
 
 #### package.json has no scripts
 
+- Rule ID: `setup.package-json-no-scripts`
 - Severity: high
 - Category: setup_and_tests
 - Affected file: package.json
@@ -146,6 +157,7 @@ Coverage: **93%**
 
 #### No test script in package.json
 
+- Rule ID: `setup.missing-test-script`
 - Severity: high
 - Category: setup_and_tests
 - Affected file: package.json
@@ -158,6 +170,7 @@ Coverage: **93%**
 
 #### Missing CLAUDE.md
 
+- Rule ID: `agent-instructions.missing-claude-md`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: CLAUDE.md
@@ -168,6 +181,7 @@ Coverage: **93%**
 
 #### README.md exists, but does not include clear test command
 
+- Rule ID: `artifact-quality.READMEmd.missing-clear-test-command`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: README.md
@@ -178,6 +192,7 @@ Coverage: **93%**
 
 #### README.md exists, but does not include architecture or repo map
 
+- Rule ID: `artifact-quality.READMEmd.missing-architecture-or-repo-map`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: README.md
@@ -188,6 +203,7 @@ Coverage: **93%**
 
 #### Missing llms.txt
 
+- Rule ID: `llms.missing`
 - Severity: medium
 - Category: agent_instructions
 - Affected file: llms.txt
@@ -198,6 +214,7 @@ Coverage: **93%**
 
 #### README.md has no quickstart section
 
+- Rule ID: `docs.readme-no-quickstart`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -208,6 +225,7 @@ Coverage: **93%**
 
 #### README.md has no installation instructions
 
+- Rule ID: `docs.readme-no-install`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -218,6 +236,7 @@ Coverage: **93%**
 
 #### README.md has no examples
 
+- Rule ID: `docs.readme-no-examples`
 - Severity: medium
 - Category: documentation
 - Affected file: README.md
@@ -228,6 +247,7 @@ Coverage: **93%**
 
 #### Docs exist but no Markdown files are discoverable
 
+- Rule ID: `docs.no-markdown`
 - Severity: medium
 - Category: documentation
 - Affected file: docs/
@@ -238,6 +258,7 @@ Coverage: **93%**
 
 #### No lint script in package.json
 
+- Rule ID: `setup.missing-lint-script`
 - Severity: medium
 - Category: setup_and_tests
 - Affected file: package.json
@@ -248,6 +269,7 @@ Coverage: **93%**
 
 #### No typecheck script in package.json
 
+- Rule ID: `setup.missing-typecheck-script`
 - Severity: medium
 - Category: setup_and_tests
 - Affected file: package.json
@@ -258,6 +280,7 @@ Coverage: **93%**
 
 #### Missing .agentlighthouseignore
 
+- Rule ID: `security.missing-agentlighthouseignore`
 - Severity: medium
 - Category: security_and_privacy
 - Affected file: .agentlighthouseignore
@@ -268,6 +291,7 @@ Coverage: **93%**
 
 #### Instructions do not tell agents how to handle secrets
 
+- Rule ID: `security.agent-secret-guidance-missing`
 - Severity: medium
 - Category: security_and_privacy
 - Affected file: AGENTS.md
@@ -278,6 +302,7 @@ Coverage: **93%**
 
 #### Missing agent task benchmark file
 
+- Rule ID: `TASK_BENCHMARK_MISSING`
 - Severity: medium
 - Category: task_benchmarks
 - Affected file: agentlighthouse.tasks.yaml
@@ -290,6 +315,7 @@ Coverage: **93%**
 
 #### README has installation guidance but no verification step
 
+- Rule ID: `artifact-quality.readme-missing-verification-step`
 - Severity: low
 - Category: documentation
 - Affected file: README.md
@@ -300,6 +326,7 @@ Coverage: **93%**
 
 #### README commands are not clearly grounded in package.json scripts
 
+- Rule ID: `artifact-quality.readme-commands-not-grounded-in-scripts`
 - Severity: low
 - Category: freshness_and_consistency
 - Affected file: README.md
@@ -310,6 +337,7 @@ Coverage: **93%**
 
 #### Docs contain TODO/deprecated-looking terms without migration guidance
 
+- Rule ID: `freshness.deprecated-or-todo-terms`
 - Severity: low
 - Category: freshness_and_consistency
 - Affected file: n/a
@@ -322,6 +350,7 @@ Coverage: **93%**
 
 #### OpenAPI file not detected
 
+- Rule ID: `api.openapi-not-detected`
 - Severity: info
 - Category: api_schema
 - Affected file: n/a
@@ -332,6 +361,7 @@ Coverage: **93%**
 
 #### MCP readiness could not be evaluated yet
 
+- Rule ID: `mcp.not-evaluated`
 - Severity: info
 - Category: mcp_tools
 - Affected file: n/a
@@ -342,6 +372,7 @@ Coverage: **93%**
 
 #### Command verification probes were skipped
 
+- Rule ID: `COMMAND_VERIFICATION_SKIPPED`
 - Severity: info
 - Category: setup_and_tests
 - Affected file: n/a

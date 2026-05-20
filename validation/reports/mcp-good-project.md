@@ -1,5 +1,7 @@
 # AgentLighthouse Report: mcp-good-project
 
+AgentLighthouse measures **agent-readiness**, not general software quality. A mature human-friendly project can score lower when it lacks agent-specific context, verifiable workflows, or machine-readable API/tool guidance.
+
 Score: **95/100**
 
 Strong agent-readiness with 0 high-priority issue(s) remaining.
@@ -11,6 +13,7 @@ Coverage: **78%**
 ## Project Detection
 
 - Type: `mcp_project`
+- Profile: `mcp`
 - Confidence: 90%
 - Package manager: `npm`
 - Frameworks: none detected
@@ -22,6 +25,12 @@ Coverage: **78%**
 - Human-readable project signals: 80/100 - README present, 1 Markdown doc file(s), package metadata present, MCP files or dependencies present
 - Agent-specific context layer: 68/100 - AGENTS.md present, CLAUDE.md present, llms.txt present, agent task benchmark present
 - Verifiability: 60/100 - test script declared, lint script declared, typecheck script declared, command probes not run
+
+## CI Interpretation
+
+- This score should be used as an agent-readiness gate, not as a judgment of overall engineering quality.
+- Low scores usually mean agents need more context files, clearer examples, verifiable commands, or safer API/MCP descriptions.
+- Command execution probes are opt-in; static analysis remains the default.
 
 ## Subscores
 
@@ -97,11 +106,11 @@ Coverage: **78%**
 
 ## Scan Metadata
 
-- Scan ID: `scan_4cb116c8`
+- Scan ID: `scan_0385e711`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T19:47:28.362Z
-- Completed: 2026-05-20T19:47:28.366Z
+- Started: 2026-05-20T20:03:35.433Z
+- Completed: 2026-05-20T20:03:35.437Z
 - Duration: 4ms
 - Files scanned: 9
 - Text files read: 8
@@ -115,6 +124,7 @@ Coverage: **78%**
 
 #### CLAUDE.md appears stale or too vague
 
+- Rule ID: `agent-instructions.claude-vague`
 - Severity: low
 - Category: agent_instructions
 - Affected file: CLAUDE.md
@@ -127,6 +137,7 @@ Coverage: **78%**
 
 #### OpenAPI file not detected
 
+- Rule ID: `api.openapi-not-detected`
 - Severity: info
 - Category: api_schema
 - Affected file: n/a
@@ -137,6 +148,7 @@ Coverage: **78%**
 
 #### MCP-related files or packages detected
 
+- Rule ID: `mcp.detected`
 - Severity: info
 - Category: mcp_tools
 - Affected file: src/mcp-server.example.txt
@@ -147,6 +159,7 @@ Coverage: **78%**
 
 #### Command verification probes were skipped
 
+- Rule ID: `COMMAND_VERIFICATION_SKIPPED`
 - Severity: info
 - Category: setup_and_tests
 - Affected file: n/a

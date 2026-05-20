@@ -21,6 +21,8 @@ It complements Codex, Claude Code, Cursor, GitHub Copilot, Gemini, and future ag
 - Semantic OpenAPI and MCP analysis for agent failure modes, unsafe ambiguity, examples, auth, errors, and tool schemas.
 - Opt-in command probes for trusted local verification; static analysis remains the default.
 - Score interpretation that separates human-readable signals, agent-specific context, and verifiability.
+- CI-ready JSON, Markdown, SARIF, PR-summary, and GitHub step-summary reports.
+- Explicit CI gates for score, severity, and confidence.
 - Starter artifact generation for agent instructions, Claude memory, `llms.txt`, `.agentlighthouseignore`, and task benchmarks.
 - CLI commands for `scan`, `init`, and `version`.
 - Next.js dashboard with sample score, findings, subscores, and recommendations.
@@ -60,9 +62,12 @@ The dashboard runs from `apps/web` through the root `pnpm dev` script.
 agentlighthouse scan <path>
 agentlighthouse scan <path> --json --output report.json
 agentlighthouse scan <path> --format markdown --output report.md
+agentlighthouse scan <path> --format sarif --output report.sarif
+agentlighthouse scan <path> --format pr-summary --output pr-summary.md
 agentlighthouse scan <path> --profile devtool
 agentlighthouse scan <path> --probe commands
-agentlighthouse scan <path> --fail-under 70
+agentlighthouse scan <path> --fail-under 70 --min-confidence medium
+agentlighthouse scan <path> --fail-on-severity high
 agentlighthouse init <path> --dry-run
 agentlighthouse init <path> --force
 agentlighthouse version
@@ -85,7 +90,7 @@ Then open the local Next.js URL printed by the dev server. The initial dashboard
 
 ## CI Usage
 
-AgentLighthouse can run as a score gate in GitHub Actions:
+AgentLighthouse can run as a score gate in GitHub Actions or any CI:
 
 ```yaml
 - name: AgentLighthouse scan
@@ -93,6 +98,21 @@ AgentLighthouse can run as a score gate in GitHub Actions:
 ```
 
 The command writes the report before returning a non-zero exit code when the score is below the threshold.
+
+Use the composite action when consuming AgentLighthouse from GitHub:
+
+```yaml
+- uses: actions/checkout@v4
+- uses: PainDeMie64/agentlighthouse@main
+  with:
+    path: "."
+    fail-under: "75"
+    fail-on-severity: high
+    min-confidence: medium
+    output-sarif: "true"
+```
+
+See `docs/CI.md`, `docs/GITHUB_ACTION.md`, and `docs/SARIF.md`.
 
 ## Configuration
 
@@ -129,7 +149,7 @@ validation/reports      safe generated scan reports
 - Phase 0: foundation, deterministic scanner, docs, CI.
 - Phase 1: local scanner and dashboard depth.
 - Phase 2A: semantic OpenAPI, MCP, task benchmark, and command probe analysis.
-- Phase 2B: GitHub Action and PR suggestions.
+- Phase 2B: CI gates, SARIF, GitHub Action, PR summaries, and step summaries.
 - Phase 3: docs crawler plus deeper API/MCP reference resolution.
 - Phase 4: agent benchmark runner.
 - Phase 5: hosted SaaS dashboard.

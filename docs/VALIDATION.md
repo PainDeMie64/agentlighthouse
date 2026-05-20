@@ -45,7 +45,7 @@ Do not commit cloned repositories. `.tmp/` is ignored.
 
 ## Reports
 
-Use JSON for machine analysis and Markdown for human review:
+Use JSON for machine analysis, Markdown for human review, SARIF for code scanning, and PR summary Markdown for concise CI comments:
 
 ```bash
 pnpm --filter @agentlighthouse/cli dev scan examples/sample-project --json --output validation/reports/sample-project.json
@@ -53,10 +53,12 @@ pnpm --filter @agentlighthouse/cli dev scan examples/sample-project --json --out
 
 Reports should not contain secrets or sensitive local paths. Sanitize before committing if needed.
 
-`pnpm validate:realworld` generates:
+`pnpm validate:realworld` generates JSON, Markdown, SARIF, and PR-summary reports for each committed validation target. Key outputs include:
 
 - `validation/reports/sample-project.json`
 - `validation/reports/sample-project.md`
+- `validation/reports/sample-project.sarif`
+- `validation/reports/sample-project-pr-summary.md`
 - `validation/reports/sample-good-project.json`
 - `validation/reports/sample-good-project.md`
 - `validation/reports/sample-bad-project.json`
@@ -65,17 +67,25 @@ Reports should not contain secrets or sensitive local paths. Sanitize before com
 - `validation/reports/openapi-good-project.md`
 - `validation/reports/openapi-bad-project.json`
 - `validation/reports/openapi-bad-project.md`
+- `validation/reports/openapi-bad-project.sarif`
+- `validation/reports/openapi-bad-project-pr-summary.md`
 - `validation/reports/mcp-good-project.json`
 - `validation/reports/mcp-good-project.md`
 - `validation/reports/mcp-bad-project.json`
 - `validation/reports/mcp-bad-project.md`
+- `validation/reports/mcp-bad-project.sarif`
+- `validation/reports/mcp-bad-project-pr-summary.md`
 - `validation/reports/agentlighthouse.json`
 - `validation/reports/agentlighthouse.md`
+- `validation/reports/agentlighthouse.sarif`
+- `validation/reports/agentlighthouse-pr-summary.md`
 
 When repositories are present under `.tmp/validation-repos/`, the same command also writes sanitized external reports under:
 
 - `validation/reports/external/external-<repo>.json`
 - `validation/reports/external/external-<repo>.md`
+- `validation/reports/external/external-<repo>.sarif`
+- `validation/reports/external/external-<repo>-pr-summary.md`
 
 External reports are ignored by git by default because JSON reports can include third-party text snippets used as evidence. Review them locally, then commit only summarized calibration notes unless there is a clear reason to preserve a specific report.
 

@@ -14,7 +14,7 @@ program
   .command("scan")
   .argument("[path]", "Project path to scan", ".")
   .option("--json", "Print JSON output")
-  .option("--format <format>", "Output format: text, json, or markdown", "text")
+  .option("--format <format>", "Output format: text, json, markdown, sarif, or pr-summary", "text")
   .option(
     "--profile <profile>",
     "Scan profile: default, devtool, api, mcp, docs, library, or internal"
@@ -23,6 +23,15 @@ program
   .option("--run-probes", "Run all safe opt-in probes")
   .option("--output <file>", "Write report output to a file")
   .option("--fail-under <score>", "Exit with code 1 when score is below the threshold")
+  .option(
+    "--fail-on-severity <severity>",
+    "Exit with code 1 when any finding is at or above severity: critical, high, medium, low, or info"
+  )
+  .option(
+    "--min-confidence <confidence>",
+    "Exit with code 1 when score confidence is below: low, medium, or high"
+  )
+  .option("--github-step-summary", "Append a concise Markdown summary to GITHUB_STEP_SUMMARY")
   .option("--include <glob...>", "Only include paths containing these patterns")
   .option("--exclude <glob...>", "Exclude paths matching these patterns")
   .option("--no-color", "Disable terminal color")
