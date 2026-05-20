@@ -44,7 +44,7 @@ describe("release metadata", () => {
       expect(pkg.publishConfig?.access).toBe("public");
     }
 
-    expect(cli.bin?.agentlighthouse).toBe("./dist/index.js");
+    expect(cli.bin?.agentlighthouse).toBe("dist/index.js");
     expect(cli.dependencies?.["@agentlighthouse/core"]).toBe("0.1.0-alpha.1");
     expect(JSON.stringify(cli.dependencies)).not.toContain("workspace:");
   });

@@ -32,7 +32,7 @@
     "LICENSE"
   ],
   "bin": {
-    "agentlighthouse": "./dist/index.js"
+    "agentlighthouse": "dist/index.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
