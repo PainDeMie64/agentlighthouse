@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_d1cc993f",
+  "scanId": "scan_390cc3c9",
   "scannedPath": "<repo>/examples/mcp-bad-project",
-  "startedAt": "2026-05-20T21:49:19.896Z",
-  "completedAt": "2026-05-20T21:49:19.898Z",
+  "startedAt": "2026-05-20T21:56:26.072Z",
+  "completedAt": "2026-05-20T21:56:26.074Z",
   "durationMs": 2,
   "agentLighthouseVersion": "0.1.0-alpha.0",
   "profile": "mcp",
@@ -954,7 +954,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-bad-project",
-  "scannedAt": "2026-05-20T21:49:19.898Z",
+  "scannedAt": "2026-05-20T21:56:26.074Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

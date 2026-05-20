@@ -118,7 +118,9 @@ Set `AGENTLIGHTHOUSE_RELEASE_DEBUG=1` to keep the temporary smoke directory.
 pnpm release:dry-run
 ```
 
-This runs `pnpm publish --dry-run --access public --no-git-checks` for the publishable packages only. It does not publish anything.
+This runs `pnpm publish --dry-run --access public --tag alpha --no-git-checks` for the
+publishable packages only. It does not publish anything and it rehearses the intended alpha
+dist-tag.
 
 If dry-run fails, publishing is blocked until package metadata, dependency rewriting, or tarball contents are fixed.
 

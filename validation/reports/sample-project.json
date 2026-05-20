@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_194141b7",
+  "scanId": "scan_7ed198ae",
   "scannedPath": "<repo>/examples/sample-project",
-  "startedAt": "2026-05-20T21:49:19.472Z",
-  "completedAt": "2026-05-20T21:49:19.485Z",
-  "durationMs": 13,
+  "startedAt": "2026-05-20T21:56:25.768Z",
+  "completedAt": "2026-05-20T21:56:25.777Z",
+  "durationMs": 9,
   "agentLighthouseVersion": "0.1.0-alpha.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -939,7 +939,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-project",
-  "scannedAt": "2026-05-20T21:49:19.485Z",
+  "scannedAt": "2026-05-20T21:56:25.777Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

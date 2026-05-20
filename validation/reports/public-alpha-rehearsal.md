@@ -1,12 +1,12 @@
 # Public Alpha Rehearsal
 
-Generated: 2026-05-20T21:50:17.900Z
+Generated: 2026-05-20T21:55:58.686Z
 
 ## Summary
 
-- Git commit tested: `89b2494efd6450db231e28efe26e7356508d84fa`
+- Git commit tested: `4ed8d9e384acfa2ca0751aa506b86c53fc5fd959`
 - Clone source: remote
-- Node version: `v22.22.2`
+- Node version: `v26.1.0`
 - pnpm version: `10.33.0`
 - Packed CLI install result: passed
 - Final recommendation: **ready with caveats: require manual approval, do not tag or publish automatically, and keep GitHub Action source-based limitations visible.**
@@ -22,14 +22,9 @@ Generated: 2026-05-20T21:50:17.900Z
 
 | Check                   | Status | Detail                                                                                                                                |
 | ----------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Fresh clone             | passed | remote clone checked out 89b2494efd6450db231e28efe26e7356508d84fa.                                                                    |
+| Fresh clone             | passed | remote clone checked out 4ed8d9e384acfa2ca0751aa506b86c53fc5fd959.                                                                    |
 | README source workflow  | passed | Install, build, test, scan, baseline create/validate, and scan --baseline report bundle all worked from a clean clone.                |
 | Packed CLI real install | passed | Packed CLI installed into a separate clean consumer project and ran without monorepo source paths or TypeScript runtime dependencies. |
-| release:check           | passed | Completed earlier in pnpm release:rehearsal before fresh-clone validation.                                                            |
-| release:dry-run         | passed | Completed earlier in pnpm release:rehearsal before fresh-clone validation.                                                            |
-| release:package-audit   | passed | Completed earlier in pnpm release:rehearsal before fresh-clone validation.                                                            |
-| release:readme-check    | passed | Completed earlier in pnpm release:rehearsal before fresh-clone validation.                                                            |
-| release:external-trial  | passed | Completed earlier in pnpm release:rehearsal before fresh-clone validation.                                                            |
 
 ## Related Reports
 

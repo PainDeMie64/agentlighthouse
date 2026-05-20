@@ -1,6 +1,6 @@
 # Release Readiness
 
-Generated: 2026-05-20T21:49:44.956Z
+Generated: 2026-05-20T22:04:28.842Z
 
 ## Package Versions
 
@@ -16,11 +16,11 @@ Generated: 2026-05-20T21:49:44.956Z
 ## Checks
 
 - PASSED: Build - Built packages before npm dry-run.
-- PASSED: npm publish dry-run for @agentlighthouse/core - npm dry-run completed without publishing.
-- PASSED: npm publish dry-run for @agentlighthouse/cli - npm dry-run completed without publishing.
+- PASSED: npm publish dry-run for @agentlighthouse/core - npm dry-run completed with dist-tag alpha and without publishing.
+- PASSED: npm publish dry-run for @agentlighthouse/cli - npm dry-run completed with dist-tag alpha and without publishing.
 
 ## Known Packaging Limitations
 
-- This was npm publish --dry-run only. No package was published.
+- This was npm publish --dry-run --tag alpha only. No package was published.
 - @agentlighthouse/web is private and intentionally skipped.
 - No git tag was created.

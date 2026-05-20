@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_9690debe",
+  "scanId": "scan_fdd1033a",
   "scannedPath": "<repo>",
-  "startedAt": "2026-05-20T21:49:19.951Z",
-  "completedAt": "2026-05-20T21:49:19.968Z",
-  "durationMs": 17,
+  "startedAt": "2026-05-20T21:56:26.119Z",
+  "completedAt": "2026-05-20T21:56:26.132Z",
+  "durationMs": 13,
   "agentLighthouseVersion": "0.1.0-alpha.0",
   "profile": "devtool",
   "scoringModelVersion": "0.1.0",
@@ -315,7 +315,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>",
-  "scannedAt": "2026-05-20T21:49:19.968Z",
+  "scannedAt": "2026-05-20T21:56:26.132Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

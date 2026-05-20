@@ -3,13 +3,17 @@ import { packageVersions, runCommand, writeReleaseReport } from "./release-utils
 const checks: Array<{ name: string; status: "passed" | "failed" | "skipped"; detail: string }> = [];
 
 async function dryRun(packageDir: string, name: string): Promise<void> {
-  await runCommand("pnpm", ["publish", "--dry-run", "--access", "public", "--no-git-checks"], {
-    cwd: packageDir
-  });
+  await runCommand(
+    "pnpm",
+    ["publish", "--dry-run", "--access", "public", "--tag", "alpha", "--no-git-checks"],
+    {
+      cwd: packageDir
+    }
+  );
   checks.push({
     name: `npm publish dry-run for ${name}`,
     status: "passed",
-    detail: "npm dry-run completed without publishing."
+    detail: "npm dry-run completed with dist-tag alpha and without publishing."
   });
 }
 
@@ -24,7 +28,7 @@ try {
     tarballs: [],
     checks,
     limitations: [
-      "This was npm publish --dry-run only. No package was published.",
+      "This was npm publish --dry-run --tag alpha only. No package was published.",
       "@agentlighthouse/web is private and intentionally skipped.",
       "No git tag was created."
     ]
