@@ -44,6 +44,7 @@ pnpm validate:realworld
 - Added Phase 2A semantic findings for OpenAPI operations, MCP tools, opt-in command probes, and richer task benchmarks.
 - Added score interpretation for human-readable signals, agent-specific context, and verifiability.
 - Added Phase 2B CI reporters and gates: SARIF, PR summaries, GitHub step summary output, severity gates, and confidence gates.
+- Added Phase 2C baseline comparison with stable finding fingerprints, delta reporters, and regression gates.
 
 ## False Positives Found
 
@@ -65,7 +66,7 @@ pnpm validate:realworld
 - Docs usefulness is still deterministic and heuristic.
 - Command probes run only when explicitly enabled and do not execute install commands or arbitrary docs commands.
 - Profiles are still minimal and do not yet support user-defined rule-level severity overrides.
-- Baseline comparison is designed but not implemented yet, so CI cannot automatically distinguish new findings from existing debt.
+- Scan+baseline convenience mode is deferred; compare-only is the stable CI primitive for now.
 
 ## What To Test Next
 

@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_15a61aaf",
+  "scanId": "scan_cea4b84f",
   "scannedPath": "<repo>/examples/openapi-bad-project",
-  "startedAt": "2026-05-20T20:03:35.367Z",
-  "completedAt": "2026-05-20T20:03:35.370Z",
-  "durationMs": 3,
+  "startedAt": "2026-05-20T20:22:52.842Z",
+  "completedAt": "2026-05-20T20:22:52.844Z",
+  "durationMs": 2,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -108,7 +108,11 @@
       "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
       "affectedFile": "AGENTS.md",
       "suggestedFixType": "create_file",
-      "ruleId": "agent-instructions.missing-agents-md"
+      "ruleId": "agent-instructions.missing-agents-md",
+      "fingerprint": "alh_3a0ad1c7",
+      "identityParts": ["agent-instructions.missing-agents-md", "agents.md", "agents.md"],
+      "locationKey": "agents.md",
+      "subject": "AGENTS.md"
     },
     {
       "id": "agent-instructions.missing-claude-md",
@@ -120,7 +124,11 @@
       "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
       "affectedFile": "CLAUDE.md",
       "suggestedFixType": "create_file",
-      "ruleId": "agent-instructions.missing-claude-md"
+      "ruleId": "agent-instructions.missing-claude-md",
+      "fingerprint": "alh_2919953b",
+      "identityParts": ["agent-instructions.missing-claude-md", "claude.md", "claude.md"],
+      "locationKey": "claude.md",
+      "subject": "CLAUDE.md"
     },
     {
       "id": "artifact-quality.READMEmd.missing-clear-test-command",
@@ -134,7 +142,15 @@
       "recommendation": "Add clear test command to README.md.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command"
+      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command",
+      "fingerprint": "alh_e3728b0d",
+      "identityParts": [
+        "artifact-quality.READMEmd.missing-clear-test-command",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
@@ -148,7 +164,15 @@
       "recommendation": "Add architecture or repo map to README.md.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map"
+      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+      "fingerprint": "alh_182aba10",
+      "identityParts": [
+        "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.readme-missing-verification-step",
@@ -162,7 +186,15 @@
       "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.readme-missing-verification-step"
+      "ruleId": "artifact-quality.readme-missing-verification-step",
+      "fingerprint": "alh_15490f29",
+      "identityParts": [
+        "artifact-quality.readme-missing-verification-step",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
@@ -176,7 +208,15 @@
       "recommendation": "Show package-manager commands that map directly to package.json scripts.",
       "affectedFile": "README.md",
       "suggestedFixType": "update_file",
-      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts"
+      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts",
+      "fingerprint": "alh_44385cfc",
+      "identityParts": [
+        "artifact-quality.readme-commands-not-grounded-in-scripts",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.readme-missing-troubleshooting",
@@ -188,7 +228,15 @@
       "recommendation": "Add a short troubleshooting section with common setup and test failure fixes.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.readme-missing-troubleshooting"
+      "ruleId": "artifact-quality.readme-missing-troubleshooting",
+      "fingerprint": "alh_94d45e83",
+      "identityParts": [
+        "artifact-quality.readme-missing-troubleshooting",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "llms.missing",
@@ -200,7 +248,11 @@
       "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
       "affectedFile": "llms.txt",
       "suggestedFixType": "create_file",
-      "ruleId": "llms.missing"
+      "ruleId": "llms.missing",
+      "fingerprint": "alh_dcee23b7",
+      "identityParts": ["llms.missing", "llms.txt", "llms.txt"],
+      "locationKey": "llms.txt",
+      "subject": "llms.txt"
     },
     {
       "id": "docs.readme-no-quickstart",
@@ -212,7 +264,11 @@
       "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-quickstart"
+      "ruleId": "docs.readme-no-quickstart",
+      "fingerprint": "alh_2fb4df74",
+      "identityParts": ["docs.readme-no-quickstart", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.readme-no-install",
@@ -224,7 +280,11 @@
       "recommendation": "Add installation commands and prerequisites.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-install"
+      "ruleId": "docs.readme-no-install",
+      "fingerprint": "alh_e1c052e4",
+      "identityParts": ["docs.readme-no-install", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.readme-no-examples",
@@ -236,7 +296,11 @@
       "recommendation": "Add concrete examples showing expected usage and output.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-examples"
+      "ruleId": "docs.readme-no-examples",
+      "fingerprint": "alh_b662d04a",
+      "identityParts": ["docs.readme-no-examples", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.directory-missing",
@@ -248,7 +312,11 @@
       "recommendation": "Add docs/ for architecture, development, API, and operational context.",
       "affectedFile": "docs/",
       "suggestedFixType": "create_file",
-      "ruleId": "docs.directory-missing"
+      "ruleId": "docs.directory-missing",
+      "fingerprint": "alh_80dc9ef2",
+      "identityParts": ["docs.directory-missing", "docs/", "docs/"],
+      "locationKey": "docs/",
+      "subject": "docs/"
     },
     {
       "id": "setup.package-json-no-scripts",
@@ -260,7 +328,11 @@
       "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.package-json-no-scripts"
+      "ruleId": "setup.package-json-no-scripts",
+      "fingerprint": "alh_59ea6562",
+      "identityParts": ["setup.package-json-no-scripts", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-test-script",
@@ -272,7 +344,11 @@
       "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-test-script"
+      "ruleId": "setup.missing-test-script",
+      "fingerprint": "alh_2c1c9c49",
+      "identityParts": ["setup.missing-test-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-lint-script",
@@ -284,7 +360,11 @@
       "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-lint-script"
+      "ruleId": "setup.missing-lint-script",
+      "fingerprint": "alh_6630a79a",
+      "identityParts": ["setup.missing-lint-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-typecheck-script",
@@ -296,7 +376,11 @@
       "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-typecheck-script"
+      "ruleId": "setup.missing-typecheck-script",
+      "fingerprint": "alh_101dfc87",
+      "identityParts": ["setup.missing-typecheck-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "api.openapi-detected",
@@ -308,7 +392,11 @@
       "recommendation": "Keep API descriptions, examples, and auth details current.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "none",
-      "ruleId": "api.openapi-detected"
+      "ruleId": "api.openapi-detected",
+      "fingerprint": "alh_d4b63c10",
+      "identityParts": ["api.openapi-detected", "openapi.yaml", "openapi.yaml"],
+      "locationKey": "openapi.yaml",
+      "subject": "openapi.yaml"
     },
     {
       "id": "api.openapi-no-nearby-examples",
@@ -320,7 +408,11 @@
       "recommendation": "Add examples near the API spec or link examples from the API documentation.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "add_example",
-      "ruleId": "api.openapi-no-nearby-examples"
+      "ruleId": "api.openapi-no-nearby-examples",
+      "fingerprint": "alh_f43ab7f9",
+      "identityParts": ["api.openapi-no-nearby-examples", "openapi.yaml", "openapi.yaml"],
+      "locationKey": "openapi.yaml",
+      "subject": "openapi.yaml"
     },
     {
       "id": "api.openapi-thin-descriptions",
@@ -332,7 +424,11 @@
       "recommendation": "Add meaningful operation descriptions, auth notes, and representative examples.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "api.openapi-thin-descriptions"
+      "ruleId": "api.openapi-thin-descriptions",
+      "fingerprint": "alh_722b737f",
+      "identityParts": ["api.openapi-thin-descriptions", "openapi.yaml", "openapi.yaml"],
+      "locationKey": "openapi.yaml",
+      "subject": "openapi.yaml"
     },
     {
       "id": "mcp.not-evaluated",
@@ -343,7 +439,15 @@
       "evidence": ["No file or package name matching MCP was scanned."],
       "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
       "suggestedFixType": "review_manually",
-      "ruleId": "mcp.not-evaluated"
+      "ruleId": "mcp.not-evaluated",
+      "fingerprint": "alh_0a02b750",
+      "identityParts": [
+        "mcp.not-evaluated",
+        "no file or package name matching mcp was scanned.",
+        "no file or package name matching mcp was scanned."
+      ],
+      "locationKey": "no file or package name matching mcp was scanned.",
+      "subject": "No file or package name matching MCP was scanned."
     },
     {
       "id": "security.missing-agentlighthouseignore",
@@ -355,7 +459,15 @@
       "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
       "affectedFile": ".agentlighthouseignore",
       "suggestedFixType": "create_file",
-      "ruleId": "security.missing-agentlighthouseignore"
+      "ruleId": "security.missing-agentlighthouseignore",
+      "fingerprint": "alh_5848d659",
+      "identityParts": [
+        "security.missing-agentlighthouseignore",
+        ".agentlighthouseignore",
+        ".agentlighthouseignore"
+      ],
+      "locationKey": ".agentlighthouseignore",
+      "subject": ".agentlighthouseignore"
     },
     {
       "id": "security.agent-secret-guidance-missing",
@@ -367,7 +479,11 @@
       "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
       "affectedFile": "AGENTS.md",
       "suggestedFixType": "add_section",
-      "ruleId": "security.agent-secret-guidance-missing"
+      "ruleId": "security.agent-secret-guidance-missing",
+      "fingerprint": "alh_7624eb5d",
+      "identityParts": ["security.agent-secret-guidance-missing", "agents.md", "agents.md"],
+      "locationKey": "agents.md",
+      "subject": "AGENTS.md"
     },
     {
       "id": "freshness.deprecated-or-todo-terms",
@@ -378,7 +494,15 @@
       "evidence": ["README.md:3: API docs coming soon."],
       "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
       "suggestedFixType": "update_file",
-      "ruleId": "freshness.deprecated-or-todo-terms"
+      "ruleId": "freshness.deprecated-or-todo-terms",
+      "fingerprint": "alh_40b9eaf2",
+      "identityParts": [
+        "freshness.deprecated-or-todo-terms",
+        "readme.md:3: api docs coming soon.",
+        "readme.md:3: api docs coming soon."
+      ],
+      "locationKey": "readme.md:3: api docs coming soon.",
+      "subject": "README.md:3: API docs coming soon."
     },
     {
       "id": "OPENAPI_WEAK_SPEC_DESCRIPTION",
@@ -392,7 +516,11 @@
       "fixExample": "Describe the main resources, required authentication, common create/list/update flows, and where to find examples.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_WEAK_SPEC_DESCRIPTION"
+      "ruleId": "OPENAPI_WEAK_SPEC_DESCRIPTION",
+      "fingerprint": "alh_06f3a785",
+      "identityParts": ["OPENAPI_WEAK_SPEC_DESCRIPTION", "openapi.yaml", "openapi.yaml"],
+      "locationKey": "openapi.yaml",
+      "subject": "openapi.yaml"
     },
     {
       "id": "OPENAPI_AUTH_UNCLEAR",
@@ -408,7 +536,11 @@
       "fixExample": "Add an HTTP bearer or API key security scheme and a request example using EXAMPLE_API_KEY.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_AUTH_UNCLEAR"
+      "ruleId": "OPENAPI_AUTH_UNCLEAR",
+      "fingerprint": "alh_a3eec027",
+      "identityParts": ["OPENAPI_AUTH_UNCLEAR", "openapi.yaml", "openapi.yaml"],
+      "locationKey": "openapi.yaml",
+      "subject": "openapi.yaml"
     },
     {
       "id": "OPENAPI_SERVER_URL_MISSING",
@@ -422,7 +554,11 @@
       "fixExample": "Add servers: [{ url: 'https://api.example.com/v1' }].",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_SERVER_URL_MISSING"
+      "ruleId": "OPENAPI_SERVER_URL_MISSING",
+      "fingerprint": "alh_8e9e4ef8",
+      "identityParts": ["OPENAPI_SERVER_URL_MISSING", "openapi.yaml", "openapi.yaml"],
+      "locationKey": "openapi.yaml",
+      "subject": "openapi.yaml"
     },
     {
       "id": "OPENAPI_MISSING_OPERATION_ID",
@@ -440,7 +576,15 @@
       "fixExample": "Use verb+noun names that distinguish similar operations, for example revokeApiKey instead of delete.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_MISSING_OPERATION_ID"
+      "ruleId": "OPENAPI_MISSING_OPERATION_ID",
+      "fingerprint": "alh_8e84230b",
+      "identityParts": [
+        "OPENAPI_MISSING_OPERATION_ID",
+        "openapi.yaml#/paths/~1items/get",
+        "get /items"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items/get",
+      "subject": "GET /items"
     },
     {
       "id": "OPENAPI_WEAK_OPERATION_DESCRIPTION",
@@ -458,7 +602,15 @@
       "fixExample": "Add descriptions that mention required IDs, auth scope, side effects, and common failure handling.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_WEAK_OPERATION_DESCRIPTION"
+      "ruleId": "OPENAPI_WEAK_OPERATION_DESCRIPTION",
+      "fingerprint": "alh_6919d594",
+      "identityParts": [
+        "OPENAPI_WEAK_OPERATION_DESCRIPTION",
+        "openapi.yaml#/paths/~1items/get",
+        "get /items"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items/get",
+      "subject": "GET /items"
     },
     {
       "id": "OPENAPI_MISSING_REQUEST_EXAMPLE",
@@ -472,7 +624,15 @@
       "fixExample": "Add an example body with workspace_id, customer_id, and idempotency_key where relevant.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_MISSING_REQUEST_EXAMPLE"
+      "ruleId": "OPENAPI_MISSING_REQUEST_EXAMPLE",
+      "fingerprint": "alh_26ab955c",
+      "identityParts": [
+        "OPENAPI_MISSING_REQUEST_EXAMPLE",
+        "openapi.yaml#/paths/~1items/post",
+        "post /items"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items/post",
+      "subject": "POST /items"
     },
     {
       "id": "OPENAPI_MISSING_RESPONSE_EXAMPLE",
@@ -490,7 +650,15 @@
       "fixExample": "Add 200/201 response examples with IDs, timestamps, pagination cursors, and nested objects.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_MISSING_RESPONSE_EXAMPLE"
+      "ruleId": "OPENAPI_MISSING_RESPONSE_EXAMPLE",
+      "fingerprint": "alh_86ea0160",
+      "identityParts": [
+        "OPENAPI_MISSING_RESPONSE_EXAMPLE",
+        "openapi.yaml#/paths/~1items/get",
+        "get /items"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items/get",
+      "subject": "GET /items"
     },
     {
       "id": "OPENAPI_MISSING_ERROR_RESPONSES",
@@ -508,7 +676,15 @@
       "fixExample": "Add 401, 404, 409, and 429 responses with short descriptions and example error payloads.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_MISSING_ERROR_RESPONSES"
+      "ruleId": "OPENAPI_MISSING_ERROR_RESPONSES",
+      "fingerprint": "alh_2165a7bf",
+      "identityParts": [
+        "OPENAPI_MISSING_ERROR_RESPONSES",
+        "openapi.yaml#/paths/~1items/get",
+        "get /items"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items/get",
+      "subject": "GET /items"
     },
     {
       "id": "OPENAPI_AMBIGUOUS_OPERATION_NAME",
@@ -526,7 +702,15 @@
       "fixExample": "Prefer syncCatalog, searchDocuments, or updateWorkspaceMember over generic names.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_AMBIGUOUS_OPERATION_NAME"
+      "ruleId": "OPENAPI_AMBIGUOUS_OPERATION_NAME",
+      "fingerprint": "alh_1c887f19",
+      "identityParts": [
+        "OPENAPI_AMBIGUOUS_OPERATION_NAME",
+        "openapi.yaml#/paths/~1items/get",
+        "get /items"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items/get",
+      "subject": "GET /items"
     },
     {
       "id": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED",
@@ -540,7 +724,15 @@
       "fixExample": "State whether delete/cancel/revoke is irreversible and include sandbox-safe examples.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED"
+      "ruleId": "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED",
+      "fingerprint": "alh_ebb7f09d",
+      "identityParts": [
+        "OPENAPI_DESTRUCTIVE_OPERATION_UNMARKED",
+        "openapi.yaml#/paths/~1items~1{id}/delete",
+        "delete /items/{id}"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items~1{id}/delete",
+      "subject": "DELETE /items/{id}"
     },
     {
       "id": "OPENAPI_PAGINATION_UNCLEAR",
@@ -554,7 +746,15 @@
       "fixExample": "Describe limit and cursor parameters and include a response example with next_cursor.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_PAGINATION_UNCLEAR"
+      "ruleId": "OPENAPI_PAGINATION_UNCLEAR",
+      "fingerprint": "alh_16c2bc50",
+      "identityParts": [
+        "OPENAPI_PAGINATION_UNCLEAR",
+        "openapi.yaml#/paths/~1items/get",
+        "get /items"
+      ],
+      "locationKey": "openapi.yaml#/paths/~1items/get",
+      "subject": "GET /items"
     },
     {
       "id": "OPENAPI_RATE_LIMIT_UNCLEAR",
@@ -567,7 +767,15 @@
       "agentFailureMode": "A coding agent may create brittle retry loops or ignore throttling responses.",
       "fixExample": "Add a 429 response with Retry-After guidance and an example error payload.",
       "suggestedFixType": "update_file",
-      "ruleId": "OPENAPI_RATE_LIMIT_UNCLEAR"
+      "ruleId": "OPENAPI_RATE_LIMIT_UNCLEAR",
+      "fingerprint": "alh_4946d639",
+      "identityParts": [
+        "OPENAPI_RATE_LIMIT_UNCLEAR",
+        "no operation mentions 429, retry-after, or rate limits.",
+        "no operation mentions 429, retry-after, or rate limits."
+      ],
+      "locationKey": "no operation mentions 429, retry-after, or rate limits.",
+      "subject": "No operation mentions 429, Retry-After, or rate limits."
     },
     {
       "id": "TASK_BENCHMARK_MISSING",
@@ -581,7 +789,15 @@
       "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
       "affectedFile": "agentlighthouse.tasks.yaml",
       "suggestedFixType": "create_file",
-      "ruleId": "TASK_BENCHMARK_MISSING"
+      "ruleId": "TASK_BENCHMARK_MISSING",
+      "fingerprint": "alh_92fffcef",
+      "identityParts": [
+        "TASK_BENCHMARK_MISSING",
+        "agentlighthouse.tasks.yaml",
+        "agentlighthouse.tasks.yaml"
+      ],
+      "locationKey": "agentlighthouse.tasks.yaml",
+      "subject": "agentlighthouse.tasks.yaml"
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -594,7 +810,15 @@
       "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
       "fixExample": "agentlighthouse scan . --probe commands",
       "suggestedFixType": "none",
-      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+      "fingerprint": "alh_ac2d574f",
+      "identityParts": [
+        "COMMAND_VERIFICATION_SKIPPED",
+        "run with --probe commands or --run-probes to execute safe script probes.",
+        "run with --probe commands or --run-probes to execute safe script probes."
+      ],
+      "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -738,7 +962,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/openapi-bad-project",
-  "scannedAt": "2026-05-20T20:03:35.370Z",
+  "scannedAt": "2026-05-20T20:22:52.844Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

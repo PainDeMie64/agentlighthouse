@@ -1,10 +1,13 @@
-import { sampleScanResult } from "@agentlighthouse/core";
+import { sampleComparisonResult, sampleScanResult } from "@agentlighthouse/core";
+import { DeltaSummary } from "../../components/DeltaSummary";
 import { FindingList } from "../../components/FindingList";
+import { FindingDeltaList } from "../../components/FindingDeltaList";
 import { ProductHeader } from "../../components/ProductHeader";
 import { ProjectSummary } from "../../components/ProjectSummary";
 import { RecommendationList } from "../../components/RecommendationList";
 import { ReportPreview } from "../../components/ReportPreview";
 import { ScoreCard } from "../../components/ScoreCard";
+import { ScoreDeltaCard } from "../../components/ScoreDeltaCard";
 import { SemanticSummary } from "../../components/SemanticSummary";
 import { SubscoreGrid } from "../../components/SubscoreGrid";
 
@@ -25,6 +28,9 @@ export default function DashboardPage() {
             <ProjectSummary result={sampleScanResult} />
             <SemanticSummary result={sampleScanResult} />
             <SubscoreGrid result={sampleScanResult} />
+            <ScoreDeltaCard comparison={sampleComparisonResult} />
+            <DeltaSummary comparison={sampleComparisonResult} />
+            <FindingDeltaList comparison={sampleComparisonResult} />
             <FindingList result={sampleScanResult} />
           </div>
           <div className="space-y-6">

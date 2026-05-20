@@ -54,6 +54,10 @@ export const scoreConfidenceLevelSchema = z.enum(scoreConfidenceLevels);
 export const findingSchema = z.object({
   id: z.string(),
   ruleId: z.string(),
+  fingerprint: z.string().optional(),
+  identityParts: z.array(z.string()).optional(),
+  locationKey: z.string().optional(),
+  subject: z.string().optional(),
   title: z.string(),
   severity: severitySchema,
   category: findingCategorySchema,
@@ -278,6 +282,63 @@ export const scanResultSchema = z.object({
   signals: projectSignalsSchema
 });
 
+export const comparisonVerdictSchema = z.enum([
+  "improved",
+  "regressed",
+  "unchanged",
+  "mixed",
+  "inconclusive"
+]);
+
+export const comparisonScanSnapshotSchema = z.object({
+  scanId: z.string(),
+  scannedPath: z.string(),
+  score: z.number().min(0).max(100),
+  confidence: scoreConfidenceLevelSchema,
+  confidenceScore: z.number().min(0).max(100),
+  coverage: z.number().min(0).max(100),
+  profile: scanProfileSchema,
+  completedAt: z.string()
+});
+
+export const comparisonFindingSchema = findingSchema.extend({
+  previousSeverity: severitySchema.optional(),
+  currentSeverity: severitySchema.optional()
+});
+
+export const comparisonResultSchema = z.object({
+  comparisonId: z.string(),
+  baseline: comparisonScanSnapshotSchema,
+  current: comparisonScanSnapshotSchema,
+  deltas: z.object({
+    scoreDelta: z.number(),
+    confidenceDelta: z.number(),
+    coverageDelta: z.number(),
+    findingCountDelta: z.number(),
+    severityCountDeltas: z.record(z.number())
+  }),
+  findings: z.object({
+    new: z.array(comparisonFindingSchema),
+    resolved: z.array(comparisonFindingSchema),
+    unchanged: z.array(comparisonFindingSchema),
+    worsened: z.array(comparisonFindingSchema),
+    improved: z.array(comparisonFindingSchema)
+  }),
+  summary: z.object({
+    verdict: comparisonVerdictSchema,
+    regressionDetected: z.boolean(),
+    improvementDetected: z.boolean(),
+    topRegressions: z.array(z.string()),
+    topImprovements: z.array(z.string()),
+    recommendedActions: z.array(z.string()),
+    caveats: z.array(z.string())
+  }),
+  metadata: z.object({
+    agentLighthouseVersion: z.string(),
+    comparisonModelVersion: z.string()
+  })
+});
+
 export const generatedArtifactSchema = z.object({
   path: z.string(),
   content: z.string(),
@@ -308,6 +369,10 @@ export type McpAnalysis = z.infer<typeof mcpAnalysisSchema>;
 export type CommandProbeResult = z.infer<typeof commandProbeResultSchema>;
 export type CommandProbeSummary = z.infer<typeof commandProbeSummarySchema>;
 export type ScanResult = z.infer<typeof scanResultSchema>;
+export type ComparisonVerdict = z.infer<typeof comparisonVerdictSchema>;
+export type ComparisonScanSnapshot = z.infer<typeof comparisonScanSnapshotSchema>;
+export type ComparisonFinding = z.infer<typeof comparisonFindingSchema>;
+export type ComparisonResult = z.infer<typeof comparisonResultSchema>;
 export type GeneratedArtifact = z.infer<typeof generatedArtifactSchema>;
 
 export interface ScanOptions {

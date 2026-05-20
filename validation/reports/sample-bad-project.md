@@ -117,11 +117,11 @@ Coverage: **93%**
 
 ## Scan Metadata
 
-- Scan ID: `scan_f53b3987`
+- Scan ID: `scan_ae39d0db`
 - AgentLighthouse version: `0.1.0`
 - Scoring model: `0.1.0`
-- Started: 2026-05-20T20:03:35.293Z
-- Completed: 2026-05-20T20:03:35.294Z
+- Started: 2026-05-20T20:22:52.758Z
+- Completed: 2026-05-20T20:22:52.759Z
 - Duration: 1ms
 - Files scanned: 3
 - Text files read: 2

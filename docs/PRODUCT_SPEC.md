@@ -30,6 +30,15 @@
 - Composite GitHub Action for source-based CI usage.
 - Validation reports in JSON, Markdown, SARIF, and PR-summary formats.
 
+## Phase 2C Capabilities
+
+- Stable finding fingerprints for baseline comparison.
+- `compare` command for saved JSON scan reports.
+- Delta reports showing score, confidence, coverage, new findings, resolved findings, worsened findings, and improved findings.
+- Regression gates for score drops, confidence drops, coverage drops, new severities, and overall regression.
+- GitHub Action baseline input for token-free PR delta reports.
+- Dashboard comparison demo using the same comparison result shape as the CLI.
+
 ## Future Features
 
 - GitHub Checks reports and token-backed PR comments.

@@ -10,6 +10,7 @@ Current reporters:
 - SARIF: code-scanning output with rule definitions and file annotations.
 - PR summary: concise Markdown for PR comments, step summaries, Slack, or Linear.
 - GitHub step summary: PR summary rendered to `GITHUB_STEP_SUMMARY` when available.
+- Comparison reporters: text, JSON, Markdown, and PR-summary delta reports for baseline/current scans.
 
 ## CLI Examples
 
@@ -18,6 +19,7 @@ agentlighthouse scan . --format json --output agentlighthouse.json
 agentlighthouse scan . --format markdown --output agentlighthouse.md
 agentlighthouse scan . --format sarif --output agentlighthouse.sarif
 agentlighthouse scan . --format pr-summary --output agentlighthouse-pr-summary.md
+agentlighthouse compare --baseline baseline.json --current current.json --format markdown --output delta.md
 ```
 
 The scan result is the source of truth. Adding future reporters, such as GitHub Checks or SARIF quick fixes, should not change scanner behavior.

@@ -1,6 +1,10 @@
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
+  compareScanResults,
+  renderComparisonJsonReport,
+  renderComparisonMarkdownReport,
+  renderComparisonPrSummaryReport,
   renderJsonReport,
   renderMarkdownReport,
   renderPrSummaryReport,
@@ -56,12 +60,16 @@ const targets = [
 ] satisfies ValidationTarget[];
 
 await mkdir(reportDir, { recursive: true });
+const savedResults = new Map<string, Awaited<ReturnType<typeof scanProject>>>();
 
 for (const target of targets) {
   const result = await scanProject(target.path);
   process.stdout.write(
     `${target.name}: ${result.score}/100 (${result.findings.length} findings)\n`
   );
+  if (!target.subdir) {
+    savedResults.set(target.name, result);
+  }
   if (target.save) {
     const sanitizedResult = sanitizeResult(result, repoRoot);
     const targetReportDir = path.join(reportDir, target.subdir ?? "");
@@ -110,6 +118,24 @@ for (const target of targets) {
   }
 }
 
+await writeComparisonReport({
+  name: "comparison-improved",
+  baseline: {
+    ...requiredResult(savedResults, "sample-bad-project"),
+    coverage: {
+      ...requiredResult(savedResults, "sample-bad-project").coverage,
+      coveragePercent: 40
+    },
+    scoreConfidenceScore: 45
+  },
+  current: requiredResult(savedResults, "sample-good-project")
+});
+await writeComparisonReport({
+  name: "comparison-regressed",
+  baseline: requiredResult(savedResults, "sample-good-project"),
+  current: requiredResult(savedResults, "sample-bad-project")
+});
+
 async function optionalValidationRepos(): Promise<ValidationTarget[]> {
   const validationRoot = path.join(repoRoot, ".tmp", "validation-repos");
   try {
@@ -129,4 +155,58 @@ async function optionalValidationRepos(): Promise<ValidationTarget[]> {
 
 function sanitizeResult<T>(value: T, rootPath: string): T {
   return JSON.parse(JSON.stringify(value).replaceAll(rootPath, "<repo>")) as T;
+}
+
+function requiredResult(
+  results: Map<string, Awaited<ReturnType<typeof scanProject>>>,
+  name: string
+): Awaited<ReturnType<typeof scanProject>> {
+  const result = results.get(name);
+  if (!result) {
+    throw new Error(`Validation target ${name} was not scanned.`);
+  }
+  return result;
+}
+
+async function writeComparisonReport(input: {
+  name: string;
+  baseline: Awaited<ReturnType<typeof scanProject>>;
+  current: Awaited<ReturnType<typeof scanProject>>;
+}): Promise<void> {
+  const comparison = sanitizeResult(compareScanResults(input.baseline, input.current), repoRoot);
+  process.stdout.write(
+    `${input.name}: ${comparison.summary.verdict} (${comparison.deltas.scoreDelta >= 0 ? "+" : ""}${comparison.deltas.scoreDelta} score)\n`
+  );
+  await writeFile(
+    path.join(reportDir, `${input.name}.json`),
+    await format(renderComparisonJsonReport(comparison), {
+      parser: "json",
+      printWidth: 100
+    }),
+    "utf8"
+  );
+  await writeFile(
+    path.join(reportDir, `${input.name}.md`),
+    await format(renderComparisonMarkdownReport(comparison), {
+      parser: "markdown",
+      printWidth: 100
+    }),
+    "utf8"
+  );
+  await writeFile(
+    path.join(reportDir, `${input.name}-pr-summary.md`),
+    await format(
+      renderComparisonPrSummaryReport(comparison, {
+        reportPaths: [
+          `validation/reports/${input.name}.json`,
+          `validation/reports/${input.name}.md`
+        ]
+      }),
+      {
+        parser: "markdown",
+        printWidth: 100
+      }
+    ),
+    "utf8"
+  );
 }

@@ -11,6 +11,7 @@ import { analyzeMcp } from "./analyzers/mcp.js";
 import { analyzeOpenApi } from "./analyzers/openapi.js";
 import { ReadinessAnalyzer } from "./analyzers/readiness.js";
 import { analyzeTaskBenchmarks } from "./analyzers/tasks.js";
+import { compareScanResults } from "./comparison/compare.js";
 import { resolveConfig, resolveProfile } from "./config/profile.js";
 import { detectProject, detectedArtifacts } from "./detection/project.js";
 import { StarterArtifactGenerator } from "./generators/artifacts.js";
@@ -27,10 +28,13 @@ export * from "./analyzers/openapi.js";
 export * from "./analyzers/readiness.js";
 export * from "./analyzers/tasks.js";
 export * from "./config/profile.js";
+export * from "./comparison/compare.js";
 export * from "./detection/project.js";
+export * from "./findings/helpers.js";
 export * from "./generators/artifacts.js";
 export * from "./probes/commands.js";
 export * from "./reporters/cli.js";
+export * from "./reporters/comparison.js";
 export * from "./reporters/github-summary.js";
 export * from "./reporters/json.js";
 export * from "./reporters/markdown.js";
@@ -447,3 +451,35 @@ export const sampleScanResult: ScanResult = {
     textByPath: {}
   }
 };
+
+export const sampleComparisonResult = compareScanResults(
+  {
+    ...sampleScanResult,
+    scanId: "scan_demo_baseline",
+    completedAt: "2026-05-19T00:00:00.120Z",
+    score: 63,
+    scoreConfidence: "low",
+    scoreConfidenceScore: 55,
+    coverage: {
+      ...sampleScanResult.coverage,
+      coveragePercent: 51
+    },
+    findings: [
+      ...sampleScanResult.findings,
+      {
+        ...sampleScanResult.findings[0]!,
+        id: "llms.missing",
+        ruleId: "llms.missing",
+        title: "Missing llms.txt",
+        severity: "medium",
+        category: "agent_instructions",
+        description: "The baseline lacked an LLM-readable project map.",
+        evidence: ["llms.txt was not found at the repository root."],
+        recommendation: "Create llms.txt with links to README, docs, architecture, and examples.",
+        affectedFile: "llms.txt",
+        suggestedFixType: "create_file"
+      }
+    ]
+  },
+  sampleScanResult
+);

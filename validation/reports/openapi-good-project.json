@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_3ac8fd69",
+  "scanId": "scan_f3c79802",
   "scannedPath": "<repo>/examples/openapi-good-project",
-  "startedAt": "2026-05-20T20:03:35.343Z",
-  "completedAt": "2026-05-20T20:03:35.349Z",
-  "durationMs": 6,
+  "startedAt": "2026-05-20T20:22:52.814Z",
+  "completedAt": "2026-05-20T20:22:52.821Z",
+  "durationMs": 7,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -88,7 +88,11 @@
       "recommendation": "Expand AGENTS.md with commands, architecture boundaries, coding conventions, and safety guidance.",
       "affectedFile": "AGENTS.md",
       "suggestedFixType": "update_file",
-      "ruleId": "agent-instructions.agents-too-short"
+      "ruleId": "agent-instructions.agents-too-short",
+      "fingerprint": "alh_fe530980",
+      "identityParts": ["agent-instructions.agents-too-short", "agents.md", "agents.md"],
+      "locationKey": "agents.md",
+      "subject": "AGENTS.md"
     },
     {
       "id": "api.openapi-detected",
@@ -100,7 +104,11 @@
       "recommendation": "Keep API descriptions, examples, and auth details current.",
       "affectedFile": "openapi.yaml",
       "suggestedFixType": "none",
-      "ruleId": "api.openapi-detected"
+      "ruleId": "api.openapi-detected",
+      "fingerprint": "alh_d4b63c10",
+      "identityParts": ["api.openapi-detected", "openapi.yaml", "openapi.yaml"],
+      "locationKey": "openapi.yaml",
+      "subject": "openapi.yaml"
     },
     {
       "id": "mcp.not-evaluated",
@@ -111,7 +119,15 @@
       "evidence": ["No file or package name matching MCP was scanned."],
       "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
       "suggestedFixType": "review_manually",
-      "ruleId": "mcp.not-evaluated"
+      "ruleId": "mcp.not-evaluated",
+      "fingerprint": "alh_0a02b750",
+      "identityParts": [
+        "mcp.not-evaluated",
+        "no file or package name matching mcp was scanned.",
+        "no file or package name matching mcp was scanned."
+      ],
+      "locationKey": "no file or package name matching mcp was scanned.",
+      "subject": "No file or package name matching MCP was scanned."
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -124,7 +140,15 @@
       "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
       "fixExample": "agentlighthouse scan . --probe commands",
       "suggestedFixType": "none",
-      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+      "fingerprint": "alh_ac2d574f",
+      "identityParts": [
+        "COMMAND_VERIFICATION_SKIPPED",
+        "run with --probe commands or --run-probes to execute safe script probes.",
+        "run with --probe commands or --run-probes to execute safe script probes."
+      ],
+      "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -296,7 +320,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/openapi-good-project",
-  "scannedAt": "2026-05-20T20:03:35.349Z",
+  "scannedAt": "2026-05-20T20:22:52.821Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

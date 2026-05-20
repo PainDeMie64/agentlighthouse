@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_e251c8c5",
+  "scanId": "scan_9b50675d",
   "scannedPath": "<repo>/examples/mcp-bad-project",
-  "startedAt": "2026-05-20T20:03:35.455Z",
-  "completedAt": "2026-05-20T20:03:35.456Z",
-  "durationMs": 1,
+  "startedAt": "2026-05-20T20:22:52.938Z",
+  "completedAt": "2026-05-20T20:22:52.940Z",
+  "durationMs": 2,
   "agentLighthouseVersion": "0.1.0",
   "profile": "mcp",
   "scoringModelVersion": "0.1.0",
@@ -108,7 +108,11 @@
       "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
       "affectedFile": "AGENTS.md",
       "suggestedFixType": "create_file",
-      "ruleId": "agent-instructions.missing-agents-md"
+      "ruleId": "agent-instructions.missing-agents-md",
+      "fingerprint": "alh_3a0ad1c7",
+      "identityParts": ["agent-instructions.missing-agents-md", "agents.md", "agents.md"],
+      "locationKey": "agents.md",
+      "subject": "AGENTS.md"
     },
     {
       "id": "agent-instructions.missing-claude-md",
@@ -120,7 +124,11 @@
       "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
       "affectedFile": "CLAUDE.md",
       "suggestedFixType": "create_file",
-      "ruleId": "agent-instructions.missing-claude-md"
+      "ruleId": "agent-instructions.missing-claude-md",
+      "fingerprint": "alh_2919953b",
+      "identityParts": ["agent-instructions.missing-claude-md", "claude.md", "claude.md"],
+      "locationKey": "claude.md",
+      "subject": "CLAUDE.md"
     },
     {
       "id": "artifact-quality.READMEmd.missing-clear-test-command",
@@ -134,7 +142,15 @@
       "recommendation": "Add clear test command to README.md.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command"
+      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command",
+      "fingerprint": "alh_e3728b0d",
+      "identityParts": [
+        "artifact-quality.READMEmd.missing-clear-test-command",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
@@ -148,7 +164,15 @@
       "recommendation": "Add architecture or repo map to README.md.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map"
+      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+      "fingerprint": "alh_182aba10",
+      "identityParts": [
+        "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.readme-missing-verification-step",
@@ -162,7 +186,15 @@
       "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.readme-missing-verification-step"
+      "ruleId": "artifact-quality.readme-missing-verification-step",
+      "fingerprint": "alh_15490f29",
+      "identityParts": [
+        "artifact-quality.readme-missing-verification-step",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
@@ -176,7 +208,15 @@
       "recommendation": "Show package-manager commands that map directly to package.json scripts.",
       "affectedFile": "README.md",
       "suggestedFixType": "update_file",
-      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts"
+      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts",
+      "fingerprint": "alh_44385cfc",
+      "identityParts": [
+        "artifact-quality.readme-commands-not-grounded-in-scripts",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "llms.missing",
@@ -188,7 +228,11 @@
       "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
       "affectedFile": "llms.txt",
       "suggestedFixType": "create_file",
-      "ruleId": "llms.missing"
+      "ruleId": "llms.missing",
+      "fingerprint": "alh_dcee23b7",
+      "identityParts": ["llms.missing", "llms.txt", "llms.txt"],
+      "locationKey": "llms.txt",
+      "subject": "llms.txt"
     },
     {
       "id": "docs.readme-no-quickstart",
@@ -200,7 +244,11 @@
       "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-quickstart"
+      "ruleId": "docs.readme-no-quickstart",
+      "fingerprint": "alh_2fb4df74",
+      "identityParts": ["docs.readme-no-quickstart", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.readme-no-install",
@@ -212,7 +260,11 @@
       "recommendation": "Add installation commands and prerequisites.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-install"
+      "ruleId": "docs.readme-no-install",
+      "fingerprint": "alh_e1c052e4",
+      "identityParts": ["docs.readme-no-install", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.readme-no-examples",
@@ -224,7 +276,11 @@
       "recommendation": "Add concrete examples showing expected usage and output.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-examples"
+      "ruleId": "docs.readme-no-examples",
+      "fingerprint": "alh_b662d04a",
+      "identityParts": ["docs.readme-no-examples", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.directory-missing",
@@ -236,7 +292,11 @@
       "recommendation": "Add docs/ for architecture, development, API, and operational context.",
       "affectedFile": "docs/",
       "suggestedFixType": "create_file",
-      "ruleId": "docs.directory-missing"
+      "ruleId": "docs.directory-missing",
+      "fingerprint": "alh_80dc9ef2",
+      "identityParts": ["docs.directory-missing", "docs/", "docs/"],
+      "locationKey": "docs/",
+      "subject": "docs/"
     },
     {
       "id": "setup.package-json-no-scripts",
@@ -248,7 +308,11 @@
       "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.package-json-no-scripts"
+      "ruleId": "setup.package-json-no-scripts",
+      "fingerprint": "alh_59ea6562",
+      "identityParts": ["setup.package-json-no-scripts", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-test-script",
@@ -260,7 +324,11 @@
       "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-test-script"
+      "ruleId": "setup.missing-test-script",
+      "fingerprint": "alh_2c1c9c49",
+      "identityParts": ["setup.missing-test-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-lint-script",
@@ -272,7 +340,11 @@
       "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-lint-script"
+      "ruleId": "setup.missing-lint-script",
+      "fingerprint": "alh_6630a79a",
+      "identityParts": ["setup.missing-lint-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-typecheck-script",
@@ -284,7 +356,11 @@
       "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-typecheck-script"
+      "ruleId": "setup.missing-typecheck-script",
+      "fingerprint": "alh_101dfc87",
+      "identityParts": ["setup.missing-typecheck-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "api.openapi-not-detected",
@@ -295,7 +371,15 @@
       "evidence": ["No openapi.* or swagger.* file was scanned."],
       "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
       "suggestedFixType": "review_manually",
-      "ruleId": "api.openapi-not-detected"
+      "ruleId": "api.openapi-not-detected",
+      "fingerprint": "alh_64a67cea",
+      "identityParts": [
+        "api.openapi-not-detected",
+        "no openapi.* or swagger.* file was scanned.",
+        "no openapi.* or swagger.* file was scanned."
+      ],
+      "locationKey": "no openapi.* or swagger.* file was scanned.",
+      "subject": "No openapi.* or swagger.* file was scanned."
     },
     {
       "id": "mcp.detected",
@@ -307,7 +391,11 @@
       "recommendation": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "review_manually",
-      "ruleId": "mcp.detected"
+      "ruleId": "mcp.detected",
+      "fingerprint": "alh_0a35bf27",
+      "identityParts": ["mcp.detected", "src/mcp-server.example.txt", "src/mcp-server.example.txt"],
+      "locationKey": "src/mcp-server.example.txt",
+      "subject": "src/mcp-server.example.txt"
     },
     {
       "id": "security.missing-agentlighthouseignore",
@@ -319,7 +407,15 @@
       "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
       "affectedFile": ".agentlighthouseignore",
       "suggestedFixType": "create_file",
-      "ruleId": "security.missing-agentlighthouseignore"
+      "ruleId": "security.missing-agentlighthouseignore",
+      "fingerprint": "alh_5848d659",
+      "identityParts": [
+        "security.missing-agentlighthouseignore",
+        ".agentlighthouseignore",
+        ".agentlighthouseignore"
+      ],
+      "locationKey": ".agentlighthouseignore",
+      "subject": ".agentlighthouseignore"
     },
     {
       "id": "security.agent-secret-guidance-missing",
@@ -331,7 +427,11 @@
       "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
       "affectedFile": "AGENTS.md",
       "suggestedFixType": "add_section",
-      "ruleId": "security.agent-secret-guidance-missing"
+      "ruleId": "security.agent-secret-guidance-missing",
+      "fingerprint": "alh_7624eb5d",
+      "identityParts": ["security.agent-secret-guidance-missing", "agents.md", "agents.md"],
+      "locationKey": "agents.md",
+      "subject": "AGENTS.md"
     },
     {
       "id": "freshness.deprecated-or-todo-terms",
@@ -342,7 +442,15 @@
       "evidence": ["README.md:3: Tools coming soon."],
       "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
       "suggestedFixType": "update_file",
-      "ruleId": "freshness.deprecated-or-todo-terms"
+      "ruleId": "freshness.deprecated-or-todo-terms",
+      "fingerprint": "alh_fd432ff8",
+      "identityParts": [
+        "freshness.deprecated-or-todo-terms",
+        "readme.md:3: tools coming soon.",
+        "readme.md:3: tools coming soon."
+      ],
+      "locationKey": "readme.md:3: tools coming soon.",
+      "subject": "README.md:3: Tools coming soon."
     },
     {
       "id": "MCP_TOOL_NAME_AMBIGUOUS",
@@ -356,7 +464,11 @@
       "fixExample": "Use names such as search_docs, create_workspace_ticket, or revoke_api_key.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "update_file",
-      "ruleId": "MCP_TOOL_NAME_AMBIGUOUS"
+      "ruleId": "MCP_TOOL_NAME_AMBIGUOUS",
+      "fingerprint": "alh_1fd7cdd1",
+      "identityParts": ["MCP_TOOL_NAME_AMBIGUOUS", "src/mcp-server.example.txt#tool:run", "run"],
+      "locationKey": "src/mcp-server.example.txt#tool:run",
+      "subject": "run"
     },
     {
       "id": "MCP_TOOL_DESCRIPTION_SHALLOW",
@@ -370,7 +482,15 @@
       "fixExample": "Mention input expectations, side effects, auth requirements, and error behavior.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "update_file",
-      "ruleId": "MCP_TOOL_DESCRIPTION_SHALLOW"
+      "ruleId": "MCP_TOOL_DESCRIPTION_SHALLOW",
+      "fingerprint": "alh_461ecd92",
+      "identityParts": [
+        "MCP_TOOL_DESCRIPTION_SHALLOW",
+        "src/mcp-server.example.txt#tool:run",
+        "run"
+      ],
+      "locationKey": "src/mcp-server.example.txt#tool:run",
+      "subject": "run"
     },
     {
       "id": "MCP_TOOL_INPUT_SCHEMA_MISSING",
@@ -384,7 +504,15 @@
       "fixExample": "Use a zod/object schema with workspace_id and query fields plus descriptions.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "update_file",
-      "ruleId": "MCP_TOOL_INPUT_SCHEMA_MISSING"
+      "ruleId": "MCP_TOOL_INPUT_SCHEMA_MISSING",
+      "fingerprint": "alh_5b6494d4",
+      "identityParts": [
+        "MCP_TOOL_INPUT_SCHEMA_MISSING",
+        "src/mcp-server.example.txt#tool:run",
+        "run"
+      ],
+      "locationKey": "src/mcp-server.example.txt#tool:run",
+      "subject": "run"
     },
     {
       "id": "MCP_TOOL_EXAMPLE_MISSING",
@@ -398,7 +526,11 @@
       "fixExample": "Include an example invocation showing realistic placeholder arguments.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "update_file",
-      "ruleId": "MCP_TOOL_EXAMPLE_MISSING"
+      "ruleId": "MCP_TOOL_EXAMPLE_MISSING",
+      "fingerprint": "alh_fcf7d67a",
+      "identityParts": ["MCP_TOOL_EXAMPLE_MISSING", "src/mcp-server.example.txt#tool:run", "run"],
+      "locationKey": "src/mcp-server.example.txt#tool:run",
+      "subject": "run"
     },
     {
       "id": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED",
@@ -412,7 +544,15 @@
       "fixExample": "State that the tool mutates data and requires explicit user approval outside test fixtures.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "update_file",
-      "ruleId": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED"
+      "ruleId": "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED",
+      "fingerprint": "alh_8c691aa6",
+      "identityParts": [
+        "MCP_TOOL_DESTRUCTIVE_ACTION_UNMARKED",
+        "src/mcp-server.example.txt#tool:delete",
+        "delete"
+      ],
+      "locationKey": "src/mcp-server.example.txt#tool:delete",
+      "subject": "delete"
     },
     {
       "id": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR",
@@ -426,7 +566,15 @@
       "fixExample": "Document not-found, unauthorized, rate-limit, and validation failures.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "update_file",
-      "ruleId": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR"
+      "ruleId": "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR",
+      "fingerprint": "alh_95ff4f47",
+      "identityParts": [
+        "MCP_TOOL_ERROR_BEHAVIOR_UNCLEAR",
+        "src/mcp-server.example.txt#tool:run",
+        "run"
+      ],
+      "locationKey": "src/mcp-server.example.txt#tool:run",
+      "subject": "run"
     },
     {
       "id": "TASK_BENCHMARK_MISSING",
@@ -440,7 +588,15 @@
       "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
       "affectedFile": "agentlighthouse.tasks.yaml",
       "suggestedFixType": "create_file",
-      "ruleId": "TASK_BENCHMARK_MISSING"
+      "ruleId": "TASK_BENCHMARK_MISSING",
+      "fingerprint": "alh_92fffcef",
+      "identityParts": [
+        "TASK_BENCHMARK_MISSING",
+        "agentlighthouse.tasks.yaml",
+        "agentlighthouse.tasks.yaml"
+      ],
+      "locationKey": "agentlighthouse.tasks.yaml",
+      "subject": "agentlighthouse.tasks.yaml"
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -453,7 +609,15 @@
       "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
       "fixExample": "agentlighthouse scan . --probe commands",
       "suggestedFixType": "none",
-      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+      "fingerprint": "alh_ac2d574f",
+      "identityParts": [
+        "COMMAND_VERIFICATION_SKIPPED",
+        "run with --probe commands or --run-probes to execute safe script probes.",
+        "run with --probe commands or --run-probes to execute safe script probes."
+      ],
+      "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -589,7 +753,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-bad-project",
-  "scannedAt": "2026-05-20T20:03:35.456Z",
+  "scannedAt": "2026-05-20T20:22:52.940Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

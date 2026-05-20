@@ -42,11 +42,14 @@ agentlighthouse scan . --fail-under 80
 agentlighthouse scan . --fail-under 80 --min-confidence medium
 agentlighthouse scan . --fail-on-severity high
 agentlighthouse scan . --fail-under 80 --fail-on-severity critical
+agentlighthouse compare --baseline baseline.json --current current.json --fail-on-regression
+agentlighthouse compare --baseline baseline.json --current current.json --fail-on-score-drop 5 --fail-on-new-severity high
 ```
 
 - `--fail-under` fails when the score is below a threshold.
 - `--fail-on-severity` fails when any finding is at or above a severity.
 - `--min-confidence` fails when the score confidence is too low.
+- Compare gates fail on regressions between two saved JSON scan reports.
 - `--probe commands` is opt-in and should only be used in trusted CI jobs.
 
 ## Output Formats
@@ -56,6 +59,15 @@ agentlighthouse scan . --fail-under 80 --fail-on-severity critical
 - Markdown: issue-compatible report for GitHub comments, pull requests, or artifacts.
 - SARIF: GitHub code scanning and other SARIF consumers.
 - PR summary: short Markdown for PR comments, step summaries, Slack, or Linear.
+
+## PR Delta Reports
+
+```bash
+agentlighthouse scan . --format json --output current.json
+agentlighthouse compare --baseline agentlighthouse-baseline.json --current current.json --format pr-summary --output agentlighthouse-delta.md
+```
+
+Delta reports show score, confidence, coverage, new findings, resolved findings, and regression gate status.
 
 ## GitHub Step Summary
 

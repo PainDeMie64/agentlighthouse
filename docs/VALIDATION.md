@@ -79,6 +79,12 @@ Reports should not contain secrets or sensitive local paths. Sanitize before com
 - `validation/reports/agentlighthouse.md`
 - `validation/reports/agentlighthouse.sarif`
 - `validation/reports/agentlighthouse-pr-summary.md`
+- `validation/reports/comparison-improved.json`
+- `validation/reports/comparison-improved.md`
+- `validation/reports/comparison-improved-pr-summary.md`
+- `validation/reports/comparison-regressed.json`
+- `validation/reports/comparison-regressed.md`
+- `validation/reports/comparison-regressed-pr-summary.md`
 
 When repositories are present under `.tmp/validation-repos/`, the same command also writes sanitized external reports under:
 

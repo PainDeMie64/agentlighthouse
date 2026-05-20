@@ -33,6 +33,15 @@
 - Composite GitHub Action.
 - Future: token-backed PR comments, GitHub Checks, baseline comparison, and patch suggestions.
 
+## Phase 2C: Baseline Comparison + PR Delta Reporting
+
+- Stable finding fingerprints.
+- Compare command for saved JSON reports.
+- Markdown, JSON, text, and PR-summary delta reporters.
+- Regression gates for score, confidence, coverage, and new severities.
+- GitHub Action baseline input.
+- Dashboard comparison demo.
+
 ## Phase 3: Docs Crawler + Deeper API/MCP Resolution
 
 - Crawl documentation sites safely.

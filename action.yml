@@ -41,6 +41,38 @@ inputs:
     description: Append a concise summary to the GitHub step summary.
     required: false
     default: "true"
+  baseline:
+    description: Optional baseline AgentLighthouse JSON report path inside the caller workspace.
+    required: false
+    default: ""
+  comparison-output:
+    description: Comparison report output path inside the caller workspace.
+    required: false
+    default: agentlighthouse-delta.md
+  comparison-format:
+    description: "Comparison output format: text, json, markdown, or pr-summary."
+    required: false
+    default: pr-summary
+  fail-on-regression:
+    description: Fail when the baseline comparison detects a regression.
+    required: false
+    default: "false"
+  fail-on-score-drop:
+    description: Fail when the score drops by at least this many points.
+    required: false
+    default: ""
+  fail-on-coverage-drop:
+    description: Fail when coverage drops by at least this many points.
+    required: false
+    default: ""
+  fail-on-confidence-drop:
+    description: Fail when confidence score drops by at least this many points.
+    required: false
+    default: ""
+  fail-on-new-severity:
+    description: Fail when a new finding is at or above this severity.
+    required: false
+    default: ""
 runs:
   using: composite
   steps:
@@ -96,6 +128,13 @@ runs:
             --output "$GITHUB_WORKSPACE/agentlighthouse-report.json"
         fi
 
+        if [ -n "${{ inputs.baseline }}" ] && [ "${{ inputs.output-json }}" != "true" ]; then
+          pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
+            "${common_args[@]}" \
+            --format json \
+            --output "$GITHUB_WORKSPACE/agentlighthouse-report.json"
+        fi
+
         if [ "${{ inputs.output-markdown }}" = "true" ]; then
           pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
             "${common_args[@]}" \
@@ -121,3 +160,34 @@ runs:
           "${summary_args[@]}" \
           --format pr-summary \
           --output "$GITHUB_WORKSPACE/agentlighthouse-pr-summary.md"
+
+        if [ -n "${{ inputs.baseline }}" ]; then
+          compare_gate_args=()
+
+          if [ "${{ inputs.fail-on-regression }}" = "true" ]; then
+            compare_gate_args+=(--fail-on-regression)
+          fi
+
+          if [ -n "${{ inputs.fail-on-score-drop }}" ]; then
+            compare_gate_args+=(--fail-on-score-drop "${{ inputs.fail-on-score-drop }}")
+          fi
+
+          if [ -n "${{ inputs.fail-on-coverage-drop }}" ]; then
+            compare_gate_args+=(--fail-on-coverage-drop "${{ inputs.fail-on-coverage-drop }}")
+          fi
+
+          if [ -n "${{ inputs.fail-on-confidence-drop }}" ]; then
+            compare_gate_args+=(--fail-on-confidence-drop "${{ inputs.fail-on-confidence-drop }}")
+          fi
+
+          if [ -n "${{ inputs.fail-on-new-severity }}" ]; then
+            compare_gate_args+=(--fail-on-new-severity "${{ inputs.fail-on-new-severity }}")
+          fi
+
+          pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev compare \
+            --baseline "$GITHUB_WORKSPACE/${{ inputs.baseline }}" \
+            --current "$GITHUB_WORKSPACE/agentlighthouse-report.json" \
+            --format "${{ inputs.comparison-format }}" \
+            --output "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}" \
+            "${compare_gate_args[@]}"
+        fi

@@ -1,0 +1,19 @@
+name: AgentLighthouse PR Delta
+
+on:
+  pull_request:
+
+jobs:
+  pr-delta:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          baseline: agentlighthouse-baseline.json
+          comparison-output: agentlighthouse-pr-delta.md
+          comparison-format: pr-summary
+          fail-on-score-drop: "5"
+          fail-on-new-severity: high
+          github-step-summary: "true"

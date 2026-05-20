@@ -23,6 +23,7 @@ It complements Codex, Claude Code, Cursor, GitHub Copilot, Gemini, and future ag
 - Score interpretation that separates human-readable signals, agent-specific context, and verifiability.
 - CI-ready JSON, Markdown, SARIF, PR-summary, and GitHub step-summary reports.
 - Explicit CI gates for score, severity, and confidence.
+- Baseline comparison and PR delta reports for score, confidence, coverage, new findings, and resolved findings.
 - Starter artifact generation for agent instructions, Claude memory, `llms.txt`, `.agentlighthouseignore`, and task benchmarks.
 - CLI commands for `scan`, `init`, and `version`.
 - Next.js dashboard with sample score, findings, subscores, and recommendations.
@@ -68,6 +69,8 @@ agentlighthouse scan <path> --profile devtool
 agentlighthouse scan <path> --probe commands
 agentlighthouse scan <path> --fail-under 70 --min-confidence medium
 agentlighthouse scan <path> --fail-on-severity high
+agentlighthouse compare --baseline baseline.json --current current.json --format markdown --output delta.md
+agentlighthouse compare --baseline baseline.json --current current.json --fail-on-regression
 agentlighthouse init <path> --dry-run
 agentlighthouse init <path> --force
 agentlighthouse version
@@ -78,6 +81,7 @@ During development, use:
 ```bash
 pnpm --filter @agentlighthouse/cli dev scan .
 pnpm --filter @agentlighthouse/cli dev init . --dry-run
+pnpm --filter @agentlighthouse/cli dev compare --baseline validation/reports/sample-good-project.json --current validation/reports/sample-bad-project.json --format pr-summary
 ```
 
 ## Dashboard Usage
@@ -110,6 +114,9 @@ Use the composite action when consuming AgentLighthouse from GitHub:
     fail-on-severity: high
     min-confidence: medium
     output-sarif: "true"
+    baseline: agentlighthouse-baseline.json
+    comparison-output: agentlighthouse-delta.md
+    fail-on-regression: "true"
 ```
 
 See `docs/CI.md`, `docs/GITHUB_ACTION.md`, and `docs/SARIF.md`.
@@ -150,6 +157,7 @@ validation/reports      safe generated scan reports
 - Phase 1: local scanner and dashboard depth.
 - Phase 2A: semantic OpenAPI, MCP, task benchmark, and command probe analysis.
 - Phase 2B: CI gates, SARIF, GitHub Action, PR summaries, and step summaries.
+- Phase 2C: baseline comparison and PR delta reporting.
 - Phase 3: docs crawler plus deeper API/MCP reference resolution.
 - Phase 4: agent benchmark runner.
 - Phase 5: hosted SaaS dashboard.

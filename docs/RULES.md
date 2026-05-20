@@ -4,6 +4,8 @@ AgentLighthouse findings use stable rule IDs. These IDs are intended to remain s
 
 Rule IDs are emitted in JSON, Markdown, PR summaries, and SARIF. Avoid renaming rules unless the meaning changes enough to justify a documented migration.
 
+Findings also include stable fingerprints derived from rule ID, normalized affected path, and a stable subject such as an OpenAPI method/path, MCP tool name, task ID, or artifact path. Fingerprints intentionally avoid scan IDs, timestamps, absolute paths, and raw excerpts.
+
 ## Agent Instructions
 
 ### `agent-instructions.missing-agents-md`

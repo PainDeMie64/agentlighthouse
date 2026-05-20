@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_0385e711",
+  "scanId": "scan_bc84858a",
   "scannedPath": "<repo>/examples/mcp-good-project",
-  "startedAt": "2026-05-20T20:03:35.433Z",
-  "completedAt": "2026-05-20T20:03:35.437Z",
+  "startedAt": "2026-05-20T20:22:52.915Z",
+  "completedAt": "2026-05-20T20:22:52.919Z",
   "durationMs": 4,
   "agentLighthouseVersion": "0.1.0",
   "profile": "mcp",
@@ -88,7 +88,11 @@
       "recommendation": "Refresh CLAUDE.md with current setup commands, product boundaries, and test expectations.",
       "affectedFile": "CLAUDE.md",
       "suggestedFixType": "update_file",
-      "ruleId": "agent-instructions.claude-vague"
+      "ruleId": "agent-instructions.claude-vague",
+      "fingerprint": "alh_d545fec5",
+      "identityParts": ["agent-instructions.claude-vague", "claude.md", "claude.md"],
+      "locationKey": "claude.md",
+      "subject": "CLAUDE.md"
     },
     {
       "id": "api.openapi-not-detected",
@@ -99,7 +103,15 @@
       "evidence": ["No openapi.* or swagger.* file was scanned."],
       "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
       "suggestedFixType": "review_manually",
-      "ruleId": "api.openapi-not-detected"
+      "ruleId": "api.openapi-not-detected",
+      "fingerprint": "alh_64a67cea",
+      "identityParts": [
+        "api.openapi-not-detected",
+        "no openapi.* or swagger.* file was scanned.",
+        "no openapi.* or swagger.* file was scanned."
+      ],
+      "locationKey": "no openapi.* or swagger.* file was scanned.",
+      "subject": "No openapi.* or swagger.* file was scanned."
     },
     {
       "id": "mcp.detected",
@@ -111,7 +123,11 @@
       "recommendation": "Ensure each MCP tool has a clear name, description, input schema, and safety guidance.",
       "affectedFile": "src/mcp-server.example.txt",
       "suggestedFixType": "review_manually",
-      "ruleId": "mcp.detected"
+      "ruleId": "mcp.detected",
+      "fingerprint": "alh_0a35bf27",
+      "identityParts": ["mcp.detected", "src/mcp-server.example.txt", "src/mcp-server.example.txt"],
+      "locationKey": "src/mcp-server.example.txt",
+      "subject": "src/mcp-server.example.txt"
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -124,7 +140,15 @@
       "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
       "fixExample": "agentlighthouse scan . --probe commands",
       "suggestedFixType": "none",
-      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+      "fingerprint": "alh_ac2d574f",
+      "identityParts": [
+        "COMMAND_VERIFICATION_SKIPPED",
+        "run with --probe commands or --run-probes to execute safe script probes.",
+        "run with --probe commands or --run-probes to execute safe script probes."
+      ],
+      "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -302,7 +326,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-good-project",
-  "scannedAt": "2026-05-20T20:03:35.437Z",
+  "scannedAt": "2026-05-20T20:22:52.919Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

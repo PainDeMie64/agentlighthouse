@@ -16,5 +16,11 @@ describe("CI distribution assets", () => {
     await expect(
       access(path.join(repoRoot, "examples/github-actions/strict-gate.yml"))
     ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/baseline-comparison.yml"))
+    ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/pr-delta.yml"))
+    ).resolves.toBeUndefined();
   });
 });

@@ -1,0 +1,492 @@
+{
+  "comparisonId": "cmp_39524415",
+  "baseline": {
+    "scanId": "scan_06e2acf4",
+    "scannedPath": "<repo>/examples/sample-good-project",
+    "score": 85,
+    "confidence": "medium",
+    "confidenceScore": 66,
+    "coverage": 67,
+    "profile": "api",
+    "completedAt": "2026-05-20T20:22:52.730Z"
+  },
+  "current": {
+    "scanId": "scan_ae39d0db",
+    "scannedPath": "<repo>/examples/sample-bad-project",
+    "score": 0,
+    "confidence": "low",
+    "confidenceScore": 58,
+    "coverage": 93,
+    "profile": "library",
+    "completedAt": "2026-05-20T20:22:52.759Z"
+  },
+  "deltas": {
+    "scoreDelta": -85,
+    "confidenceDelta": -8,
+    "coverageDelta": 26,
+    "findingCountDelta": 19,
+    "severityCountDeltas": {
+      "critical": 0,
+      "high": 3,
+      "medium": 13,
+      "low": 3,
+      "info": 0
+    }
+  },
+  "findings": {
+    "new": [
+      {
+        "id": "agent-instructions.missing-agents-md",
+        "title": "Missing AGENTS.md",
+        "severity": "high",
+        "category": "agent_instructions",
+        "description": "The repo has no AGENTS.md, so coding agents lack a stable project guide.",
+        "evidence": ["AGENTS.md was not found at the repository root."],
+        "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+        "affectedFile": "AGENTS.md",
+        "suggestedFixType": "create_file",
+        "ruleId": "agent-instructions.missing-agents-md",
+        "fingerprint": "alh_3a0ad1c7",
+        "identityParts": ["agent-instructions.missing-agents-md", "agents.md", "agents.md"],
+        "locationKey": "agents.md",
+        "subject": "AGENTS.md"
+      },
+      {
+        "id": "setup.missing-test-script",
+        "title": "No test script in package.json",
+        "severity": "high",
+        "category": "setup_and_tests",
+        "description": "Agents cannot reliably run test without a package script.",
+        "evidence": ["package.json scripts does not include \"test\"."],
+        "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
+        "affectedFile": "package.json",
+        "suggestedFixType": "add_script",
+        "ruleId": "setup.missing-test-script",
+        "fingerprint": "alh_2c1c9c49",
+        "identityParts": ["setup.missing-test-script", "package.json", "package.json"],
+        "locationKey": "package.json",
+        "subject": "package.json"
+      },
+      {
+        "id": "setup.package-json-no-scripts",
+        "title": "package.json has no scripts",
+        "severity": "high",
+        "category": "setup_and_tests",
+        "description": "Agents cannot discover standard local workflows from package.json.",
+        "evidence": ["package.json scripts object is empty."],
+        "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
+        "affectedFile": "package.json",
+        "suggestedFixType": "add_script",
+        "ruleId": "setup.package-json-no-scripts",
+        "fingerprint": "alh_59ea6562",
+        "identityParts": ["setup.package-json-no-scripts", "package.json", "package.json"],
+        "locationKey": "package.json",
+        "subject": "package.json"
+      },
+      {
+        "id": "agent-instructions.missing-claude-md",
+        "title": "Missing CLAUDE.md",
+        "severity": "medium",
+        "category": "agent_instructions",
+        "description": "Claude Code users do not have a concise project memory file.",
+        "evidence": ["CLAUDE.md was not found at the repository root."],
+        "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
+        "affectedFile": "CLAUDE.md",
+        "suggestedFixType": "create_file",
+        "ruleId": "agent-instructions.missing-claude-md",
+        "fingerprint": "alh_2919953b",
+        "identityParts": ["agent-instructions.missing-claude-md", "claude.md", "claude.md"],
+        "locationKey": "claude.md",
+        "subject": "CLAUDE.md"
+      },
+      {
+        "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+        "title": "README.md exists, but does not include architecture or repo map",
+        "severity": "medium",
+        "category": "agent_instructions",
+        "description": "A detected agent-facing artifact is missing specific guidance agents need for reliable work.",
+        "evidence": [
+          "README.md does not contain any of: architecture, repo structure, packages/, apps/, src/."
+        ],
+        "recommendation": "Add architecture or repo map to README.md.",
+        "affectedFile": "README.md",
+        "suggestedFixType": "add_section",
+        "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+        "fingerprint": "alh_182aba10",
+        "identityParts": [
+          "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+          "readme.md",
+          "readme.md"
+        ],
+        "locationKey": "readme.md",
+        "subject": "README.md"
+      },
+      {
+        "id": "artifact-quality.READMEmd.missing-clear-test-command",
+        "title": "README.md exists, but does not include clear test command",
+        "severity": "medium",
+        "category": "agent_instructions",
+        "description": "A detected agent-facing artifact is missing specific guidance agents need for reliable work.",
+        "evidence": [
+          "README.md does not contain any of: test, pnpm test, npm test, pytest, cargo test, go test."
+        ],
+        "recommendation": "Add clear test command to README.md.",
+        "affectedFile": "README.md",
+        "suggestedFixType": "add_section",
+        "ruleId": "artifact-quality.READMEmd.missing-clear-test-command",
+        "fingerprint": "alh_e3728b0d",
+        "identityParts": [
+          "artifact-quality.READMEmd.missing-clear-test-command",
+          "readme.md",
+          "readme.md"
+        ],
+        "locationKey": "readme.md",
+        "subject": "README.md"
+      },
+      {
+        "id": "docs.no-markdown",
+        "title": "Docs exist but no Markdown files are discoverable",
+        "severity": "medium",
+        "category": "documentation",
+        "description": "Agents work best when documentation source is available in text formats.",
+        "evidence": ["docs/ exists but no .md or .mdx files were scanned."],
+        "recommendation": "Add Markdown documentation or ensure docs source is not ignored.",
+        "affectedFile": "docs/",
+        "suggestedFixType": "add_section",
+        "ruleId": "docs.no-markdown",
+        "fingerprint": "alh_48960857",
+        "identityParts": ["docs.no-markdown", "docs/", "docs/"],
+        "locationKey": "docs/",
+        "subject": "docs/"
+      },
+      {
+        "id": "docs.readme-no-examples",
+        "title": "README.md has no examples",
+        "severity": "medium",
+        "category": "documentation",
+        "description": "The README is missing a section agents commonly need to orient themselves.",
+        "evidence": ["README.md does not contain any of: example, usage, demo."],
+        "recommendation": "Add concrete examples showing expected usage and output.",
+        "affectedFile": "README.md",
+        "suggestedFixType": "add_section",
+        "ruleId": "docs.readme-no-examples",
+        "fingerprint": "alh_b662d04a",
+        "identityParts": ["docs.readme-no-examples", "readme.md", "readme.md"],
+        "locationKey": "readme.md",
+        "subject": "README.md"
+      },
+      {
+        "id": "docs.readme-no-install",
+        "title": "README.md has no installation instructions",
+        "severity": "medium",
+        "category": "documentation",
+        "description": "The README is missing a section agents commonly need to orient themselves.",
+        "evidence": ["README.md does not contain any of: install, pnpm, npm, yarn, pip."],
+        "recommendation": "Add installation commands and prerequisites.",
+        "affectedFile": "README.md",
+        "suggestedFixType": "add_section",
+        "ruleId": "docs.readme-no-install",
+        "fingerprint": "alh_e1c052e4",
+        "identityParts": ["docs.readme-no-install", "readme.md", "readme.md"],
+        "locationKey": "readme.md",
+        "subject": "README.md"
+      },
+      {
+        "id": "docs.readme-no-quickstart",
+        "title": "README.md has no quickstart section",
+        "severity": "medium",
+        "category": "documentation",
+        "description": "The README is missing a section agents commonly need to orient themselves.",
+        "evidence": [
+          "README.md does not contain any of: quickstart, quick start, getting started."
+        ],
+        "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
+        "affectedFile": "README.md",
+        "suggestedFixType": "add_section",
+        "ruleId": "docs.readme-no-quickstart",
+        "fingerprint": "alh_2fb4df74",
+        "identityParts": ["docs.readme-no-quickstart", "readme.md", "readme.md"],
+        "locationKey": "readme.md",
+        "subject": "README.md"
+      },
+      {
+        "id": "llms.missing",
+        "title": "Missing llms.txt",
+        "severity": "medium",
+        "category": "agent_instructions",
+        "description": "The project does not expose a compact, machine-readable map for LLMs and agents.",
+        "evidence": ["llms.txt was not found at the repository root."],
+        "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
+        "affectedFile": "llms.txt",
+        "suggestedFixType": "create_file",
+        "ruleId": "llms.missing",
+        "fingerprint": "alh_dcee23b7",
+        "identityParts": ["llms.missing", "llms.txt", "llms.txt"],
+        "locationKey": "llms.txt",
+        "subject": "llms.txt"
+      },
+      {
+        "id": "security.agent-secret-guidance-missing",
+        "title": "Instructions do not tell agents how to handle secrets",
+        "severity": "medium",
+        "category": "security_and_privacy",
+        "description": "Agent-facing instructions should state how to avoid exposing secrets or private data.",
+        "evidence": ["No secret/privacy guidance was detected in AGENTS.md."],
+        "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
+        "affectedFile": "AGENTS.md",
+        "suggestedFixType": "add_section",
+        "ruleId": "security.agent-secret-guidance-missing",
+        "fingerprint": "alh_7624eb5d",
+        "identityParts": ["security.agent-secret-guidance-missing", "agents.md", "agents.md"],
+        "locationKey": "agents.md",
+        "subject": "AGENTS.md"
+      },
+      {
+        "id": "security.missing-agentlighthouseignore",
+        "title": "Missing .agentlighthouseignore",
+        "severity": "medium",
+        "category": "security_and_privacy",
+        "description": "Scans should explicitly exclude generated, private, and secret-bearing paths.",
+        "evidence": [".agentlighthouseignore was not found at the repository root."],
+        "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
+        "affectedFile": ".agentlighthouseignore",
+        "suggestedFixType": "create_file",
+        "ruleId": "security.missing-agentlighthouseignore",
+        "fingerprint": "alh_5848d659",
+        "identityParts": [
+          "security.missing-agentlighthouseignore",
+          ".agentlighthouseignore",
+          ".agentlighthouseignore"
+        ],
+        "locationKey": ".agentlighthouseignore",
+        "subject": ".agentlighthouseignore"
+      },
+      {
+        "id": "setup.missing-lint-script",
+        "title": "No lint script in package.json",
+        "severity": "medium",
+        "category": "setup_and_tests",
+        "description": "Agents cannot reliably run lint without a package script.",
+        "evidence": ["package.json scripts does not include \"lint\"."],
+        "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
+        "affectedFile": "package.json",
+        "suggestedFixType": "add_script",
+        "ruleId": "setup.missing-lint-script",
+        "fingerprint": "alh_6630a79a",
+        "identityParts": ["setup.missing-lint-script", "package.json", "package.json"],
+        "locationKey": "package.json",
+        "subject": "package.json"
+      },
+      {
+        "id": "setup.missing-typecheck-script",
+        "title": "No typecheck script in package.json",
+        "severity": "medium",
+        "category": "setup_and_tests",
+        "description": "Agents cannot reliably run typecheck without a package script.",
+        "evidence": ["package.json scripts does not include \"typecheck\"."],
+        "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
+        "affectedFile": "package.json",
+        "suggestedFixType": "add_script",
+        "ruleId": "setup.missing-typecheck-script",
+        "fingerprint": "alh_101dfc87",
+        "identityParts": ["setup.missing-typecheck-script", "package.json", "package.json"],
+        "locationKey": "package.json",
+        "subject": "package.json"
+      },
+      {
+        "id": "TASK_BENCHMARK_MISSING",
+        "title": "Missing agent task benchmark file",
+        "severity": "medium",
+        "category": "task_benchmarks",
+        "description": "The project has no agentlighthouse.tasks.yaml or benchmark task file.",
+        "evidence": ["No agent task benchmark file was found."],
+        "recommendation": "Add agentlighthouse.tasks.yaml with realistic, verifiable agent workflows.",
+        "agentFailureMode": "A team cannot tell whether agents can complete common workflows because no deterministic task set exists.",
+        "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
+        "affectedFile": "agentlighthouse.tasks.yaml",
+        "suggestedFixType": "create_file",
+        "ruleId": "TASK_BENCHMARK_MISSING",
+        "fingerprint": "alh_92fffcef",
+        "identityParts": [
+          "TASK_BENCHMARK_MISSING",
+          "agentlighthouse.tasks.yaml",
+          "agentlighthouse.tasks.yaml"
+        ],
+        "locationKey": "agentlighthouse.tasks.yaml",
+        "subject": "agentlighthouse.tasks.yaml"
+      },
+      {
+        "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
+        "title": "README commands are not clearly grounded in package.json scripts",
+        "severity": "low",
+        "category": "freshness_and_consistency",
+        "description": "Commands are more trustworthy when README examples match executable project scripts.",
+        "evidence": [
+          "No fenced README command references a package.json script such as test, lint, typecheck, dev, or build."
+        ],
+        "recommendation": "Show package-manager commands that map directly to package.json scripts.",
+        "affectedFile": "README.md",
+        "suggestedFixType": "update_file",
+        "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts",
+        "fingerprint": "alh_44385cfc",
+        "identityParts": [
+          "artifact-quality.readme-commands-not-grounded-in-scripts",
+          "readme.md",
+          "readme.md"
+        ],
+        "locationKey": "readme.md",
+        "subject": "README.md"
+      },
+      {
+        "id": "artifact-quality.readme-missing-verification-step",
+        "title": "README has installation guidance but no verification step",
+        "severity": "low",
+        "category": "documentation",
+        "description": "Agents need a quick command to verify the project works after installation.",
+        "evidence": [
+          "README does not show an obvious test, build, healthcheck, or smoke-test step after installation."
+        ],
+        "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
+        "affectedFile": "README.md",
+        "suggestedFixType": "add_section",
+        "ruleId": "artifact-quality.readme-missing-verification-step",
+        "fingerprint": "alh_15490f29",
+        "identityParts": [
+          "artifact-quality.readme-missing-verification-step",
+          "readme.md",
+          "readme.md"
+        ],
+        "locationKey": "readme.md",
+        "subject": "README.md"
+      },
+      {
+        "id": "freshness.deprecated-or-todo-terms",
+        "title": "Docs contain TODO/deprecated-looking terms without migration guidance",
+        "severity": "low",
+        "category": "freshness_and_consistency",
+        "description": "Stale markers can confuse agents unless they include replacement guidance.",
+        "evidence": ["README.md:3: Coming soon.", "README.md:5: TODO old setup."],
+        "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
+        "suggestedFixType": "update_file",
+        "ruleId": "freshness.deprecated-or-todo-terms",
+        "fingerprint": "alh_f6a256e8",
+        "identityParts": [
+          "freshness.deprecated-or-todo-terms",
+          "readme.md:3: coming soon.",
+          "readme.md:3: coming soon."
+        ],
+        "locationKey": "readme.md:3: coming soon.",
+        "subject": "README.md:3: Coming soon."
+      },
+      {
+        "id": "api.openapi-not-detected",
+        "title": "OpenAPI file not detected",
+        "severity": "info",
+        "category": "api_schema",
+        "description": "No OpenAPI schema was found. This may be fine for projects without an HTTP API.",
+        "evidence": ["No openapi.* or swagger.* file was scanned."],
+        "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
+        "suggestedFixType": "review_manually",
+        "ruleId": "api.openapi-not-detected",
+        "fingerprint": "alh_64a67cea",
+        "identityParts": [
+          "api.openapi-not-detected",
+          "no openapi.* or swagger.* file was scanned.",
+          "no openapi.* or swagger.* file was scanned."
+        ],
+        "locationKey": "no openapi.* or swagger.* file was scanned.",
+        "subject": "No openapi.* or swagger.* file was scanned."
+      }
+    ],
+    "resolved": [
+      {
+        "id": "api.openapi-detected",
+        "title": "OpenAPI file detected",
+        "severity": "info",
+        "category": "api_schema",
+        "description": "The scanner found an API schema that agents can use.",
+        "evidence": ["openapi.yaml"],
+        "recommendation": "Keep API descriptions, examples, and auth details current.",
+        "affectedFile": "openapi.yaml",
+        "suggestedFixType": "none",
+        "ruleId": "api.openapi-detected",
+        "fingerprint": "alh_d4b63c10",
+        "identityParts": ["api.openapi-detected", "openapi.yaml", "openapi.yaml"],
+        "locationKey": "openapi.yaml",
+        "subject": "openapi.yaml"
+      }
+    ],
+    "unchanged": [
+      {
+        "id": "COMMAND_VERIFICATION_SKIPPED",
+        "title": "Command verification probes were skipped",
+        "severity": "info",
+        "category": "setup_and_tests",
+        "description": "Static analysis is default; project commands are not executed unless explicitly enabled.",
+        "evidence": ["Run with --probe commands or --run-probes to execute safe script probes."],
+        "recommendation": "Use command probes in trusted local or CI environments when you want executable verification.",
+        "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
+        "fixExample": "agentlighthouse scan . --probe commands",
+        "suggestedFixType": "none",
+        "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+        "fingerprint": "alh_ac2d574f",
+        "identityParts": [
+          "COMMAND_VERIFICATION_SKIPPED",
+          "run with --probe commands or --run-probes to execute safe script probes.",
+          "run with --probe commands or --run-probes to execute safe script probes."
+        ],
+        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+        "subject": "Run with --probe commands or --run-probes to execute safe script probes."
+      },
+      {
+        "id": "mcp.not-evaluated",
+        "title": "MCP readiness could not be evaluated yet",
+        "severity": "info",
+        "category": "mcp_tools",
+        "description": "No MCP server/config/package signal was detected.",
+        "evidence": ["No file or package name matching MCP was scanned."],
+        "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
+        "suggestedFixType": "review_manually",
+        "ruleId": "mcp.not-evaluated",
+        "fingerprint": "alh_0a02b750",
+        "identityParts": [
+          "mcp.not-evaluated",
+          "no file or package name matching mcp was scanned.",
+          "no file or package name matching mcp was scanned."
+        ],
+        "locationKey": "no file or package name matching mcp was scanned.",
+        "subject": "No file or package name matching MCP was scanned."
+      }
+    ],
+    "worsened": [],
+    "improved": []
+  },
+  "summary": {
+    "verdict": "regressed",
+    "regressionDetected": true,
+    "improvementDetected": true,
+    "topRegressions": [
+      "New high finding: Missing AGENTS.md",
+      "New high finding: No test script in package.json",
+      "New high finding: package.json has no scripts",
+      "Score dropped by 85 point(s)."
+    ],
+    "topImprovements": ["Resolved info finding: OpenAPI file detected"],
+    "recommendedActions": [
+      "Fix new high-severity agent-readiness findings before merging.",
+      "Compare the changed files with the baseline report and recover lost context.",
+      "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
+      "Add a package.json \"test\" script or document the equivalent command clearly.",
+      "Add scripts for test, lint, typecheck, build, and local development."
+    ],
+    "caveats": [
+      "Different profiles: baseline api, current library.",
+      "Coverage changed substantially; score deltas may reflect changed analyzability.",
+      "One or both scans have low confidence."
+    ]
+  },
+  "metadata": {
+    "agentLighthouseVersion": "0.1.0",
+    "comparisonModelVersion": "0.1.0"
+  }
+}

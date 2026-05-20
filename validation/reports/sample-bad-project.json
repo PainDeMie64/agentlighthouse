@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_f53b3987",
+  "scanId": "scan_ae39d0db",
   "scannedPath": "<repo>/examples/sample-bad-project",
-  "startedAt": "2026-05-20T20:03:35.293Z",
-  "completedAt": "2026-05-20T20:03:35.294Z",
+  "startedAt": "2026-05-20T20:22:52.758Z",
+  "completedAt": "2026-05-20T20:22:52.759Z",
   "durationMs": 1,
   "agentLighthouseVersion": "0.1.0",
   "profile": "library",
@@ -107,7 +107,11 @@
       "recommendation": "Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.",
       "affectedFile": "AGENTS.md",
       "suggestedFixType": "create_file",
-      "ruleId": "agent-instructions.missing-agents-md"
+      "ruleId": "agent-instructions.missing-agents-md",
+      "fingerprint": "alh_3a0ad1c7",
+      "identityParts": ["agent-instructions.missing-agents-md", "agents.md", "agents.md"],
+      "locationKey": "agents.md",
+      "subject": "AGENTS.md"
     },
     {
       "id": "agent-instructions.missing-claude-md",
@@ -119,7 +123,11 @@
       "recommendation": "Add CLAUDE.md with concise workflow, boundaries, and testing expectations.",
       "affectedFile": "CLAUDE.md",
       "suggestedFixType": "create_file",
-      "ruleId": "agent-instructions.missing-claude-md"
+      "ruleId": "agent-instructions.missing-claude-md",
+      "fingerprint": "alh_2919953b",
+      "identityParts": ["agent-instructions.missing-claude-md", "claude.md", "claude.md"],
+      "locationKey": "claude.md",
+      "subject": "CLAUDE.md"
     },
     {
       "id": "artifact-quality.READMEmd.missing-clear-test-command",
@@ -133,7 +141,15 @@
       "recommendation": "Add clear test command to README.md.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command"
+      "ruleId": "artifact-quality.READMEmd.missing-clear-test-command",
+      "fingerprint": "alh_e3728b0d",
+      "identityParts": [
+        "artifact-quality.READMEmd.missing-clear-test-command",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
@@ -147,7 +163,15 @@
       "recommendation": "Add architecture or repo map to README.md.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map"
+      "ruleId": "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+      "fingerprint": "alh_182aba10",
+      "identityParts": [
+        "artifact-quality.READMEmd.missing-architecture-or-repo-map",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.readme-missing-verification-step",
@@ -161,7 +185,15 @@
       "recommendation": "Add a short verification step such as running tests, typecheck, build, or a health command.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "artifact-quality.readme-missing-verification-step"
+      "ruleId": "artifact-quality.readme-missing-verification-step",
+      "fingerprint": "alh_15490f29",
+      "identityParts": [
+        "artifact-quality.readme-missing-verification-step",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "artifact-quality.readme-commands-not-grounded-in-scripts",
@@ -175,7 +207,15 @@
       "recommendation": "Show package-manager commands that map directly to package.json scripts.",
       "affectedFile": "README.md",
       "suggestedFixType": "update_file",
-      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts"
+      "ruleId": "artifact-quality.readme-commands-not-grounded-in-scripts",
+      "fingerprint": "alh_44385cfc",
+      "identityParts": [
+        "artifact-quality.readme-commands-not-grounded-in-scripts",
+        "readme.md",
+        "readme.md"
+      ],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "llms.missing",
@@ -187,7 +227,11 @@
       "recommendation": "Create llms.txt with links to README, docs, architecture, examples, and API references.",
       "affectedFile": "llms.txt",
       "suggestedFixType": "create_file",
-      "ruleId": "llms.missing"
+      "ruleId": "llms.missing",
+      "fingerprint": "alh_dcee23b7",
+      "identityParts": ["llms.missing", "llms.txt", "llms.txt"],
+      "locationKey": "llms.txt",
+      "subject": "llms.txt"
     },
     {
       "id": "docs.readme-no-quickstart",
@@ -199,7 +243,11 @@
       "recommendation": "Add a quickstart that gets a new user to a working command quickly.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-quickstart"
+      "ruleId": "docs.readme-no-quickstart",
+      "fingerprint": "alh_2fb4df74",
+      "identityParts": ["docs.readme-no-quickstart", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.readme-no-install",
@@ -211,7 +259,11 @@
       "recommendation": "Add installation commands and prerequisites.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-install"
+      "ruleId": "docs.readme-no-install",
+      "fingerprint": "alh_e1c052e4",
+      "identityParts": ["docs.readme-no-install", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.readme-no-examples",
@@ -223,7 +275,11 @@
       "recommendation": "Add concrete examples showing expected usage and output.",
       "affectedFile": "README.md",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.readme-no-examples"
+      "ruleId": "docs.readme-no-examples",
+      "fingerprint": "alh_b662d04a",
+      "identityParts": ["docs.readme-no-examples", "readme.md", "readme.md"],
+      "locationKey": "readme.md",
+      "subject": "README.md"
     },
     {
       "id": "docs.no-markdown",
@@ -235,7 +291,11 @@
       "recommendation": "Add Markdown documentation or ensure docs source is not ignored.",
       "affectedFile": "docs/",
       "suggestedFixType": "add_section",
-      "ruleId": "docs.no-markdown"
+      "ruleId": "docs.no-markdown",
+      "fingerprint": "alh_48960857",
+      "identityParts": ["docs.no-markdown", "docs/", "docs/"],
+      "locationKey": "docs/",
+      "subject": "docs/"
     },
     {
       "id": "setup.package-json-no-scripts",
@@ -247,7 +307,11 @@
       "recommendation": "Add scripts for test, lint, typecheck, build, and local development.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.package-json-no-scripts"
+      "ruleId": "setup.package-json-no-scripts",
+      "fingerprint": "alh_59ea6562",
+      "identityParts": ["setup.package-json-no-scripts", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-test-script",
@@ -259,7 +323,11 @@
       "recommendation": "Add a package.json \"test\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-test-script"
+      "ruleId": "setup.missing-test-script",
+      "fingerprint": "alh_2c1c9c49",
+      "identityParts": ["setup.missing-test-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-lint-script",
@@ -271,7 +339,11 @@
       "recommendation": "Add a package.json \"lint\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-lint-script"
+      "ruleId": "setup.missing-lint-script",
+      "fingerprint": "alh_6630a79a",
+      "identityParts": ["setup.missing-lint-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "setup.missing-typecheck-script",
@@ -283,7 +355,11 @@
       "recommendation": "Add a package.json \"typecheck\" script or document the equivalent command clearly.",
       "affectedFile": "package.json",
       "suggestedFixType": "add_script",
-      "ruleId": "setup.missing-typecheck-script"
+      "ruleId": "setup.missing-typecheck-script",
+      "fingerprint": "alh_101dfc87",
+      "identityParts": ["setup.missing-typecheck-script", "package.json", "package.json"],
+      "locationKey": "package.json",
+      "subject": "package.json"
     },
     {
       "id": "api.openapi-not-detected",
@@ -294,7 +370,15 @@
       "evidence": ["No openapi.* or swagger.* file was scanned."],
       "recommendation": "For API products, publish an OpenAPI spec with operation descriptions and examples.",
       "suggestedFixType": "review_manually",
-      "ruleId": "api.openapi-not-detected"
+      "ruleId": "api.openapi-not-detected",
+      "fingerprint": "alh_64a67cea",
+      "identityParts": [
+        "api.openapi-not-detected",
+        "no openapi.* or swagger.* file was scanned.",
+        "no openapi.* or swagger.* file was scanned."
+      ],
+      "locationKey": "no openapi.* or swagger.* file was scanned.",
+      "subject": "No openapi.* or swagger.* file was scanned."
     },
     {
       "id": "mcp.not-evaluated",
@@ -305,7 +389,15 @@
       "evidence": ["No file or package name matching MCP was scanned."],
       "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
       "suggestedFixType": "review_manually",
-      "ruleId": "mcp.not-evaluated"
+      "ruleId": "mcp.not-evaluated",
+      "fingerprint": "alh_0a02b750",
+      "identityParts": [
+        "mcp.not-evaluated",
+        "no file or package name matching mcp was scanned.",
+        "no file or package name matching mcp was scanned."
+      ],
+      "locationKey": "no file or package name matching mcp was scanned.",
+      "subject": "No file or package name matching MCP was scanned."
     },
     {
       "id": "security.missing-agentlighthouseignore",
@@ -317,7 +409,15 @@
       "recommendation": "Add .agentlighthouseignore with node_modules, build outputs, env files, secrets, and vendor paths.",
       "affectedFile": ".agentlighthouseignore",
       "suggestedFixType": "create_file",
-      "ruleId": "security.missing-agentlighthouseignore"
+      "ruleId": "security.missing-agentlighthouseignore",
+      "fingerprint": "alh_5848d659",
+      "identityParts": [
+        "security.missing-agentlighthouseignore",
+        ".agentlighthouseignore",
+        ".agentlighthouseignore"
+      ],
+      "locationKey": ".agentlighthouseignore",
+      "subject": ".agentlighthouseignore"
     },
     {
       "id": "security.agent-secret-guidance-missing",
@@ -329,7 +429,11 @@
       "recommendation": "Add a security section explaining secret handling and external LLM constraints.",
       "affectedFile": "AGENTS.md",
       "suggestedFixType": "add_section",
-      "ruleId": "security.agent-secret-guidance-missing"
+      "ruleId": "security.agent-secret-guidance-missing",
+      "fingerprint": "alh_7624eb5d",
+      "identityParts": ["security.agent-secret-guidance-missing", "agents.md", "agents.md"],
+      "locationKey": "agents.md",
+      "subject": "AGENTS.md"
     },
     {
       "id": "freshness.deprecated-or-todo-terms",
@@ -340,7 +444,15 @@
       "evidence": ["README.md:3: Coming soon.", "README.md:5: TODO old setup."],
       "recommendation": "Resolve TODOs or add explicit migration/replacement guidance.",
       "suggestedFixType": "update_file",
-      "ruleId": "freshness.deprecated-or-todo-terms"
+      "ruleId": "freshness.deprecated-or-todo-terms",
+      "fingerprint": "alh_f6a256e8",
+      "identityParts": [
+        "freshness.deprecated-or-todo-terms",
+        "readme.md:3: coming soon.",
+        "readme.md:3: coming soon."
+      ],
+      "locationKey": "readme.md:3: coming soon.",
+      "subject": "README.md:3: Coming soon."
     },
     {
       "id": "TASK_BENCHMARK_MISSING",
@@ -354,7 +466,15 @@
       "fixExample": "Add tasks for installing the project, running tests, adding a small feature, and using the public API.",
       "affectedFile": "agentlighthouse.tasks.yaml",
       "suggestedFixType": "create_file",
-      "ruleId": "TASK_BENCHMARK_MISSING"
+      "ruleId": "TASK_BENCHMARK_MISSING",
+      "fingerprint": "alh_92fffcef",
+      "identityParts": [
+        "TASK_BENCHMARK_MISSING",
+        "agentlighthouse.tasks.yaml",
+        "agentlighthouse.tasks.yaml"
+      ],
+      "locationKey": "agentlighthouse.tasks.yaml",
+      "subject": "agentlighthouse.tasks.yaml"
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -367,7 +487,15 @@
       "agentFailureMode": "Without command probes, AgentLighthouse can tell agents what commands appear to exist, but not whether they currently pass.",
       "fixExample": "agentlighthouse scan . --probe commands",
       "suggestedFixType": "none",
-      "ruleId": "COMMAND_VERIFICATION_SKIPPED"
+      "ruleId": "COMMAND_VERIFICATION_SKIPPED",
+      "fingerprint": "alh_ac2d574f",
+      "identityParts": [
+        "COMMAND_VERIFICATION_SKIPPED",
+        "run with --probe commands or --run-probes to execute safe script probes.",
+        "run with --probe commands or --run-probes to execute safe script probes."
+      ],
+      "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -503,7 +631,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-bad-project",
-  "scannedAt": "2026-05-20T20:03:35.294Z",
+  "scannedAt": "2026-05-20T20:22:52.759Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

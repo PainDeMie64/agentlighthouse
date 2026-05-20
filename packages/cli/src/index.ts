@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from "commander";
+import { runCompareCommand } from "./commands/compare.js";
 import { runInitCommand } from "./commands/init.js";
 import { runScanCommand } from "./commands/scan.js";
 
@@ -38,6 +39,33 @@ program
   .description("Scan a local project directory.")
   .action((targetPath: string, options: Parameters<typeof runScanCommand>[1]) => {
     runScanCommand(targetPath, options).catch(handleError);
+  });
+
+program
+  .command("compare")
+  .requiredOption("--baseline <file>", "Baseline scan result JSON")
+  .requiredOption("--current <file>", "Current scan result JSON")
+  .option("--format <format>", "Output format: text, json, markdown, or pr-summary", "text")
+  .option("--output <file>", "Write comparison report output to a file")
+  .option("--fail-on-regression", "Exit with code 1 when any regression is detected")
+  .option("--fail-on-score-drop <points>", "Exit with code 1 when score drops by at least points")
+  .option(
+    "--fail-on-coverage-drop <points>",
+    "Exit with code 1 when coverage drops by at least points"
+  )
+  .option(
+    "--fail-on-confidence-drop <points>",
+    "Exit with code 1 when confidence score drops by at least points"
+  )
+  .option(
+    "--fail-on-new-severity <severity>",
+    "Exit with code 1 when any new finding is at or above severity"
+  )
+  .option("--fail-on-new-critical", "Exit with code 1 when a new critical finding appears")
+  .option("--fail-on-new-high", "Exit with code 1 when a new high or critical finding appears")
+  .description("Compare two saved AgentLighthouse JSON scan reports.")
+  .action((options: Parameters<typeof runCompareCommand>[0]) => {
+    runCompareCommand(options).catch(handleError);
   });
 
 program
