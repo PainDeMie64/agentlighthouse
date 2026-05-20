@@ -1,6 +1,6 @@
 {
   "name": "@agentlighthouse/cli",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "AgentLighthouse command-line interface.",
   "license": "MIT",
   "repository": {
@@ -52,7 +52,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@agentlighthouse/core": "workspace:^",
+    "@agentlighthouse/core": "0.1.0-alpha.1",
     "commander": "^14.0.0"
   },
   "devDependencies": {

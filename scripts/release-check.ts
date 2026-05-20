@@ -22,6 +22,11 @@ async function runCheck(name: string, command: string, args: string[]): Promise<
 }
 
 try {
+  const versions = await packageVersions();
+  const coreVersion =
+    versions.find((item) => item.name === "@agentlighthouse/core")?.version ?? "unknown";
+  const cliVersion =
+    versions.find((item) => item.name === "@agentlighthouse/cli")?.version ?? "unknown";
   await runCheck("Typecheck", "pnpm", ["typecheck"]);
   await runCheck("Lint", "pnpm", ["lint"]);
   await runCheck("Tests", "pnpm", ["test"]);
@@ -32,10 +37,10 @@ try {
   await runCheck("Git whitespace check", "git", ["diff", "--check"]);
   await writeReleaseReport({
     title: "Release Readiness",
-    packageVersions: await packageVersions(),
+    packageVersions: versions,
     tarballs: [
-      `${releaseArtifactsDir}/agentlighthouse-core-0.1.0-alpha.0.tgz`,
-      `${releaseArtifactsDir}/agentlighthouse-cli-0.1.0-alpha.0.tgz`
+      `${releaseArtifactsDir}/agentlighthouse-core-${coreVersion}.tgz`,
+      `${releaseArtifactsDir}/agentlighthouse-cli-${cliVersion}.tgz`
     ],
     checks,
     limitations: [

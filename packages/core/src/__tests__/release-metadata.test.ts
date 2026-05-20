@@ -20,6 +20,7 @@ interface PackageJson {
   files?: string[];
   bin?: Record<string, string>;
   publishConfig?: { access?: string };
+  dependencies?: Record<string, string>;
 }
 
 describe("release metadata", () => {
@@ -28,7 +29,7 @@ describe("release metadata", () => {
     const cli = await readPackage("packages/cli/package.json");
 
     for (const pkg of [core, cli]) {
-      expect(pkg.version).toBe("0.1.0-alpha.0");
+      expect(pkg.version).toBe("0.1.0-alpha.1");
       expect(pkg.description).toBeTruthy();
       expect(pkg.license).toBe("MIT");
       expect(pkg.repository).toBeTruthy();
@@ -44,6 +45,8 @@ describe("release metadata", () => {
     }
 
     expect(cli.bin?.agentlighthouse).toBe("./dist/index.js");
+    expect(cli.dependencies?.["@agentlighthouse/core"]).toBe("0.1.0-alpha.1");
+    expect(JSON.stringify(cli.dependencies)).not.toContain("workspace:");
   });
 
   it("keeps the dashboard private", async () => {
@@ -66,10 +69,10 @@ describe("release metadata", () => {
     ).resolves.toBeUndefined();
   });
 
-  it("does not claim npm publication in the README", async () => {
+  it("documents npm alpha status explicitly in the README", async () => {
     const readme = await readFile(path.join(repoRoot, "README.md"), "utf8");
-    expect(readme).toContain("has not been published to npm yet");
-    expect(readme).toContain("Future npm install path after publication");
+    expect(readme).toMatch(/has not been published to npm yet|npm alpha is now published/i);
+    expect(readme).toMatch(/Future npm install path after publication|@agentlighthouse\/cli@alpha/);
     expect(readme).toContain("direct pnpm CLI commands are the recommended CI path");
     expect(readme).not.toContain("npm install -g @agentlighthouse/cli\n\n## Quickstart");
   });
@@ -110,11 +113,12 @@ describe("release metadata", () => {
 
   it("keeps the changelog ready for the alpha candidate", async () => {
     const changelog = await readFile(path.join(repoRoot, "CHANGELOG.md"), "utf8");
+    expect(changelog).toContain("## 0.1.0-alpha.1");
     expect(changelog).toContain("## 0.1.0-alpha.0");
+    expect(changelog).toContain("workspace:");
     expect(changelog).toContain("### Added");
-    expect(changelog).toContain("### Changed");
-    expect(changelog).toContain("### Known Limitations");
-    expect(changelog).toContain("not published to npm yet");
+    expect(changelog).toContain("### Fixed");
+    expect(changelog).toContain("### Known Issue");
   });
 });
 

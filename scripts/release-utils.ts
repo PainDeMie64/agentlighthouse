@@ -116,9 +116,12 @@ export async function packWorkspacePackage(
   await runCommand("pnpm", ["pack", "--pack-destination", releaseArtifactsDir], {
     cwd: path.join(repoRoot, packageDir)
   });
+  const packageJson = JSON.parse(
+    await readFile(path.join(repoRoot, packageDir, "package.json"), "utf8")
+  ) as { version: string };
   const tarball = path.join(
     releaseArtifactsDir,
-    `${packageName.replace("@", "").replace("/", "-")}-0.1.0-alpha.0.tgz`
+    `${packageName.replace("@", "").replace("/", "-")}-${packageJson.version}.tgz`
   );
   await access(tarball, constants.R_OK);
   return tarball;
@@ -167,6 +170,53 @@ export function assertTarballContents(
   );
   if (junk) {
     throw new Error(`${packageName} tarball includes unexpected release junk: ${junk}.`);
+  }
+}
+
+export type PackedPackageMetadata = {
+  name?: string;
+  version?: string;
+  dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
+  peerDependencies?: Record<string, string>;
+  optionalDependencies?: Record<string, string>;
+  bundleDependencies?: string[] | Record<string, string>;
+  bundledDependencies?: string[] | Record<string, string>;
+  packageManager?: string;
+};
+
+export async function readPackedPackageJson(tarball: string): Promise<PackedPackageMetadata> {
+  const result = await runCommand("tar", ["-xOf", tarball, "package/package.json"]);
+  return JSON.parse(result.stdout) as PackedPackageMetadata;
+}
+
+export function assertNoWorkspaceProtocol(
+  packageName: string,
+  packageJson: PackedPackageMetadata
+): void {
+  const sections: Array<keyof PackedPackageMetadata> = [
+    "dependencies",
+    "devDependencies",
+    "peerDependencies",
+    "optionalDependencies",
+    "bundleDependencies",
+    "bundledDependencies"
+  ];
+  for (const section of sections) {
+    const value = packageJson[section];
+    if (!value) {
+      continue;
+    }
+    if (Array.isArray(value)) {
+      continue;
+    }
+    for (const [dependencyName, dependencyVersion] of Object.entries(value)) {
+      if (dependencyVersion.includes("workspace:")) {
+        throw new Error(
+          `${packageName} packed package.json leaks workspace protocol in ${section}.${dependencyName}: ${dependencyVersion}`
+        );
+      }
+    }
   }
 }
 

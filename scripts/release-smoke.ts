@@ -1,12 +1,14 @@
-import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, rm } from "node:fs/promises";
 import path from "node:path";
 import {
+  assertNoWorkspaceProtocol,
   assertShebang,
   assertTarballContents,
   ensureCleanDir,
   listTarball,
   packageVersions,
   packWorkspacePackage,
+  readPackedPackageJson,
   releaseArtifactsDir,
   releaseSmokeDir,
   repoRoot,
@@ -35,70 +37,61 @@ try {
 
   assertTarballContents("@agentlighthouse/core", await listTarball(coreTarball));
   assertTarballContents("@agentlighthouse/cli", await listTarball(cliTarball), { expectBin: true });
+  assertNoWorkspaceProtocol("@agentlighthouse/core", await readPackedPackageJson(coreTarball));
+  assertNoWorkspaceProtocol("@agentlighthouse/cli", await readPackedPackageJson(cliTarball));
   checks.push({
     name: "Package tarball contents",
     status: "passed",
     detail:
-      "core and CLI tarballs include dist, README, LICENSE, and exclude src/tests/temp reports."
+      "core and CLI tarballs include dist, README, LICENSE, exclude src/tests/temp reports, and contain no workspace: dependency metadata."
   });
 
-  await writeFile(
-    path.join(releaseSmokeDir, "package.json"),
-    JSON.stringify(
-      {
-        name: "agentlighthouse-release-smoke",
-        version: "0.0.0",
-        private: true,
-        type: "module",
-        dependencies: {
-          "@agentlighthouse/core": `file:${coreTarball}`,
-          "@agentlighthouse/cli": `file:${cliTarball}`
-        },
-        pnpm: {
-          overrides: {
-            "@agentlighthouse/core": `file:${coreTarball}`
-          }
-        }
-      },
-      null,
-      2
-    ),
-    "utf8"
-  );
-  await runCommand("pnpm", ["fetch", "--prod"]);
-  await runCommand("pnpm", ["install", "--prefer-offline"], { cwd: releaseSmokeDir });
+  await runCommand("npm", ["init", "-y"], { cwd: releaseSmokeDir });
+  await runCommand("npm", ["install", coreTarball, cliTarball], { cwd: releaseSmokeDir });
   checks.push({
     name: "Packed install",
     status: "passed",
-    detail:
-      "Installed packed core and CLI tarballs into a clean temporary project using pnpm prefer-offline."
+    detail: "Installed packed core and CLI tarballs into a clean temporary project using npm."
   });
 
-  await runCommand("pnpm", ["exec", "agentlighthouse", "--help"], { cwd: releaseSmokeDir });
-  await runCommand("pnpm", ["exec", "agentlighthouse", "version"], { cwd: releaseSmokeDir });
+  await runCommand("npx", ["agentlighthouse", "--help"], { cwd: releaseSmokeDir });
+  await runCommand("npx", ["agentlighthouse", "version"], { cwd: releaseSmokeDir });
   const fixture = path.join(repoRoot, "examples", "sample-good-project");
   const scanOutputPath = path.join(releaseSmokeDir, "scan.json");
   const baselineOutputPath = path.join(releaseSmokeDir, "baseline.json");
-  await runCommand("pnpm", ["exec", "agentlighthouse", "scan", fixture], { cwd: releaseSmokeDir });
+  const reportDir = path.join(releaseSmokeDir, "reports");
+  await runCommand("npx", ["agentlighthouse", "scan", fixture], { cwd: releaseSmokeDir });
   await runCommand(
-    "pnpm",
-    ["exec", "agentlighthouse", "scan", fixture, "--format", "json", "--output", scanOutputPath],
+    "npx",
+    ["agentlighthouse", "scan", fixture, "--format", "json", "--output", scanOutputPath],
     { cwd: releaseSmokeDir }
   );
   await runCommand(
-    "pnpm",
-    ["exec", "agentlighthouse", "baseline", "create", fixture, "--output", baselineOutputPath],
+    "npx",
+    ["agentlighthouse", "baseline", "create", fixture, "--output", baselineOutputPath],
     { cwd: releaseSmokeDir }
   );
+  await runCommand("npx", ["agentlighthouse", "baseline", "validate", baselineOutputPath], {
+    cwd: releaseSmokeDir
+  });
   await runCommand(
-    "pnpm",
-    ["exec", "agentlighthouse", "baseline", "validate", baselineOutputPath],
-    {
-      cwd: releaseSmokeDir
-    }
+    "npx",
+    [
+      "agentlighthouse",
+      "scan",
+      fixture,
+      "--baseline",
+      baselineOutputPath,
+      "--report-dir",
+      reportDir
+    ],
+    { cwd: releaseSmokeDir }
   );
   await access(scanOutputPath);
   await access(baselineOutputPath);
+  await access(path.join(reportDir, "scan.json"));
+  await access(path.join(reportDir, "scan.md"));
+  await access(path.join(reportDir, "scan.sarif"));
   const scanJson = JSON.parse(await readFile(scanOutputPath, "utf8")) as {
     scanId?: string;
   };
@@ -108,7 +101,8 @@ try {
   checks.push({
     name: "Packed CLI commands",
     status: "passed",
-    detail: "help, version, scan, JSON output, baseline create, and baseline validate all worked."
+    detail:
+      "help, version, scan, JSON output, baseline create/validate, and scan --baseline report bundle all worked through npm/npx."
   });
 
   await writeReleaseReport({

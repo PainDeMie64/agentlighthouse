@@ -1,6 +1,6 @@
 {
   "name": "agentlighthouse",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "private": true,
   "description": "Lighthouse for AI agents: scan repositories, docs, APIs, and workflows for agent-readiness.",
   "license": "MIT",

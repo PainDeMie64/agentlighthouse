@@ -1,4 +1,4 @@
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readdir, readFile } from "node:fs/promises";
 import { constants } from "node:fs";
 import path from "node:path";
 import { tmpdir } from "node:os";
@@ -178,68 +178,41 @@ async function runPackedCliInstall(): Promise<void> {
   await runCommand("pnpm", ["pack", "--pack-destination", cloneArtifactsDir], {
     cwd: path.join(cloneDir, "packages", "cli")
   });
-  const coreTarball = path.join(cloneArtifactsDir, "agentlighthouse-core-0.1.0-alpha.0.tgz");
-  const cliTarball = path.join(cloneArtifactsDir, "agentlighthouse-cli-0.1.0-alpha.0.tgz");
+  const coreTarball = await findTarball(cloneArtifactsDir, "agentlighthouse-core-");
+  const cliTarball = await findTarball(cloneArtifactsDir, "agentlighthouse-cli-");
   await access(coreTarball, constants.R_OK);
   await access(cliTarball, constants.R_OK);
 
   await ensureCleanDir(consumerDir);
-  await writeFile(
-    path.join(consumerDir, "package.json"),
-    JSON.stringify(
-      {
-        name: "agentlighthouse-fresh-clone-consumer",
-        version: "0.0.0",
-        private: true,
-        type: "module",
-        dependencies: {
-          "@agentlighthouse/core": `file:${coreTarball}`,
-          "@agentlighthouse/cli": `file:${cliTarball}`
-        },
-        pnpm: {
-          overrides: {
-            "@agentlighthouse/core": `file:${coreTarball}`
-          }
-        }
-      },
-      null,
-      2
-    ),
-    "utf8"
-  );
-  await runCommand("pnpm", ["install", "--prefer-offline"], {
+  await runCommand("npm", ["init", "-y"], {
     cwd: consumerDir,
     env: { CI: "true" }
   });
+  await runCommand("npm", ["install", coreTarball, cliTarball], { cwd: consumerDir });
 
   const fixture = path.join(cloneDir, "examples", "sample-good-project");
   const scanOutputPath = path.join(consumerDir, "scan.json");
   const baselineOutputPath = path.join(consumerDir, "baseline.json");
   const reportDir = path.join(consumerDir, "reports");
-  await runCommand("pnpm", ["exec", "agentlighthouse", "--help"], { cwd: consumerDir });
-  await runCommand("pnpm", ["exec", "agentlighthouse", "version"], { cwd: consumerDir });
-  await runCommand("pnpm", ["exec", "agentlighthouse", "scan", fixture], { cwd: consumerDir });
+  await runCommand("npx", ["agentlighthouse", "--help"], { cwd: consumerDir });
+  await runCommand("npx", ["agentlighthouse", "version"], { cwd: consumerDir });
+  await runCommand("npx", ["agentlighthouse", "scan", fixture], { cwd: consumerDir });
   await runCommand(
-    "pnpm",
-    ["exec", "agentlighthouse", "scan", fixture, "--format", "json", "--output", scanOutputPath],
+    "npx",
+    ["agentlighthouse", "scan", fixture, "--format", "json", "--output", scanOutputPath],
     { cwd: consumerDir }
   );
   await runCommand(
-    "pnpm",
-    ["exec", "agentlighthouse", "baseline", "create", fixture, "--output", baselineOutputPath],
+    "npx",
+    ["agentlighthouse", "baseline", "create", fixture, "--output", baselineOutputPath],
     { cwd: consumerDir }
   );
+  await runCommand("npx", ["agentlighthouse", "baseline", "validate", baselineOutputPath], {
+    cwd: consumerDir
+  });
   await runCommand(
-    "pnpm",
-    ["exec", "agentlighthouse", "baseline", "validate", baselineOutputPath],
-    {
-      cwd: consumerDir
-    }
-  );
-  await runCommand(
-    "pnpm",
+    "npx",
     [
-      "exec",
       "agentlighthouse",
       "scan",
       fixture,
@@ -268,6 +241,14 @@ async function runPackedCliInstall(): Promise<void> {
       "utf8"
     )
   ) as { dependencies?: Record<string, string>; devDependencies?: Record<string, string> };
+  if (
+    Object.values({
+      ...installedCliPackage.dependencies,
+      ...installedCliPackage.devDependencies
+    }).some((value) => value.includes("workspace:"))
+  ) {
+    throw new Error("Installed CLI package metadata contains a workspace: dependency.");
+  }
   if (installedCliPackage.dependencies?.tsx || installedCliPackage.dependencies?.["ts-node"]) {
     throw new Error("Installed CLI depends on a TypeScript runtime package.");
   }
@@ -278,6 +259,15 @@ async function runPackedCliInstall(): Promise<void> {
     detail:
       "Packed CLI installed into a separate clean consumer project and ran without monorepo source paths or TypeScript runtime dependencies."
   });
+}
+
+async function findTarball(dir: string, prefix: string): Promise<string> {
+  const entries = await readdir(dir);
+  const match = entries.find((entry) => entry.startsWith(prefix) && entry.endsWith(".tgz"));
+  if (!match) {
+    throw new Error(`No packed tarball starting with ${prefix} found in ${dir}.`);
+  }
+  return path.join(dir, match);
 }
 
 async function assertFilesExist(root: string, relativePaths: string[]): Promise<void> {

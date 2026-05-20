@@ -2,10 +2,12 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import {
   assertTarballContents,
+  assertNoWorkspaceProtocol,
   ensureCleanDir,
   listTarball,
   packageContentAuditReportPath,
   packWorkspacePackage,
+  readPackedPackageJson,
   releaseArtifactsDir,
   runCommand,
   writeMarkdownReport
@@ -46,6 +48,8 @@ async function auditPackage(
   const tarball = await packWorkspacePackage(packageDir, packageName);
   const entries = await listTarball(tarball);
   assertTarballContents(packageName, entries, options);
+  const packedPackageJson = await readPackedPackageJson(tarball);
+  assertNoWorkspaceProtocol(packageName, packedPackageJson);
   const requiredEntries = [
     "package/package.json",
     "package/README.md",
@@ -73,7 +77,8 @@ async function auditPackage(
       "The package files field keeps source, tests, examples, validation reports, temp files, and tarballs out of the publish artifact.",
       options.expectBin
         ? "The CLI binary target is package/dist/index.js and is included."
-        : "No executable binary is expected for this package."
+        : "No executable binary is expected for this package.",
+      "Packed package metadata was checked for workspace: dependency protocol leaks."
     ]
   });
 }
@@ -85,6 +90,7 @@ function renderReport(rowsToRender: AuditRow[], error?: unknown): string {
     `Generated: ${new Date().toISOString()}`,
     "",
     "This audit checks the local packed tarballs for the packages intended for public alpha publication.",
+    "It inspects the packed package.json metadata, not only the source package.json.",
     "",
     "| Package | Status | Tarball |",
     "| --- | --- | --- |",

@@ -82,7 +82,7 @@ importers:
   packages/cli:
     dependencies:
       "@agentlighthouse/core":
-        specifier: workspace:^
+        specifier: 0.1.0-alpha.1
         version: link:../core
       commander:
         specifier: ^14.0.0

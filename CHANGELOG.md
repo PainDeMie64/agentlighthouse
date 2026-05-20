@@ -12,9 +12,28 @@ AgentLighthouse follows semantic versioning after the public alpha line, with ex
 - Public alpha release checklist.
 - External trial summary report.
 
+## 0.1.0-alpha.1
+
+Recovery release for npm installability after the first alpha exposed a package metadata issue.
+
+### Fixed
+
+- Replaced the leaked `workspace:` dependency in the published CLI package metadata with an exact npm dependency on `@agentlighthouse/core@0.1.0-alpha.1`.
+- Added release checks that inspect packed package metadata and fail if publishable packages contain `workspace:` dependency protocols.
+- Updated packed-install smoke tests to use a clean npm consumer project, so npm install behavior is verified before publishing.
+
+### Notes
+
+- This is intended to be the first usable npm alpha for CLI consumers.
+- Use explicit `@alpha` install commands while the project remains in public alpha.
+
 ## 0.1.0-alpha.0
 
-First public alpha release candidate. This version is not published to npm yet.
+First public alpha release. Published to npm, but the CLI package is not installable by npm consumers because `@agentlighthouse/core` leaked as a `workspace:` dependency in the published package metadata. Use `0.1.0-alpha.1` or later.
+
+### Known Issue
+
+- `@agentlighthouse/cli@0.1.0-alpha.0` fails npm install with `EUNSUPPORTEDPROTOCOL Unsupported URL Type "workspace:"`.
 
 ### Added
 
@@ -45,6 +64,6 @@ First public alpha release candidate. This version is not published to npm yet.
 - GitHub Checks API integration.
 - AI agent execution.
 - Paid LLM API dependencies.
-- npm packages are release-ready locally but not published.
+- npm package metadata for the CLI is broken in this version.
 - The GitHub Action is experimental and source-based until npm distribution exists.
 - OpenAPI `$ref` handling and MCP static extraction are useful but incomplete.
