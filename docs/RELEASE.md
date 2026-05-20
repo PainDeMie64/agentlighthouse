@@ -1,15 +1,16 @@
 # Release Process
 
-AgentLighthouse is not published to npm yet. Phase 2G rehearses the first public alpha from a clean clone without publishing packages, creating GitHub releases, or pushing tags.
+AgentLighthouse is published to npm as a public alpha. Use explicit `@alpha` package commands
+until a stable release exists.
 
 ## Intended Packages
 
-Publish later:
+Publishable packages:
 
 - `@agentlighthouse/core`
 - `@agentlighthouse/cli`
 
-Do not publish during public alpha packaging prep:
+Do not publish:
 
 - `@agentlighthouse/web` because it is a private repository-local dashboard.
 
@@ -98,7 +99,7 @@ The smoke test:
 1. Builds packages.
 2. Packs `@agentlighthouse/core`.
 3. Packs `@agentlighthouse/cli`.
-4. Installs those tarballs into a clean temporary project with `pnpm install --prefer-offline`.
+4. Installs those tarballs into a clean temporary project with `npm install`.
 5. Runs the installed `agentlighthouse` binary:
    - `agentlighthouse --help`
    - `agentlighthouse version`
@@ -108,7 +109,9 @@ The smoke test:
    - `agentlighthouse baseline validate baseline.json`
 6. Verifies package tarballs include `dist`, package metadata, README, and license, and exclude source/tests/temp artifacts.
 
-The package tarballs are local. External runtime dependencies are resolved through the pnpm store when available and through the registry if the store is missing a dependency tarball.
+The package tarballs are local. Runtime dependency resolution intentionally uses npm in a clean
+consumer project so publish metadata problems such as leaked `workspace:` protocols are caught
+before release.
 
 Set `AGENTLIGHTHOUSE_RELEASE_DEBUG=1` to keep the temporary smoke directory.
 

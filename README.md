@@ -27,7 +27,23 @@ It prepares projects so existing and future agents can use them more reliably.
 
 ## Quickstart
 
-AgentLighthouse is prepared for public alpha packaging, but it has not been published to npm yet. Use the local workspace commands today.
+AgentLighthouse is available as a public alpha on npm. Use the explicit `@alpha` tag while the project is pre-1.0.
+
+Alpha npm install:
+
+```bash
+npm install -g @agentlighthouse/cli@alpha
+agentlighthouse scan .
+agentlighthouse scan . --report-dir agentlighthouse-reports
+```
+
+Or run with `npx`:
+
+```bash
+npx @agentlighthouse/cli@alpha scan .
+```
+
+`0.1.0-alpha.1` is the first usable npm alpha. The `@agentlighthouse/cli@0.1.0-alpha.0` package was broken by a leaked workspace dependency and has been deprecated.
 
 Current local development:
 
@@ -46,16 +62,6 @@ The report bundle writes:
 - `scan.md`
 - `scan.sarif`
 - `pr-summary.md`
-
-Future npm install path after publication:
-
-```bash
-npm install -g @agentlighthouse/cli
-agentlighthouse scan .
-npx @agentlighthouse/cli scan .
-```
-
-Those npm commands are documented as the intended public-alpha experience, not as currently published packages.
 
 ## Baselines
 
@@ -91,20 +97,18 @@ pnpm --filter @agentlighthouse/cli dev scan . \
 
 ## CI Usage
 
-The commands below show the installed CLI shape that the packed alpha will expose. Until npm
-publishing is complete, use the source form:
-`pnpm --filter @agentlighthouse/cli dev scan ...`.
+Prefer the published alpha CLI for external repositories:
 
 Simple scan gate:
 
 ```bash
-agentlighthouse scan . --fail-under 75 --report-dir agentlighthouse-reports
+npx @agentlighthouse/cli@alpha scan . --fail-under 75 --report-dir agentlighthouse-reports
 ```
 
 Baseline gate:
 
 ```bash
-agentlighthouse scan . \
+npx @agentlighthouse/cli@alpha scan . \
   --baseline agentlighthouse-baseline.json \
   --report-dir agentlighthouse-reports \
   --fail-under 80 \
@@ -115,7 +119,7 @@ agentlighthouse scan . \
 PR-aware gate:
 
 ```bash
-agentlighthouse scan . \
+npx @agentlighthouse/cli@alpha scan . \
   --baseline agentlighthouse-baseline.json \
   --git-base origin/main \
   --git-head HEAD \
@@ -126,7 +130,7 @@ Reports are written before gates fail.
 
 ## GitHub Action
 
-The GitHub Action is experimental for public alpha. It works from source and is useful for dogfooding, but direct pnpm CLI commands are the recommended CI path until `@agentlighthouse/cli` is published.
+The GitHub Action is experimental for public alpha. It works from source and is useful for dogfooding, but direct `npx @agentlighthouse/cli@alpha` commands are the recommended CI path for external repositories until the action is hardened further.
 
 ```yaml
 - uses: actions/checkout@v4
@@ -142,7 +146,7 @@ The GitHub Action is experimental for public alpha. It works from source and is 
     fail-on-pr-regression: "true"
 ```
 
-The current action is source-based: it installs and builds AgentLighthouse from the checked-out action path, then scans the caller workspace through `GITHUB_WORKSPACE`. A future npm distribution will make this faster and simpler.
+The current action is source-based: it installs and builds AgentLighthouse from the checked-out action path, then scans the caller workspace through `GITHUB_WORKSPACE`.
 
 ## Example Output
 
@@ -250,14 +254,14 @@ validation/reports      safe generated scan reports
 
 ## Current Limitations
 
-- Packages are not published to npm yet.
+- Public npm packages are alpha-quality. Prefer explicit `@alpha` commands until a stable release exists.
 - No hosted SaaS yet.
 - No auth or billing.
 - No token-backed PR comments.
 - No GitHub Checks API integration.
 - No AI agent execution.
 - OpenAPI `$ref` and MCP static extraction are useful but not complete.
-- The GitHub Action is source-based until packaging is finalized.
+- The GitHub Action is source-based and experimental.
 
 ## Release Readiness
 
@@ -274,7 +278,6 @@ pnpm release:rehearsal
 
 ## Roadmap
 
-- Phase 2G: public-alpha release rehearsal from fresh clone.
 - Phase 3: docs crawler and deeper API/MCP reference resolution.
 - Phase 4: deterministic benchmark runner.
 - Phase 5: hosted dashboard and project history.

@@ -2,7 +2,8 @@
 
 AgentLighthouse is local-first and can run in GitHub Actions or any CI as a deterministic score gate. It measures agent-readiness, not general software quality.
 
-The npm package is not published yet. Use workspace commands from a source checkout today. After public alpha publication, the same examples can switch to `npx @agentlighthouse/cli`.
+The public alpha CLI is published on npm. Prefer explicit `@alpha` commands in CI until a stable
+release exists.
 
 ## Markdown Report and Score Gate
 
@@ -19,16 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.33.0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm --filter @agentlighthouse/cli dev scan . --fail-under 75 --format markdown --output agentlighthouse-report.md
+      - run: npx @agentlighthouse/cli@alpha scan . --fail-under 75 --format markdown --output agentlighthouse-report.md
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -41,17 +36,16 @@ The scanner writes reports before applying CI gates, so CI can keep artifacts ev
 ## Gates
 
 ```bash
-pnpm --filter @agentlighthouse/cli dev scan . --fail-under 80
-agentlighthouse scan . --fail-under 80
-agentlighthouse scan . --fail-under 80 --min-confidence medium
-agentlighthouse scan . --fail-on-severity high
-agentlighthouse scan . --fail-under 80 --fail-on-severity critical
-agentlighthouse scan . --report-dir agentlighthouse-reports
-agentlighthouse scan . --baseline agentlighthouse-baseline.json --report-dir agentlighthouse-reports --fail-on-regression
-agentlighthouse compare --baseline baseline.json --current current.json --fail-on-regression
-agentlighthouse compare --baseline baseline.json --current current.json --fail-on-score-drop 5 --fail-on-new-severity high
-agentlighthouse compare --baseline baseline.json --current current.json --changed-files changed-files.txt --fail-on-new-changed-high
-agentlighthouse compare --baseline baseline.json --current current.json --git-base origin/main --git-head HEAD --fail-on-pr-regression
+npx @agentlighthouse/cli@alpha scan . --fail-under 80
+npx @agentlighthouse/cli@alpha scan . --fail-under 80 --min-confidence medium
+npx @agentlighthouse/cli@alpha scan . --fail-on-severity high
+npx @agentlighthouse/cli@alpha scan . --fail-under 80 --fail-on-severity critical
+npx @agentlighthouse/cli@alpha scan . --report-dir agentlighthouse-reports
+npx @agentlighthouse/cli@alpha scan . --baseline agentlighthouse-baseline.json --report-dir agentlighthouse-reports --fail-on-regression
+npx @agentlighthouse/cli@alpha compare --baseline baseline.json --current current.json --fail-on-regression
+npx @agentlighthouse/cli@alpha compare --baseline baseline.json --current current.json --fail-on-score-drop 5 --fail-on-new-severity high
+npx @agentlighthouse/cli@alpha compare --baseline baseline.json --current current.json --changed-files changed-files.txt --fail-on-new-changed-high
+npx @agentlighthouse/cli@alpha compare --baseline baseline.json --current current.json --git-base origin/main --git-head HEAD --fail-on-pr-regression
 ```
 
 - `--fail-under` fails when the score is below a threshold.
@@ -73,9 +67,9 @@ agentlighthouse compare --baseline baseline.json --current current.json --git-ba
 ## PR Delta Reports
 
 ```bash
-agentlighthouse scan . --format json --output current.json
-agentlighthouse compare --baseline agentlighthouse-baseline.json --current current.json --format pr-summary --output agentlighthouse-delta.md
-agentlighthouse scan . --baseline agentlighthouse-baseline.json --comparison-output agentlighthouse-delta.md --comparison-format pr-summary
+npx @agentlighthouse/cli@alpha scan . --format json --output current.json
+npx @agentlighthouse/cli@alpha compare --baseline agentlighthouse-baseline.json --current current.json --format pr-summary --output agentlighthouse-delta.md
+npx @agentlighthouse/cli@alpha scan . --baseline agentlighthouse-baseline.json --comparison-output agentlighthouse-delta.md --comparison-format pr-summary
 ```
 
 Delta reports show score, confidence, coverage, new findings, resolved findings, and regression gate status.
@@ -83,7 +77,7 @@ Delta reports show score, confidence, coverage, new findings, resolved findings,
 ## Report Bundle
 
 ```bash
-agentlighthouse scan . --report-dir agentlighthouse-reports
+npx @agentlighthouse/cli@alpha scan . --report-dir agentlighthouse-reports
 ```
 
 Writes `scan.json`, `scan.md`, `scan.sarif`, and `pr-summary.md`. With `--baseline`, the bundle also includes `comparison.json`, `comparison.md`, and `comparison-pr-summary.md`.
@@ -91,9 +85,9 @@ Writes `scan.json`, `scan.md`, `scan.sarif`, and `pr-summary.md`. With `--baseli
 ## PR-Aware Delta Reports
 
 ```bash
-agentlighthouse scan . --format json --output current.json
+npx @agentlighthouse/cli@alpha scan . --format json --output current.json
 git diff --name-status origin/main...HEAD > changed-files.txt
-agentlighthouse compare \
+npx @agentlighthouse/cli@alpha compare \
   --baseline agentlighthouse-baseline.json \
   --current current.json \
   --changed-files changed-files.txt \
@@ -108,7 +102,7 @@ For git-ref detection in GitHub Actions, use `actions/checkout` with `fetch-dept
 ## GitHub Step Summary
 
 ```bash
-agentlighthouse scan . --format pr-summary --github-step-summary
+npx @agentlighthouse/cli@alpha scan . --format pr-summary --github-step-summary
 ```
 
 If `GITHUB_STEP_SUMMARY` is set, AgentLighthouse appends a concise summary. If it is not set, the CLI prints a warning and continues.

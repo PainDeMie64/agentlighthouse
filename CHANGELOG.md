@@ -12,7 +12,7 @@ AgentLighthouse follows semantic versioning after the public alpha line, with ex
 - Public alpha release checklist.
 - External trial summary report.
 
-## 0.1.0-alpha.1
+## 0.1.0-alpha.1 - 2026-05-21
 
 Recovery release for npm installability after the first alpha exposed a package metadata issue.
 
@@ -24,10 +24,11 @@ Recovery release for npm installability after the first alpha exposed a package 
 
 ### Notes
 
-- This is intended to be the first usable npm alpha for CLI consumers.
+- This is the first usable npm alpha for CLI consumers.
+- `@agentlighthouse/core@0.1.0-alpha.1` and `@agentlighthouse/cli@0.1.0-alpha.1` are published on npm under the `alpha` dist-tag.
 - Use explicit `@alpha` install commands while the project remains in public alpha.
 
-## 0.1.0-alpha.0
+## 0.1.0-alpha.0 - 2026-05-21
 
 First public alpha release. Published to npm, but the CLI package is not installable by npm consumers because `@agentlighthouse/core` leaked as a `workspace:` dependency in the published package metadata. Use `0.1.0-alpha.1` or later.
 
@@ -54,7 +55,7 @@ First public alpha release. Published to npm, but the CLI package is not install
 ### Changed
 
 - Public docs now separate currently runnable source-checkout commands from future npm commands.
-- GitHub Action docs recommend direct pnpm CLI workflows until npm publishing is complete.
+- GitHub Action docs recommend direct CLI workflows while the action remains source-based.
 
 ### Known Limitations
 
