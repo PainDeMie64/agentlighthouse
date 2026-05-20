@@ -13,4 +13,11 @@ import {
 } from "@agentlighthouse/core";
 ```
 
-The API is alpha. See `docs/SCHEMA_STABILITY.md` in the repository before depending on report schemas or finding fingerprints.
+Install explicitly from the alpha channel while the project is pre-1.0:
+
+```bash
+npm install @agentlighthouse/core@alpha
+```
+
+The API is alpha. See `docs/SCHEMA_STABILITY.md` in the repository before depending on report
+schemas or finding fingerprints.

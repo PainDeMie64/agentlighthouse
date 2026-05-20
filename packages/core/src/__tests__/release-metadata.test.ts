@@ -71,9 +71,10 @@ describe("release metadata", () => {
 
   it("documents npm alpha status explicitly in the README", async () => {
     const readme = await readFile(path.join(repoRoot, "README.md"), "utf8");
-    expect(readme).toMatch(/has not been published to npm yet|npm alpha is now published/i);
-    expect(readme).toMatch(/Future npm install path after publication|@agentlighthouse\/cli@alpha/);
-    expect(readme).toContain("direct pnpm CLI commands are the recommended CI path");
+    expect(readme).toMatch(/available as a public alpha on npm/i);
+    expect(readme).toMatch(/@agentlighthouse\/cli@alpha/);
+    expect(readme).toContain("first usable npm alpha");
+    expect(readme).toContain("direct `npx @agentlighthouse/cli@alpha` commands");
     expect(readme).not.toContain("npm install -g @agentlighthouse/cli\n\n## Quickstart");
   });
 

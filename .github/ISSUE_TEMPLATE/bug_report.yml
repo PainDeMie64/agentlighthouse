@@ -1,0 +1,44 @@
+name: Bug report
+description: Report install failures, scan crashes, or broken CLI behavior.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for trying the alpha. Please avoid sharing secrets, private repo paths, or proprietary snippets.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the install failure, crash, or unexpected CLI behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and output
+      description: Paste the command and relevant output. Redact secrets and private paths.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AgentLighthouse version
+      placeholder: "0.1.0-alpha.1"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "Node 22, npm 10, macOS/Linux/Windows, CI provider if relevant"
+  - type: textarea
+    id: repo-shape
+    attributes:
+      label: Project shape
+      placeholder: "TypeScript library, docs site, OpenAPI project, MCP server, internal app..."
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?

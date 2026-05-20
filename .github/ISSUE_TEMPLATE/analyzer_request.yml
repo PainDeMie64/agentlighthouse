@@ -1,0 +1,40 @@
+name: Analyzer request
+description: Request better coverage for a repo shape, API style, MCP pattern, or documentation system.
+title: "[Analyzer]: "
+labels: ["enhancement", "analyzer"]
+body:
+  - type: textarea
+    id: project-type
+    attributes:
+      label: What kind of project should AgentLighthouse understand better?
+      placeholder: "OpenAPI-heavy API, MCP server, SDK repo, docs site, CLI tool..."
+    validations:
+      required: true
+  - type: textarea
+    id: gap
+    attributes:
+      label: What is missing or weak today?
+      placeholder: "The scanner misses generated OpenAPI refs, specific MCP tool registration style, docs framework..."
+    validations:
+      required: true
+  - type: textarea
+    id: agent-failure
+    attributes:
+      label: What would an AI coding agent misunderstand?
+  - type: textarea
+    id: examples
+    attributes:
+      label: Public examples or sanitized snippets
+      description: Link public repos/specs when possible. Do not paste private code.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - OpenAPI
+        - MCP
+        - Docs
+        - Package/setup
+        - Benchmarks
+        - CI/reporting
+        - Other

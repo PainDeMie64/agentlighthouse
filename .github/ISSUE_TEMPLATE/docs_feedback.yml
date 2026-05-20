@@ -1,0 +1,33 @@
+name: Docs feedback
+description: Report confusing install, CI, scoring, baseline, or first-user docs.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page or section
+      placeholder: "README Quickstart, docs/CI.md, docs/FIRST_USER_TRIAL.md..."
+    validations:
+      required: true
+  - type: textarea
+    id: confusion
+    attributes:
+      label: What was confusing or missing?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested wording or example
+  - type: dropdown
+    id: user-type
+    attributes:
+      label: What were you trying to do?
+      options:
+        - Install locally
+        - Scan a project
+        - Interpret findings
+        - Create a baseline
+        - Use CI or GitHub Actions
+        - Understand roadmap or limitations

@@ -12,6 +12,23 @@ Coding agents work best when a project has clear setup commands, test commands, 
 
 AgentLighthouse turns that context into a score, structured findings, reports, baselines, and PR deltas.
 
+## Try It In 30 Seconds
+
+```bash
+npx @agentlighthouse/cli@alpha scan .
+```
+
+That command runs locally, prints an agent-readiness score, and lists concrete findings. To keep
+reports:
+
+```bash
+npx @agentlighthouse/cli@alpha scan . --report-dir agentlighthouse-reports
+```
+
+This is an alpha release. Expect useful static analysis, JSON/Markdown/SARIF reports, baselines,
+and PR deltas. Do not expect hosted SaaS, AI-agent execution, token-backed PR comments, or perfect
+OpenAPI/MCP parsing yet.
+
 ## What It Does Not Do
 
 AgentLighthouse is not:
@@ -291,6 +308,8 @@ pnpm release:rehearsal
 - [Scoring Model](docs/SCORING_MODEL.md)
 - [Rules](docs/RULES.md)
 - [Release Process](docs/RELEASE.md)
+- [First User Trial](docs/FIRST_USER_TRIAL.md)
+- [Next Issues](docs/NEXT_ISSUES.md)
 - [Alpha Release Checklist](docs/ALPHA_RELEASE_CHECKLIST.md)
 - [Versioning](docs/VERSIONING.md)
 - [Schema Stability](docs/SCHEMA_STABILITY.md)

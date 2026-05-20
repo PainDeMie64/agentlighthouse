@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: First-user trial guide
+    url: https://github.com/PainDeMie64/agentlighthouse/blob/main/docs/FIRST_USER_TRIAL.md
+    about: Start here if you are trying AgentLighthouse for the first time.
