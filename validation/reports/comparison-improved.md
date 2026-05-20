@@ -52,7 +52,7 @@ No comparison gate status was provided.
 17. **low** `artifact-quality.readme-commands-not-grounded-in-scripts`: README commands are not clearly grounded in package.json scripts (README.md:1, README.md)
 18. **low** `artifact-quality.readme-missing-verification-step`: README has installation guidance but no verification step (README.md:1, README.md)
 19. **low** `freshness.deprecated-or-todo-terms`: Docs contain TODO/deprecated-looking terms without migration guidance (README.md:1, README.md:3: Coming soon.)
-20. **info** `api.openapi-not-detected`: OpenAPI file not detected (No openapi._ or swagger._ file was scanned., No openapi._ or swagger._ file was scanned.)
+20. **info** `api.openapi-not-detected`: OpenAPI file not detected
 
 ## Worsened Findings
 
@@ -78,8 +78,8 @@ None.
 
 ## Metadata
 
-- Baseline scan: `scan_1eeadae9` (2026-05-20T20:44:21.061Z)
-- Current scan: `scan_7793b496` (2026-05-20T20:44:21.033Z)
+- Baseline scan: `scan_76c199bb` (2026-05-20T21:08:14.211Z)
+- Current scan: `scan_cf6a2683` (2026-05-20T21:08:14.179Z)
 - Baseline profile: `library`
 - Current profile: `api`
 - Comparison model: `0.1.0`

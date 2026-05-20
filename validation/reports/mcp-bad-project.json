@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_0c016e45",
+  "scanId": "scan_63d83e87",
   "scannedPath": "<repo>/examples/mcp-bad-project",
-  "startedAt": "2026-05-20T20:44:21.235Z",
-  "completedAt": "2026-05-20T20:44:21.237Z",
+  "startedAt": "2026-05-20T21:08:14.423Z",
+  "completedAt": "2026-05-20T21:08:14.425Z",
   "durationMs": 2,
   "agentLighthouseVersion": "0.1.0",
   "profile": "mcp",
@@ -495,14 +495,7 @@
         "no openapi.* or swagger.* file was scanned."
       ],
       "locationKey": "no openapi.* or swagger.* file was scanned.",
-      "subject": "No openapi.* or swagger.* file was scanned.",
-      "location": {
-        "file": "No openapi.* or swagger.* file was scanned.",
-        "locationKey": "no openapi.* or swagger.* file was scanned.",
-        "subject": "No openapi.* or swagger.* file was scanned.",
-        "symbol": "No openapi.* or swagger.* file was scanned.",
-        "sourceKind": "openapi"
-      }
+      "subject": "No openapi.* or swagger.* file was scanned."
     },
     {
       "id": "mcp.detected",
@@ -825,14 +818,7 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-      "location": {
-        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "sourceKind": "unknown"
-      }
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -968,7 +954,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-bad-project",
-  "scannedAt": "2026-05-20T20:44:21.237Z",
+  "scannedAt": "2026-05-20T21:08:14.425Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",

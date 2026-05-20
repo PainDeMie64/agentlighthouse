@@ -1,8 +1,9 @@
-import { mkdtemp, readFile } from "node:fs/promises";
+import { access, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { runScanCommand } from "../commands/scan.js";
+import { renderJsonReport, scanProject } from "@agentlighthouse/core";
 
 describe("runScanCommand", () => {
   const originalExitCode = process.exitCode;
@@ -113,4 +114,57 @@ describe("runScanCommand", () => {
     );
     expect(process.exitCode).not.toBe(1);
   });
+
+  it("writes report bundles with scan artifacts", async () => {
+    const outputDir = await mkdtemp(path.join(tmpdir(), "agentlighthouse-bundle-"));
+
+    await runScanCommand(sampleGoodPath(), {
+      format: "text",
+      reportDir: outputDir
+    });
+
+    await expect(access(path.join(outputDir, "scan.json"))).resolves.toBeUndefined();
+    await expect(access(path.join(outputDir, "scan.md"))).resolves.toBeUndefined();
+    await expect(access(path.join(outputDir, "scan.sarif"))).resolves.toBeUndefined();
+    await expect(access(path.join(outputDir, "pr-summary.md"))).resolves.toBeUndefined();
+  });
+
+  it("runs scan plus baseline comparison and writes reports before PR gates fail", async () => {
+    const outputDir = await mkdtemp(path.join(tmpdir(), "agentlighthouse-scan-baseline-"));
+    const baseline = await scanProject(sampleGoodPath());
+    const baselinePath = path.join(outputDir, "baseline.json");
+    const comparisonPath = path.join(outputDir, "delta.md");
+    await writeFile(baselinePath, renderJsonReport(baseline), "utf8");
+
+    await runScanCommand(sampleBadPath(), {
+      format: "markdown",
+      output: path.join(outputDir, "scan.md"),
+      baseline: baselinePath,
+      reportDir: path.join(outputDir, "bundle"),
+      comparisonOutput: comparisonPath,
+      comparisonFormat: "pr-summary",
+      failOnPrRegression: true,
+      changedFiles: path.resolve(
+        import.meta.dirname,
+        "../../../../examples/comparison/changed-files.txt"
+      )
+    });
+
+    expect(await readFile(comparisonPath, "utf8")).toContain("AgentLighthouse PR Delta");
+    await expect(
+      access(path.join(outputDir, "bundle", "comparison.json"))
+    ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(outputDir, "bundle", "comparison-pr-summary.md"))
+    ).resolves.toBeUndefined();
+    expect(process.exitCode).toBe(1);
+  });
 });
+
+function sampleGoodPath(): string {
+  return path.resolve(import.meta.dirname, "../../../../examples/sample-good-project");
+}
+
+function sampleBadPath(): string {
+  return path.resolve(import.meta.dirname, "../../../../examples/sample-bad-project");
+}

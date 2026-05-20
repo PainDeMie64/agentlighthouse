@@ -17,6 +17,10 @@ AgentLighthouse is Lighthouse for AI agents: a deterministic, local-first scanne
 - [Task Benchmarks](docs/TASK_BENCHMARKS.md)
 - [Development Guide](docs/DEVELOPMENT.md)
 - [CI Usage](docs/CI.md)
+- [GitHub Action](docs/GITHUB_ACTION.md)
+- [Baseline Comparison](docs/BASELINE_COMPARISON.md)
+- [PR-Aware Analysis](docs/PR_AWARE_ANALYSIS.md)
+- [Release Process](docs/RELEASE.md)
 - [Validation Guide](docs/VALIDATION.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Decisions](docs/DECISIONS.md)
@@ -30,4 +34,6 @@ AgentLighthouse is Lighthouse for AI agents: a deterministic, local-first scanne
 
 - Scan sample project: `pnpm --filter @agentlighthouse/cli dev scan examples/sample-project`
 - Scan this repo: `pnpm --filter @agentlighthouse/cli dev scan .`
+- Create baseline: `pnpm --filter @agentlighthouse/cli dev baseline create . --output agentlighthouse-baseline.json`
+- Write report bundle: `pnpm --filter @agentlighthouse/cli dev scan . --report-dir agentlighthouse-reports`
 - Generate starter files safely: `pnpm --filter @agentlighthouse/cli dev init . --dry-run`

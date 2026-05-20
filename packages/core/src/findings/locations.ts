@@ -107,7 +107,17 @@ function sourceKindFor(ruleId: string, file: string): FindingLocation["sourceKin
 }
 
 function fileFromEvidence(evidence: string[]): string | undefined {
-  return evidence[0]?.split(":")[0];
+  const candidate = evidence[0]?.split(":")[0]?.trim();
+  if (!candidate || /\s/.test(candidate)) return undefined;
+  if (
+    /^(AGENTS\.md|CLAUDE\.md|README\.md|llms\.txt|package\.json|agentlighthouse\.tasks\.ya?ml)$/i.test(
+      candidate
+    ) ||
+    /\.(md|txt|json|ya?ml|ts|tsx|js|jsx|py|toml|rs|go|html)$/i.test(candidate)
+  ) {
+    return candidate;
+  }
+  return undefined;
 }
 
 function subjectFromEvidence(evidence: string[]): string | undefined {

@@ -42,6 +42,8 @@ agentlighthouse scan . --fail-under 80
 agentlighthouse scan . --fail-under 80 --min-confidence medium
 agentlighthouse scan . --fail-on-severity high
 agentlighthouse scan . --fail-under 80 --fail-on-severity critical
+agentlighthouse scan . --report-dir agentlighthouse-reports
+agentlighthouse scan . --baseline agentlighthouse-baseline.json --report-dir agentlighthouse-reports --fail-on-regression
 agentlighthouse compare --baseline baseline.json --current current.json --fail-on-regression
 agentlighthouse compare --baseline baseline.json --current current.json --fail-on-score-drop 5 --fail-on-new-severity high
 agentlighthouse compare --baseline baseline.json --current current.json --changed-files changed-files.txt --fail-on-new-changed-high
@@ -52,6 +54,7 @@ agentlighthouse compare --baseline baseline.json --current current.json --git-ba
 - `--fail-on-severity` fails when any finding is at or above a severity.
 - `--min-confidence` fails when the score confidence is too low.
 - Compare gates fail on regressions between two saved JSON scan reports.
+- `scan --baseline` runs the current scan and comparison in one command.
 - PR-aware compare gates fail on new findings introduced on changed files.
 - `--probe commands` is opt-in and should only be used in trusted CI jobs.
 
@@ -68,9 +71,18 @@ agentlighthouse compare --baseline baseline.json --current current.json --git-ba
 ```bash
 agentlighthouse scan . --format json --output current.json
 agentlighthouse compare --baseline agentlighthouse-baseline.json --current current.json --format pr-summary --output agentlighthouse-delta.md
+agentlighthouse scan . --baseline agentlighthouse-baseline.json --comparison-output agentlighthouse-delta.md --comparison-format pr-summary
 ```
 
 Delta reports show score, confidence, coverage, new findings, resolved findings, and regression gate status.
+
+## Report Bundle
+
+```bash
+agentlighthouse scan . --report-dir agentlighthouse-reports
+```
+
+Writes `scan.json`, `scan.md`, `scan.sarif`, and `pr-summary.md`. With `--baseline`, the bundle also includes `comparison.json`, `comparison.md`, and `comparison-pr-summary.md`.
 
 ## PR-Aware Delta Reports
 

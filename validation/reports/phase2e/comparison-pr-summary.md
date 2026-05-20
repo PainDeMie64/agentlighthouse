@@ -51,5 +51,5 @@ None.
 
 ### Reports
 
-- validation/reports/pr-aware-comparison.json
-- validation/reports/pr-aware-comparison.md
+- validation/reports/phase2e/comparison.json
+- validation/reports/phase2e/comparison.md

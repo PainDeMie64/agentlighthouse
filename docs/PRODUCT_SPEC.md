@@ -48,6 +48,15 @@
 - SARIF line regions when locations are available.
 - Dashboard PR impact demo.
 
+## Phase 2E Capabilities
+
+- Baseline lifecycle commands: create, validate, and summary.
+- Scan-plus-baseline convenience mode.
+- Report bundle generation for local and CI artifacts.
+- Hardened error messages for wrong JSON result types.
+- Dogfood GitHub workflow for this repository.
+- Public-alpha README and release checklist.
+
 ## Future Features
 
 - GitHub Checks reports and token-backed PR comments.

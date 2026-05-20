@@ -2,7 +2,16 @@
   "name": "@agentlighthouse/cli",
   "version": "0.1.0",
   "description": "AgentLighthouse command-line interface.",
+  "license": "MIT",
   "type": "module",
+  "files": [
+    "dist",
+    "src",
+    "!src/__tests__",
+    "!dist/__tests__",
+    "package.json",
+    "README.md"
+  ],
   "bin": {
     "agentlighthouse": "./dist/index.js"
   },

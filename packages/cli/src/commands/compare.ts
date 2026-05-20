@@ -52,8 +52,8 @@ export async function runCompareCommand(options: CompareCommandOptions): Promise
   if (!["text", "json", "markdown", "pr-summary"].includes(format)) {
     throw new Error(`Unsupported format "${format}". Use text, json, markdown, or pr-summary.`);
   }
-  const baseline = await readScanResult(options.baseline);
-  const current = await readScanResult(options.current);
+  const baseline = await readScanResultFile(options.baseline);
+  const current = await readScanResultFile(options.current);
   const changedFiles = await readChangedFiles(options);
   const comparison = compareScanResults(baseline, current, { changedFiles });
   const gateResult = evaluateComparisonGates(comparison, options);
@@ -80,19 +80,47 @@ export async function runCompareCommand(options: CompareCommandOptions): Promise
   }
 }
 
-async function readScanResult(filePath: string) {
+export async function readScanResultFile(filePath: string) {
   const resolved = resolveFromInvocationCwd(filePath);
-  const parsed = JSON.parse(await readFile(resolved, "utf8")) as unknown;
-  if (parsed && typeof parsed === "object" && "comparisonId" in parsed && !("scanId" in parsed)) {
+  let raw: string;
+  try {
+    raw = await readFile(resolved, "utf8");
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
     throw new Error(
-      `${filePath} is a comparison report. The compare command expects saved scan result JSON files for --baseline and --current.`
+      `Could not read scan result JSON at ${filePath}. Expected a file produced by: agentlighthouse scan . --format json --output ${filePath}. ${message}`
     );
   }
-  return scanResultSchema.parse(parsed);
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw) as unknown;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(
+      `Invalid JSON in ${filePath}. Expected AgentLighthouse scan-result JSON. Recreate it with: agentlighthouse scan . --format json --output ${filePath}. ${message}`
+    );
+  }
+  if (parsed && typeof parsed === "object" && "comparisonId" in parsed && !("scanId" in parsed)) {
+    throw new Error(
+      `${filePath} is a comparison report, not a scan-result JSON file. Use files produced by: agentlighthouse scan . --format json --output current.json`
+    );
+  }
+  const result = scanResultSchema.safeParse(parsed);
+  if (!result.success) {
+    throw new Error(
+      `${filePath} is not a valid AgentLighthouse scan-result JSON file. Expected fields include scanId, score, coverage, findings, and scoringModelVersion. Recreate it with: agentlighthouse scan . --format json --output ${filePath}`
+    );
+  }
+  if (result.data.scoringModelVersion !== "0.1.0") {
+    throw new Error(
+      `${filePath} uses unsupported scoring model ${result.data.scoringModelVersion}. This CLI supports scoring model 0.1.0. Regenerate the file with this CLI version.`
+    );
+  }
+  return result.data;
 }
 
-async function readChangedFiles(
-  options: CompareCommandOptions
+export async function readChangedFiles(
+  options: Pick<CompareCommandOptions, "changedFiles" | "gitBase" | "gitHead">
 ): Promise<ChangedFile[] | undefined> {
   const hasExplicit = Boolean(options.changedFiles);
   const hasGit = Boolean(options.gitBase || options.gitHead);
@@ -101,7 +129,14 @@ async function readChangedFiles(
   }
   if (options.changedFiles) {
     const resolved = resolveFromInvocationCwd(options.changedFiles);
-    return parseChangedFilesText(await readFile(resolved, "utf8"), "explicit");
+    try {
+      return parseChangedFilesText(await readFile(resolved, "utf8"), "explicit");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      throw new Error(
+        `Could not read changed-files list at ${options.changedFiles}. Create one with: git diff --name-status origin/main...HEAD > changed-files.txt. ${message}`
+      );
+    }
   }
   if (options.gitBase || options.gitHead) {
     if (!options.gitBase || !options.gitHead) {
@@ -119,7 +154,13 @@ async function readChangedFiles(
           maxBuffer: 1024 * 1024
         }
       );
-      return parseGitNameStatus(stdout, "git");
+      const files = parseGitNameStatus(stdout, "git");
+      if (files.length === 0) {
+        process.stderr.write(
+          `Git diff ${options.gitBase}...${options.gitHead} returned no changed files; PR impact sections will be empty.\n`
+        );
+      }
+      return files;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       throw new Error(
@@ -130,7 +171,7 @@ async function readChangedFiles(
   return undefined;
 }
 
-function renderComparisonResult(
+export function renderComparisonResult(
   result: ComparisonResult,
   format: CompareFormat,
   options: { status: "passed" | "failed"; reasons: string[]; reportPaths: string[] }
@@ -147,7 +188,7 @@ function renderComparisonResult(
   return renderComparisonCliReport(result);
 }
 
-function evaluateComparisonGates(
+export function evaluateComparisonGates(
   result: ComparisonResult,
   options: CompareCommandOptions
 ): { failed: boolean; reasons: string[] } {

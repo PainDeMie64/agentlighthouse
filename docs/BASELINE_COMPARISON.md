@@ -1,6 +1,7 @@
 # Baseline Comparison Design
 
 Phase 2C implements baseline comparison for saved AgentLighthouse JSON scan results.
+Phase 2E adds first-class baseline lifecycle commands and scan-plus-baseline convenience mode.
 
 ## Goals
 
@@ -18,6 +19,9 @@ Phase 2C implements baseline comparison for saved AgentLighthouse JSON scan resu
 
 ```bash
 agentlighthouse scan . --output current.json
+agentlighthouse baseline create . --output agentlighthouse-baseline.json
+agentlighthouse baseline validate agentlighthouse-baseline.json
+agentlighthouse baseline summary agentlighthouse-baseline.json
 agentlighthouse compare --baseline main.json --current current.json
 agentlighthouse compare --baseline main.json --current current.json --format markdown --output delta.md
 agentlighthouse compare --baseline main.json --current current.json --format pr-summary --output pr-delta.md
@@ -25,11 +29,30 @@ agentlighthouse compare --baseline main.json --current current.json --fail-on-re
 agentlighthouse compare --baseline main.json --current current.json --fail-on-score-drop 5 --fail-on-new-severity high
 agentlighthouse compare --baseline main.json --current current.json --changed-files changed-files.txt --format pr-summary
 agentlighthouse compare --baseline main.json --current current.json --git-base origin/main --git-head HEAD --fail-on-pr-regression
+agentlighthouse scan . --baseline main.json --comparison-output delta.md --comparison-format pr-summary
+agentlighthouse scan . --baseline main.json --report-dir agentlighthouse-reports --fail-on-regression
 ```
 
 The compare command does not rescan. It reads two saved JSON reports, which keeps CI deterministic and makes it easy to compare local, artifact, or branch-generated reports.
 
 Changed-file inputs are optional. Full scans remain the source of truth; changed files classify which findings are most relevant to the pull request.
+
+## Baseline Lifecycle
+
+Create a baseline when the team accepts the current readiness state:
+
+```bash
+agentlighthouse baseline create . --output agentlighthouse-baseline.json
+```
+
+Validate a baseline before using it in CI:
+
+```bash
+agentlighthouse baseline validate agentlighthouse-baseline.json
+agentlighthouse baseline summary agentlighthouse-baseline.json
+```
+
+AgentLighthouse rejects comparison-result JSON as a baseline. If that happens, regenerate a scan-result baseline with `baseline create` or `scan --format json`.
 
 ## Baseline Storage Strategies
 
@@ -41,7 +64,7 @@ Run a scan on `main`, commit `agentlighthouse-baseline.json`, and compare pull r
 agentlighthouse scan . --format json --output agentlighthouse-baseline.json
 ```
 
-This is simple and token-free. The tradeoff is that the baseline must be updated intentionally when the team accepts new readiness debt or resolves old debt.
+This is simple and token-free. The tradeoff is that the baseline must be updated intentionally when the team accepts new readiness debt or resolves previous debt.
 
 ### CI Artifact Baseline
 
@@ -89,6 +112,8 @@ Score deltas are shown alongside confidence and coverage deltas so a project is 
 - `--fail-on-pr-regression`
 
 Reports are written before gates fail.
+
+`scan --baseline` applies the same comparison gates after writing scan and comparison reports.
 
 ## PR-Aware Changed Files
 

@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_289c35ad",
-  "scannedPath": "<repo>",
-  "startedAt": "2026-05-20T21:08:14.482Z",
-  "completedAt": "2026-05-20T21:08:14.498Z",
-  "durationMs": 16,
+  "scanId": "scan_f37cffdf",
+  "scannedPath": "/home/mikael/Documents/Codex/2026-05-20/you-are-a-senior-autonomous-local",
+  "startedAt": "2026-05-20T21:09:25.728Z",
+  "completedAt": "2026-05-20T21:09:25.754Z",
+  "durationMs": 26,
   "agentLighthouseVersion": "0.1.0",
   "profile": "devtool",
   "scoringModelVersion": "0.1.0",
@@ -314,13 +314,13 @@
   ],
   "warnings": [],
   "errors": [],
-  "projectPath": "<repo>",
-  "scannedAt": "2026-05-20T21:08:14.498Z",
+  "projectPath": "/home/mikael/Documents/Codex/2026-05-20/you-are-a-senior-autonomous-local",
+  "scannedAt": "2026-05-20T21:09:25.754Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],
   "signals": {
-    "rootPath": "<repo>",
+    "rootPath": "/home/mikael/Documents/Codex/2026-05-20/you-are-a-senior-autonomous-local",
     "projectName": "agentlighthouse",
     "scannedFiles": [
       ".agentlighthouseignore",

@@ -8,6 +8,9 @@ describe("CI distribution assets", () => {
   it("includes the composite action and example workflows", async () => {
     await expect(access(path.join(repoRoot, "action.yml"))).resolves.toBeUndefined();
     await expect(
+      access(path.join(repoRoot, ".github/workflows/agentlighthouse.yml"))
+    ).resolves.toBeUndefined();
+    await expect(
       access(path.join(repoRoot, "examples/github-actions/basic.yml"))
     ).resolves.toBeUndefined();
     await expect(
@@ -27,6 +30,18 @@ describe("CI distribution assets", () => {
     ).resolves.toBeUndefined();
     await expect(
       access(path.join(repoRoot, "examples/github-actions/changed-files-list.yml"))
+    ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/scan-only.yml"))
+    ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/committed-baseline-pr.yml"))
+    ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/generated-baseline-main.yml"))
+    ).resolves.toBeUndefined();
+    await expect(
+      access(path.join(repoRoot, "examples/github-actions/sarif-code-scanning.yml"))
     ).resolves.toBeUndefined();
   });
 });

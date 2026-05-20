@@ -1,0 +1,25 @@
+name: AgentLighthouse committed baseline PR
+
+on:
+  pull_request:
+
+jobs:
+  agent-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          baseline: agentlighthouse-baseline.json
+          comparison-format: pr-summary
+          comparison-output: agentlighthouse-delta.md
+          report-dir: agentlighthouse-reports
+          fail-on-pr-regression: "true"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agentlighthouse-reports
+          path: |
+            agentlighthouse-reports
+            agentlighthouse-delta.md

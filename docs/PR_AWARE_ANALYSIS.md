@@ -66,7 +66,7 @@ Global regression gates such as `--fail-on-regression` and `--fail-on-score-drop
 ## Interpreting Buckets
 
 - `touched`: the finding location file is directly in the changed-file list.
-- `related`: the finding is linked through a location key, old path, or source file.
+- `related`: the finding is linked through a location key, previous path, or source file.
 - `global`: the finding affects project-level readiness or lacks a single file owner.
 - `unrelated`: an unchanged finding outside the changed-file set.
 - `unknown`: AgentLighthouse could not confidently locate the finding.

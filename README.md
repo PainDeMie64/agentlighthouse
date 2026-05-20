@@ -1,43 +1,197 @@
 # AgentLighthouse
 
-AgentLighthouse is Lighthouse for AI agents. It scans repositories, docs, API specs, MCP-related files, and agent instruction artifacts to answer one question:
+AgentLighthouse is Lighthouse for AI agents. It scans a repository and answers:
 
-> Can AI coding agents correctly understand and use this project?
+> Can AI coding agents correctly understand, use, and verify this project?
 
-The first version is deterministic and local-first. It does not require OpenAI, Anthropic, or any other model-provider key.
+It is local-first and deterministic by default. It does not require OpenAI, Anthropic, or any other model-provider key.
 
-## Why It Exists
+## Why Agent-Readiness Matters
 
-Coding agents are only as good as the context they can read. Many projects have useful human knowledge scattered across READMEs, docs, CI files, package scripts, API schemas, and tribal workflow notes. AgentLighthouse turns that environment into an auditable score, structured findings, and concrete fixes.
+Coding agents work best when a project has clear setup commands, test commands, docs, API specs, MCP tool descriptions, examples, task workflows, and safety guidance. Many mature projects are excellent for humans but still hard for agents because the context is scattered or not machine-readable.
 
-It complements Codex, Claude Code, Cursor, GitHub Copilot, Gemini, and future agent platforms by making projects more agent-readable.
+AgentLighthouse turns that context into a score, structured findings, reports, baselines, and PR deltas.
 
-## MVP Features
+## What It Does Not Do
 
-- Local project scanner.
-- Agent-readiness score from 0 to 100.
-- Structured findings with severity, category, evidence, recommendation, and suggested fix type.
-- Detection for `AGENTS.md`, `CLAUDE.md`, `llms.txt`, Cursor/Copilot hints, docs, OpenAPI specs, package scripts, MCP signals, benchmark files, and common config.
-- Semantic OpenAPI and MCP analysis for agent failure modes, unsafe ambiguity, examples, auth, errors, and tool schemas.
-- Opt-in command probes for trusted local verification; static analysis remains the default.
-- Score interpretation that separates human-readable signals, agent-specific context, and verifiability.
-- CI-ready JSON, Markdown, SARIF, PR-summary, and GitHub step-summary reports.
-- Explicit CI gates for score, severity, and confidence.
-- Baseline comparison and PR delta reports for score, confidence, coverage, new findings, and resolved findings.
-- PR-aware changed-file classification so reviewers can separate new findings on touched files from global or unrelated existing findings.
-- Starter artifact generation for agent instructions, Claude memory, `llms.txt`, `.agentlighthouseignore`, and task benchmarks.
-- CLI commands for `scan`, `init`, and `version`.
-- Next.js dashboard with sample score, findings, subscores, and recommendations.
-- Core unit tests and GitHub Actions CI.
+AgentLighthouse is not:
+
+- a chatbot
+- a replacement for Codex, Claude Code, Cursor, Copilot, OpenClaw, or other agents
+- an AI IDE
+- an agent execution platform
+- a hosted governance suite
+- a model-provider gateway
+
+It prepares projects so existing and future agents can use them more reliably.
 
 ## Quickstart
 
 ```bash
 pnpm install
-pnpm --filter @agentlighthouse/cli dev scan examples/sample-project
-pnpm --filter @agentlighthouse/cli dev scan examples/sample-project --json
-pnpm --filter @agentlighthouse/cli dev init examples/sample-project --dry-run
+pnpm --filter @agentlighthouse/cli dev scan .
+pnpm --filter @agentlighthouse/cli dev scan . --report-dir agentlighthouse-reports
 ```
+
+The report bundle writes:
+
+- `scan.json`
+- `scan.md`
+- `scan.sarif`
+- `pr-summary.md`
+
+## Baselines
+
+Create a baseline from the current accepted state:
+
+```bash
+pnpm --filter @agentlighthouse/cli dev baseline create . --output agentlighthouse-baseline.json
+pnpm --filter @agentlighthouse/cli dev baseline validate agentlighthouse-baseline.json
+pnpm --filter @agentlighthouse/cli dev baseline summary agentlighthouse-baseline.json
+```
+
+A baseline is a normal scan-result JSON file. Committing or updating it is an intentional project decision.
+
+## Compare Against A Baseline
+
+```bash
+pnpm --filter @agentlighthouse/cli dev scan . \
+  --baseline agentlighthouse-baseline.json \
+  --report-dir agentlighthouse-reports \
+  --comparison-output agentlighthouse-delta.md \
+  --comparison-format pr-summary
+```
+
+For PR-aware analysis:
+
+```bash
+git diff --name-status origin/main...HEAD > changed-files.txt
+pnpm --filter @agentlighthouse/cli dev scan . \
+  --baseline agentlighthouse-baseline.json \
+  --changed-files changed-files.txt \
+  --fail-on-pr-regression
+```
+
+## CI Usage
+
+Simple scan gate:
+
+```bash
+agentlighthouse scan . --fail-under 75 --report-dir agentlighthouse-reports
+```
+
+Baseline gate:
+
+```bash
+agentlighthouse scan . \
+  --baseline agentlighthouse-baseline.json \
+  --report-dir agentlighthouse-reports \
+  --fail-under 80 \
+  --min-confidence medium \
+  --fail-on-regression
+```
+
+PR-aware gate:
+
+```bash
+agentlighthouse scan . \
+  --baseline agentlighthouse-baseline.json \
+  --git-base origin/main \
+  --git-head HEAD \
+  --fail-on-pr-regression
+```
+
+Reports are written before gates fail.
+
+## GitHub Action
+
+```yaml
+- uses: actions/checkout@v4
+  with:
+    fetch-depth: 0
+- uses: PainDeMie64/agentlighthouse@main
+  with:
+    path: "."
+    baseline: agentlighthouse-baseline.json
+    report-dir: agentlighthouse-reports
+    git-base: origin/${{ github.base_ref }}
+    git-head: HEAD
+    fail-on-pr-regression: "true"
+```
+
+The current action is source-based: it installs and builds AgentLighthouse from the checked-out action path. A future npm distribution will make this faster.
+
+## Example Output
+
+```text
+AgentLighthouse Score: 85/100
+Confidence: medium
+Coverage: 67%
+
+New high-severity findings:
+1. Missing AGENTS.md
+2. No test script in package.json
+
+Recommended actions:
+1. Create AGENTS.md with setup, tests, architecture, conventions, and safety rules.
+2. Add a package.json test script or document the equivalent command clearly.
+```
+
+## Interpreting Scores
+
+AgentLighthouse measures agent-readiness, not general software quality.
+
+- `90-100`: strong agent context, still check confidence and coverage.
+- `70-89`: useful foundation with concrete gaps.
+- `40-69`: agents will likely need human help.
+- `0-39`: missing core agent-readable context or verifiability.
+
+The score is shown with:
+
+- confidence
+- coverage
+- human-readable project signals
+- agent-specific context layer
+- verifiability signals
+
+## Profiles
+
+Supported profiles:
+
+- `default`
+- `devtool`
+- `api`
+- `mcp`
+- `docs`
+- `library`
+- `internal`
+
+Use a profile explicitly:
+
+```bash
+agentlighthouse scan . --profile api
+```
+
+Or set `agentlighthouse.config.json`.
+
+## Command Probes
+
+Static analysis is the default. Command probes are opt-in:
+
+```bash
+agentlighthouse scan . --probe commands
+```
+
+AgentLighthouse never runs install commands or arbitrary commands copied from docs. Probes are intended for trusted local or CI environments.
+
+## OpenAPI And MCP Analysis
+
+AgentLighthouse includes deterministic semantic checks for:
+
+- OpenAPI operation IDs, descriptions, examples, auth, errors, pagination, rate limits, and destructive operations
+- MCP tool names, descriptions, input schemas, examples, privacy, auth, and side effects
+
+The goal is to explain what an AI coding agent is likely to misunderstand and how to fix it.
 
 ## Local Development
 
@@ -47,105 +201,18 @@ pnpm test
 pnpm typecheck
 pnpm lint
 pnpm build
+pnpm validate:realworld
 pnpm dev
 ```
 
-The dashboard runs from `apps/web` through the root `pnpm dev` script.
+The dashboard runs from `apps/web`.
 
 ## Troubleshooting
 
-- If install fails, confirm Node.js 22+ and pnpm 10.33.0.
-- If command probes fail, rerun the same package script manually and check whether local dependencies are installed.
-- If validation reports include unexpected third-party evidence, keep external reports ignored and summarize only the calibration notes.
-
-## CLI Usage
-
-```bash
-agentlighthouse scan <path>
-agentlighthouse scan <path> --json --output report.json
-agentlighthouse scan <path> --format markdown --output report.md
-agentlighthouse scan <path> --format sarif --output report.sarif
-agentlighthouse scan <path> --format pr-summary --output pr-summary.md
-agentlighthouse scan <path> --profile devtool
-agentlighthouse scan <path> --probe commands
-agentlighthouse scan <path> --fail-under 70 --min-confidence medium
-agentlighthouse scan <path> --fail-on-severity high
-agentlighthouse compare --baseline baseline.json --current current.json --format markdown --output delta.md
-agentlighthouse compare --baseline baseline.json --current current.json --fail-on-regression
-agentlighthouse compare --baseline baseline.json --current current.json --changed-files changed-files.txt --format pr-summary
-agentlighthouse compare --baseline baseline.json --current current.json --git-base origin/main --git-head HEAD --fail-on-pr-regression
-agentlighthouse init <path> --dry-run
-agentlighthouse init <path> --force
-agentlighthouse version
-```
-
-During development, use:
-
-```bash
-pnpm --filter @agentlighthouse/cli dev scan .
-pnpm --filter @agentlighthouse/cli dev init . --dry-run
-pnpm --filter @agentlighthouse/cli dev compare --baseline validation/reports/sample-good-project.json --current validation/reports/sample-bad-project.json --format pr-summary
-pnpm --filter @agentlighthouse/cli dev compare --baseline validation/reports/sample-good-project.json --current validation/reports/sample-bad-project.json --changed-files examples/comparison/changed-files.txt --format pr-summary
-```
-
-## Dashboard Usage
-
-```bash
-pnpm dev
-```
-
-Then open the local Next.js URL printed by the dev server. The initial dashboard uses sample scan data from `@agentlighthouse/core`.
-
-## CI Usage
-
-AgentLighthouse can run as a score gate in GitHub Actions or any CI:
-
-```yaml
-- name: AgentLighthouse scan
-  run: pnpm --filter @agentlighthouse/cli dev scan . --fail-under 75 --format markdown --output agentlighthouse-report.md
-```
-
-The command writes the report before returning a non-zero exit code when the score is below the threshold.
-
-Use the composite action when consuming AgentLighthouse from GitHub:
-
-```yaml
-- uses: actions/checkout@v4
-- uses: PainDeMie64/agentlighthouse@main
-  with:
-    path: "."
-    fail-under: "75"
-    fail-on-severity: high
-    min-confidence: medium
-    output-sarif: "true"
-    baseline: agentlighthouse-baseline.json
-    comparison-output: agentlighthouse-delta.md
-    git-base: origin/main
-    git-head: HEAD
-    fail-on-regression: "true"
-    fail-on-pr-regression: "true"
-```
-
-Use `fetch-depth: 0` in checkout when relying on `git-base`/`git-head`. See `docs/CI.md`, `docs/GITHUB_ACTION.md`, `docs/PR_AWARE_ANALYSIS.md`, and `docs/SARIF.md`.
-
-## Configuration
-
-Add `agentlighthouse.config.json` to set a default profile:
-
-```json
-{
-  "profile": "devtool",
-  "probes": {
-    "commands": false,
-    "timeoutMs": 30000,
-    "allowedScripts": ["test", "typecheck", "lint"]
-  }
-}
-```
-
-Supported profiles are `default`, `devtool`, `api`, `mcp`, `docs`, `library`, and `internal`.
-
-Command probes are off by default. AgentLighthouse never runs install commands or arbitrary commands copied from docs.
+- If a baseline fails validation, confirm it was created by `agentlighthouse scan --format json` or `agentlighthouse baseline create`, not by `agentlighthouse compare`.
+- If git-based PR analysis fails, fetch enough history and retry with `git diff --name-status <base>...<head>`.
+- If command probes fail, rerun the underlying package script locally; probes are opt-in and do not install dependencies.
+- If a score feels low for a mature project, check confidence, coverage, and the agent-specific context layer before treating it as a software-quality judgment.
 
 ## Repository Structure
 
@@ -153,23 +220,34 @@ Command probes are off by default. AgentLighthouse never runs install commands o
 apps/web                Next.js dashboard
 packages/core           scanner, analyzers, scoring, schemas, generators, reporters
 packages/cli            command-line interface
-examples                 sample projects, including good/bad OpenAPI and MCP fixtures
-docs                    product, architecture, scoring, development, validation docs
+examples                sample projects and GitHub Action examples
+docs                    product, architecture, scoring, CI, release, and validation docs
 validation/reports      safe generated scan reports
 ```
 
+## Current Limitations
+
+- No hosted SaaS yet.
+- No auth or billing.
+- No token-backed PR comments.
+- No GitHub Checks API integration.
+- No AI agent execution.
+- OpenAPI `$ref` and MCP static extraction are useful but not complete.
+- The GitHub Action is source-based until packaging is finalized.
+
 ## Roadmap
 
-- Phase 0: foundation, deterministic scanner, docs, CI.
-- Phase 1: local scanner and dashboard depth.
-- Phase 2A: semantic OpenAPI, MCP, task benchmark, and command probe analysis.
-- Phase 2B: CI gates, SARIF, GitHub Action, PR summaries, and step summaries.
-- Phase 2C: baseline comparison and PR delta reporting.
-- Phase 2D: changed-files-aware PR analysis and precise finding locations.
-- Phase 3: docs crawler plus deeper API/MCP reference resolution.
-- Phase 4: agent benchmark runner.
-- Phase 5: hosted SaaS dashboard.
+- Phase 2E: baseline lifecycle, report bundles, dogfood CI, public-alpha DX.
+- Phase 3: docs crawler and deeper API/MCP reference resolution.
+- Phase 4: deterministic benchmark runner.
+- Phase 5: hosted dashboard and project history.
 
-## Contributing
+## More Docs
 
-Keep the product focused on agent-readiness verification. Generation is useful only when it improves measurable readiness. Add focused tests for scanner, scoring, generator, and CLI changes.
+- [CI](docs/CI.md)
+- [GitHub Action](docs/GITHUB_ACTION.md)
+- [Baseline Comparison](docs/BASELINE_COMPARISON.md)
+- [PR-Aware Analysis](docs/PR_AWARE_ANALYSIS.md)
+- [Scoring Model](docs/SCORING_MODEL.md)
+- [Rules](docs/RULES.md)
+- [Release Process](docs/RELEASE.md)

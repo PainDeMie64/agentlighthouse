@@ -1,0 +1,28 @@
+name: AgentLighthouse SARIF
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  sarif:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          output-sarif: "true"
+          report-dir: agentlighthouse-reports
+      - uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: agentlighthouse-reports/scan.sarif
+
+# Uploading SARIF uses GitHub's code scanning action and requires security-events permission.
+# AgentLighthouse itself does not require a token or hosted service.

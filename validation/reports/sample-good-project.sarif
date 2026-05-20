@@ -116,18 +116,6 @@
           "message": {
             "text": "MCP readiness could not be evaluated yet: If this project exposes MCP tools, include server files and clear tool descriptions."
           },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "No file or package name matching MCP was scanned."
-                },
-                "region": {
-                  "startLine": 1
-                }
-              }
-            }
-          ],
           "partialFingerprints": {
             "agentLighthouseFinding": "alh_0a02b750"
           },
@@ -137,8 +125,7 @@
             "recommendation": "If this project exposes MCP tools, include server files and clear tool descriptions.",
             "confidence": "medium",
             "subject": "No file or package name matching MCP was scanned.",
-            "locationKey": "no file or package name matching mcp was scanned.",
-            "sourceKind": "unknown"
+            "locationKey": "no file or package name matching mcp was scanned."
           }
         },
         {
@@ -147,18 +134,6 @@
           "message": {
             "text": "Command verification probes were skipped: Use command probes in trusted local or CI environments when you want executable verification."
           },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "Run with --probe commands or --run-probes to execute safe script probes."
-                },
-                "region": {
-                  "startLine": 1
-                }
-              }
-            }
-          ],
           "partialFingerprints": {
             "agentLighthouseFinding": "alh_ac2d574f"
           },
@@ -170,8 +145,7 @@
             "fixExample": "agentlighthouse scan . --probe commands",
             "confidence": "medium",
             "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-            "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-            "sourceKind": "unknown"
+            "locationKey": "run with --probe commands or --run-probes to execute safe script probes."
           }
         }
       ]

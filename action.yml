@@ -37,6 +37,14 @@ inputs:
     description: Write agentlighthouse-report.sarif.
     required: false
     default: "false"
+  output-pr-summary:
+    description: Write agentlighthouse-pr-summary.md.
+    required: false
+    default: "true"
+  report-dir:
+    description: Optional report bundle directory inside the caller workspace.
+    required: false
+    default: ""
   github-step-summary:
     description: Append a concise summary to the GitHub step summary.
     required: false
@@ -132,6 +140,8 @@ runs:
         scan_path="$GITHUB_WORKSPACE/${{ inputs.path }}"
         common_args=()
         gate_args=()
+        comparison_args=()
+        output_args=()
 
         if [ -n "${{ inputs.profile }}" ]; then
           common_args+=(--profile "${{ inputs.profile }}")
@@ -151,6 +161,10 @@ runs:
 
         if [ -n "${{ inputs.min-confidence }}" ]; then
           gate_args+=(--min-confidence "${{ inputs.min-confidence }}")
+        fi
+
+        if [ -n "${{ inputs.report-dir }}" ]; then
+          output_args+=(--report-dir "$GITHUB_WORKSPACE/${{ inputs.report-dir }}")
         fi
 
         if [ "${{ inputs.output-json }}" = "true" ]; then
@@ -186,75 +200,78 @@ runs:
           summary_args+=(--github-step-summary)
         fi
 
-        pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
-          "${common_args[@]}" \
-          "${gate_args[@]}" \
-          "${summary_args[@]}" \
-          --format pr-summary \
-          --output "$GITHUB_WORKSPACE/agentlighthouse-pr-summary.md"
-
         if [ -n "${{ inputs.baseline }}" ]; then
-          compare_gate_args=()
+          comparison_args+=(--baseline "$GITHUB_WORKSPACE/${{ inputs.baseline }}")
+          comparison_args+=(--comparison-format "${{ inputs.comparison-format }}")
+          comparison_args+=(--comparison-output "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}")
 
           if [ "${{ inputs.fail-on-regression }}" = "true" ]; then
-            compare_gate_args+=(--fail-on-regression)
+            comparison_args+=(--fail-on-regression)
           fi
 
           if [ -n "${{ inputs.fail-on-score-drop }}" ]; then
-            compare_gate_args+=(--fail-on-score-drop "${{ inputs.fail-on-score-drop }}")
+            comparison_args+=(--fail-on-score-drop "${{ inputs.fail-on-score-drop }}")
           fi
 
           if [ -n "${{ inputs.fail-on-coverage-drop }}" ]; then
-            compare_gate_args+=(--fail-on-coverage-drop "${{ inputs.fail-on-coverage-drop }}")
+            comparison_args+=(--fail-on-coverage-drop "${{ inputs.fail-on-coverage-drop }}")
           fi
 
           if [ -n "${{ inputs.fail-on-confidence-drop }}" ]; then
-            compare_gate_args+=(--fail-on-confidence-drop "${{ inputs.fail-on-confidence-drop }}")
+            comparison_args+=(--fail-on-confidence-drop "${{ inputs.fail-on-confidence-drop }}")
           fi
 
           if [ -n "${{ inputs.fail-on-new-severity }}" ]; then
-            compare_gate_args+=(--fail-on-new-severity "${{ inputs.fail-on-new-severity }}")
+            comparison_args+=(--fail-on-new-severity "${{ inputs.fail-on-new-severity }}")
           fi
 
           if [ -n "${{ inputs.changed-files }}" ]; then
-            compare_gate_args+=(--changed-files "$GITHUB_WORKSPACE/${{ inputs.changed-files }}")
+            comparison_args+=(--changed-files "$GITHUB_WORKSPACE/${{ inputs.changed-files }}")
           elif [ -n "${{ inputs.git-base }}" ] || [ -n "${{ inputs.git-head }}" ]; then
-            compare_gate_args+=(--git-base "${{ inputs.git-base }}" --git-head "${{ inputs.git-head }}")
+            comparison_args+=(--git-base "${{ inputs.git-base }}" --git-head "${{ inputs.git-head }}")
           fi
 
           if [ -n "${{ inputs.fail-on-new-changed-severity }}" ]; then
-            compare_gate_args+=(--fail-on-new-changed-severity "${{ inputs.fail-on-new-changed-severity }}")
+            comparison_args+=(--fail-on-new-changed-severity "${{ inputs.fail-on-new-changed-severity }}")
           fi
 
           if [ "${{ inputs.fail-on-new-changed-high }}" = "true" ]; then
-            compare_gate_args+=(--fail-on-new-changed-high)
+            comparison_args+=(--fail-on-new-changed-high)
           fi
 
           if [ "${{ inputs.fail-on-new-changed-critical }}" = "true" ]; then
-            compare_gate_args+=(--fail-on-new-changed-critical)
+            comparison_args+=(--fail-on-new-changed-critical)
           fi
 
           if [ "${{ inputs.fail-on-pr-regression }}" = "true" ]; then
-            compare_gate_args+=(--fail-on-pr-regression)
+            comparison_args+=(--fail-on-pr-regression)
           fi
-
-          set +e
-          pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev compare \
-            --baseline "$GITHUB_WORKSPACE/${{ inputs.baseline }}" \
-            --current "$GITHUB_WORKSPACE/agentlighthouse-report.json" \
-            --format "${{ inputs.comparison-format }}" \
-            --output "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}" \
-            "${compare_gate_args[@]}"
-          compare_status=$?
-          set -e
-
-          if [ "${{ inputs.github-step-summary }}" = "true" ] && [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
-            {
-              echo ""
-              echo "---"
-              cat "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}"
-            } >> "$GITHUB_STEP_SUMMARY"
-          fi
-
-          exit "$compare_status"
         fi
+
+        final_output_args=()
+        if [ "${{ inputs.output-pr-summary }}" = "true" ]; then
+          final_output_args+=(--format pr-summary --output "$GITHUB_WORKSPACE/agentlighthouse-pr-summary.md")
+        else
+          final_output_args+=(--format text)
+        fi
+
+        set +e
+        pnpm --dir "$GITHUB_ACTION_PATH" --filter @agentlighthouse/cli dev scan "$scan_path" \
+          "${common_args[@]}" \
+          "${gate_args[@]}" \
+          "${comparison_args[@]}" \
+          "${output_args[@]}" \
+          "${summary_args[@]}" \
+          "${final_output_args[@]}"
+        scan_status=$?
+        set -e
+
+        if [ "${{ inputs.github-step-summary }}" = "true" ] && [ -n "${GITHUB_STEP_SUMMARY:-}" ] && [ -n "${{ inputs.baseline }}" ] && [ -f "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}" ]; then
+          {
+            echo ""
+            echo "---"
+            cat "$GITHUB_WORKSPACE/${{ inputs.comparison-output }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+        fi
+
+        exit "$scan_status"

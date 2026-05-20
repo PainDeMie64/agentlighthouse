@@ -1,8 +1,8 @@
 {
-  "scanId": "scan_2d358cb0",
+  "scanId": "scan_850c5cd3",
   "scannedPath": "<repo>/examples/mcp-good-project",
-  "startedAt": "2026-05-20T20:44:21.214Z",
-  "completedAt": "2026-05-20T20:44:21.217Z",
+  "startedAt": "2026-05-20T21:08:14.401Z",
+  "completedAt": "2026-05-20T21:08:14.404Z",
   "durationMs": 3,
   "agentLighthouseVersion": "0.1.0",
   "profile": "mcp",
@@ -119,14 +119,7 @@
         "no openapi.* or swagger.* file was scanned."
       ],
       "locationKey": "no openapi.* or swagger.* file was scanned.",
-      "subject": "No openapi.* or swagger.* file was scanned.",
-      "location": {
-        "file": "No openapi.* or swagger.* file was scanned.",
-        "locationKey": "no openapi.* or swagger.* file was scanned.",
-        "subject": "No openapi.* or swagger.* file was scanned.",
-        "symbol": "No openapi.* or swagger.* file was scanned.",
-        "sourceKind": "openapi"
-      }
+      "subject": "No openapi.* or swagger.* file was scanned."
     },
     {
       "id": "mcp.detected",
@@ -171,14 +164,7 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-      "location": {
-        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "sourceKind": "unknown"
-      }
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -356,7 +342,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/mcp-good-project",
-  "scannedAt": "2026-05-20T20:44:21.217Z",
+  "scannedAt": "2026-05-20T21:08:14.404Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

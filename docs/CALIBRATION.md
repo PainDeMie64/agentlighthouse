@@ -52,7 +52,7 @@ pnpm validate:realworld
 - Sample OpenAPI files inside `examples/` caused AgentLighthouse itself to be detected as an API project. Root self-scan now ignores example OpenAPI files for project classification.
 - README command extraction previously misread `pnpm --filter` as a package script. Option flags are ignored.
 - The freshness rule flagged its own documented rule ID because `deprecated` appeared inside inline code in `docs/RULES.md`. Freshness checks now strip inline code before matching stale terms.
-- The old sample-good OpenAPI fixture was too toy-like and scored lower under semantic analysis. It was upgraded instead of weakening the OpenAPI rules.
+- The previous sample-good OpenAPI fixture was too toy-like and scored lower under semantic analysis. It was upgraded instead of weakening the OpenAPI rules.
 
 ## False Negatives Found
 

@@ -1,0 +1,22 @@
+name: AgentLighthouse scan only
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  agent-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PainDeMie64/agentlighthouse@main
+        with:
+          path: "."
+          fail-under: "75"
+          report-dir: agentlighthouse-reports
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agentlighthouse-reports
+          path: agentlighthouse-reports

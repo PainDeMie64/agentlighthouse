@@ -2,7 +2,13 @@ import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { renderJsonReport, scanProject } from "@agentlighthouse/core";
+import {
+  compareScanResults,
+  renderComparisonJsonReport,
+  renderJsonReport,
+  scanResultSchema,
+  scanProject
+} from "@agentlighthouse/core";
 import { runCompareCommand } from "../commands/compare.js";
 
 describe("runCompareCommand", () => {
@@ -87,6 +93,26 @@ describe("runCompareCommand", () => {
     expect(report).toContain("Changed files analyzed");
     expect(report).toContain("New Findings On Changed Files");
     expect(process.exitCode).toBe(1);
+  });
+
+  it("rejects comparison-result JSON when scan-result JSON is expected", async () => {
+    const { baselinePath, currentPath, outputDir } = await comparisonFixture();
+    const comparisonPath = path.join(outputDir, "comparison.json");
+    const baseline = scanResultSchema.parse(JSON.parse(await readFile(baselinePath, "utf8")));
+    const current = scanResultSchema.parse(JSON.parse(await readFile(currentPath, "utf8")));
+    await writeFile(
+      comparisonPath,
+      renderComparisonJsonReport(compareScanResults(baseline, current)),
+      "utf8"
+    );
+
+    await expect(
+      runCompareCommand({
+        baseline: comparisonPath,
+        current: currentPath,
+        format: "json"
+      })
+    ).rejects.toThrow("comparison report, not a scan-result JSON");
   });
 });
 

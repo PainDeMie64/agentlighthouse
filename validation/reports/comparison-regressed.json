@@ -1,24 +1,24 @@
 {
-  "comparisonId": "cmp_8efdb236",
+  "comparisonId": "cmp_97ad35b2",
   "baseline": {
-    "scanId": "scan_7793b496",
+    "scanId": "scan_cf6a2683",
     "scannedPath": "<repo>/examples/sample-good-project",
     "score": 85,
     "confidence": "medium",
     "confidenceScore": 66,
     "coverage": 67,
     "profile": "api",
-    "completedAt": "2026-05-20T20:44:21.033Z"
+    "completedAt": "2026-05-20T21:08:14.179Z"
   },
   "current": {
-    "scanId": "scan_1eeadae9",
+    "scanId": "scan_76c199bb",
     "scannedPath": "<repo>/examples/sample-bad-project",
     "score": 0,
     "confidence": "low",
     "confidenceScore": 58,
     "coverage": 93,
     "profile": "library",
-    "completedAt": "2026-05-20T20:44:21.061Z"
+    "completedAt": "2026-05-20T21:08:14.211Z"
   },
   "deltas": {
     "scoreDelta": -85,
@@ -540,14 +540,7 @@
           "no openapi.* or swagger.* file was scanned."
         ],
         "locationKey": "no openapi.* or swagger.* file was scanned.",
-        "subject": "No openapi.* or swagger.* file was scanned.",
-        "location": {
-          "file": "No openapi.* or swagger.* file was scanned.",
-          "locationKey": "no openapi.* or swagger.* file was scanned.",
-          "subject": "No openapi.* or swagger.* file was scanned.",
-          "symbol": "No openapi.* or swagger.* file was scanned.",
-          "sourceKind": "openapi"
-        }
+        "subject": "No openapi.* or swagger.* file was scanned."
       }
     ],
     "resolved": [
@@ -596,14 +589,7 @@
           "run with --probe commands or --run-probes to execute safe script probes."
         ],
         "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "location": {
-          "file": "Run with --probe commands or --run-probes to execute safe script probes.",
-          "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-          "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-          "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
-          "sourceKind": "unknown"
-        }
+        "subject": "Run with --probe commands or --run-probes to execute safe script probes."
       },
       {
         "id": "mcp.not-evaluated",
@@ -622,14 +608,7 @@
           "no file or package name matching mcp was scanned."
         ],
         "locationKey": "no file or package name matching mcp was scanned.",
-        "subject": "No file or package name matching MCP was scanned.",
-        "location": {
-          "file": "No file or package name matching MCP was scanned.",
-          "locationKey": "no file or package name matching mcp was scanned.",
-          "subject": "No file or package name matching MCP was scanned.",
-          "symbol": "No file or package name matching MCP was scanned.",
-          "sourceKind": "unknown"
-        }
+        "subject": "No file or package name matching MCP was scanned."
       }
     ],
     "worsened": [],

@@ -7,6 +7,8 @@ coverage/
 .vercel/
 .tmp/
 validation/reports/external/
+agentlighthouse-reports/
+agentlighthouse-delta.md
 vendor/
 *.log
 .env

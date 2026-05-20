@@ -13,6 +13,7 @@ import { ScoreCard } from "../../components/ScoreCard";
 import { ScoreDeltaCard } from "../../components/ScoreDeltaCard";
 import { SemanticSummary } from "../../components/SemanticSummary";
 import { SubscoreGrid } from "../../components/SubscoreGrid";
+import { WorkflowDemo } from "../../components/WorkflowDemo";
 
 export default function DashboardPage() {
   return (
@@ -30,6 +31,7 @@ export default function DashboardPage() {
             <ScoreCard result={sampleScanResult} />
             <ProjectSummary result={sampleScanResult} />
             <SemanticSummary result={sampleScanResult} />
+            <WorkflowDemo />
             <SubscoreGrid result={sampleScanResult} />
             <ScoreDeltaCard comparison={sampleComparisonResult} />
             <DeltaSummary comparison={sampleComparisonResult} />

@@ -2,7 +2,16 @@
   "name": "@agentlighthouse/core",
   "version": "0.1.0",
   "description": "Core scanner, schemas, scoring, and generators for AgentLighthouse.",
+  "license": "MIT",
   "type": "module",
+  "files": [
+    "dist",
+    "src",
+    "!src/__tests__",
+    "!dist/__tests__",
+    "package.json",
+    "README.md"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

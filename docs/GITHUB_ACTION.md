@@ -12,6 +12,7 @@ AgentLighthouse includes a first composite GitHub Action for CI use. It scans th
     output-json: "true"
     output-markdown: "true"
     output-sarif: "true"
+    report-dir: agentlighthouse-reports
     github-step-summary: "true"
     baseline: agentlighthouse-baseline.json
     comparison-output: agentlighthouse-delta.md
@@ -31,6 +32,8 @@ AgentLighthouse includes a first composite GitHub Action for CI use. It scans th
 - `min-confidence`: fail when confidence is below the selected level.
 - `probes`: set to `commands` to opt into safe command probes.
 - `output-json`, `output-markdown`, `output-sarif`: report artifact toggles.
+- `output-pr-summary`: write `agentlighthouse-pr-summary.md`.
+- `report-dir`: write a consistent report bundle directory.
 - `github-step-summary`: append a concise summary to the GitHub step summary.
 - `baseline`: optional baseline JSON report path inside the caller workspace.
 - `comparison-output`: optional comparison report output path.
@@ -47,7 +50,7 @@ The action scans `${{ github.workspace }}`, not the action repository. Reports a
 
 This phase uses a source checkout action that installs and builds AgentLighthouse from the action path. A packaged action or npm distribution should make this faster later.
 
-When `baseline` is provided, the action writes a current JSON report and runs `agentlighthouse compare`. No GitHub token is required for the comparison itself.
+When `baseline` is provided, the action uses `agentlighthouse scan --baseline` so the current scan and comparison run as one workflow. No GitHub token is required for the comparison itself.
 
 For PR-aware git comparison, configure checkout with full history:
 

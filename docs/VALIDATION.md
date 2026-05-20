@@ -29,6 +29,7 @@ pnpm --filter @agentlighthouse/cli dev scan examples/mcp-bad-project
 ```bash
 pnpm --filter @agentlighthouse/cli dev scan /path/to/repo
 pnpm --filter @agentlighthouse/cli dev scan /path/to/repo --json --output validation/reports/repo.json
+pnpm --filter @agentlighthouse/cli dev scan /path/to/repo --report-dir agentlighthouse-reports
 ```
 
 Only scan paths you are allowed to inspect. Avoid recursively scanning private directories without an explicit target path.
@@ -85,6 +86,13 @@ Reports should not contain secrets or sensitive local paths. Sanitize before com
 - `validation/reports/comparison-regressed.json`
 - `validation/reports/comparison-regressed.md`
 - `validation/reports/comparison-regressed-pr-summary.md`
+- `validation/reports/phase2e/scan.json`
+- `validation/reports/phase2e/scan.md`
+- `validation/reports/phase2e/scan.sarif`
+- `validation/reports/phase2e/pr-summary.md`
+- `validation/reports/phase2e/comparison.json`
+- `validation/reports/phase2e/comparison.md`
+- `validation/reports/phase2e/comparison-pr-summary.md`
 
 When repositories are present under `.tmp/validation-repos/`, the same command also writes sanitized external reports under:
 

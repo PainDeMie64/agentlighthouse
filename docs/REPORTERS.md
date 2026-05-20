@@ -20,6 +20,8 @@ agentlighthouse scan . --format json --output agentlighthouse.json
 agentlighthouse scan . --format markdown --output agentlighthouse.md
 agentlighthouse scan . --format sarif --output agentlighthouse.sarif
 agentlighthouse scan . --format pr-summary --output agentlighthouse-pr-summary.md
+agentlighthouse scan . --report-dir agentlighthouse-reports
+agentlighthouse scan . --baseline baseline.json --report-dir agentlighthouse-reports --comparison-output delta.md
 agentlighthouse compare --baseline baseline.json --current current.json --format markdown --output delta.md
 agentlighthouse compare --baseline baseline.json --current current.json --changed-files changed-files.txt --format pr-summary --output pr-delta.md
 ```

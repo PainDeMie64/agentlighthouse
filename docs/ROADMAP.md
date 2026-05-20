@@ -51,6 +51,15 @@
 - SARIF regions when line information is available.
 - Dashboard PR impact demo.
 
+## Phase 2E: Baseline Workflow Hardening + Public Alpha DX
+
+- Baseline create, validate, and summary commands.
+- `scan --baseline` convenience workflow.
+- Report bundles for local and CI artifacts.
+- Public-alpha README and release checklist.
+- Dogfood GitHub workflow for AgentLighthouse itself.
+- Clearer errors for scan-result versus comparison-result JSON.
+
 ## Phase 3: Docs Crawler + Deeper API/MCP Resolution
 
 - Crawl documentation sites safely.

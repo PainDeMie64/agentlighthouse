@@ -10,6 +10,7 @@ coverage/
 vendor/
 validation/reports/
 examples/
+agentlighthouse-baseline.json
 *.log
 .env
 .env.*

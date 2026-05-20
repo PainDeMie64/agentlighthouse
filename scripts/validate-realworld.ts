@@ -145,6 +145,7 @@ await writeComparisonReport({
     "explicit"
   )
 });
+await writePhase2eWorkflowReports(savedResults);
 
 async function optionalValidationRepos(): Promise<ValidationTarget[]> {
   const validationRoot = path.join(repoRoot, ".tmp", "validation-repos");
@@ -220,6 +221,86 @@ async function writeComparisonReport(input: {
         parser: "markdown",
         printWidth: 100
       }
+    ),
+    "utf8"
+  );
+}
+
+async function writePhase2eWorkflowReports(
+  results: Map<string, Awaited<ReturnType<typeof scanProject>>>
+): Promise<void> {
+  const phase2eDir = path.join(reportDir, "phase2e");
+  await mkdir(phase2eDir, { recursive: true });
+  const scan = sanitizeResult(requiredResult(results, "agentlighthouse"), repoRoot);
+  const comparison = sanitizeResult(
+    compareScanResults(
+      requiredResult(results, "sample-good-project"),
+      requiredResult(results, "sample-bad-project"),
+      {
+        changedFiles: parseChangedFilesText(
+          await readFile(
+            path.join(repoRoot, "examples", "comparison", "changed-files.txt"),
+            "utf8"
+          ),
+          "explicit"
+        )
+      }
+    ),
+    repoRoot
+  );
+
+  await writeFile(
+    path.join(phase2eDir, "scan.json"),
+    await format(renderJsonReport(scan), { parser: "json", printWidth: 100 }),
+    "utf8"
+  );
+  await writeFile(
+    path.join(phase2eDir, "scan.md"),
+    await format(renderMarkdownReport(scan), { parser: "markdown", printWidth: 100 }),
+    "utf8"
+  );
+  await writeFile(
+    path.join(phase2eDir, "scan.sarif"),
+    await format(renderSarifReport(scan), { parser: "json", printWidth: 100 }),
+    "utf8"
+  );
+  await writeFile(
+    path.join(phase2eDir, "pr-summary.md"),
+    await format(
+      renderPrSummaryReport(scan, {
+        reportPaths: [
+          "validation/reports/phase2e/scan.json",
+          "validation/reports/phase2e/scan.md",
+          "validation/reports/phase2e/scan.sarif"
+        ]
+      }),
+      { parser: "markdown", printWidth: 100 }
+    ),
+    "utf8"
+  );
+  await writeFile(
+    path.join(phase2eDir, "comparison.json"),
+    await format(renderComparisonJsonReport(comparison), { parser: "json", printWidth: 100 }),
+    "utf8"
+  );
+  await writeFile(
+    path.join(phase2eDir, "comparison.md"),
+    await format(renderComparisonMarkdownReport(comparison), {
+      parser: "markdown",
+      printWidth: 100
+    }),
+    "utf8"
+  );
+  await writeFile(
+    path.join(phase2eDir, "comparison-pr-summary.md"),
+    await format(
+      renderComparisonPrSummaryReport(comparison, {
+        reportPaths: [
+          "validation/reports/phase2e/comparison.json",
+          "validation/reports/phase2e/comparison.md"
+        ]
+      }),
+      { parser: "markdown", printWidth: 100 }
     ),
     "utf8"
   );

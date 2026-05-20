@@ -1,0 +1,28 @@
+name: AgentLighthouse generated baseline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm --filter @agentlighthouse/cli dev baseline create . --output agentlighthouse-baseline.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agentlighthouse-baseline
+          path: agentlighthouse-baseline.json
+
+# Pull request workflows can download this artifact and pass it as --baseline.
+# Artifact lookup is CI-provider-specific; a committed baseline is simpler for early adoption.

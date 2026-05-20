@@ -20,9 +20,9 @@ No non-informational findings.
 
 ### Reports
 
-- validation/reports/agentlighthouse.json
-- validation/reports/agentlighthouse.md
-- validation/reports/agentlighthouse.sarif
+- validation/reports/phase2e/scan.json
+- validation/reports/phase2e/scan.md
+- validation/reports/phase2e/scan.sarif
 
 ### What Changed
 

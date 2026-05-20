@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_7793b496",
+  "scanId": "scan_cf6a2683",
   "scannedPath": "<repo>/examples/sample-good-project",
-  "startedAt": "2026-05-20T20:44:21.027Z",
-  "completedAt": "2026-05-20T20:44:21.033Z",
-  "durationMs": 6,
+  "startedAt": "2026-05-20T21:08:14.171Z",
+  "completedAt": "2026-05-20T21:08:14.179Z",
+  "durationMs": 8,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -124,14 +124,7 @@
         "no file or package name matching mcp was scanned."
       ],
       "locationKey": "no file or package name matching mcp was scanned.",
-      "subject": "No file or package name matching MCP was scanned.",
-      "location": {
-        "file": "No file or package name matching MCP was scanned.",
-        "locationKey": "no file or package name matching mcp was scanned.",
-        "subject": "No file or package name matching MCP was scanned.",
-        "symbol": "No file or package name matching MCP was scanned.",
-        "sourceKind": "unknown"
-      }
+      "subject": "No file or package name matching MCP was scanned."
     },
     {
       "id": "COMMAND_VERIFICATION_SKIPPED",
@@ -152,14 +145,7 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-      "location": {
-        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "sourceKind": "unknown"
-      }
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -340,7 +326,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/sample-good-project",
-  "scannedAt": "2026-05-20T20:44:21.033Z",
+  "scannedAt": "2026-05-20T21:08:14.179Z",
   "recommendedActions": [
     "Use opt-in command probes in trusted environments to verify setup and tests."
   ],

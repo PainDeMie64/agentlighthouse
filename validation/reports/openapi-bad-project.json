@@ -1,9 +1,9 @@
 {
-  "scanId": "scan_3f55bfb3",
+  "scanId": "scan_972c32b7",
   "scannedPath": "<repo>/examples/openapi-bad-project",
-  "startedAt": "2026-05-20T20:44:21.143Z",
-  "completedAt": "2026-05-20T20:44:21.146Z",
-  "durationMs": 3,
+  "startedAt": "2026-05-20T21:08:14.296Z",
+  "completedAt": "2026-05-20T21:08:14.298Z",
+  "durationMs": 2,
   "agentLighthouseVersion": "0.1.0",
   "profile": "api",
   "scoringModelVersion": "0.1.0",
@@ -595,14 +595,7 @@
         "no file or package name matching mcp was scanned."
       ],
       "locationKey": "no file or package name matching mcp was scanned.",
-      "subject": "No file or package name matching MCP was scanned.",
-      "location": {
-        "file": "No file or package name matching MCP was scanned.",
-        "locationKey": "no file or package name matching mcp was scanned.",
-        "subject": "No file or package name matching MCP was scanned.",
-        "symbol": "No file or package name matching MCP was scanned.",
-        "sourceKind": "unknown"
-      }
+      "subject": "No file or package name matching MCP was scanned."
     },
     {
       "id": "security.missing-agentlighthouseignore",
@@ -1040,14 +1033,7 @@
         "no operation mentions 429, retry-after, or rate limits."
       ],
       "locationKey": "no operation mentions 429, retry-after, or rate limits.",
-      "subject": "No operation mentions 429, Retry-After, or rate limits.",
-      "location": {
-        "file": "No operation mentions 429, Retry-After, or rate limits.",
-        "locationKey": "no operation mentions 429, retry-after, or rate limits.",
-        "subject": "No operation mentions 429, Retry-After, or rate limits.",
-        "symbol": "No operation mentions 429, Retry-After, or rate limits.",
-        "sourceKind": "openapi"
-      }
+      "subject": "No operation mentions 429, Retry-After, or rate limits."
     },
     {
       "id": "TASK_BENCHMARK_MISSING",
@@ -1097,14 +1083,7 @@
         "run with --probe commands or --run-probes to execute safe script probes."
       ],
       "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-      "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-      "location": {
-        "file": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "locationKey": "run with --probe commands or --run-probes to execute safe script probes.",
-        "subject": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "symbol": "Run with --probe commands or --run-probes to execute safe script probes.",
-        "sourceKind": "unknown"
-      }
+      "subject": "Run with --probe commands or --run-probes to execute safe script probes."
     }
   ],
   "scoreInterpretation": {
@@ -1248,7 +1227,7 @@
   "warnings": [],
   "errors": [],
   "projectPath": "<repo>/examples/openapi-bad-project",
-  "scannedAt": "2026-05-20T20:44:21.146Z",
+  "scannedAt": "2026-05-20T21:08:14.298Z",
   "recommendedActions": [
     "Run: agentlighthouse init .",
     "Add or document setup, test, lint, and typecheck commands.",
